@@ -1,0 +1,81 @@
+/* === Overriding Default HTML Elements === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* === Body + Base Text === */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #222;
+  background-color: #fafafa;
+  padding: 20px;
+}
+
+/* === Headings === */
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+h1 { font-size: 2em; }
+h2 { font-size: 1.6em; }
+h3 { font-size: 1.3em; }
+
+/* === Text Styles === */
+.bold, b, strong { font-weight: bold; }
+.italic, i, em { font-style: italic; }
+.underline, u { text-decoration: underline; }
+a {
+  color: #0056b3;
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+/* === Paragraphs and Lists === */
+p { margin-bottom: 1em; }
+ul, ol {
+  margin-left: 20px;
+  margin-bottom: 1em;
+}
+
+/* === Div Containers === */
+div {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 15px;
+  background-color: #fff;
+}
+
+/* === Buttons === */
+button, input[type="button"], input[type="submit"] {
+  background-color: #0078d7;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+button:hover, input[type="button"]:hover, input[type="submit"]:hover {
+  background-color: #005ea6;
+}
+
+/* === Forms === */
+input, textarea, select {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 6px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* === Images === */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
