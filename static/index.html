@@ -4,8 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    Dashboard page under construction.
+    <header>
+        <h1>Infinexpense</h1>
+        <nav>
+            <h2><a href="#dashboard">Dashboard</a></h2>
+            <h2><a href="#receipts">Receipts</a></h2>
+            <h2><a href="#products">Products</a></h2>
+            <h2><a href="#categories">Categories</a></h2>
+            <h2><a href="#merchants">Merchants</a></h2>
+        </nav>
+    </header>
+    <main>
+        <!-- Month card: page-wide card showing the current month -->
+        <section id="month-card" class="card month-card">
+            <p id="current-month" class="month-line">Overview for <span id="current-month-year">November 2025</span></p>
+        </section>
+        <!-- Quick summary row: place these items horizontally -->
+        <section id="quick-view" class="quick-view">
+            <div id="total-expenses" class="item">
+                <h3>Total Expenses (This month)</h3>
+                <p>$0.00</p>
+            </div>
+            <div id="total-receipts" class="item">
+                <h3>Total Receipts (This month)</h3>
+                <p>0</p>
+            </div>
+            <div id="total-products" class="item">
+                <h3>Total Products</h3>
+                <p>0</p>
+            </div>
+        </section>
+
+        <!-- Recent receipts: each item shows store on the left and date/total on the right -->
+        <section id="recent-receipts" class="recent-receipts">
+            <div class="section-header">
+                <h3 id="recent-receipts-title">Recent Receipts</h3>
+                <a id="see-all-btn" href="/receipts" class="see-all" aria-label="See all receipts">See all</a>
+            </div>
+
+            <article id="receipt-1" class="card receipt-card">
+                <div class="receipt-row">
+                    <h4 class="store">Supermarket 1</h4>
+                    <span class="date muted">2024-06-01</span>
+                </div>
+                <div class="receipt-row">
+                    <span class="products muted">12 products</span>
+                    <span class="total">€45.67</span>
+                </div>
+            </article>
+
+            <article id="receipt-2" class="card receipt-card">
+                <div class="receipt-row">
+                    <h4 class="store">Supermarket 2</h4>
+                    <span class="date muted">2024-06-02</span>
+                </div>
+                <div class="receipt-row">
+                    <span class="products muted">4 products</span>
+                    <span class="total">€7.89</span>
+                </div>
+            </article>
+
+            <article id="receipt-3" class="card receipt-card">
+                <div class="receipt-row">
+                    <h4 class="store">Supermarket 3</h4>
+                    <span class="date muted">2024-06-05</span>
+                </div>
+                <div class="receipt-row">
+                    <span class="products muted">12 products</span>
+                    <span class="total">€92.46</span>
+                </div>
+            </article>
+        </section>
+    </main>
 </body>
 </html>
