@@ -5,6 +5,15 @@ from sqlalchemy.sql import func
 from src.database import Base
 
 class Receipt(Base):
+    
+    '''
+    This class represents a receipt in the system.
+    A receipt is associated with a merchant, has a date, total price,
+    an optional barcode, and optional notes. It also maintains relationships
+    with the Merchant and ReceiptItem models.
+    The total price must be non-negative.
+    '''
+
     __tablename__ = "receipts"
 
     id = Column(Integer, primary_key=True, index=True) # Unique identifier for each receipt
