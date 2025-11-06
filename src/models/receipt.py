@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, Date, DateTime, ForeignKey, Text, Numeric
+from sqlalchemy import Column, Integer, Date, DateTime, ForeignKey, String, Numeric
 from sqlalchemy.orm import relationship, CheckConstraint
 from sqlalchemy.sql import func
 
@@ -9,10 +9,10 @@ class Receipt(Base):
 
     id = Column(Integer, primary_key=True, index=True) # Unique identifier for each receipt
     merchant_id = Column(Integer, ForeignKey("merchants.id", ondelete = "RESTRICT"), nullable=False) # Vendor name
-    date = Column(Date, nullable=False) # Date of the receipt
-    total_price = Column(Numeric(12,2), nullable=False) # Total amount on the receipt (000000.00)
-    barcode = Column(Text, nullable=True) # Barcode number associated with the receipt
-    notes = Column(Text, nullable=True) # Additional notes about the receipt
+    date = Column(Date, nullable=False, Index=True) # Date of the receipt
+    total_price = Column(Numeric(12,2), nullable=False) # Total amount on the receipt (000000000000.00)
+    barcode = Column(String(20), nullable=True) # Barcode number associated with the receipt
+    notes = Column(String(80), nullable=True) # Additional notes about the receipt
 
     merchant = relationship("Merchant", back_populates="receipts") # Relationship to the Merchant model
     items = relationship("ReceiptItem", back_populates="receipt", cascade="all, delete-orphan") # Relationship to ReceiptItem model
