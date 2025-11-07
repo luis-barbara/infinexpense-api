@@ -1,16 +1,35 @@
-# Pydantic schema: serve para ir buscar informações aos models e transforma-las em json
-# para depois permitir comunicar com frontend ou outras APIs
+from pydantic import BaseModel, ConfigDict, Field
 
-from pydantic import BaseModel, ConfigDict
 
-class CategoryBase(BaseModel):
-    name: str
-    
+class MerchantBase(BaseModel):
+    name: str = Field(
+        min_length=1, 
+        max_length=100, 
+        description="Name of the merchant (required, 1-100 characters)"
+    )
+    location: str | None = Field(
+        default=None, 
+        description="Optional location of the merchant (e.g., 'Olhao', 'Faro')"
+    )
 
-class CategoryCreate(CategoryBase):
+
+class MerchantCreate(MerchantBase):
     pass
 
-class Category(CategoryBase):
-    id: int
-    model_config = ConfigDict(from_attributes=True)   
 
+class MerchantUpdate(BaseModel):
+    name: str | None = Field(
+        default=None, 
+        min_length=1, 
+        max_length=100, 
+        description="New name for the merchant (optional)"
+    )
+    location: str | None = Field(
+        default=None, 
+        description="New location for the merchant (optional)"
+    )
+
+
+class Merchant(MerchantBase):
+    id: int
+    model_config = ConfigDict(from_attributes=True)
