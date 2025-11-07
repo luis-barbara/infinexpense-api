@@ -1,5 +1,3 @@
-## LUIS
-
 from sqlalchemy import Column, Integer, String, ForeignKey, Index, Numeric
 from sqlalchemy.orm import relationship, CheckConstraint
 
