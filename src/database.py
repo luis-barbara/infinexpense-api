@@ -1,92 +1,34 @@
-from src.settings import settings
-from sqlalchemy import create_engine, text
-from pydantic import BaseModel
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+from .settings import settings
+
+# Construct the database URL (URL de ligação à base de dados)
+SQLALCHEMY_DATABASE_URL = (
+    f"{settings.database_driver}://"
+    f"{settings.database_username}:{settings.database_password}@"
+    f"{settings.database_host}:{settings.database_port}/"
+    f"{settings.database_name}"
+)
+
+# Create the SQLAlchemy engine (Gestor de ligações da applicação à base de dados)
+engine = create_engine(SQLALCHEMY_DATABASE_URL)
+
+# SessionLocal class for creating DB sessions (SQLAlchemy: criação de varias sessoes para as diferentes chamadas a API)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+# Base class for models (Class Base permite que todos os modelos criados em models.py 
+# herdam desta class, para que o Alembic consiga encontrar os models, compara-los com a base de dados e criar as migrations)
+Base = declarative_base()
 
 
-class User(BaseModel):
-    name: str
-    email: str
-
-
-class Database:
-    def __init__(
-        self,
-        driver=settings.database_driver,
-        host=settings.database_host,
-        name=settings.database_name,
-        password=settings.database_password,
-        port=settings.database_port,
-        username=settings.database_username,
-    ):
-        self.engine = create_engine(
-            f"{driver}://{username}:{password}@{host}:{port}/{name}"
-        )
-
-    def create_user(self, name: str, email: str) -> str:
-        with self.engine.begin() as connection:
-            statement = text(
-                """
-                INSERT INTO users
-                (name, email)
-                VALUES (:name, :email)
-                RETURNING id;
-                """
-            )
-            result = connection.execute(
-                statement=statement, parameters={"name": name, "email": email}
-            )
-            user_id = result.scalar_one()
-
-            return str(user_id)
-
-    def get_user(self, user_id: int) -> User | None:
-        with self.engine.begin() as connection:
-            statement = text(
-                """
-                SELECT name, email
-                FROM users
-                WHERE id = :id;
-                """
-            )
-            result = connection.execute(statement=statement, parameters={"id": user_id})
-            result_first = result.fetchone()
-
-            if not result_first:
-                return None
-
-            user = User(name=result_first[0], email=result_first[1])
-
-            return user
-
-    def delete_user(self, id: int):
-        with self.engine.begin() as connection:
-            statement = text(
-                """
-                DELETE FROM users
-                WHERE id = :id
-                RETURNING id;
-                """
-            )
-            result = connection.execute(statement, {"id": id})
-            deleted_id = result.scalar_one_or_none()
-
-            return deleted_id is not None
-
-    def update(self, id: int, name: str, email: str):
-        with self.engine.begin() as connection:
-            statement = text(
-                """
-                UPDATE users
-                SET name = :name, email = :email
-                WHERE id = :id
-                RETURNING id;
-                """
-            )
-            result = connection.execute(statement, {"id": id, "name": name, "email": email})
-            updated_id = result.scalar_one_or_none()
-
-            return updated_id is not None
-
-
-if __name__ == "__main__":
-    breakpoint()
+# Dependency for getting DB session
+# Abre uma nova sessão de DB (db = SessionLocal())
+# 'yield db' -> Entrega a sessão ao endpoint
+# 'finally: db.close()' -> Fecha a sessão após o endpoint terminar
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()

@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routers import receipts, products, merchants, categories, reports
+from src.routers import receipts #, products, merchants, categories, reports
 
 app = FastAPI(
     title="Infinexpense API",
@@ -8,10 +8,10 @@ app = FastAPI(
 )
 
 app.include_router(receipts.router, prefix="/receipts", tags=["Receipts"])
-app.include_router(products.router, prefix="/products", tags=["Products"])
-app.include_router(merchants.router, prefix="/merchants", tags=["Merchants"])
-app.include_router(categories.router, prefix="/categories", tags=["Categories"])
-app.include_router(reports.router, prefix="/reports", tags=["Reports"])
+#app.include_router(products.router, prefix="/products", tags=["Products"])
+#app.include_router(merchants.router, prefix="/merchants", tags=["Merchants"])
+#app.include_router(categories.router, prefix="/categories", tags=["Categories"])
+#app.include_router(reports.router, prefix="/reports", tags=["Reports"])
 
 
 
