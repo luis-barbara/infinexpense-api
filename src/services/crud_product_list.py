@@ -79,8 +79,8 @@ def update_product_list(db: Session, db: Session, db_product_list: product_list_
     """
     update_dict = update_data.model_dump(exclude_unset=True)
 
-    # --- VALIDAÇÃO DE LÓGICA DE NEGÓCIO ---
-    # 1. (Igual ao 'crud_merchant.py') O 'name' está a ser mudado? Verifica duplicados.
+    # Validação
+    # 1. O nome está a ser mudado? Verifica se ja existe.
     if 'name' in update_dict:
         existing = db.query(model_product_list.ProductList).filter_by(
             name=update_dict['name']
@@ -88,20 +88,20 @@ def update_product_list(db: Session, db: Session, db_product_list: product_list_
         if existing and existing.id != db_product_list.id:
             raise ValueError(f"ProductList name '{update_dict['name']}' already exists")
 
-    # 2. (NOVO) A Categoria está a ser mudada? Verifica se existe.
+    # 2. A Categoria está a ser mudada? Verifica se existe.
     if 'category_id' in update_dict:
         category = crud_category.get_category(db, update_dict['category_id'])
         if not category:
             raise ValueError(f"Category ID '{update_dict['category_id']}' not found")
 
-    # 3. (NOVO) A Unidade de Medida está a ser mudada? Verifica se existe.
+    # 3. A Unidade de Medida está a ser mudada? Verifica se existe.
     if 'measurement_unit_id' in update_dict:
         unit = crud_measurement_unit.get_measurement_unit(db, update_dict['measurement_unit_id'])
         if not unit:
             raise ValueError(f"MeasurementUnit ID '{update_dict['measurement_unit_id']}' not found")
-    # ------------------------------------
     
-    # Se passou as validações, aplica as alterações
+
+    # Se passar as validações, são aplicados os updates
     for key, value in update_dict.items():
         setattr(db_product_list, key, value)
 
@@ -114,14 +114,13 @@ def update_product_list(db: Session, db: Session, db_product_list: product_list_
     db.refresh(db_product_list)
     return db_product_list
 
-# --- DELETE (Apagar) ---
-# (O Delete é igual ao 'crud_merchant.py')
 
+
+# Delete
 def delete_product_list(
-    db: Session, db_product_list: model_product_list.ProductList
-) -> model_product_list.ProductList:
+    db: Session, db_product_list: product_list_model.ProductList) -> product_list_model.ProductList:
     """
-    Apaga um produto da lista-mestra.
+    Apaga um produto da lista
     """
     db.delete(db_product_list)
     
@@ -129,8 +128,7 @@ def delete_product_list(
         db.commit()
     except IntegrityError:
         db.rollback()
-        # Isto acontece se um 'Product' (Item do Recibo)
-        # ainda estiver a apontar para este 'ProductList'
+        # Caso algum produto (Item do Recibo) ainda estiver a apontar para este 'ProductList'
         raise ValueError("Cannot delete: this product definition is linked to existing receipts")
         
     return db_product_list
