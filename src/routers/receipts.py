@@ -25,8 +25,8 @@ router = APIRouter(
     summary="Create a new receipt"
 )
 def create_receipt(
-    db: Session = Depends(get_db),
-    receipt: ReceiptCreate
+    receipt: ReceiptCreate,
+    db: Session = Depends(get_db)
 ):
     """
     Create a new receipt with the provided details.
@@ -46,13 +46,13 @@ def create_receipt(
     summary="Retrieve all receipts with optional filtering"
 )
 def get_receipt_by_filter(
-    db: Session = Depends(get_db),
     skip: int = Query(0, ge=0, description="Number of records to skip for pagination"),
     limit: int = Query(100, ge=1, le=1000, description="Maximum number of records to return"),
     merchant_id: Optional[int] = Query(None, description="Filter by merchant ID"),
     barcode: Optional[str] = Query(None, description="Filter by receipt barcode"),
     start_date: Optional[date] = Query(None, description="Filter receipts from this date (inclusive)"),
     end_date: Optional[date] = Query(None, description="Filter receipts up to this date (inclusive)"),
+    db: Session = Depends(get_db),
 ):
     """
     Retrieve all receipts with optional filtering by:
@@ -83,8 +83,8 @@ def get_receipt_by_filter(
     summary="Retrieve a receipt by its ID"
 )
 def get_receipt_by_id(
-    db:  Session = Depends(get_db),
-    receipt_id: int = Path(..., gt=0, description="The ID of the receipt to retrieve")
+    receipt_id: int = Path(..., gt=0, description="The ID of the receipt to retrieve"),
+    db:  Session = Depends(get_db)
 ):
     """
     Retrive a receipt by its unique ID.
@@ -107,8 +107,8 @@ def get_receipt_by_id(
     summary="Retrieve all products associated with a specific receipt"
 )
 def get_receipts_products(
-    db: Session = Depends(get_db),
-    receipt_id: int = Path(..., gt=0, description="The ID of the receipt to retrieve products for")
+    receipt_id: int = Path(..., gt=0, description="The ID of the receipt to retrieve products for"),
+    db: Session = Depends(get_db)
 ):
     """
     Retrieve all products associated with a specific receipt.
@@ -127,8 +127,8 @@ def get_receipts_products(
     summary="Retrieve a receipt by its barcode"
 )
 def get_receipt_by_barcode(
-    db: Session = Depends(get_db),
-    barcode: str = Path(..., description="The barcode of the receipt to retrieve")
+    barcode: str = Path(..., description="The barcode of the receipt to retrieve"),
+    db: Session = Depends(get_db)
 ):
     """
     Retrieve a receipt by its barcode.
@@ -151,10 +151,10 @@ def get_receipt_by_barcode(
     summary="Retrieve all receipts for a specific merchant"
 )
 def get_receipts_by_merchant(
-    db: Session = Depends(get_db),
     merchant_id: int = Path(..., gt=0, description="The ID of the merchant to retrieve receipts for"),
     skip: int = Query(0, ge=0, description="Number of records to skip for pagination"),
-    limit: int = Query(100, ge=1, le=1000, description="Maximum number of records to return")
+    limit: int = Query(100, ge=1, le=1000, description="Maximum number of records to return"),
+    db: Session = Depends(get_db)
 ):
     """
     Retrieve all receipts associated with a specific merchant.
@@ -173,9 +173,9 @@ def get_receipts_by_merchant(
     summary="Update an existing receipt by its ID"
 )
 def update_receipt(
-    db: Session = Depends(get_db),
     receipt_id: int = Path(..., gt=0, description="The ID of the receipt to update"),
     receipt_update: ReceiptUpdate = ...,
+    db: Session = Depends(get_db)
 ):
     """
     Update an existing receipt with the provided details.
@@ -194,8 +194,8 @@ def update_receipt(
     summary="Delete a receipt by its ID"
 )
 def delete_receipt(
-    db: Session = Depends(get_db),
-    receipt_id: int = Path(..., gt=0, description="The ID of the receipt to delete")
+    receipt_id: int = Path(..., gt=0, description="The ID of the receipt to delete"),
+    db: Session = Depends(get_db)
 ):
     """
     Delete a receipt by its unique ID.
