@@ -71,7 +71,7 @@ def create_product_list(db: Session, product_list_data: product_list_schema.Prod
 
 
 # Update
-def update_product_list(db: Session, db: Session, db_product_list: product_list_model.ProductList,
+def update_product_list(db: Session, db_product_list: product_list_model.ProductList,
                         update_data: product_list_schema.ProductListUpdate,
                         ) -> product_list_model.ProductList:
     """
@@ -82,7 +82,7 @@ def update_product_list(db: Session, db: Session, db_product_list: product_list_
     # Validação
     # 1. O nome está a ser mudado? Verifica se ja existe.
     if 'name' in update_dict:
-        existing = db.query(model_product_list.ProductList).filter_by(
+        existing = db.query(product_list_model.ProductList).filter_by(
             name=update_dict['name']
         ).first()
         if existing and existing.id != db_product_list.id:
