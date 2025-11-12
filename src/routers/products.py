@@ -9,7 +9,7 @@ from src.schemas.product import (
     ProductListUpdate,
     ProductList as ProductListSchema
 )
-from src.services.crud_product import ProductListService
+from src.services.crud_product_list import ProductListService as get_product_list
 
 router = APIRouter(
     prefix="/products",
@@ -36,7 +36,7 @@ def create_product(
     - **category_id**: ID of the category
     Returns the created product.
     """
-    return ProductListService.create_product(db, product)
+    return get_product_list.create_product(db, product)
 
 
 
@@ -62,7 +62,7 @@ def get_all_products(
     - **category_id**: Optional filter by category ID
     Returns a list of products.
     """
-    return ProductListService.get_all_products(
+    return get_product_list.get_all_products(
         db=db, 
         skip=skip, 
         limit=limit,
@@ -87,7 +87,7 @@ def get_product_by_id(
     - **product_id**: ID of the product to retrieve
     Returns the product details.
     """
-    product = ProductListService.get_product_by_id(db, product_id)
+    product = get_product_list.get_product_by_id(db, product_id)
     if not product:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
     return product
@@ -100,7 +100,7 @@ def get_product_by_id(
     summary="Retrieve a product by barcode"
 )
 def get_product_by_barcode(
-    barcode: str = Path(..., max_length=50, description="Barcode of the product to retrieve"),,
+    barcode: str = Path(..., max_length=50, description="Barcode of the product to retrieve"),
     db: Session = Depends(get_db)
 ):
     """
@@ -108,7 +108,7 @@ def get_product_by_barcode(
     - **barcode**: Barcode of the product to retrieve
     Returns the product details.
     """
-    product = ProductListService.get_product_by_barcode(db, barcode)
+    product = get_product_list.get_product_by_barcode(db, barcode)
     if not product:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
     return product
@@ -130,7 +130,7 @@ def get_product_by_name(
 
     Returns the product details.
     """
-    product = ProductListService.get_product_by_name(db, name)
+    product = get_product_list.get_product_by_name(db, name)
     if not product:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="product not found")
     return product

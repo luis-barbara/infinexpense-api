@@ -19,6 +19,11 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # IMPORTANTE: Importe TODOS os models aqui para o Alembic detectá-los
 from src.models.receipt import Receipt
+from src.models.category import Category
+from src.models.merchant import Merchant
+from src.models.product import ProductList
+from src.models.receipt_product import Product
+from src.models.measurement_unit import MeasurementUnit
 # from src.models.user import User  # Adicione se existir
 
 target_metadata = Base.metadata

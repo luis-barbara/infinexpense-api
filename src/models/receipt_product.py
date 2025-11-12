@@ -1,6 +1,6 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Index, Numeric
-from sqlalchemy.orm import relationship, CheckConstraint
-
+from sqlalchemy import Column, Integer, String, ForeignKey, Index, Numeric, CheckConstraint
+from sqlalchemy.orm import relationship
+from src.models.product import ProductList
 from src.database import Base
 
 class Product(Base):
@@ -21,18 +21,18 @@ class Product(Base):
     price = Column(
         Numeric(12, 4), 
         nullable=False, 
-        description="Price of this specific item"
+        info={'description':'Price of this specific item"'}
     )
     quantity = Column(
         Numeric(12, 4), 
         nullable=False, 
-        description="Quantity of this specific item (e.g., 0.5)"
+        info={'description':'Quantity of this specific item (e.g., 0.5)"'}
     )
     
     description = Column(
         String(100), 
         nullable=True, 
-        description="Optional description (e.g., 'on sale')"
+        info={'description':'Optional description (e.g., "on sale")'}
     )
 
   

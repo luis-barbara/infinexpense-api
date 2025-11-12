@@ -21,7 +21,7 @@ class MeasurementUnit(Base):
         nullable=False, 
         unique=True, 
         index=True, 
-        description="Full name of the unit (e.g., 'Kilogram')"
+        info={'description':'Full name of the unit (e.g., "Kilogram")'}
     )
     
     abbreviation = Column(
@@ -29,7 +29,7 @@ class MeasurementUnit(Base):
         nullable=False, 
         unique=True, 
         index=True, 
-        description="Abbreviation of the unit (e.g., 'kg')"
+        info={'description':'Abbreviation of the unit (e.g., kg")'}
     )
 
     # The Relationship: "One unit (kg) can be in many product definitions (ProductList)"

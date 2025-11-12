@@ -22,7 +22,7 @@ class Category(Base):
         nullable=False, 
         unique=True, 
         index=True, 
-        description="Name of the category (e.g., 'Fruit')"
+        info={'description':'Name of the category (e.g., "Fruit")'}
     )
 
     # The Relationship: "One category can be in many product definitions (ProductList)"

@@ -14,7 +14,7 @@ class Merchant(Base):
     __tablename__ = "merchants"
 
     id = Column(Integer, primary_key=True, index=True) # Unique identifier for each merchant
-    name = Column(String(100), nullable=False, unique=True, Index=True) # Name of the merchant
+    name = Column(String(100), nullable=False, unique=True, index=True) # Name of the merchant
     receipts = relationship("Receipt", back_populates="merchant", cascade="all, delete-orphan") # Relationship to Receipt model
     location = Column(String(255), nullable=True)  # Optional location of the merchant
 

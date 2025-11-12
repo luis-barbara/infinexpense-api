@@ -1,5 +1,7 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Index
 from sqlalchemy.orm import relationship
+from src.models.category import Category
+from src.models.measurement_unit import MeasurementUnit
 
 from src.database import Base
 
@@ -21,7 +23,7 @@ class ProductList(Base):
         nullable=False, 
         unique=True, 
         index=True, 
-        description="Name of the product (e.g., 'Madeira Banana')"
+        info={'description':'Name of the product (e.g., "Madeira Banana")'}
     )
     
 
@@ -30,7 +32,7 @@ class ProductList(Base):
         nullable=True, 
         unique=True, 
         index=True, 
-        description="Barcode of the product (optional, unique)"
+        info={'description':'Barcode of the product (optional, unique)'}
     )
 
     

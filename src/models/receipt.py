@@ -1,7 +1,8 @@
 from sqlalchemy import Column, Integer, Date, DateTime, ForeignKey, String, Numeric
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
-
+from src.models.merchant import Merchant
+from src.models.receipt_product import Product
 from src.database import Base
 
 class Receipt(Base):
@@ -18,7 +19,7 @@ class Receipt(Base):
 
     id = Column(Integer, primary_key=True, index=True) # Unique identifier for each receipt
     merchant_id = Column(Integer, ForeignKey("merchants.id", ondelete = "RESTRICT"), nullable=False) # Vendor name
-    date = Column(Date, nullable=False, Index=True) # Date of the receipt
+    purchase_date = Column(Date, nullable=False, index=True) # Date of the receipt
     barcode = Column(String(20), nullable=True) # Barcode number associated with the receipt
     
 
