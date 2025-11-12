@@ -27,3 +27,4 @@ class Receipt(Base):
 
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False) # Timestamp when the receipt was created
     updated_at = Column(DateTime(timezone=True), onupdate=func.now()) # Timestamp when the receipt was last updated
+

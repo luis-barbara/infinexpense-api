@@ -1,81 +1,122 @@
-/* === Overriding Default HTML Elements === */
+/* static/css/receipts.css */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* === Body + Base Text === */
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
-  color: #222;
-  background-color: #fafafa;
-  padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
 }
 
-/* === Headings === */
-h1, h2, h3, h4, h5, h6 {
-  margin-bottom: 10px;
-  font-weight: 600;
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
 }
 
-h1 { font-size: 2em; }
-h2 { font-size: 1.6em; }
-h3 { font-size: 1.3em; }
-
-/* === Text Styles === */
-.bold, b, strong { font-weight: bold; }
-.italic, i, em { font-style: italic; }
-.underline, u { text-decoration: underline; }
-a {
-  color: #0056b3;
-  text-decoration: none;
-}
-a:hover { text-decoration: underline; }
-
-/* === Paragraphs and Lists === */
-p { margin-bottom: 1em; }
-ul, ol {
-  margin-left: 20px;
-  margin-bottom: 1em;
+h1 {
+    color: #333;
+    margin-bottom: 30px;
+    text-align: center;
 }
 
-/* === Div Containers === */
-div {
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 10px;
-  margin-bottom: 15px;
-  background-color: #fff;
+h2 {
+    color: #667eea;
+    margin-bottom: 15px;
+    font-size: 1.3em;
 }
 
-/* === Buttons === */
-button, input[type="button"], input[type="submit"] {
-  background-color: #0078d7;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 8px 14px;
-  cursor: pointer;
-}
-button:hover, input[type="button"]:hover, input[type="submit"]:hover {
-  background-color: #005ea6;
+.form-section, .filter-section {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
 }
 
-/* === Forms === */
-input, textarea, select {
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 6px;
-  width: 100%;
-  margin-bottom: 10px;
+form {
+    display: grid;
+    gap: 15px;
 }
 
-/* === Images === */
-img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 4px;
+input, button {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+button {
+    background: #667eea;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #5568d3;
+}
+
+.receipt-card {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.receipt-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.receipt-card h3 {
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+.receipt-card p {
+    margin: 8px 0;
+    color: #666;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.actions button {
+    flex: 1;
+    padding: 8px;
+    font-size: 13px;
+}
+
+.delete-btn {
+    background: #dc3545;
+}
+
+.delete-btn:hover {
+    background: #c82333;
+}
+
+.filter-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    align-items: end;
 }
