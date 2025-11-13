@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Merchant - InfinExpense</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">InfinExpense</a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Dashboard</a></li>
+                <li><a href="receipts.html" class="nav-link">Receipts</a></li>
+                <li><a href="products.html" class="nav-link">Products</a></li>
+                <li><a href="categories.html" class="nav-link">Categories</a></li>
+                <li><a href="merchants.html" class="nav-link active">Merchants</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Add New Merchant</h1>
+        </div>
+
+        <div class="card" style="max-width: 800px; margin: 0 auto;">
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Merchant Name *</label>
+                    <input type="text" class="form-input" placeholder="Enter merchant name" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Location *</label>
+                    <input type="text" class="form-input" placeholder="Enter location/address" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Phone</label>
+                        <input type="tel" class="form-input" placeholder="+351 289 123 456">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" placeholder="merchant@example.com">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Website</label>
+                    <input type="url" class="form-input" placeholder="https://www.example.com">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Notes</label>
+                    <textarea class="form-textarea" placeholder="Add any additional notes about this merchant..."></textarea>
+                </div>
+
+                <div class="flex flex-gap" style="justify-content: flex-end; margin-top: 2rem;">
+                    <a href="merchants.html" class="btn btn-outline">Cancel</a>
+                    <button type="submit" class="btn btn-success">Add Merchant</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

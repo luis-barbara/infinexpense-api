@@ -1,44 +1,142 @@
-<!-- templates/receipts.html -->
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestão de Recibos</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <title>Dashboard - InfinExpense</title>
+    <link rel="stylesheet" href="../static/styles.css">
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../static/index.html" class="nav-brand">InfinExpense</a>
+            <ul class="nav-menu">
+                <li><a href="../static/index.html" class="nav-link active">Dashboard</a></li>
+                <li><a href="../static/receipts.html" class="nav-link">Receipts</a></li>
+                <li><a href="../static/products.html" class="nav-link">Products</a></li>
+                <li><a href="../static/categories.html" class="nav-link">Categories</a></li>
+                <li><a href="../static/merchants.html" class="nav-link">Merchants</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
     <div class="container">
-        <h1>Gestão de Recibos</h1>
-        
-        <!-- Formulário para criar recibo -->
-        <div class="form-section">
-            <h2>Adicionar Recibo</h2>
-            <form id="receiptForm">
-                <input type="number" id="merchantId" placeholder="ID do Comerciante" required>
-                <input type="date" id="receiptDate" required>
-                <input type="text" id="barcode" placeholder="Código de Barras">
-                <button type="submit">Criar Recibo</button>
-            </form>
+        <div class="page-header">
+            <h1 class="page-title">Dashboard</h1>
+            <a href="../static/receipt-add.html" class="btn btn-primary">+ Add Receipt</a>
         </div>
 
-        <!-- Filtros -->
-        <div class="filter-section">
-            <h2>Filtrar Recibos</h2>
-            <input type="number" id="filterMerchant" placeholder="Filtrar por Comerciante">
-            <input type="date" id="filterStartDate" placeholder="Data Início">
-            <input type="date" id="filterEndDate" placeholder="Data Fim">
-            <button onclick="filterReceipts()">Filtrar</button>
-            <button onclick="loadReceipts()">Limpar Filtros</button>
+        <!-- Monthly Statistics -->
+        <div class="stats-grid">
+            <div class="stat-card" data-stat-type="monthly-expenses">
+                <div class="stat-label">Total Expenses This Month</div>
+                <div class="stat-value" id="monthly-expenses" data-field="total-expenses">€2,847.65</div>
+                <div class="card-subtitle">
+                    <span id="expenseComparison" data-field="expense-comparison" onclick="toggleComparisonMode()" style="text-decoration: underline; cursor: pointer;">+12.5% from last month</span>
+                </div>
+            </div>
+            <div class="stat-card" data-stat-type="total-receipts">
+                <div class="stat-label">Total Receipts</div>
+                <div class="stat-value" id="total-receipts" data-field="receipt-count">28</div>
+                <div class="card-subtitle" id="receipts-comparison" data-field="receipt-comparison">+5 from last month</div>
+            </div>
+            <div class="stat-card" data-stat-type="total-products">
+                <div class="stat-label">Products Purchased</div>
+                <div class="stat-value" id="products-purchased" data-field="product-count">156</div>
+                <div class="card-subtitle" id="products-comparison" data-field="product-comparison">+18 from last month</div>
+            </div>
         </div>
 
-        <!-- Lista de recibos -->
-        <div class="receipts-list">
-            <h2>Recibos</h2>
-            <div id="receiptsContainer"></div>
+        <!-- Recent Receipts -->
+        <div class="card">
+            <div class="flex-between mb-2">
+                <h2 class="detail-title" style="margin-bottom: 0;">Recent Receipts</h2>
+                <a href="../static/receipts.html" class="btn btn-outline btn-sm">View All</a>
+            </div>
+
+            <div class="receipt-list" id="recent-receipts-list" data-max-items="3">
+                <!-- Receipt 1 -->
+                <a href="../static/receipt-1001.html" class="receipt-card" data-receipt-id="1001" data-merchant-id="4001">
+                    <div class="receipt-header">
+                        <div>
+                            <div class="receipt-merchant" data-field="merchant-name">Continente</div>
+                            <div class="receipt-detail-item" style="margin-top: 0.5rem;">
+                                <span class="receipt-detail-label">Products</span>
+                                <span class="receipt-detail-value" data-field="product-count">12 items</span>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="receipt-date" data-field="receipt-date">Nov 10, 2025</div>
+                            <div class="receipt-detail-value" data-field="receipt-total" style="margin-top: 0.5rem; font-size: 1.5rem; color: var(--primary-color);">€87.45</div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Receipt 2 -->
+                <a href="../static/receipt-1002.html" class="receipt-card" data-receipt-id="1002" data-merchant-id="4002">
+                    <div class="receipt-header">
+                        <div>
+                            <div class="receipt-merchant" data-field="merchant-name">Pingo Doce</div>
+                            <div class="receipt-detail-item" style="margin-top: 0.5rem;">
+                                <span class="receipt-detail-label">Products</span>
+                                <span class="receipt-detail-value" data-field="product-count">8 items</span>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="receipt-date" data-field="receipt-date">Nov 8, 2025</div>
+                            <div class="receipt-detail-value" data-field="receipt-total" style="margin-top: 0.5rem; font-size: 1.5rem; color: var(--primary-color);">€45.20</div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Receipt 3 -->
+                <a href="../static/receipt-1003.html" class="receipt-card" data-receipt-id="1003" data-merchant-id="4003">
+                    <div class="receipt-header">
+                        <div>
+                            <div class="receipt-merchant" data-field="merchant-name">Lidl</div>
+                            <div class="receipt-detail-item" style="margin-top: 0.5rem;">
+                                <span class="receipt-detail-label">Products</span>
+                                <span class="receipt-detail-value" data-field="product-count">15 items</span>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="receipt-date" data-field="receipt-date">Nov 6, 2025</div>
+                            <div class="receipt-detail-value" data-field="receipt-total" style="margin-top: 0.5rem; font-size: 1.5rem; color: var(--primary-color);">€62.80</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 
-    <script src="/static/receipt.js"></script>
+    <script>
+        /**
+         * Toggle between percentage and absolute value for expense comparison
+         * Switches display between "+12.5%" and "+€314.52"
+         * Can be bound to Python backend data via data-field="expense-comparison"
+         */
+        let showPercentage = true;
+        const lastMonthExpense = 2533.13; // Previous month value - populate from DB
+        const currentExpense = 2847.65;    // Current month value - populate from DB
+        const difference = currentExpense - lastMonthExpense;
+        const percentage = ((difference / lastMonthExpense) * 100).toFixed(1);
+
+        /**
+         * Toggle display mode for expense comparison
+         * Called on click of the comparison element
+         */
+        function toggleComparisonMode() {
+            const element = document.getElementById('expenseComparison');
+            showPercentage = !showPercentage;
+            
+            if (showPercentage) {
+                element.textContent = `+${percentage}% from last month`;
+            } else {
+                element.textContent = `+€${difference.toFixed(2)} from last month`;
+            }
+        }
+    </script>
 </body>
 </html>

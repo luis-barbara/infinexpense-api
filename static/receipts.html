@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipts - InfinExpense</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">InfinExpense</a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Dashboard</a></li>
+                <li><a href="receipts.html" class="nav-link active">Receipts</a></li>
+                <li><a href="products.html" class="nav-link">Products</a></li>
+                <li><a href="categories.html" class="nav-link">Categories</a></li>
+                <li><a href="merchants.html" class="nav-link">Merchants</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Receipts</h1>
+            <a href="receipt-add.html" class="btn btn-primary">+ Add Receipt</a>
+        </div>
+
+        <!-- Search Bar and Items Per Page -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search receipts by merchant, date, or amount...">
+            <button class="btn btn-primary" onclick="filterItems()">Search</button>
+            <select id="itemsPerPage" class="form-select" style="width: auto; min-width: 150px;" onchange="changeItemsPerPage()">
+                <option value="5" selected>Show 5</option>
+                <option value="10">Show 10</option>
+                <option value="20">Show 20</option>
+                <option value="50">Show 50</option>
+            </select>
+        </div>
+
+        <!-- Receipts List -->
+        <div class="list-container" id="receiptsList">
+            <a href="receipt-1001.html" class="list-item receipt-item" data-receipt-id="1001" data-merchant-id="4001">
+                <div class="list-item-main">
+                    <div>
+                        <div class="list-item-label">Receipt ID</div>
+                        <div class="list-item-value">#1001</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Merchant</div>
+                        <div class="list-item-value">Continente</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Date</div>
+                        <div class="list-item-value">Nov 10, 2025</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Products</div>
+                        <div class="list-item-value">12 items</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Total</div>
+                        <div class="list-item-value">€87.45</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="receipt-1002.html" class="list-item receipt-item" data-receipt-id="1002" data-merchant-id="4002">
+                <div class="list-item-main">
+                    <div>
+                        <div class="list-item-label">Receipt ID</div>
+                        <div class="list-item-value">#1002</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Merchant</div>
+                        <div class="list-item-value">Pingo Doce</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Date</div>
+                        <div class="list-item-value">Nov 8, 2025</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Products</div>
+                        <div class="list-item-value">8 items</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Total</div>
+                        <div class="list-item-value">€45.20</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="receipt-1003.html" class="list-item receipt-item" data-receipt-id="1003" data-merchant-id="4003">
+                <div class="list-item-main">
+                    <div>
+                        <div class="list-item-label">Receipt ID</div>
+                        <div class="list-item-value">#1003</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Merchant</div>
+                        <div class="list-item-value">Lidl</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Date</div>
+                        <div class="list-item-value">Nov 6, 2025</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Products</div>
+                        <div class="list-item-value">15 items</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Total</div>
+                        <div class="list-item-value">€62.80</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="receipt-1004.html" class="list-item receipt-item" data-receipt-id="1004" data-merchant-id="4001">
+                <div class="list-item-main">
+                    <div>
+                        <div class="list-item-label">Receipt ID</div>
+                        <div class="list-item-value">#1004</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Merchant</div>
+                        <div class="list-item-value">Auchan</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Date</div>
+                        <div class="list-item-value">Nov 5, 2025</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Products</div>
+                        <div class="list-item-value">20 items</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Total</div>
+                        <div class="list-item-value">€124.50</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="receipt-1005.html" class="list-item receipt-item" data-receipt-id="1005" data-merchant-id="4002">
+                <div class="list-item-main">
+                    <div>
+                        <div class="list-item-label">Receipt ID</div>
+                        <div class="list-item-value">#1005</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Merchant</div>
+                        <div class="list-item-value">Minipreço</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Date</div>
+                        <div class="list-item-value">Nov 4, 2025</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Products</div>
+                        <div class="list-item-value">6 items</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Total</div>
+                        <div class="list-item-value">€28.90</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="receipt-1006.html" class="list-item receipt-item" data-receipt-id="1006" data-merchant-id="4003">
+                <div class="list-item-main">
+                    <div>
+                        <div class="list-item-label">Receipt ID</div>
+                        <div class="list-item-value">#1006</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Merchant</div>
+                        <div class="list-item-value">Intermarché</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Date</div>
+                        <div class="list-item-value">Nov 3, 2025</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Products</div>
+                        <div class="list-item-value">10 items</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Total</div>
+                        <div class="list-item-value">€56.75</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="receipt-1007.html" class="list-item receipt-item" data-receipt-id="1007" data-merchant-id="4004">
+                <div class="list-item-main">
+                    <div>
+                        <div class="list-item-label">Receipt ID</div>
+                        <div class="list-item-value">#1007</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Merchant</div>
+                        <div class="list-item-value">El Corte Inglés</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Date</div>
+                        <div class="list-item-value">Nov 2, 2025</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Products</div>
+                        <div class="list-item-value">18 items</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Total</div>
+                        <div class="list-item-value">€143.20</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="receipt-1008.html" class="list-item receipt-item" data-receipt-id="1008" data-merchant-id="4001">
+                <div class="list-item-main">
+                    <div>
+                        <div class="list-item-label">Receipt ID</div>
+                        <div class="list-item-value">#1008</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Merchant</div>
+                        <div class="list-item-value">Continente</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Date</div>
+                        <div class="list-item-value">Nov 1, 2025</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Products</div>
+                        <div class="list-item-value">14 items</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Total</div>
+                        <div class="list-item-value">€78.30</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="receipt-1009.html" class="list-item receipt-item" data-receipt-id="1009" data-merchant-id="4002">
+                <div class="list-item-main">
+                    <div>
+                        <div class="list-item-label">Receipt ID</div>
+                        <div class="list-item-value">#1009</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Merchant</div>
+                        <div class="list-item-value">Pingo Doce</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Date</div>
+                        <div class="list-item-value">Oct 31, 2025</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Products</div>
+                        <div class="list-item-value">9 items</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Total</div>
+                        <div class="list-item-value">€52.40</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="receipt-1010.html" class="list-item receipt-item" data-receipt-id="1010" data-merchant-id="4003">
+                <div class="list-item-main">
+                    <div>
+                        <div class="list-item-label">Receipt ID</div>
+                        <div class="list-item-value">#1010</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Merchant</div>
+                        <div class="list-item-value">Lidl</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Date</div>
+                        <div class="list-item-value">Oct 30, 2025</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Products</div>
+                        <div class="list-item-value">11 items</div>
+                    </div>
+                    <div>
+                        <div class="list-item-label">Total</div>
+                        <div class="list-item-value">€49.85</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" id="pagination">
+            <button class="pagination-btn" id="prevBtn" onclick="changePage(-1)">Previous</button>
+            <span id="pageNumbers"></span>
+            <button class="pagination-btn" id="nextBtn" onclick="changePage(1)">Next</button>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        let itemsPerPage = 5;
+        const allItems = document.querySelectorAll('.receipt-item');
+        const totalItems = allItems.length;
+
+        function showPage(page) {
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+
+            allItems.forEach((item, index) => {
+                if (index >= startIndex && index < endIndex) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            updatePagination();
+        }
+
+        function updatePagination() {
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+            const pageNumbers = document.getElementById('pageNumbers');
+            pageNumbers.innerHTML = '';
+
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'pagination-btn' + (i === currentPage ? ' active' : '');
+                btn.textContent = i;
+                btn.onclick = () => {
+                    currentPage = i;
+                    showPage(currentPage);
+                };
+                pageNumbers.appendChild(btn);
+            }
+
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = currentPage === totalPages;
+        }
+
+        function changePage(direction) {
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+            currentPage += direction;
+            if (currentPage < 1) currentPage = 1;
+            if (currentPage > totalPages) currentPage = totalPages;
+            showPage(currentPage);
+        }
+
+        function changeItemsPerPage() {
+            itemsPerPage = parseInt(document.getElementById('itemsPerPage').value);
+            currentPage = 1;
+            showPage(currentPage);
+        }
+
+        function filterItems() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            let visibleCount = 0;
+
+            allItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                const matches = text.includes(searchTerm);
+                item.setAttribute('data-visible', matches);
+                
+                if (matches) {
+                    visibleCount++;
+                }
+            });
+
+            // Update display based on search
+            if (searchTerm === '') {
+                showPage(currentPage);
+            } else {
+                let shownCount = 0;
+                allItems.forEach(item => {
+                    if (item.getAttribute('data-visible') === 'true') {
+                        if (shownCount < itemsPerPage) {
+                            item.style.display = 'flex';
+                            shownCount++;
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                document.getElementById('pagination').style.display = searchTerm ? 'none' : 'flex';
+            }
+        }
+
+        // Initialize
+        showPage(1);
+    </script>
+</body>
+</html>
