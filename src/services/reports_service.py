@@ -14,7 +14,7 @@ from src.models import (
     receipt_product as model_receipt_product,
     category as model_category
 )
-from src.schemas import report as schema_report
+from src.schemas import reports as schema_reports
 
 # ---
 # Relatório 1: GASTOS POR CATEGORIA (para o Gráfico do Dashboard)
@@ -103,7 +103,7 @@ def get_enriched_merchant_report(
     db: Session,
     start_date: Optional[date] = None,
     end_date: Optional[date] = None
-) -> List[schema_report.MerchantReportData]:
+) -> List[schema_reports.MerchantReportData]:
     """
     Calcula o relatório de supermercados (Ecrã 4).
     Isto tem de usar LEFT JOINs para incluir supermercados com 0 recibos.
