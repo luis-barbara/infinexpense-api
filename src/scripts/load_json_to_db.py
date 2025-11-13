@@ -1,6 +1,6 @@
-
 from __future__ import annotations
-"""python -m src.scripts.load_json_to_db --generate sample.json --products 200 --receipts 20
+"""
+python -m src.scripts.load_json_to_db --generate sample.json --products 200 --receipts 20
 python -m src.scripts.load_json_to_db sample.json
 """
 
@@ -56,6 +56,7 @@ from decimal import Decimal, InvalidOperation
 from typing import Any, Dict, Iterable, Optional
 import random
 import itertools
+import re
 
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
@@ -98,6 +99,32 @@ def _as_date(value: Any) -> date:
         except ValueError as e:
             raise LoaderError(f"Invalid ISO date: {value!r}") from e
     raise LoaderError(f"Invalid date: {value!r}")
+
+
+def generate_receipt_barcode() -> str:
+    """
+    Generate a valid 10–12 digit numeric barcode string for receipts.
+    """
+    length = random.randint(10, 12)
+    return "".join(str(random.randint(0, 9)) for _ in range(length))
+
+
+def normalize_receipt_barcode(raw: Any) -> str:
+    """
+    Ensure the receipt barcode is a 10–12 digit numeric string.
+
+    - If raw is None/empty: generate a new barcode.
+    - If provided: validate it and raise LoaderError if invalid.
+    """
+    if raw is None or (isinstance(raw, str) and raw.strip() == ""):
+        return generate_receipt_barcode()
+
+    s = str(raw).strip()
+    if not re.fullmatch(r"\d{10,12}", s):
+        raise LoaderError(
+            f"Invalid receipt barcode {raw!r}: must be a numeric string of 10–12 digits"
+        )
+    return s
 
 
 # Simple in-memory caches to minimize DB lookups
@@ -248,7 +275,12 @@ def load_product_list(db: Session, cache: Cache, items: Iterable[Dict[str, Any]]
         category = rec.get("category")
         unit_abbrev = rec.get("measurement_unit")
         get_or_create_product_list(
-            db, cache, name=name, category_name=category, unit_abbrev=unit_abbrev, barcode=barcode
+            db,
+            cache,
+            name=name,
+            category_name=category,
+            unit_abbrev=unit_abbrev,
+            barcode=barcode,
         )
         count += 1
     return count
@@ -268,6 +300,12 @@ def load_merchants(db: Session, cache: Cache, items: Iterable[Dict[str, Any]]) -
 
 
 def load_receipts(db: Session, cache: Cache, items: Iterable[Dict[str, Any]]) -> int:
+    """
+    Load receipts; ensures:
+    - merchant exists
+    - purchase_date is a valid date
+    - barcode is a 10–12 digit string (auto-generated if missing)
+    """
     count = 0
     for rec in items or []:
         if not rec:
@@ -275,9 +313,13 @@ def load_receipts(db: Session, cache: Cache, items: Iterable[Dict[str, Any]]) ->
         merchant_name = rec.get("merchant")
         if not merchant_name:
             raise LoaderError("Receipt requires 'merchant'")
+
         # Accept either 'purchase_date' (preferred) or legacy 'date' key
         r_date = _as_date(rec.get("purchase_date") or rec.get("date"))
-        barcode = rec.get("barcode")
+
+        # Normalize / generate a valid 10–12 digit barcode
+        raw_barcode = rec.get("barcode")
+        barcode = normalize_receipt_barcode(raw_barcode)
 
         merchant = get_or_create_merchant(db, cache, name=merchant_name)
         receipt = Receipt(merchant=merchant, purchase_date=r_date, barcode=barcode)
@@ -306,7 +348,9 @@ def load_receipts(db: Session, cache: Cache, items: Iterable[Dict[str, Any]]) ->
                     )
             else:
                 if not pl_name:
-                    raise LoaderError("Each product requires 'product_list' (name) or 'barcode_product_list'")
+                    raise LoaderError(
+                        "Each product requires 'product_list' (name) or 'barcode_product_list'"
+                    )
                 pl = get_or_create_product_list(
                     db,
                     cache,
@@ -335,8 +379,18 @@ def load_receipts(db: Session, cache: Cache, items: Iterable[Dict[str, Any]]) ->
 # ------------------ Synthetic data gen ------------------
 
 _DEFAULT_CATEGORIES = [
-    "Fruit", "Vegetable", "Dairy", "Bakery", "Meat", "Fish", "Beverages",
-    "Pantry", "Snacks", "Frozen", "Household", "Personal Care"
+    "Fruit",
+    "Vegetable",
+    "Dairy",
+    "Bakery",
+    "Meat",
+    "Fish",
+    "Beverages",
+    "Pantry",
+    "Snacks",
+    "Frozen",
+    "Household",
+    "Personal Care",
 ]
 
 _DEFAULT_UNITS = [
@@ -345,20 +399,55 @@ _DEFAULT_UNITS = [
     {"name": "Liter", "abbreviation": "L"},
     {"name": "Milliliter", "abbreviation": "mL"},
     {"name": "Unit", "abbreviation": "u"},
-    {"name": "Pack", "abbreviation": "pk"}
+    {"name": "Pack", "abbreviation": "pk"},
 ]
 
 _PRODUCT_BASES = [
-    "Apple", "Banana", "Orange", "Tomato", "Cucumber", "Milk", "Yogurt",
-    "Bread", "Baguette", "Chicken Breast", "Pork Loin", "Salmon Fillet",
-    "Sparkling Water", "Olive Oil", "Rice", "Pasta", "Chips", "Chocolate",
-    "Ice Cream", "Laundry Detergent", "Toothpaste", "Shampoo", "Coffee",
-    "Tea", "Cheese", "Butter", "Eggs", "Flour", "Sugar", "Salt"
+    "Apple",
+    "Banana",
+    "Orange",
+    "Tomato",
+    "Cucumber",
+    "Milk",
+    "Yogurt",
+    "Bread",
+    "Baguette",
+    "Chicken Breast",
+    "Pork Loin",
+    "Salmon Fillet",
+    "Sparkling Water",
+    "Olive Oil",
+    "Rice",
+    "Pasta",
+    "Chips",
+    "Chocolate",
+    "Ice Cream",
+    "Laundry Detergent",
+    "Toothpaste",
+    "Shampoo",
+    "Coffee",
+    "Tea",
+    "Cheese",
+    "Butter",
+    "Eggs",
+    "Flour",
+    "Sugar",
+    "Salt",
 ]
 
 _ADJECTIVES = [
-    "Organic", "Premium", "Local", "Imported", "Classic", "Fresh",
-    "Family", "Extra", "Light", "Whole", "Gluten-Free", "Vegan"
+    "Organic",
+    "Premium",
+    "Local",
+    "Imported",
+    "Classic",
+    "Fresh",
+    "Family",
+    "Extra",
+    "Light",
+    "Whole",
+    "Gluten-Free",
+    "Vegan",
 ]
 
 _MERCHANTS = [
@@ -366,7 +455,7 @@ _MERCHANTS = [
     {"name": "Mercado Azul", "location": "Porto"},
     {"name": "MiniPreço", "location": "Coimbra"},
     {"name": "HiperBom", "location": "Braga"},
-    {"name": "EcoFoods", "location": "Faro"}
+    {"name": "EcoFoods", "location": "Faro"},
 ]
 
 
@@ -383,7 +472,7 @@ def _unique_product_names(n: int) -> list[str]:
 
 
 def _random_barcode(i: int) -> str:
-    # 13-digit-like string; keep unique by index
+    # 13-digit-like string; keep unique by index (for product_list barcodes)
     root = 560000000000 + i  # PT-ish prefix 560 + zeros
     return str(root)
 
@@ -418,12 +507,14 @@ def generate_sample_data(n_products: int = 200, n_receipts: int = 20) -> Dict[st
         category = rng.choice(_DEFAULT_CATEGORIES)
         unit_abbrev = rng.choice(cat_to_units[category])
         barcode = _random_barcode(i) if rng.random() < 0.65 else None
-        product_list.append({
-            "name": name,
-            "barcode": barcode,
-            "category": category,
-            "measurement_unit": unit_abbrev,
-        })
+        product_list.append(
+            {
+                "name": name,
+                "barcode": barcode,
+                "category": category,
+                "measurement_unit": unit_abbrev,
+            }
+        )
 
     merchants = list(_MERCHANTS)
 
@@ -444,19 +535,26 @@ def generate_sample_data(n_products: int = 200, n_receipts: int = 20) -> Dict[st
                 qty = Decimal(str(rng.randint(100, 2000))).quantize(Decimal("0.0001"))
             else:  # u, pk
                 qty = Decimal(str(rng.randint(1, 6))).quantize(Decimal("0.0001"))
-            price = (Decimal(str(rng.uniform(0.3, 20.0))) * qty).quantize(Decimal("0.0001"))
-            lines.append({
-                "product_list": pl["name"],
-                "price": str(price),
-                "quantity": str(qty),
-                "description": rng.choice([None, "promo", "coupon", ""]),
-            })
-        receipts.append({
-            "merchant": m["name"],
-            "purchase_date": r_date.isoformat(),
-            "barcode": None,
-            "products": lines,
-        })
+            price = (Decimal(str(rng.uniform(0.3, 20.0))) * qty).quantize(
+                Decimal("0.0001")
+            )
+            lines.append(
+                {
+                    "product_list": pl["name"],
+                    "price": str(price),
+                    "quantity": str(qty),
+                    "description": rng.choice([None, "promo", "coupon", ""]),
+                }
+            )
+        receipts.append(
+            {
+                "merchant": m["name"],
+                "purchase_date": r_date.isoformat(),
+                # each receipt gets a valid 10–12 digit barcode
+                "barcode": generate_receipt_barcode(),
+                "products": lines,
+            }
+        )
 
     return {
         "categories": categories,
@@ -471,29 +569,63 @@ def generate_sample_data(n_products: int = 200, n_receipts: int = 20) -> Dict[st
 
 def load_from_json(db: Session, payload: Dict[str, Any]) -> Dict[str, int]:
     cache = Cache()
-    summary = {"categories": 0, "measurement_units": 0, "product_list": 0, "merchants": 0, "receipts": 0}
+    summary = {
+        "categories": 0,
+        "measurement_units": 0,
+        "product_list": 0,
+        "merchants": 0,
+        "receipts": 0,
+    }
 
     with db.begin():  # single transaction
-        summary["categories"] = load_categories(db, cache, payload.get("categories", []))
-        summary["measurement_units"] = load_units(db, cache, payload.get("measurement_units", []))
-        summary["product_list"] = load_product_list(db, cache, payload.get("product_list", []))
-        summary["merchants"] = load_merchants(db, cache, payload.get("merchants", []))
-        summary["receipts"] = load_receipts(db, cache, payload.get("receipts", []))
+        summary["categories"] = load_categories(
+            db, cache, payload.get("categories", [])
+        )
+        summary["measurement_units"] = load_units(
+            db, cache, payload.get("measurement_units", [])
+        )
+        summary["product_list"] = load_product_list(
+            db, cache, payload.get("product_list", [])
+        )
+        summary["merchants"] = load_merchants(
+            db, cache, payload.get("merchants", [])
+        )
+        summary["receipts"] = load_receipts(
+            db, cache, payload.get("receipts", [])
+        )
 
     return summary
 
 
 def main(argv: list[str]) -> None:
-    parser = argparse.ArgumentParser(description="Load or generate grocery receipts dataset")
+    parser = argparse.ArgumentParser(
+        description="Load or generate grocery receipts dataset"
+    )
     parser.add_argument("json_path", nargs="?", help="Path to JSON file to load")
-    parser.add_argument("--generate", dest="gen_path", help="Write a generated dataset to this JSON path and exit")
-    parser.add_argument("--products", type=int, default=200, help="Number of product definitions to generate")
-    parser.add_argument("--receipts", type=int, default=20, help="Number of receipts to generate")
+    parser.add_argument(
+        "--generate",
+        dest="gen_path",
+        help="Write a generated dataset to this JSON path and exit",
+    )
+    parser.add_argument(
+        "--products",
+        type=int,
+        default=200,
+        help="Number of product definitions to generate",
+    )
+    parser.add_argument(
+        "--receipts",
+        type=int,
+        default=20,
+        help="Number of receipts to generate",
+    )
     args = parser.parse_args(argv[1:])
 
     # Generation mode
     if args.gen_path:
-        payload = generate_sample_data(n_products=args.products, n_receipts=args.receipts)
+        payload = generate_sample_data(
+            n_products=args.products, n_receipts=args.receipts
+        )
         out = Path(args.gen_path).expanduser().resolve()
         out.write_text(json.dumps(payload, indent=2), encoding="utf-8")
         print(f"Wrote generated dataset to {out}")
@@ -501,8 +633,13 @@ def main(argv: list[str]) -> None:
 
     # Load mode
     if not args.json_path:
-        print("Usage: python -m load_json_to_db /path/to/data.json  OR  python -m load_json_to_db --generate sample.json --products 200 --receipts 20", file=sys.stderr)
-
+        print(
+            "Usage: python -m load_json_to_db /path/to/data.json  "
+            "OR  python -m load_json_to_db --generate sample.json "
+            "--products 200 --receipts 20",
+            file=sys.stderr,
+        )
+        sys.exit(1)
 
     json_path = Path(args.json_path).expanduser().resolve()
     if not json_path.exists():
