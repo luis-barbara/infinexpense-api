@@ -193,11 +193,9 @@ def get_enriched_merchant_report(
     # 'total_spent', 'receipt_count') para o teu schema 'MerchantReportData'.
     return results
 
-#
-# TO-DO (A FAZER) - Funções de Relatório para o Dashboard Principal
-# (Os 3 cartões em 'image_157b8d.jpg')
-#
-
+# ---
+# Relatório 3: KPIs para o Dashboard Principal (Ecrã de Visão Geral)
+# ---
 def get_dashboard_kpis(
     db: Session,
     start_date: Optional[date] = None,
@@ -210,15 +208,39 @@ def get_dashboard_kpis(
     3. Total de Produtos
     """
     
-    # TO-DO (A FAZER): Esta é uma query complexa que tem de
-    # 1. Aplicar os filtros de data
-    # 2. Fazer um SUM(price*qty)
-    # 3. Fazer um COUNT(receipts.id)
-    # 4. Fazer um COUNT(products.id)
+    # 1. Define o cálculo do preço total por item (preço * quantidade)
+    total_item_spent = (model_receipt_product.Product.price * model_receipt_product.Product.quantity).label("total_item_spent")
     
-    # Por agora, devolve dados 'mock' (simulados)
+    # 2. Inicia a query
+    query = db.query(
+        # Total gasto (soma de preço * quantidade de todos os produtos)
+        func.coalesce(func.sum(total_item_spent), Decimal("0.00")).label("total_spent"),
+        
+        # Contagem de recibos distintos
+        func.count(distinct(model_receipt.Receipt.id)).label("receipt_count"),
+        
+        # Contagem de produtos distintos
+        func.count(distinct(model_receipt_product.Product.id)).label("product_item_count")
+    )
+    
+    # 3. Fazemos os JOINs necessários
+    query = query.join(
+        model_receipt_product.Product,
+        model_receipt_product.Product.receipt_id == model_receipt.Receipt.id
+    )
+
+    # 4. Filtros (onde a lógica de data entra)
+    if start_date:
+        query = query.filter(model_receipt.Receipt.date >= start_date)
+    if end_date:
+        query = query.filter(model_receipt.Receipt.date <= end_date)
+
+    # 5. Executa a query
+    result = query.one()  # Como esperamos apenas uma linha de resultado
+    
+    # 6. Retorna os KPIs calculados
     return {
-        "total_spent": Decimal("1234.56"),
-        "receipt_count": 12,
-        "product_item_count": 156
+        "total_spent": result.total_spent,
+        "receipt_count": result.receipt_count,
+        "product_item_count": result.product_item_count
     }
