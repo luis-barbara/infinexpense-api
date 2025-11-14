@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories - InfinExpense</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body data-active-page="categories">
+    <!-- Navigation Template -->
+
+    <div data-template="header"></div>
+
+    <script src="../js/template-loader.js"></script>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Categories</h1>
+            <a href="category-add.html" class="btn btn-primary">+ Add Category</a>
+        </div>
+
+        <!-- Date Range Filter -->
+        <div class="filter-grid">
+            <!-- Search Bar (Left) -->
+            <div class="search-bar search-bar-no-margin">
+                <input type="text" id="searchInput" class="search-input form-input-flex" placeholder="Search categories...">
+                <button class="btn btn-primary">Search</button>
+            </div>
+            
+            <!-- Date Filter (Right) -->
+            <div class="search-bar search-bar-no-margin">
+                <label class="form-label form-label-inline">
+                    <span class="form-label-span">Start<br>Date</span>
+                    <input type="date" class="form-input form-input-flex" value="2025-11-01">
+                </label>
+                <label class="form-label form-label-inline">
+                    <span class="form-label-span">End<br>Date</span>
+                    <input type="date" class="form-input form-input-flex" value="2025-11-30">
+                </label>
+                <button class="btn btn-primary">Apply</button>
+            </div>
+        </div>
+
+        <!-- Categories and Chart Layout -->
+        <div class="grid-2cols">
+            <!-- Categories List (Left Side) -->
+            <div class="card card-no-margin card-flex">
+                <h3 class="detail-title" style="margin-bottom: 0.75rem; font-size: 1.1rem;">All Categories</h3>
+                <div class="flex-1 overflow-auto">
+                    <div class="list-container list-container-no-shadow" id="categoriesList">
+                    <!-- Dairy Category -->
+                    <div class="list-item list-item-compact">
+                        <div class="list-item-main categories-list-grid">
+                            <div class="category-color-box" style="background-color: #10b981;"></div>
+                            <div class="category-name">Dairy</div>
+                            <div class="category-meta">18 Items</div>
+                            <div class="category-meta">8.4%</div>
+                            <div style="color: var(--primary-color); font-weight: 500; font-size: 0.95rem; text-align: center;">245.80 €</div>
+                            <div class="list-item-actions">
+                                <a href="category-edit-3001.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                                <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bakery Category -->
+                    <div class="list-item list-item-compact">
+                        <div class="list-item-main categories-list-grid">
+                            <div class="category-color-box" style="background-color: #f97316;"></div>
+                            <div class="category-name">Bakery</div>
+                            <div class="category-meta">12 Items</div>
+                            <div class="category-meta">5.4%</div>
+                            <div style="color: var(--primary-color); font-weight: 500; font-size: 0.95rem; text-align: center;">156.40 €</div>
+                            <div class="list-item-actions">
+                                <a href="category-edit-3002.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                                <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Meat Category -->
+                    <div class="list-item list-item-compact">
+                        <div class="list-item-main categories-list-grid">
+                            <div class="category-color-box" style="background-color: #ef4444;"></div>
+                            <div class="category-name">Meat</div>
+                            <div class="category-meta">24 Items</div>
+                            <div class="category-meta">16.7%</div>
+                            <div style="color: var(--primary-color); font-weight: 500; font-size: 0.95rem; text-align: center;">487.50 €</div>
+                            <div class="list-item-actions">
+                                <a href="category-edit-3003.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                                <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vegetables Category -->
+                    <div class="list-item list-item-compact">
+                        <div class="list-item-main categories-list-grid">
+                            <div class="category-color-box" style="background-color: #8b5cf6;"></div>
+                            <div class="category-name">Vegetables</div>
+                            <div class="category-meta">32 Items</div>
+                            <div class="category-meta">6.8%</div>
+                            <div style="color: var(--primary-color); font-weight: 500; font-size: 0.95rem; text-align: center;">198.30 €</div>
+                            <div class="list-item-actions">
+                                <a href="category-edit-3004.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                                <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fruits Category -->
+                    <div class="list-item list-item-compact">
+                        <div class="list-item-main categories-list-grid">
+                            <div class="category-color-box" style="background-color: #ec4899;"></div>
+                            <div class="category-name">Fruits</div>
+                            <div class="category-meta">28 Items</div>
+                            <div class="category-meta">5.8%</div>
+                            <div style="color: var(--primary-color); font-weight: 500; font-size: 0.95rem; text-align: center;">167.90 €</div>
+                            <div class="list-item-actions">
+                                <a href="category-edit-3005.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                                <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Condiments Category -->
+                    <div class="list-item list-item-compact">
+                        <div class="list-item-main categories-list-grid">
+                            <div class="category-color-box" style="background-color: #a855f7;"></div>
+                            <div class="category-name">Condiments</div>
+                            <div class="category-meta">15 Items</div>
+                            <div class="category-meta">3.1%</div>
+                            <div style="color: var(--primary-color); font-weight: 500; font-size: 0.95rem; text-align: center;">89.70 €</div>
+                            <div class="list-item-actions">
+                                <a href="category-edit-3006.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                                <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Grains Category -->
+                    <div class="list-item list-item-compact">
+                        <div class="list-item-main categories-list-grid">
+                            <div class="category-color-box" style="background-color: #84cc16;"></div>
+                            <div class="category-name">Grains</div>
+                            <div class="category-meta">22 Items</div>
+                            <div class="category-meta">4.3%</div>
+                            <div style="color: var(--primary-color); font-weight: 500; font-size: 0.95rem; text-align: center;">124.60 €</div>
+                            <div class="list-item-actions">
+                                <a href="category-edit-3007.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                                <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Beverages Category -->
+                    <div class="list-item list-item-compact">
+                        <div class="list-item-main categories-list-grid">
+                            <div class="category-color-box" style="background-color: #f59e0b;"></div>
+                            <div class="category-name">Beverages</div>
+                            <div class="category-meta">35 Items</div>
+                            <div class="category-meta">10.7%</div>
+                            <div style="color: var(--primary-color); font-weight: 500; font-size: 0.95rem; text-align: center;">312.45 €</div>
+                            <div class="list-item-actions">
+                                <a href="category-edit-3008.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                                <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Snacks Category -->
+                    <div class="list-item list-item-compact">
+                        <div class="list-item-main categories-list-grid">
+                            <div class="category-color-box" style="background-color: #6366f1;"></div>
+                            <div class="category-name">Snacks</div>
+                            <div class="category-meta">19 Items</div>
+                            <div class="category-meta">4.6%</div>
+                            <div style="color: var(--primary-color); font-weight: 500; font-size: 0.95rem; text-align: center;">134.20 €</div>
+                            <div class="list-item-actions">
+                                <a href="category-edit-3009.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                                <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Frozen Category -->
+                    <div class="list-item list-item-compact">
+                        <div class="list-item-main categories-list-grid">
+                            <div class="category-color-box" style="background-color: #14b8a6;"></div>
+                            <div class="category-name">Frozen</div>
+                            <div class="category-meta">14 Items</div>
+                            <div class="category-meta">6.1%</div>
+                            <div style="color: var(--primary-color); font-weight: 500; font-size: 0.95rem; text-align: center;">178.90 €</div>
+                            <div class="list-item-actions">
+                                <a href="category-edit-3010.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                                <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Personal Care Category -->
+                    <div class="list-item list-item-compact">
+                        <div class="list-item-main categories-list-grid">
+                            <div class="category-color-box" style="background-color: #3b82f6;"></div>
+                            <div class="category-name">Personal Care</div>
+                            <div class="category-meta">21 Items</div>
+                            <div class="category-meta">9.2%</div>
+                            <div style="color: var(--primary-color); font-weight: 500; font-size: 0.95rem; text-align: center;">267.80 €</div>
+                            <div class="list-item-actions">
+                                <a href="category-edit-3011.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                                <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cleaning Category -->
+                    <div class="list-item list-item-compact">
+                        <div class="list-item-main categories-list-grid">
+                            <div class="category-color-box" style="background-color: #06b6d4;"></div>
+                            <div class="category-name">Cleaning</div>
+                            <div class="category-meta">16 Items</div>
+                            <div class="category-meta">5.0%</div>
+                            <div style="color: var(--primary-color); font-weight: 500; font-size: 0.95rem; text-align: center;">145.60 €</div>
+                            <div class="list-item-actions">
+                                <a href="category-edit-3012.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                                <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monthly Spending Chart (Right Side) -->
+            <div class="card" style="margin-bottom: 0; display: flex; flex-direction: column; overflow: hidden;">
+                <h3 class="detail-title" style="margin-bottom: 0.75rem; font-size: 1.1rem; text-align: center;">Category Spending Pie Chart</h3>
+                <div style="flex: 1; display: flex; align-items: center; justify-content: center;">
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    
+    <!-- Category Chart JavaScript -->
+    <script src="../js/category-chart.js"></script>
+</body>
+</html>

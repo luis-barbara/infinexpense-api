@@ -4,22 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - InfinExpense</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="nav-brand">InfinExpense</a>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link active">Dashboard</a></li>
-                <li><a href="receipts.html" class="nav-link">Receipts</a></li>
-                <li><a href="products.html" class="nav-link">Products</a></li>
-                <li><a href="categories.html" class="nav-link">Categories</a></li>
-                <li><a href="merchants.html" class="nav-link">Merchants</a></li>
-            </ul>
-        </div>
-    </nav>
+<body data-active-page="dashboard">
+    <!-- Navigation Template -->
+
+    <div data-template="header"></div>
+
+    <script src="js/template-loader.js"></script>
 
     <!-- Main Content -->
     <div class="container">
@@ -54,7 +46,7 @@
             <!-- Match bottom position with other pages: 64px navbar, 2rem container padding, 60px page-header, 2rem header margin, 170px stats-grid, 1.5rem stats margin, 2rem bottom margin -->
             <div class="flex-between mb-2">
                 <h2 class="detail-title" style="margin-bottom: 0;">Recent Receipts</h2>
-                <a href="receipts.html" class="btn btn-outline btn-sm">View All</a>
+                <a href="../receipt/receipts.html" class="btn btn-outline btn-sm">View All</a>
             </div>
 
             <div class="receipt-list" id="recent-receipts-list" data-max-items="3" style="display: flex; flex-direction: column; justify-content: center; flex: 1; gap: 1rem;">
@@ -112,32 +104,7 @@
         </div>
     </div>
 
-    <script>
-        /**
-         * Toggle between percentage and absolute value for expense comparison
-         * Switches display between "+12.5%" and "+314.52 €"
-         * Can be bound to Python backend data via data-field="expense-comparison"
-         */
-        let showPercentage = true;
-        const lastMonthExpense = 2533.13; // Previous month value - populate from DB
-        const currentExpense = 2847.65;    // Current month value - populate from DB
-        const difference = currentExpense - lastMonthExpense;
-        const percentage = ((difference / lastMonthExpense) * 100).toFixed(1);
-
-        /**
-         * Toggle display mode for expense comparison
-         * Called on click of the comparison element
-         */
-        function toggleComparisonMode() {
-            const element = document.getElementById('expenseComparison');
-            showPercentage = !showPercentage;
-            
-            if (showPercentage) {
-                element.textContent = `+${percentage}% from last month`;
-            } else {
-                element.textContent = `+${difference.toFixed(2)} € from last month`;
-            }
-        }
-    </script>
+    <!-- Dashboard JavaScript -->
+    <script src="js/dashboard.js"></script>
 </body>
 </html>
