@@ -23,15 +23,34 @@
 
     <!-- Main Content -->
     <div class="container">
-        <div class="page-header">
-            <h1 class="page-title">Add New Product</h1>
-        </div>
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div class="page-header">
+                <h1 class="page-title">Add New Product</h1>
+            </div>
 
-        <div class="card" style="max-width: 800px; margin: 0 auto;">
-            <form>
+            <div class="card" style="margin-bottom: 2rem;">
+                <form>
                 <div class="form-group">
                     <label class="form-label">Product Name *</label>
                     <input type="text" class="form-input" placeholder="Enter product name" required>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem;">
+                    <div class="form-group">
+                        <label class="form-label">Product Photo</label>
+                        <div class="file-upload" style="aspect-ratio: 3 / 4; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.5rem;">
+                            <input type="file" id="product-photo" class="file-upload-input" accept="image/*">
+                            <label for="product-photo" class="file-upload-label" style="cursor: pointer;">
+                                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📷</div>
+                                <div style="font-size: 0.875rem; text-align: center;">Upload Photo</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="display: flex; flex-direction: column;">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-textarea" placeholder="Add product description or notes..." style="flex: 1; resize: vertical;"></textarea>
+                    </div>
                 </div>
 
                 <div class="form-row">
@@ -53,8 +72,15 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Amount *</label>
-                        <input type="text" class="form-input" placeholder="e.g., 1L, 500g, 3 units" required>
+                        <label class="form-label">Volume *</label>
+                        <select class="form-select" required>
+                            <option value="">Select volume</option>
+                            <option value="kg">kg (kilogram(s))</option>
+                            <option value="g">g (gram(s))</option>
+                            <option value="L">L (liter(s))</option>
+                            <option value="mL">mL (mililiter(s))</option>
+                            <option value="u">u (unit(s))</option>
+                        </select>
                     </div>
                 </div>
 
@@ -70,26 +96,12 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-label">Product Photo</label>
-                    <div class="file-upload">
-                        <input type="file" id="product-photo" class="file-upload-input" accept="image/*">
-                        <label for="product-photo" class="file-upload-label">
-                            <div>📷 Click to upload product photo</div>
-                        </label>
+                    <div class="flex flex-gap" style="justify-content: flex-end; margin-top: 2rem;">
+                        <a href="products.html" class="btn btn-outline">Cancel</a>
+                        <button type="submit" class="btn btn-success">Add Product</button>
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Description</label>
-                    <textarea class="form-textarea" placeholder="Add product description or notes..."></textarea>
-                </div>
-
-                <div class="flex flex-gap" style="justify-content: flex-end; margin-top: 2rem;">
-                    <a href="products.html" class="btn btn-outline">Cancel</a>
-                    <button type="submit" class="btn btn-success">Add Product</button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </body>

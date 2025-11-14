@@ -24,117 +24,143 @@
     <!-- Main Content -->
     <div class="container">
         <div class="page-header">
-            <h1 class="page-title">Product Details</h1>
+            <h1 class="page-title">Milk Semi-Skimmed</h1>
             <div class="flex flex-gap">
                 <a href="product-edit-2001.html" class="btn btn-primary">Edit Product</a>
                 <button class="btn btn-danger">Delete Product</button>
             </div>
         </div>
 
-        <!-- Product Header Information -->
-        <div class="detail-header">
-            <div class="grid" style="grid-template-columns: 1fr 2fr; gap: 2rem;">
+        <!-- Two Column Layout -->
+        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem; height: calc(100vh - 250px);">
+            
+            <!-- LEFT COLUMN: Product Info -->
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 2rem 1.5rem;">
                 <!-- Product Photo -->
-                <div>
-                    <img src="https://via.placeholder.com/400x300/e2e8f0/64748b?text=Milk+Photo" 
+                <div style="max-width: 350px; margin: 0 auto 1.5rem;">
+                    <img id="product-image" 
+                         src="" 
                          alt="Milk Semi-Skimmed" 
                          class="image-preview"
-                         style="max-width: 100%;">
-                    <div class="file-upload">
+                         style="width: 100%; aspect-ratio: 3 / 4; object-fit: contain; border-radius: 0.5rem; display: none; cursor: pointer;">
+                    <div id="upload-area" class="file-upload" style="width: 300px; aspect-ratio: 3 / 4; display: flex; flex-direction: column; align-items: center; justify-content: center;">
                         <input type="file" id="photo-upload" class="file-upload-input" accept="image/*">
-                        <label for="photo-upload" class="file-upload-label">
-                            <div>📷 Upload New Photo</div>
+                        <label for="photo-upload" class="file-upload-label" style="cursor: pointer;">
+                            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📷</div>
+                            <div style="font-size: 0.875rem;">Upload Photo</div>
                         </label>
                     </div>
                 </div>
 
                 <!-- Product Info -->
-                <div>
-                    <h2 class="detail-title">Milk Semi-Skimmed</h2>
-                    <div class="detail-info">
-                        <div class="detail-info-item">
-                            <span class="detail-info-label">Category</span>
-                            <span class="detail-info-value">Dairy</span>
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div style="display: flex; flex-direction: column; gap: 0.25rem; align-items: center;">
+                        <span style="font-size: 0.875rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Category</span>
+                        <span style="font-size: 0.9375rem; font-weight: 600; color: var(--text-primary);">Dairy</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 0.25rem; align-items: center;">
+                        <span style="font-size: 0.875rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Volume</span>
+                        <span style="font-size: 0.9375rem; font-weight: 600; color: var(--text-primary);">Liter(s)</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 0.25rem; align-items: center;">
+                        <span style="font-size: 0.875rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Barcode</span>
+                        <span style="font-size: 0.9375rem; font-weight: 600; color: var(--text-primary);">5600308532147</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--border-color); align-items: center;">
+                        <span style="font-size: 0.875rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Current Price</span>
+                        <span style="font-size: 1.5rem; font-weight: 700; color: var(--primary-color);">0.89 € / L</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Price History & Changes -->
+            <div style="display: flex; flex-direction: column; overflow: hidden; height: 100%;">
+                <!-- Price History Chart -->
+                <div class="chart-container" style="margin-bottom: 1.5rem;">
+                    <h3 class="detail-title">Price History</h3>
+                    <canvas id="priceHistoryChart" style="max-height: 250px;"></canvas>
+                </div>
+
+                <!-- Price Changes List -->
+                <div class="card" style="flex: 1; display: flex; flex-direction: column; min-height: 0;">
+                    <h3 class="detail-title">Price Changes</h3>
+                    
+                    <!-- Table Headers -->
+                    <div class="list-header" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
+                        <div class="list-header-item">
+                            <span>Date</span>
                         </div>
-                        <div class="detail-info-item">
-                            <span class="detail-info-label">Amount</span>
-                            <span class="detail-info-value">1L</span>
+                        <div class="list-header-item">
+                            <span>Old Price</span>
                         </div>
-                        <div class="detail-info-item">
-                            <span class="detail-info-label">Barcode</span>
-                            <span class="detail-info-value">5600308532147</span>
+                        <div class="list-header-item">
+                            <span>New Price</span>
                         </div>
-                        <div class="detail-info-item">
-                            <span class="detail-info-label">Current Price</span>
-                            <span class="detail-info-value">€0.89</span>
+                        <div class="list-header-item">
+                            <span>Diferencial</span>
+                        </div>
+                    </div>
+                    
+                    <div class="scrollable-list" style="flex: 1; overflow-y: auto;">
+                        <div class="list-container">
+                            <div class="list-item">
+                                <div class="list-item-main" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
+                                    <div class="list-item-value">Nov 10, 2025</div>
+                                    <div class="list-item-value">0.85 €</div>
+                                    <div class="list-item-value">0.89 €</div>
+                                    <div class="list-item-value"><span class="badge badge-warning">+4.7%</span></div>
+                                </div>
+                            </div>
+
+                            <div class="list-item">
+                                <div class="list-item-main" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
+                                    <div class="list-item-value">Oct 28, 2025</div>
+                                    <div class="list-item-value">0.89 €</div>
+                                    <div class="list-item-value">0.85 €</div>
+                                    <div class="list-item-value"><span class="badge badge-success">-4.5%</span></div>
+                                </div>
+                            </div>
+
+                            <div class="list-item">
+                                <div class="list-item-main" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
+                                    <div class="list-item-value">Oct 15, 2025</div>
+                                    <div class="list-item-value">0.92 €</div>
+                                    <div class="list-item-value">0.89 €</div>
+                                    <div class="list-item-value"><span class="badge badge-success">-3.3%</span></div>
+                                </div>
+                            </div>
+
+                            <div class="list-item">
+                                <div class="list-item-main" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
+                                    <div class="list-item-value">Oct 1, 2025</div>
+                                    <div class="list-item-value">0.89 €</div>
+                                    <div class="list-item-value">0.92 €</div>
+                                    <div class="list-item-value"><span class="badge badge-warning">+3.4%</span></div>
+                                </div>
+                            </div>
+
+                            <div class="list-item">
+                                <div class="list-item-main" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
+                                    <div class="list-item-value">Sep 20, 2025</div>
+                                    <div class="list-item-value">0.85 €</div>
+                                    <div class="list-item-value">0.89 €</div>
+                                    <div class="list-item-value"><span class="badge badge-warning">+4.7%</span></div>
+                                </div>
+                            </div>
+
+                            <div class="list-item">
+                                <div class="list-item-main" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
+                                    <div class="list-item-value">Sep 5, 2025</div>
+                                    <div class="list-item-value">0.89 €</div>
+                                    <div class="list-item-value">0.85 €</div>
+                                    <div class="list-item-value"><span class="badge badge-success">-4.5%</span></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Price History Chart -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
-            <!-- Price Changes List (Left) -->
-            <div class="card" style="margin-bottom: 0;">
-                <h3 class="detail-title">Price Changes</h3>
-                <div class="table-container" style="box-shadow: none;">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Previous</th>
-                                <th>New</th>
-                                <th>Change</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Nov 10, 2025</td>
-                                <td>€0.85</td>
-                                <td>€0.89</td>
-                                <td><span class="badge badge-warning">+4.7%</span></td>
-                            </tr>
-                            <tr>
-                                <td>Oct 28, 2025</td>
-                                <td>€0.89</td>
-                                <td>€0.85</td>
-                                <td><span class="badge badge-success">-4.5%</span></td>
-                            </tr>
-                            <tr>
-                                <td>Oct 15, 2025</td>
-                                <td>€0.92</td>
-                                <td>€0.89</td>
-                                <td><span class="badge badge-success">-3.3%</span></td>
-                            </tr>
-                            <tr>
-                                <td>Oct 1, 2025</td>
-                                <td>€0.89</td>
-                                <td>€0.92</td>
-                                <td><span class="badge badge-warning">+3.4%</span></td>
-                            </tr>
-                            <tr>
-                                <td>Sep 20, 2025</td>
-                                <td>€0.85</td>
-                                <td>€0.89</td>
-                                <td><span class="badge badge-warning">+4.7%</span></td>
-                            </tr>
-                            <tr>
-                                <td>Sep 5, 2025</td>
-                                <td>€0.89</td>
-                                <td>€0.85</td>
-                                <td><span class="badge badge-success">-4.5%</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Price History Chart (Right) -->
-            <div class="chart-container" style="margin-bottom: 0;">
-                <h3 class="detail-title">Price History</h3>
-                <canvas id="priceHistoryChart"></canvas>
-            </div>
         </div>
     </div>
 
@@ -151,7 +177,7 @@
                     data: [0.85, 0.89, 0.92, 0.89, 0.85, 0.89],
                     borderColor: '#2563eb',
                     backgroundColor: 'rgba(37, 99, 235, 0.1)',
-                    tension: 0.3,
+                    tension: 0,
                     fill: true,
                     pointRadius: 5,
                     pointHoverRadius: 7,
@@ -170,7 +196,7 @@
                     tooltip: {
                         callbacks: {
                             label: function(context) {
-                                return 'Price: €' + context.parsed.y.toFixed(2);
+                                return 'Price: ' + context.parsed.y.toFixed(2) + ' €';
                             }
                         }
                     }
@@ -180,12 +206,35 @@
                         beginAtZero: false,
                         ticks: {
                             callback: function(value) {
-                                return '€' + value.toFixed(2);
+                                return value.toFixed(2) + ' €';
                             }
                         }
                     }
                 }
             }
+        });
+
+        // Handle photo upload
+        const photoUpload = document.getElementById('photo-upload');
+        const productImage = document.getElementById('product-image');
+        const uploadArea = document.getElementById('upload-area');
+
+        photoUpload.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    productImage.src = event.target.result;
+                    productImage.style.display = 'block';
+                    uploadArea.style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Toggle between image and upload area (click on image to change photo)
+        productImage.addEventListener('click', function() {
+            photoUpload.click();
         });
     </script>
 </body>

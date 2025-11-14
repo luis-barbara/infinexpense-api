@@ -28,372 +28,256 @@
             <a href="product-add.html" class="btn btn-primary">+ Add Product</a>
         </div>
 
-        <!-- Search Bar and Items Per Page -->
+        <!-- Search Bar -->
         <div class="search-bar">
             <input type="text" id="searchInput" class="search-input" placeholder="Search products by name, category, or price...">
             <button class="btn btn-primary" onclick="filterItems()">Search</button>
-            <select id="itemsPerPage" class="form-select" style="width: auto; min-width: 150px;" onchange="changeItemsPerPage()">
-                <option value="5" selected>Show 5</option>
-                <option value="10">Show 10</option>
-                <option value="20">Show 20</option>
-                <option value="50">Show 50</option>
-            </select>
         </div>
 
         <!-- Products List -->
-        <div class="list-container" id="productsList">
-            <a href="product-2001.html" class="list-item product-item">
-                <div class="list-item-main">
-                    <div>
-                        <div class="list-item-label">Product Name</div>
-                        <div class="list-item-value">Milk Semi-Skimmed</div>
+        <div class="content-wrapper">
+            <div class="card" style="margin-bottom: 0; display: flex; flex-direction: column; flex: 1; overflow: hidden;">
+                <!-- Table Headers -->
+                <div class="list-header" style="grid-template-columns: 2fr 1.5fr 1.2fr 1.5fr 1fr 180px;">
+                    <div class="list-header-item">
+                        <span>Product Name</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortProducts('name', 'asc')" title="Sort ascending">▲</button>
+                            <button class="sort-btn" onclick="sortProducts('name', 'desc')" title="Sort descending">▼</button>
+                        </span>
                     </div>
-                    <div>
-                        <div class="list-item-label">Category</div>
-                        <div class="list-item-value">Dairy</div>
+                    <div class="list-header-item">
+                        <span>Category</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortProducts('category', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortProducts('category', 'desc')">▼</button>
+                        </span>
                     </div>
-                    <div>
-                        <div class="list-item-label">Amount</div>
-                        <div class="list-item-value">1L</div>
+                    <div class="list-header-item">
+                        <span>Volume</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortProducts('volume', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortProducts('volume', 'desc')">▼</button>
+                        </span>
                     </div>
-                    <div>
-                        <div class="list-item-label">Barcode</div>
-                        <div class="list-item-value">5600308532147</div>
+                    <div class="list-header-item">
+                        <span>Barcode</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortProducts('barcode', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortProducts('barcode', 'desc')">▼</button>
+                        </span>
                     </div>
-                    <div>
-                        <div class="list-item-label">Price</div>
-                        <div class="list-item-value">€0.89</div>
+                    <div class="list-header-item">
+                        <span>Price</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortProducts('price', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortProducts('price', 'desc')">▼</button>
+                        </span>
                     </div>
-                </div>
-            </a>
-
-            <a href="product-2002.html" class="list-item product-item">
-                <div class="list-item-main">
-                    <div>
-                        <div class="list-item-label">Product Name</div>
-                        <div class="list-item-value">Bread Whole Wheat</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Category</div>
-                        <div class="list-item-value">Bakery</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Amount</div>
-                        <div class="list-item-value">500g</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Barcode</div>
-                        <div class="list-item-value">5600308532148</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Price</div>
-                        <div class="list-item-value">€1.20</div>
+                    <div class="list-header-item">
+                        <span>Actions</span>
                     </div>
                 </div>
-            </a>
-
-            <a href="product-2003.html" class="list-item product-item">
-                <div class="list-item-main">
-                    <div>
-                        <div class="list-item-label">Product Name</div>
-                        <div class="list-item-value">Chicken Breast</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Category</div>
-                        <div class="list-item-value">Meat</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Amount</div>
-                        <div class="list-item-value">800g</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Barcode</div>
-                        <div class="list-item-value">5600308532149</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Price</div>
-                        <div class="list-item-value">€7.60</div>
+                <div class="scrollable-list">
+                    <div class="list-container" id="productsList">
+            <div class="list-item product-item" data-name="Milk Semi-Skimmed" data-category="Dairy" data-volume="L" data-barcode="5600308532147" data-price="0.89">
+                <div class="list-item-main" style="grid-template-columns: 2fr 1.5fr 1.2fr 1.5fr 1fr 180px;">
+                    <div class="list-item-value">Milk Semi-Skimmed</div>
+                    <div class="list-item-value">Dairy</div>
+                    <div class="list-item-value">Liter(s)</div>
+                    <div class="list-item-value">5600308532147</div>
+                    <div class="list-item-value">0.89 €</div>
+                    <div class="list-item-actions">
+                        <a href="product-2001.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="product-edit-2001.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
                     </div>
                 </div>
-            </a>
+            </div>
 
-            <a href="product-2004.html" class="list-item product-item">
-                <div class="list-item-main">
-                    <div>
-                        <div class="list-item-label">Product Name</div>
-                        <div class="list-item-value">Tomatoes</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Category</div>
-                        <div class="list-item-value">Vegetables</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Amount</div>
-                        <div class="list-item-value">1.2kg</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Barcode</div>
-                        <div class="list-item-value">5600308532150</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Price</div>
-                        <div class="list-item-value">€2.40</div>
+            <div class="list-item product-item" data-name="Bread Whole Wheat" data-category="Bakery" data-volume="g" data-barcode="5600308532148" data-price="1.20">
+                <div class="list-item-main" style="grid-template-columns: 2fr 1.5fr 1.2fr 1.5fr 1fr 180px;">
+                    <div class="list-item-value">Bread Whole Wheat</div>
+                    <div class="list-item-value">Bakery</div>
+                    <div class="list-item-value">Gram(s)</div>
+                    <div class="list-item-value">5600308532148</div>
+                    <div class="list-item-value">1.20 €</div>
+                    <div class="list-item-actions">
+                        <a href="product-2002.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="product-edit-2002.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
                     </div>
                 </div>
-            </a>
+            </div>
 
-            <a href="product-2005.html" class="list-item product-item">
-                <div class="list-item-main">
-                    <div>
-                        <div class="list-item-label">Product Name</div>
-                        <div class="list-item-value">Bananas</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Category</div>
-                        <div class="list-item-value">Fruits</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Amount</div>
-                        <div class="list-item-value">1.5kg</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Barcode</div>
-                        <div class="list-item-value">5600308532151</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Price</div>
-                        <div class="list-item-value">€1.80</div>
+            <div class="list-item product-item" data-name="Chicken Breast" data-category="Meat" data-volume="g" data-barcode="5600308532149" data-price="7.60">
+                <div class="list-item-main" style="grid-template-columns: 2fr 1.5fr 1.2fr 1.5fr 1fr 180px;">
+                    <div class="list-item-value">Chicken Breast</div>
+                    <div class="list-item-value">Meat</div>
+                    <div class="list-item-value">Gram(s)</div>
+                    <div class="list-item-value">5600308532149</div>
+                    <div class="list-item-value">7.60 €</div>
+                    <div class="list-item-actions">
+                        <a href="product-2003.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="product-edit-2003.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
                     </div>
                 </div>
-            </a>
+            </div>
 
-            <a href="product-2006.html" class="list-item product-item">
-                <div class="list-item-main">
-                    <div>
-                        <div class="list-item-label">Product Name</div>
-                        <div class="list-item-value">Olive Oil Extra Virgin</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Category</div>
-                        <div class="list-item-value">Condiments</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Amount</div>
-                        <div class="list-item-value">750ml</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Barcode</div>
-                        <div class="list-item-value">5600308532152</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Price</div>
-                        <div class="list-item-value">€6.50</div>
+            <div class="list-item product-item" data-name="Tomatoes" data-category="Vegetables" data-volume="kg" data-barcode="5600308532150" data-price="2.40">
+                <div class="list-item-main" style="grid-template-columns: 2fr 1.5fr 1.2fr 1.5fr 1fr 180px;">
+                    <div class="list-item-value">Tomatoes</div>
+                    <div class="list-item-value">Vegetables</div>
+                    <div class="list-item-value">Kilogram(s)</div>
+                    <div class="list-item-value">5600308532150</div>
+                    <div class="list-item-value">2.40 €</div>
+                    <div class="list-item-actions">
+                        <a href="product-2004.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="product-edit-2004.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
                     </div>
                 </div>
-            </a>
+            </div>
 
-            <a href="product-2007.html" class="list-item product-item">
-                <div class="list-item-main">
-                    <div>
-                        <div class="list-item-label">Product Name</div>
-                        <div class="list-item-value">Rice Basmati</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Category</div>
-                        <div class="list-item-value">Grains</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Amount</div>
-                        <div class="list-item-value">1kg</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Barcode</div>
-                        <div class="list-item-value">5600308532153</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Price</div>
-                        <div class="list-item-value">€2.99</div>
+            <div class="list-item product-item" data-name="Bananas" data-category="Fruits" data-volume="kg" data-barcode="5600308532151" data-price="1.80">
+                <div class="list-item-main" style="grid-template-columns: 2fr 1.5fr 1.2fr 1.5fr 1fr 180px;">
+                    <div class="list-item-value">Bananas</div>
+                    <div class="list-item-value">Fruits</div>
+                    <div class="list-item-value">Kilogram(s)</div>
+                    <div class="list-item-value">5600308532151</div>
+                    <div class="list-item-value">1.80 €</div>
+                    <div class="list-item-actions">
+                        <a href="product-2005.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="product-edit-2005.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
                     </div>
                 </div>
-            </a>
+            </div>
 
-            <a href="product-2008.html" class="list-item product-item">
-                <div class="list-item-main">
-                    <div>
-                        <div class="list-item-label">Product Name</div>
-                        <div class="list-item-value">Pasta Spaghetti</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Category</div>
-                        <div class="list-item-value">Grains</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Amount</div>
-                        <div class="list-item-value">500g</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Barcode</div>
-                        <div class="list-item-value">5600308532154</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Price</div>
-                        <div class="list-item-value">€1.45</div>
+            <div class="list-item product-item" data-name="Olive Oil Extra Virgin" data-category="Condiments" data-volume="mL" data-barcode="5600308532152" data-price="6.50">
+                <div class="list-item-main" style="grid-template-columns: 2fr 1.5fr 1.2fr 1.5fr 1fr 180px;">
+                    <div class="list-item-value">Olive Oil Extra Virgin</div>
+                    <div class="list-item-value">Condiments</div>
+                    <div class="list-item-value">Mililiter(s)</div>
+                    <div class="list-item-value">5600308532152</div>
+                    <div class="list-item-value">6.50 €</div>
+                    <div class="list-item-actions">
+                        <a href="product-2006.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="product-edit-2006.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
                     </div>
                 </div>
-            </a>
+            </div>
 
-            <a href="product-2009.html" class="list-item product-item">
-                <div class="list-item-main">
-                    <div>
-                        <div class="list-item-label">Product Name</div>
-                        <div class="list-item-value">Orange Juice</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Category</div>
-                        <div class="list-item-value">Beverages</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Amount</div>
-                        <div class="list-item-value">1.5L</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Barcode</div>
-                        <div class="list-item-value">5600308532155</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Price</div>
-                        <div class="list-item-value">€2.85</div>
+            <div class="list-item product-item" data-name="Rice Basmati" data-category="Grains" data-volume="kg" data-barcode="5600308532153" data-price="2.99">
+                <div class="list-item-main" style="grid-template-columns: 2fr 1.5fr 1.2fr 1.5fr 1fr 180px;">
+                    <div class="list-item-value">Rice Basmati</div>
+                    <div class="list-item-value">Grains</div>
+                    <div class="list-item-value">Kilogram(s)</div>
+                    <div class="list-item-value">5600308532153</div>
+                    <div class="list-item-value">2.99 €</div>
+                    <div class="list-item-actions">
+                        <a href="product-2007.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="product-edit-2007.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
                     </div>
                 </div>
-            </a>
+            </div>
 
-            <a href="product-2010.html" class="list-item product-item">
-                <div class="list-item-main">
-                    <div>
-                        <div class="list-item-label">Product Name</div>
-                        <div class="list-item-value">Coffee Beans</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Category</div>
-                        <div class="list-item-value">Beverages</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Amount</div>
-                        <div class="list-item-value">250g</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Barcode</div>
-                        <div class="list-item-value">5600308532156</div>
-                    </div>
-                    <div>
-                        <div class="list-item-label">Price</div>
-                        <div class="list-item-value">€4.99</div>
+            <div class="list-item product-item" data-name="Pasta Spaghetti" data-category="Grains" data-volume="g" data-barcode="5600308532154" data-price="1.45">
+                <div class="list-item-main" style="grid-template-columns: 2fr 1.5fr 1.2fr 1.5fr 1fr 180px;">
+                    <div class="list-item-value">Pasta Spaghetti</div>
+                    <div class="list-item-value">Grains</div>
+                    <div class="list-item-value">Gram(s)</div>
+                    <div class="list-item-value">5600308532154</div>
+                    <div class="list-item-value">1.45 €</div>
+                    <div class="list-item-actions">
+                        <a href="product-2008.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="product-edit-2008.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
                     </div>
                 </div>
-            </a>
-        </div>
+            </div>
 
-        <!-- Pagination -->
-        <div class="pagination" id="pagination">
-            <button class="pagination-btn" id="prevBtn" onclick="changePage(-1)">Previous</button>
-            <span id="pageNumbers"></span>
-            <button class="pagination-btn" id="nextBtn" onclick="changePage(1)">Next</button>
+            <div class="list-item product-item" data-name="Orange Juice" data-category="Beverages" data-volume="u" data-barcode="5600308532155" data-price="2.85">
+                <div class="list-item-main" style="grid-template-columns: 2fr 1.5fr 1.2fr 1.5fr 1fr 180px;">
+                    <div class="list-item-value">Orange Juice</div>
+                    <div class="list-item-value">Beverages</div>
+                    <div class="list-item-value">Unit(s)</div>
+                    <div class="list-item-value">5600308532155</div>
+                    <div class="list-item-value">2.85 €</div>
+                    <div class="list-item-actions">
+                        <a href="product-2009.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="product-edit-2009.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-item product-item" data-name="Coffee Beans" data-category="Beverages" data-volume="g" data-barcode="5600308532156" data-price="4.99">
+                <div class="list-item-main" style="grid-template-columns: 2fr 1.5fr 1.2fr 1.5fr 1fr 180px;">
+                    <div class="list-item-value">Coffee Beans</div>
+                    <div class="list-item-value">Beverages</div>
+                    <div class="list-item-value">Gram(s)</div>
+                    <div class="list-item-value">5600308532156</div>
+                    <div class="list-item-value">4.99 €</div>
+                    <div class="list-item-actions">
+                        <a href="product-2010.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="product-edit-2010.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        let currentPage = 1;
-        let itemsPerPage = 5;
-        const allItems = document.querySelectorAll('.product-item');
-        const totalItems = allItems.length;
+        let sortDirection = {};
 
-        function showPage(page) {
-            const startIndex = (page - 1) * itemsPerPage;
-            const endIndex = startIndex + itemsPerPage;
+        function filterItems() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const allItems = document.querySelectorAll('.product-item');
 
-            allItems.forEach((item, index) => {
-                if (index >= startIndex && index < endIndex) {
+            allItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                const matches = text.includes(searchTerm);
+                
+                if (matches || searchTerm === '') {
                     item.style.display = 'flex';
                 } else {
                     item.style.display = 'none';
                 }
             });
-
-            updatePagination();
         }
 
-        function updatePagination() {
-            const totalPages = Math.ceil(totalItems / itemsPerPage);
-            const pageNumbers = document.getElementById('pageNumbers');
-            pageNumbers.innerHTML = '';
-
-            for (let i = 1; i <= totalPages; i++) {
-                const btn = document.createElement('button');
-                btn.className = 'pagination-btn' + (i === currentPage ? ' active' : '');
-                btn.textContent = i;
-                btn.onclick = () => {
-                    currentPage = i;
-                    showPage(currentPage);
-                };
-                pageNumbers.appendChild(btn);
-            }
-
-            document.getElementById('prevBtn').disabled = currentPage === 1;
-            document.getElementById('nextBtn').disabled = currentPage === totalPages;
-        }
-
-        function changePage(direction) {
-            const totalPages = Math.ceil(totalItems / itemsPerPage);
-            currentPage += direction;
-            if (currentPage < 1) currentPage = 1;
-            if (currentPage > totalPages) currentPage = totalPages;
-            showPage(currentPage);
-        }
-
-        function changeItemsPerPage() {
-            itemsPerPage = parseInt(document.getElementById('itemsPerPage').value);
-            currentPage = 1;
-            showPage(currentPage);
-        }
-
-        function filterItems() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            let visibleCount = 0;
-
-            allItems.forEach(item => {
-                const text = item.textContent.toLowerCase();
-                const matches = text.includes(searchTerm);
-                item.setAttribute('data-visible', matches);
+        function sortProducts(field, direction) {
+            const container = document.getElementById('productsList');
+            const items = Array.from(container.querySelectorAll('.product-item'));
+            
+            items.sort((a, b) => {
+                let aValue = a.getAttribute('data-' + field);
+                let bValue = b.getAttribute('data-' + field);
                 
-                if (matches) {
-                    visibleCount++;
+                // Convert to numbers for price and quantity
+                if (field === 'price' || field === 'quantity') {
+                    aValue = parseFloat(aValue);
+                    bValue = parseFloat(bValue);
+                }
+                
+                if (direction === 'asc') {
+                    return aValue > bValue ? 1 : -1;
+                } else {
+                    return aValue < bValue ? 1 : -1;
                 }
             });
-
-            // Update display based on search
-            if (searchTerm === '') {
-                showPage(currentPage);
-            } else {
-                let shownCount = 0;
-                allItems.forEach(item => {
-                    if (item.getAttribute('data-visible') === 'true') {
-                        if (shownCount < itemsPerPage) {
-                            item.style.display = 'flex';
-                            shownCount++;
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-                
-                document.getElementById('pagination').style.display = searchTerm ? 'none' : 'flex';
-            }
+            
+            // Re-append sorted items
+            items.forEach(item => container.appendChild(item));
         }
-
-        // Initialize
-        showPage(1);
     </script>
 </body>
 </html>

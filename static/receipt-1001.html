@@ -24,272 +24,245 @@
     <!-- Main Content -->
     <div class="container">
         <div class="page-header">
-            <h1 class="page-title">Receipt Details</h1>
+            <h1 class="page-title">RCPT-2025-1001-CON</h1>
             <div class="flex flex-gap">
+                <a href="receipt-edit-1001.html" class="btn btn-primary">Edit Receipt</a>
                 <button class="btn btn-danger">Delete Receipt</button>
             </div>
         </div>
 
-        <!-- Receipt Header Information -->
-        <div class="detail-header">
-            <h2 class="detail-title">Receipt #1001</h2>
-            <div class="detail-info">
-                <div class="detail-info-item">
-                    <span class="detail-info-label">Merchant</span>
-                    <span class="detail-info-value">Continente</span>
+        <!-- Two Column Layout -->
+        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem;">
+            
+            <!-- LEFT COLUMN: Receipt Info -->
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 2rem 1.5rem;">
+                <!-- Receipt Photo -->
+                <div style="max-width: 350px; margin: 0 auto 1.5rem;">
+                    <div class="file-upload" style="width: 300px; aspect-ratio: 3 / 4; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🧾</div>
+                        <div style="font-size: 0.875rem;">Upload Photo</div>
+                    </div>
                 </div>
-                <div class="detail-info-item">
-                    <span class="detail-info-label">Date</span>
-                    <span class="detail-info-value">Nov 10, 2025</span>
-                </div>
-                <div class="detail-info-item">
-                    <span class="detail-info-label">Total Price</span>
-                    <span class="detail-info-value">€87.45</span>
-                </div>
-                <div class="detail-info-item">
-                    <span class="detail-info-label">Number of Products</span>
-                    <span class="detail-info-value">12 items</span>
+
+                <!-- Receipt Info -->
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div style="display: flex; flex-direction: column; gap: 0.25rem; align-items: center;">
+                        <span style="font-size: 0.875rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Merchant</span>
+                        <span style="font-size: 0.9375rem; font-weight: 600; color: var(--text-primary);"><a href="merchant-4001.html" style="color: var(--text-primary); text-decoration: none;">Continente</a></span>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 0.25rem; align-items: center;">
+                        <span style="font-size: 0.875rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Location</span>
+                        <span style="font-size: 0.9375rem; font-weight: 600; color: var(--text-primary);">Faro Centro</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 0.25rem; align-items: center;">
+                        <span style="font-size: 0.875rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Date & Time</span>
+                        <span style="font-size: 0.9375rem; font-weight: 600; color: var(--text-primary);">10/11/2025 • 14:32</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--border-color); align-items: center;">
+                        <span style="font-size: 0.875rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Total Amount</span>
+                        <span style="font-size: 1.5rem; font-weight: 700; color: var(--primary-color);">87.45 €</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Editable Code Field -->
-            <div class="form-group mt-2">
-                <label class="form-label">Receipt Code</label>
-                <input type="text" class="form-input" value="RCPT-2025-1001-CON" placeholder="Enter receipt code">
-            </div>
-            <button class="btn btn-primary btn-sm">Save Code</button>
-        </div>
+            <!-- RIGHT COLUMN: Products List -->
+            <div class="card">
+                <h3 class="detail-title">Item List (12)</h3>
+                
+                <!-- Table Headers -->
+                <div class="list-header" style="grid-template-columns: 2fr 1.2fr 1.5fr 0.8fr 0.8fr 0.6fr;">
+                    <div class="list-header-item">
+                        <span>Product</span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>Category</span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>EAN</span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>Quantity</span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>Price</span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>🏷️</span>
+                    </div>
+                </div>
+                
+                <div class="list-container">
+                    <!-- Product 1 -->
+                    <div class="list-item">
+                        <div class="list-item-main" style="grid-template-columns: 2fr 1.2fr 1.5fr 0.8fr 0.8fr 0.6fr;">
+                            <div class="list-item-value" style="text-align: center;">
+                                <a href="product-2001.html" style="color: var(--primary-color); text-decoration: none;">Milk Semi-Skimmed</a>
+                            </div>
+                            <div class="list-item-value" style="text-align: center;">Dairy</div>
+                            <div class="list-item-value" style="text-align: center;">5600308532147</div>
+                            <div class="list-item-value" style="text-align: center;">1L</div>
+                            <div class="list-item-value" style="text-align: center;">0.89 €</div>
+                            <div class="list-item-value" style="text-align: center;">✓</div>
+                        </div>
+                    </div>
 
-        <!-- Products Section -->
-        <div class="card">
-            <div class="flex-between mb-2">
-                <h3 class="detail-title" style="margin-bottom: 0;">Products</h3>
-                <button class="btn btn-success btn-sm">+ Add Product</button>
+                    <!-- Product 2 -->
+                    <div class="list-item">
+                        <div class="list-item-main" style="grid-template-columns: 2fr 1.2fr 1.5fr 0.8fr 0.8fr 0.6fr;">
+                            <div class="list-item-value" style="text-align: center;">
+                                <a href="product-2002.html" style="color: var(--primary-color); text-decoration: none;">Bread Whole Wheat</a>
+                            </div>
+                            <div class="list-item-value" style="text-align: center;">Bakery</div>
+                            <div class="list-item-value" style="text-align: center;">5600308532148</div>
+                            <div class="list-item-value" style="text-align: center;">500g</div>
+                            <div class="list-item-value" style="text-align: center;">1.20 €</div>
+                            <div class="list-item-value" style="text-align: center;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="list-item">
+                        <div class="list-item-main" style="grid-template-columns: 2fr 1.2fr 1.5fr 0.8fr 0.8fr 0.6fr;">
+                            <div class="list-item-value" style="text-align: center;">
+                                <a href="product-2003.html" style="color: var(--primary-color); text-decoration: none;">Chicken Breast</a>
+                            </div>
+                            <div class="list-item-value" style="text-align: center;">Meat</div>
+                            <div class="list-item-value" style="text-align: center;">5600308532149</div>
+                            <div class="list-item-value" style="text-align: center;">800g</div>
+                            <div class="list-item-value" style="text-align: center;">7.60 €</div>
+                            <div class="list-item-value" style="text-align: center;">✓</div>
+                        </div>
+                    </div>
+
+                    <!-- Product 4 -->
+                    <div class="list-item">
+                        <div class="list-item-main" style="grid-template-columns: 2fr 1.2fr 1.5fr 0.8fr 0.8fr 0.6fr;">
+                            <div class="list-item-value" style="text-align: center;">
+                                <a href="product-2004.html" style="color: var(--primary-color); text-decoration: none;">Tomatoes</a>
+                            </div>
+                            <div class="list-item-value" style="text-align: center;">Vegetables</div>
+                            <div class="list-item-value" style="text-align: center;">5600308532150</div>
+                            <div class="list-item-value" style="text-align: center;">1.2kg</div>
+                            <div class="list-item-value" style="text-align: center;">2.40 €</div>
+                            <div class="list-item-value" style="text-align: center;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Product 5 -->
+                    <div class="list-item">
+                        <div class="list-item-main" style="grid-template-columns: 2fr 1.2fr 1.5fr 0.8fr 0.8fr 0.6fr;">
+                            <div class="list-item-value" style="text-align: center;">
+                                <a href="product-2005.html" style="color: var(--primary-color); text-decoration: none;">Bananas</a>
+                            </div>
+                            <div class="list-item-value" style="text-align: center;">Fruits</div>
+                            <div class="list-item-value" style="text-align: center;">5600308532151</div>
+                            <div class="list-item-value" style="text-align: center;">1.5kg</div>
+                            <div class="list-item-value" style="text-align: center;">1.80 €</div>
+                            <div class="list-item-value" style="text-align: center;">✓</div>
+                        </div>
+                    </div>
+
+                    <!-- Product 6 -->
+                    <div class="list-item">
+                        <div class="list-item-main" style="grid-template-columns: 2fr 1.2fr 1.5fr 0.8fr 0.8fr 0.6fr;">
+                            <div class="list-item-value" style="text-align: center;">
+                                <a href="product-2006.html" style="color: var(--primary-color); text-decoration: none;">Olive Oil Extra Virgin</a>
+                            </div>
+                            <div class="list-item-value" style="text-align: center;">Condiments</div>
+                            <div class="list-item-value" style="text-align: center;">5600308532152</div>
+                            <div class="list-item-value" style="text-align: center;">750ml</div>
+                            <div class="list-item-value" style="text-align: center;">6.50 €</div>
+                            <div class="list-item-value" style="text-align: center;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Product 7 -->
+                    <div class="list-item">
+                        <div class="list-item-main" style="grid-template-columns: 2fr 1.2fr 1.5fr 0.8fr 0.8fr 0.6fr;">
+                            <div class="list-item-value" style="text-align: center;">
+                                <a href="product-2007.html" style="color: var(--primary-color); text-decoration: none;">Rice Basmati</a>
+                            </div>
+                            <div class="list-item-value" style="text-align: center;">Grains</div>
+                            <div class="list-item-value" style="text-align: center;">5600308532153</div>
+                            <div class="list-item-value" style="text-align: center;">1kg</div>
+                            <div class="list-item-value" style="text-align: center;">2.99 €</div>
+                            <div class="list-item-value" style="text-align: center;">✓</div>
+                        </div>
+                    </div>
+
+                    <!-- Product 8 -->
+                    <div class="list-item">
+                        <div class="list-item-main" style="grid-template-columns: 2fr 1.2fr 1.5fr 0.8fr 0.8fr 0.6fr;">
+                            <div class="list-item-value" style="text-align: center;">
+                                <a href="product-2008.html" style="color: var(--primary-color); text-decoration: none;">Pasta Spaghetti</a>
+                            </div>
+                            <div class="list-item-value" style="text-align: center;">Grains</div>
+                            <div class="list-item-value" style="text-align: center;">5600308532154</div>
+                            <div class="list-item-value" style="text-align: center;">500g</div>
+                            <div class="list-item-value" style="text-align: center;">1.45 €</div>
+                            <div class="list-item-value" style="text-align: center;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Product 9 -->
+                    <div class="list-item">
+                        <div class="list-item-main" style="grid-template-columns: 2fr 1.2fr 1.5fr 0.8fr 0.8fr 0.6fr;">
+                            <div class="list-item-value" style="text-align: center;">
+                                <a href="product-2009.html" style="color: var(--primary-color); text-decoration: none;">Orange Juice</a>
+                            </div>
+                            <div class="list-item-value" style="text-align: center;">Beverages</div>
+                            <div class="list-item-value" style="text-align: center;">5600308532155</div>
+                            <div class="list-item-value" style="text-align: center;">1.5L</div>
+                            <div class="list-item-value" style="text-align: center;">2.85 €</div>
+                            <div class="list-item-value" style="text-align: center;">✓</div>
+                        </div>
+                    </div>
+
+                    <!-- Product 10 -->
+                    <div class="list-item">
+                        <div class="list-item-main" style="grid-template-columns: 2fr 1.2fr 1.5fr 0.8fr 0.8fr 0.6fr;">
+                            <div class="list-item-value" style="text-align: center;">
+                                <a href="product-2010.html" style="color: var(--primary-color); text-decoration: none;">Coffee Beans</a>
+                            </div>
+                            <div class="list-item-value" style="text-align: center;">Beverages</div>
+                            <div class="list-item-value" style="text-align: center;">5600308532156</div>
+                            <div class="list-item-value" style="text-align: center;">250g</div>
+                            <div class="list-item-value" style="text-align: center;">4.99 €</div>
+                            <div class="list-item-value" style="text-align: center;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Product 11 -->
+                    <div class="list-item">
+                        <div class="list-item-main" style="grid-template-columns: 2fr 1.2fr 1.5fr 0.8fr 0.8fr 0.6fr;">
+                            <div class="list-item-value" style="text-align: center;">
+                                <a href="product-2011.html" style="color: var(--primary-color); text-decoration: none;">Yogurt Natural</a>
+                            </div>
+                            <div class="list-item-value" style="text-align: center;">Dairy</div>
+                            <div class="list-item-value" style="text-align: center;">5600308532157</div>
+                            <div class="list-item-value" style="text-align: center;">4x125g</div>
+                            <div class="list-item-value" style="text-align: center;">1.99 €</div>
+                            <div class="list-item-value" style="text-align: center;">✓</div>
+                        </div>
+                    </div>
+
+                    <!-- Product 12 -->
+                    <div class="list-item">
+                        <div class="list-item-main" style="grid-template-columns: 2fr 1.2fr 1.5fr 0.8fr 0.8fr 0.6fr;">
+                            <div class="list-item-value" style="text-align: center;">
+                                <a href="product-2012.html" style="color: var(--primary-color); text-decoration: none;">Cheese Mozzarella</a>
+                            </div>
+                            <div class="list-item-value" style="text-align: center;">Dairy</div>
+                            <div class="list-item-value" style="text-align: center;">5600308532158</div>
+                            <div class="list-item-value" style="text-align: center;">200g</div>
+                            <div class="list-item-value" style="text-align: center;">2.79 €</div>
+                            <div class="list-item-value" style="text-align: center;"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="table-container" style="box-shadow: none;">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Category</th>
-                            <th>Amount</th>
-                            <th>Barcode</th>
-                            <th>Price</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><a href="product-2001.html" style="color: var(--primary-color); text-decoration: none; font-weight: 600;">Milk Semi-Skimmed</a></td>
-                            <td>Dairy</td>
-                            <td>
-                                <input type="text" value="1L" class="form-input" style="padding: 0.375rem 0.5rem; font-size: 0.875rem; width: 80px;" onchange="updateProduct(this)">
-                            </td>
-                            <td>5600308532147</td>
-                            <td>
-                                <input type="number" step="0.01" value="0.89" class="form-input" style="padding: 0.375rem 0.5rem; font-size: 0.875rem; width: 80px;" onchange="updateProduct(this)">
-                            </td>
-                            <td>
-                                <button class="btn btn-danger btn-sm" onclick="removeProduct(this)">Remove</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="product-2002.html" style="color: var(--primary-color); text-decoration: none; font-weight: 600;">Bread Whole Wheat</a></td>
-                            <td>Bakery</td>
-                            <td>
-                                <input type="text" value="500g" class="form-input" style="padding: 0.375rem 0.5rem; font-size: 0.875rem; width: 80px;" onchange="updateProduct(this)">
-                            </td>
-                            <td>5600308532148</td>
-                            <td>
-                                <input type="number" step="0.01" value="1.20" class="form-input" style="padding: 0.375rem 0.5rem; font-size: 0.875rem; width: 80px;" onchange="updateProduct(this)">
-                            </td>
-                            <td>
-                                <button class="btn btn-danger btn-sm" onclick="removeProduct(this)">Remove</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="product-2003.html" style="color: var(--primary-color); text-decoration: none; font-weight: 600;">Chicken Breast</a></td>
-                            <td>Meat</td>
-                            <td>
-                                <input type="text" value="800g" class="form-input" style="padding: 0.375rem 0.5rem; font-size: 0.875rem; width: 80px;" onchange="updateProduct(this)">
-                            </td>
-                            <td>5600308532149</td>
-                            <td>
-                                <input type="number" step="0.01" value="7.60" class="form-input" style="padding: 0.375rem 0.5rem; font-size: 0.875rem; width: 80px;" onchange="updateProduct(this)">
-                            </td>
-                            <td>
-                                <button class="btn btn-danger btn-sm" onclick="removeProduct(this)">Remove</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="product-2004.html" style="color: var(--primary-color); text-decoration: none; font-weight: 600;">Tomatoes</a></td>
-                            <td>Vegetables</td>
-                            <td>
-                                <input type="text" value="1.2kg" class="form-input" style="padding: 0.375rem 0.5rem; font-size: 0.875rem; width: 80px;" onchange="updateProduct(this)">
-                            </td>
-                            <td>5600308532150</td>
-                            <td>
-                                <input type="number" step="0.01" value="2.40" class="form-input" style="padding: 0.375rem 0.5rem; font-size: 0.875rem; width: 80px;" onchange="updateProduct(this)">
-                            </td>
-                            <td>
-                                <button class="btn btn-danger btn-sm" onclick="removeProduct(this)">Remove</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="product-2005.html" style="color: var(--primary-color); text-decoration: none; font-weight: 600;">Bananas</a></td>
-                            <td>Fruits</td>
-                            <td>
-                                <input type="text" value="1.5kg" class="form-input" style="padding: 0.375rem 0.5rem; font-size: 0.875rem; width: 80px;" onchange="updateProduct(this)">
-                            </td>
-                            <td>5600308532151</td>
-                            <td>
-                                <input type="number" step="0.01" value="1.80" class="form-input" style="padding: 0.375rem 0.5rem; font-size: 0.875rem; width: 80px;" onchange="updateProduct(this)">
-                            </td>
-                            <td>
-                                <button class="btn btn-danger btn-sm" onclick="removeProduct(this)">Remove</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="product-2006.html" style="color: var(--primary-color); text-decoration: none; font-weight: 600;">Olive Oil Extra Virgin</a></td>
-                            <td>Condiments</td>
-                            <td>
-                                <input type="text" value="750ml" class="form-input" style="padding: 0.375rem 0.5rem; font-size: 0.875rem; width: 80px;" onchange="updateProduct(this)">
-                            </td>
-                            <td>5600308532152</td>
-                            <td>
-                                <input type="number" step="0.01" value="6.50" class="form-input" style="padding: 0.375rem 0.5rem; font-size: 0.875rem; width: 80px;" onchange="updateProduct(this)">
-                            </td>
-                            <td>
-                                <button class="btn btn-danger btn-sm" onclick="removeProduct(this)">Remove</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="product-2007.html" style="color: var(--primary-color); text-decoration: none; font-weight: 600;">Rice Basmati</a></td>
-                            <td>Grains</td>
-                            <td>
-                                <input type="text" value="1kg" class="form-input" style="padding: 0.375rem 0.5rem; font-size: 0.875rem; width: 80px;" onchange="updateProduct(this)">
-                            </td>
-                            <td>5600308532153</td>
-                            <td>
-                                <input type="number" step="0.01" value="2.99" class="form-input" style="padding: 0.375rem 0.5rem; font-size: 0.875rem; width: 80px;" onchange="updateProduct(this)">
-                            </td>
-                            <td>
-                                <button class="btn btn-danger btn-sm" onclick="removeProduct(this)">Remove</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="product-2008.html" style="color: var(--primary-color); text-decoration: none; font-weight: 600;">Pasta Spaghetti</a></td>
-                            <td>Grains</td>
-                            <td>
-                                <input type="text" value="500g" class="form-input" style="padding: 0.375rem 0.5rem; font-size: 0.875rem; width: 80px;" onchange="updateProduct(this)">
-                            </td>
-                            <td>5600308532154</td>
-                            <td>
-                                <input type="number" step="0.01" value="1.45" class="form-input" style="padding: 0.375rem 0.5rem; font-size: 0.875rem; width: 80px;" onchange="updateProduct(this)">
-                            </td>
-                            <td>
-                                <button class="btn btn-danger btn-sm" onclick="removeProduct(this)">Remove</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="product-2009.html" style="color: var(--primary-color); text-decoration: none; font-weight: 600;">Orange Juice</a></td>
-                            <td>Beverages</td>
-                            <td>
-                                <input type="text" value="1.5L" class="form-input" style="padding: 0.375rem 0.5rem; font-size: 0.875rem; width: 80px;" onchange="updateProduct(this)">
-                            </td>
-                            <td>5600308532155</td>
-                            <td>
-                                <input type="number" step="0.01" value="2.85" class="form-input" style="padding: 0.375rem 0.5rem; font-size: 0.875rem; width: 80px;" onchange="updateProduct(this)">
-                            </td>
-                            <td>
-                                <button class="btn btn-danger btn-sm" onclick="removeProduct(this)">Remove</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="product-2010.html" style="color: var(--primary-color); text-decoration: none; font-weight: 600;">Coffee Beans</a></td>
-                            <td>Beverages</td>
-                            <td>
-                                <input type="text" value="250g" class="form-input" style="padding: 0.375rem 0.5rem; font-size: 0.875rem; width: 80px;" onchange="updateProduct(this)">
-                            </td>
-                            <td>5600308532156</td>
-                            <td>
-                                <input type="number" step="0.01" value="4.99" class="form-input" style="padding: 0.375rem 0.5rem; font-size: 0.875rem; width: 80px;" onchange="updateProduct(this)">
-                            </td>
-                            <td>
-                                <button class="btn btn-danger btn-sm" onclick="removeProduct(this)">Remove</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="product-2011.html" style="color: var(--primary-color); text-decoration: none; font-weight: 600;">Yogurt Natural</a></td>
-                            <td>Dairy</td>
-                            <td>
-                                <input type="text" value="4x125g" class="form-input" style="padding: 0.375rem 0.5rem; font-size: 0.875rem; width: 80px;" onchange="updateProduct(this)">
-                            </td>
-                            <td>5600308532157</td>
-                            <td>
-                                <input type="number" step="0.01" value="1.99" class="form-input" style="padding: 0.375rem 0.5rem; font-size: 0.875rem; width: 80px;" onchange="updateProduct(this)">
-                            </td>
-                            <td>
-                                <button class="btn btn-danger btn-sm" onclick="removeProduct(this)">Remove</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="product-2012.html" style="color: var(--primary-color); text-decoration: none; font-weight: 600;">Cheese Mozzarella</a></td>
-                            <td>Dairy</td>
-                            <td>
-                                <input type="text" value="200g" class="form-input" style="padding: 0.375rem 0.5rem; font-size: 0.875rem; width: 80px;" onchange="updateProduct(this)">
-                            </td>
-                            <td>5600308532158</td>
-                            <td>
-                                <input type="number" step="0.01" value="2.79" class="form-input" style="padding: 0.375rem 0.5rem; font-size: 0.875rem; width: 80px;" onchange="updateProduct(this)">
-                            </td>
-                            <td>
-                                <button class="btn btn-danger btn-sm" onclick="removeProduct(this)">Remove</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
-
-    <script>
-        function updateProduct(input) {
-            // Calculate new total
-            calculateTotal();
-            console.log('Product updated:', input.value);
-            // In a real application, this would send data to the backend
-        }
-
-        function removeProduct(button) {
-            if (confirm('Are you sure you want to remove this product from the receipt?')) {
-                const row = button.closest('tr');
-                row.remove();
-                calculateTotal();
-            }
-        }
-
-        function calculateTotal() {
-            const priceInputs = document.querySelectorAll('input[type="number"]');
-            let total = 0;
-            priceInputs.forEach(input => {
-                total += parseFloat(input.value) || 0;
-            });
-            
-            // Update total display
-            const totalElement = document.querySelector('.detail-info-value');
-            if (totalElement && totalElement.textContent.includes('€')) {
-                totalElement.textContent = '€' + total.toFixed(2);
-            }
-            
-            // Update product count
-            const productCount = document.querySelectorAll('tbody tr').length;
-            const countElements = document.querySelectorAll('.detail-info-value');
-            if (countElements.length > 3) {
-                countElements[3].textContent = productCount + ' items';
-            }
-        }
-    </script>
 </body>
 </html>
