@@ -4,9 +4,9 @@ from pydantic import BaseModel, Field, ConfigDict
 from decimal import Decimal
 from typing import List
 
-#
-# --- Schema para os Gráficos do Dashboard (Ecrã 1 / 'image_157b8d.jpg') ---
-#
+
+# Schema para os Gráficos do Dashboard 
+
 class ReportSpendingByEntity(BaseModel):
     """
     Um schema genérico que serve tanto para "Gastos por Categoria"
@@ -22,13 +22,12 @@ class ReportSpendingByEntity(BaseModel):
         description="Total amount spent on this entity"
     )
 
-    # model_config = ConfigDict(from_attributes=True) # Precisamos disto!
     model_config = ConfigDict(from_attributes=True)
 
 
-# ---
-# Schema para a Lista Enriquecida de Supermercados (Ecrã 4 / 'image_b893b5.png')
-# ---
+
+# Schema para "analytics"" de Supermercados
+
 class MerchantReportData(BaseModel):
     """
     Schema para a lista de supermercados no ecrã de Configurações.
@@ -37,7 +36,7 @@ class MerchantReportData(BaseModel):
     # Dados que vêm do 'model.Merchant'
     id: int
     name: str
-    location: str | None = None # Mantém o 'location' que definimos
+    location: str | None = None 
     
     # Dados Calculados (que o 'reports_service.py' vai calcular)
     total_spent: Decimal = Field(
@@ -47,5 +46,4 @@ class MerchantReportData(BaseModel):
     )
     receipt_count: int = Field(description="Number of receipts from this merchant")
 
-    # model_config = ConfigDict(from_attributes=True) # Precisamos disto!
     model_config = ConfigDict(from_attributes=True)

@@ -2,26 +2,25 @@
 
 from fastapi import APIRouter, Depends, HTTPException, status, File, UploadFile
 from sqlalchemy.orm import Session
-import logging # Para logging de erros
+import logging 
 
 # Importa as dependências (DB, Service, Schema de resposta)
 from src.db.dependencies import get_db
 from src.services import file_service 
-from src.schemas import product as schema_product # O 'response_model' (devolve o produto atualizado)
+from src.schemas import product as schema_product 
 
-# Cria o "mini-router"
+
 router = APIRouter(
-    prefix="/uploads", # Prefixo para todos os endpoints de upload
-    tags=["Uploads"]   # Tag para a documentação /docs
+    prefix="/uploads", 
+    tags=["Uploads"]   
 )
 
-# ---
-# Endpoint 1: Upload de Foto para a Lista-Mestra de Produtos
-# ---
+
+# Endpoint: Upload de Foto para a Lista de Produtos
 @router.post(
     "/product-list/{product_list_id}/photo",
     response_model=schema_product.ProductList,
-    status_code=status.HTTP_200_OK # 200 OK (porque estamos a *atualizar* um produto)
+    status_code=status.HTTP_200_OK 
 )
 def upload_product_list_photo(
     product_list_id: int,
@@ -35,27 +34,21 @@ def upload_product_list_photo(
     Substitui a foto antiga, se existir.
     """
     
-    # O 'router' não faz lógica. Ele delega no 'service'.
-    # O 'file_service' já foi desenhado para lançar HTTPExceptions
-    # (400, 404, 500), por isso não precisamos de 'try...except' complexos
-    # para esses casos.
+
     try:
         updated_product = file_service.save_product_photo(
             db=db,
             product_list_id=product_list_id,
             file=file
         )
-        # Se o 'service' for bem sucedido, devolvemos o produto atualizado
+
         return updated_product
     
     # Este 'except' é um "safeguard" (rede de segurança) para erros
     # *inesperados* que o 'file_service' não tenha previsto.
     except HTTPException as e:
-        # Se o 'file_service' lançou um HTTPException,
-        # simplesmente re-lançamo-lo
         raise e
     except Exception as e:
-        # Se foi um erro totalmente inesperado (ex: um bug no código)
         logging.error(f"Erro inesperado no upload de foto para product_list_id {product_list_id}: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

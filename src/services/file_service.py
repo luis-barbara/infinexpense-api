@@ -10,7 +10,7 @@ from sqlalchemy.exc import IntegrityError
 from src.models import product as model_product_list
 from . import crud_product_list
 
-# --- Configurações ---
+# Configurações 
 UPLOAD_DIRECTORY = Path("/app/uploads/products")
 os.makedirs(UPLOAD_DIRECTORY, exist_ok=True)
 
@@ -32,7 +32,7 @@ def save_product_photo(
 ) -> model_product_list.ProductList:
     """Faz upload de uma foto para a ProductList com validações reforçadas."""
 
-    # --- 1. Validar produto ---
+    # 1. Validar produto
     db_product = crud_product_list.get_product_list(db, product_list_id)
     if not db_product:
         raise HTTPException(
@@ -40,7 +40,7 @@ def save_product_photo(
             detail="ProductList not found"
         )
 
-    # --- 2. Validar tipo de ficheiro ---
+    # 2. Validar tipo de ficheiro
     file_extension = Path(file.filename).suffix.lower()
     if not file.content_type or file.content_type not in ALLOWED_MIME_TYPES or file_extension not in ALLOWED_EXTENSIONS:
         raise HTTPException(
@@ -48,7 +48,7 @@ def save_product_photo(
             detail=f"Invalid file type. Allowed types: {', '.join(ALLOWED_EXTENSIONS)}"
         )
 
-    # --- 3. Validar tamanho máximo ---
+    # 3. Validar tamanho máximo
     file.file.seek(0, os.SEEK_END)
     file_size = file.file.tell()
     file.file.seek(0)
@@ -58,12 +58,12 @@ def save_product_photo(
             detail=f"File too large. Maximum allowed size is {MAX_FILE_SIZE // (1024*1024)} MB"
         )
 
-    # --- 4. Gerar nome seguro ---
+    # 4. Gerar nome seguro
     safe_filename = f"product_{product_list_id}_{uuid.uuid4()}{file_extension}"
     file_path_on_disk = UPLOAD_DIRECTORY / safe_filename
     file_path_in_db = f"/uploads/products/{safe_filename}"
 
-    # --- 5. Salvar no disco ---
+    # 5. Gravar no disco
     try:
         with open(file_path_on_disk, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
@@ -75,7 +75,7 @@ def save_product_photo(
     finally:
         file.file.close()
 
-    # --- 6. Apagar foto antiga ---
+    # 6. Apagar foto antiga
     if db_product.photo_url:
         try:
             old_file_path = os.path.join("/app", db_product.photo_url.lstrip('/'))
@@ -84,7 +84,7 @@ def save_product_photo(
         except Exception as e:
             logger.warning(f"Failed to delete old photo {db_product.photo_url}: {e}")
 
-    # --- 7. Atualizar Base de Dados ---
+    # 7. Atualizar Base de Dados
     db_product.photo_url = file_path_in_db
     db.add(db_product)
     try:

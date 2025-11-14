@@ -8,24 +8,23 @@ import logging
 
 # Importa as dependências (DB, Service, Schemas de resposta)
 from src.db.dependencies import get_db
-from src.services import reports_service  # O "Cérebro" (que já te dei)
-from src.schemas import report as schema_report  # O "Contrato" JSON (que já te dei)
+from src.services import reports_service 
+from src.schemas import report as schema_report  
 
-# Cria o "mini-router"
+
 router = APIRouter(
-    prefix="/reports",  # O 'prefix' do 'main.py'
-    tags=["Reports"]  # O 'tags' do 'main.py'
+    prefix="/reports",  
+    tags=["Reports"] 
 )
 
-# ---
-# Endpoint 1: Relatório de Gastos por Categoria (para o gráfico)
-# ---
+
+# Endpoint: Relatório de Gastos por Categoria (para o gráfico)
 @router.get(
     "/spending-by-category",
     response_model=List[schema_report.ReportSpendingByEntity]
 )
 def get_spending_by_category_endpoint(
-    # Estes são os filtros de data que o teu frontend ('imagem.png-10a83757...') vai enviar
+    # filtros de data que frontend vai enviar
     start_date: Optional[date] = Query(default=None, description="Data de início (YYYY-MM-DD)"),
     end_date: Optional[date] = Query(default=None, description="Data de fim (YYYY-MM-DD)"),
     db: Session = Depends(get_db)
@@ -35,7 +34,6 @@ def get_spending_by_category_endpoint(
     Usado para o gráfico no Dashboard e no ecrã de Categorias.
     """
     try:
-        # O router não faz cálculos. Ele delega no 'service'.
         report_data = reports_service.get_spending_by_category(
             db=db,
             start_date=start_date,
@@ -43,22 +41,21 @@ def get_spending_by_category_endpoint(
         )
         return report_data
     except Exception as e:
-        # Apanha qualquer erro inesperado da query SQL complexa
+        # Qualquer erro inesperado da query SQL complexa
         logging.error(f"Erro ao gerar 'spending-by-category' report: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Ocorreu um erro ao calcular o relatório."
         )
 
-# ---
-# Endpoint 2: Relatório de Supermercados (para o Ecrã 4)
-# ---
+
+# Endpoint: "Analytics"" de Supermercados 
 @router.get(
     "/enriched-merchants",
     response_model=List[schema_report.MerchantReportData]
 )
 def get_enriched_merchant_report_endpoint(
-    # Este relatório também pode usar os mesmos filtros
+    # filtros
     start_date: Optional[date] = Query(default=None, description="Data de início (YYYY-MM-DD)"),
     end_date: Optional[date] = Query(default=None, description="Data de fim (YYYY-MM-DD)"),
     db: Session = Depends(get_db)
@@ -82,12 +79,11 @@ def get_enriched_merchant_report_endpoint(
             detail="Ocorreu um erro ao calcular o relatório de supermercados."
         )
 
-# ---
-# Endpoint 3: KPIs do Dashboard (os 3 cartões)
-# ---
+
+# Endpoint : KPIs do Dashboard (os 3 cartões)
 @router.get(
     "/dashboard-kpis",
-    response_model=dict  # Devolve um dicionário simples, ex: {"total_spent": 123.45, ...}
+    response_model=dict  # Devolve um dicionário simples
 )
 def get_dashboard_kpis_endpoint(
     start_date: Optional[date] = Query(default=None, description="Data de início (YYYY-MM-DD)"),
