@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merchants - InfinExpense</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body data-active-page="merchants">
+    <!-- Navigation Template -->
+
+    <div data-template="header"></div>
+
+    <script src="../js/template-loader.js"></script>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Merchants</h1>
+            <a href="add.html" class="btn btn-primary">+ Add Merchant</a>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search merchants by name, category, or location...">
+            <button class="btn btn-primary" onclick="filterItems()">Search</button>
+        </div>
+
+        <!-- Merchants List -->
+        <div class="content-wrapper">
+            <div class="card card-no-margin card-flex card-flex-1 overflow-hidden">
+                <!-- Table Headers -->
+                <div class="list-header merchants-list-grid">
+                    <div class="list-header-item">
+                        <span>Merchant Name</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortMerchants('name', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortMerchants('name', 'desc')">▼</button>
+                        </span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>Location</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortMerchants('location', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortMerchants('location', 'desc')">▼</button>
+                        </span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>Total Receipts</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortMerchants('receipts', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortMerchants('receipts', 'desc')">▼</button>
+                        </span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>Total Spent</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortMerchants('spent', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortMerchants('spent', 'desc')">▼</button>
+                        </span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>Actions</span>
+                    </div>
+                </div>
+                <div class="scrollable-list">
+                    <div class="list-container" id="merchantsList">
+            <!-- ============================================================ -->
+            <!-- INTEGRATION INSTRUCTIONS:                                     -->
+            <!-- 1. KEEP the first list item below as a TEMPLATE              -->
+            <!-- 2. DELETE all subsequent list items (they are example data)  -->
+            <!-- 3. Use backend to populate this container dynamically        -->
+            <!-- 4. Each item must have: class="list-item merchant-item"      -->
+            <!-- 5. Required data attributes: data-name, data-location,       -->
+            <!--    data-receipts, data-spent                                  -->
+            <!-- ============================================================ -->
+            
+            <!-- TEMPLATE - KEEP THIS ITEM AS REFERENCE -->
+            <div class="list-item merchant-item" data-name="Continente" data-location="Faro Centro" data-receipts="8" data-spent="687.40">
+                <div class="list-item-main merchants-list-grid">
+                    <div class="list-item-value"><span class="example-data">Continente</span></div>
+                    <div class="list-item-value"><span class="example-data">Faro Centro</span></div>
+                    <div class="list-item-value"><span class="example-data">8 receipts</span></div>
+                    <div class="list-item-value"><span class="example-data">687.40 €</span></div>
+                    <div class="list-item-actions">
+                        <a href="view-example.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="edit-example.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DELETE BELOW - Example data only -->
+            <div class="list-item merchant-item" data-name="Pingo Doce" data-location="Olhão" data-receipts="6" data-spent="423.90">
+                <div class="list-item-main merchants-list-grid">
+                    <div class="list-item-value">Pingo Doce</div>
+                    <div class="list-item-value">Olhão</div>
+                    <div class="list-item-value">6 receipts</div>
+                    <div class="list-item-value">423.90 €</div>
+                    <div class="list-item-actions">
+                        <a href="view-example-2.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="merchant-edit-4002.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-item merchant-item" data-name="Lidl" data-location="Loulé" data-receipts="5" data-spent="312.50">
+                <div class="list-item-main merchants-list-grid">
+                    <div class="list-item-value">Lidl</div>
+                    <div class="list-item-value">Loulé</div>
+                    <div class="list-item-value">5 receipts</div>
+                    <div class="list-item-value">312.50 €</div>
+                    <div class="list-item-actions">
+                        <a href="merchant-4003.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="merchant-edit-4003.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-item merchant-item" data-name="Auchan" data-location="Portimão" data-receipts="4" data-spent="268.20">
+                <div class="list-item-main merchants-list-grid">
+                    <div class="list-item-value">Auchan</div>
+                    <div class="list-item-value">Portimão</div>
+                    <div class="list-item-value">4 receipts</div>
+                    <div class="list-item-value">268.20 €</div>
+                    <div class="list-item-actions">
+                        <a href="merchant-4004.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="merchant-edit-4004.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-item merchant-item" data-name="Minipreço" data-location="Tavira" data-receipts="3" data-spent="145.80">
+                <div class="list-item-main merchants-list-grid">
+                    <div class="list-item-value">Minipreço</div>
+                    <div class="list-item-value">Tavira</div>
+                    <div class="list-item-value">3 receipts</div>
+                    <div class="list-item-value">145.80 €</div>
+                    <div class="list-item-actions">
+                        <a href="merchant-4005.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="merchant-edit-4005.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-item merchant-item" data-name="Intermarché" data-location="Albufeira" data-receipts="7" data-spent="578.30">
+                <div class="list-item-main merchants-list-grid">
+                    <div class="list-item-value">Intermarché</div>
+                    <div class="list-item-value">Albufeira</div>
+                    <div class="list-item-value">7 receipts</div>
+                    <div class="list-item-value">578.30 €</div>
+                    <div class="list-item-actions">
+                        <a href="merchant-4006.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="merchant-edit-4006.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-item merchant-item" data-name="El Corte Inglés" data-location="Faro" data-receipts="2" data-spent="234.50">
+                <div class="list-item-main merchants-list-grid">
+                    <div class="list-item-value">El Corte Inglés</div>
+                    <div class="list-item-value">Faro</div>
+                    <div class="list-item-value">2 receipts</div>
+                    <div class="list-item-value">234.50 €</div>
+                    <div class="list-item-actions">
+                        <a href="merchant-4007.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="merchant-edit-4007.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-item merchant-item" data-name="Mercadona" data-location="Vila Real" data-receipts="5" data-spent="389.40">
+                <div class="list-item-main merchants-list-grid">
+                    <div class="list-item-value">Mercadona</div>
+                    <div class="list-item-value">Vila Real</div>
+                    <div class="list-item-value">5 receipts</div>
+                    <div class="list-item-value">389.40 €</div>
+                    <div class="list-item-actions">
+                        <a href="merchant-4008.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="merchant-edit-4008.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-item merchant-item" data-name="Apolónia" data-location="Lagos" data-receipts="6" data-spent="456.70">
+                <div class="list-item-main merchants-list-grid">
+                    <div class="list-item-value">Apolónia</div>
+                    <div class="list-item-value">Lagos</div>
+                    <div class="list-item-value">6 receipts</div>
+                    <div class="list-item-value">456.70 €</div>
+                    <div class="list-item-actions">
+                        <a href="merchant-4009.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="merchant-edit-4009.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-item merchant-item" data-name="Jumbo" data-location="Quarteira" data-receipts="4" data-spent="298.60">
+                <div class="list-item-main merchants-list-grid">
+                    <div class="list-item-value">Jumbo</div>
+                    <div class="list-item-value">Quarteira</div>
+                    <div class="list-item-value">4 receipts</div>
+                    <div class="list-item-value">298.60 €</div>
+                    <div class="list-item-actions">
+                        <a href="merchant-4010.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="merchant-edit-4010.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Merchants List JavaScript -->
+    <script src="../js/merchants-list.js"></script>
+</body>
+</html>

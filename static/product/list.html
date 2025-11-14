@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - InfinExpense</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body data-active-page="products">
+    <!-- Navigation Template -->
+
+    <div data-template="header"></div>
+
+    <script src="../js/template-loader.js"></script>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Products</h1>
+            <a href="add.html" class="btn btn-primary">+ Add Product</a>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search products by name, category, or price...">
+            <button class="btn btn-primary" onclick="filterItems()">Search</button>
+        </div>
+
+        <!-- Products List -->
+        <div class="content-wrapper">
+            <div class="card card-no-margin card-flex card-flex-1 overflow-hidden">
+                <!-- Table Headers -->
+                <div class="list-header products-list-grid">
+                    <div class="list-header-item">
+                        <span>Product Name</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortProducts('name', 'asc')" title="Sort ascending">▲</button>
+                            <button class="sort-btn" onclick="sortProducts('name', 'desc')" title="Sort descending">▼</button>
+                        </span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>Category</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortProducts('category', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortProducts('category', 'desc')">▼</button>
+                        </span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>Volume</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortProducts('volume', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortProducts('volume', 'desc')">▼</button>
+                        </span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>Barcode</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortProducts('barcode', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortProducts('barcode', 'desc')">▼</button>
+                        </span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>Price</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortProducts('price', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortProducts('price', 'desc')">▼</button>
+                        </span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>Actions</span>
+                    </div>
+                </div>
+                <div class="scrollable-list">
+                    <div class="list-container" id="productsList">
+            <!-- ============================================================ -->
+            <!-- INTEGRATION INSTRUCTIONS:                                     -->
+            <!-- 1. KEEP the first list item below as a TEMPLATE              -->
+            <!-- 2. DELETE all subsequent list items (they are example data)  -->
+            <!-- 3. Use backend to populate this container dynamically        -->
+            <!-- 4. Each item must have: class="list-item product-item"       -->
+            <!-- 5. Required data attributes: data-name, data-category,       -->
+            <!--    data-volume, data-barcode, data-price                      -->
+            <!-- ============================================================ -->
+            
+            <!-- TEMPLATE - KEEP THIS ITEM AS REFERENCE -->
+            <div class="list-item product-item" data-name="Milk Semi-Skimmed" data-category="Dairy" data-volume="L" data-barcode="5600308532147" data-price="0.89">
+                <div class="list-item-main products-list-grid">
+                    <div class="list-item-value"><span class="example-data">Milk Semi-Skimmed</span></div>
+                    <div class="list-item-value"><span class="example-data">Dairy</span></div>
+                    <div class="list-item-value"><span class="example-data">Liter(s)</span></div>
+                    <div class="list-item-value"><span class="example-data">5600308532147</span></div>
+                    <div class="list-item-value"><span class="example-data">0.89 €</span></div>
+                    <div class="list-item-actions">
+                        <a href="view-example.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="edit-example.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DELETE BELOW - Example data only -->
+            <div class="list-item product-item" data-name="Bread Whole Wheat" data-category="Bakery" data-volume="g" data-barcode="5600308532148" data-price="1.20">
+                <div class="list-item-main products-list-grid">
+                    <div class="list-item-value">Bread Whole Wheat</div>
+                    <div class="list-item-value">Bakery</div>
+                    <div class="list-item-value">Gram(s)</div>
+                    <div class="list-item-value">5600308532148</div>
+                    <div class="list-item-value">1.20 €</div>
+                    <div class="list-item-actions">
+                        <a href="product-2002.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="product-edit-2002.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-item product-item" data-name="Chicken Breast" data-category="Meat" data-volume="g" data-barcode="5600308532149" data-price="7.60">
+                <div class="list-item-main products-list-grid">
+                    <div class="list-item-value">Chicken Breast</div>
+                    <div class="list-item-value">Meat</div>
+                    <div class="list-item-value">Gram(s)</div>
+                    <div class="list-item-value">5600308532149</div>
+                    <div class="list-item-value">7.60 €</div>
+                    <div class="list-item-actions">
+                        <a href="product-2003.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="product-edit-2003.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-item product-item" data-name="Tomatoes" data-category="Vegetables" data-volume="kg" data-barcode="5600308532150" data-price="2.40">
+                <div class="list-item-main products-list-grid">
+                    <div class="list-item-value">Tomatoes</div>
+                    <div class="list-item-value">Vegetables</div>
+                    <div class="list-item-value">Kilogram(s)</div>
+                    <div class="list-item-value">5600308532150</div>
+                    <div class="list-item-value">2.40 €</div>
+                    <div class="list-item-actions">
+                        <a href="product-2004.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="product-edit-2004.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-item product-item" data-name="Bananas" data-category="Fruits" data-volume="kg" data-barcode="5600308532151" data-price="1.80">
+                <div class="list-item-main products-list-grid">
+                    <div class="list-item-value">Bananas</div>
+                    <div class="list-item-value">Fruits</div>
+                    <div class="list-item-value">Kilogram(s)</div>
+                    <div class="list-item-value">5600308532151</div>
+                    <div class="list-item-value">1.80 €</div>
+                    <div class="list-item-actions">
+                        <a href="product-2005.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="product-edit-2005.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-item product-item" data-name="Olive Oil Extra Virgin" data-category="Condiments" data-volume="mL" data-barcode="5600308532152" data-price="6.50">
+                <div class="list-item-main products-list-grid">
+                    <div class="list-item-value">Olive Oil Extra Virgin</div>
+                    <div class="list-item-value">Condiments</div>
+                    <div class="list-item-value">Mililiter(s)</div>
+                    <div class="list-item-value">5600308532152</div>
+                    <div class="list-item-value">6.50 €</div>
+                    <div class="list-item-actions">
+                        <a href="product-2006.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="product-edit-2006.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-item product-item" data-name="Rice Basmati" data-category="Grains" data-volume="kg" data-barcode="5600308532153" data-price="2.99">
+                <div class="list-item-main products-list-grid">
+                    <div class="list-item-value">Rice Basmati</div>
+                    <div class="list-item-value">Grains</div>
+                    <div class="list-item-value">Kilogram(s)</div>
+                    <div class="list-item-value">5600308532153</div>
+                    <div class="list-item-value">2.99 €</div>
+                    <div class="list-item-actions">
+                        <a href="product-2007.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="product-edit-2007.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-item product-item" data-name="Pasta Spaghetti" data-category="Grains" data-volume="g" data-barcode="5600308532154" data-price="1.45">
+                <div class="list-item-main products-list-grid">
+                    <div class="list-item-value">Pasta Spaghetti</div>
+                    <div class="list-item-value">Grains</div>
+                    <div class="list-item-value">Gram(s)</div>
+                    <div class="list-item-value">5600308532154</div>
+                    <div class="list-item-value">1.45 €</div>
+                    <div class="list-item-actions">
+                        <a href="product-2008.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="product-edit-2008.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-item product-item" data-name="Orange Juice" data-category="Beverages" data-volume="u" data-barcode="5600308532155" data-price="2.85">
+                <div class="list-item-main products-list-grid">
+                    <div class="list-item-value">Orange Juice</div>
+                    <div class="list-item-value">Beverages</div>
+                    <div class="list-item-value">Unit(s)</div>
+                    <div class="list-item-value">5600308532155</div>
+                    <div class="list-item-value">2.85 €</div>
+                    <div class="list-item-actions">
+                        <a href="product-2009.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="product-edit-2009.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-item product-item" data-name="Coffee Beans" data-category="Beverages" data-volume="g" data-barcode="5600308532156" data-price="4.99">
+                <div class="list-item-main products-list-grid">
+                    <div class="list-item-value">Coffee Beans</div>
+                    <div class="list-item-value">Beverages</div>
+                    <div class="list-item-value">Gram(s)</div>
+                    <div class="list-item-value">5600308532156</div>
+                    <div class="list-item-value">4.99 €</div>
+                    <div class="list-item-actions">
+                        <a href="product-2010.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                        <a href="product-edit-2010.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                    </div>
+                </div>
+            </div>
+            <!-- END OF EXAMPLE DATA - DELETE ABOVE (except template) -->
+            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products List JavaScript -->
+    <script src="../js/products-list.js"></script>
+</body>
+</html>

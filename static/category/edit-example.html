@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Category - InfinExpense</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body data-active-page="categories">
+    <!-- Navigation Template -->
+
+    <div data-template="header"></div>
+
+    <script src="../js/template-loader.js"></script>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Edit Category</h1>
+        </div>
+
+        <div class="card" style="max-width: 800px; margin: 0 auto;">
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Category Name *</label>
+                    <input type="text" class="form-input" value="Dairy" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-textarea">Products including milk, cheese, yogurt, and other dairy-based items.</textarea>
+                </div>
+
+                <div class="flex flex-gap" style="justify-content: flex-end; margin-top: 2rem;">
+                    <a href="list.html" class="btn btn-outline">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

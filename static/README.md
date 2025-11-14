@@ -1,422 +1,630 @@
-# InfinExpense - Receipt Management System Frontend
+# InfinExpense - Frontend Application
 
-A modern, responsive web interface for managing receipts, products, merchants, and categories with fictional data for demonstration purposes.
+**Modern expense tracking interface with modular architecture**
+
+---
+
+## 📑 Table of Contents
+
+1. [Overview](#-overview)
+2. [Features](#-features)
+3. [Project Structure](#-project-structure)
+4. [Quick Start](#-quick-start)
+5. [Template System](#-template-system)
+6. [CSS Architecture](#-css-architecture)
+7. [JavaScript Modules](#-javascript-modules)
+8. [Backend Integration](#-backend-integration)
+9. [Development](#-development)
+10. [Browser Support](#-browser-support)
+
+---
+
+## 🎯 Overview
+
+InfinExpense is a complete frontend application for expense tracking with receipts, products, merchants, and categories. Built with **vanilla HTML, CSS, and JavaScript**, it features:
+
+- **Modular CSS** architecture (16 separate modules)
+- **Template system** for shared navigation
+- **Dynamic data** loading with `data-*` attributes
+- **Interactive charts** using Chart.js
+- **Responsive design** for mobile/desktop
+- **Clean separation** of concerns (no inline styles)
+
+**Purpose**: This is a **static frontend** designed to integrate with a Python backend (Flask/Django). All dynamic content is loaded via JavaScript from API endpoints.
+
+---
+
+## ✨ Features
+
+### Core Functionality
+- ✅ **Dashboard** - Monthly statistics, recent receipts, expense trends
+- ✅ **Receipts** - List, view, add, edit receipts with products
+- ✅ **Products** - Track products, prices, purchase history
+- ✅ **Categories** - Organize expenses by category with colors
+- ✅ **Merchants** - Store locations, totals, maps integration
+
+### Technical Features
+- ✅ **Template System** - Single-source navigation that updates everywhere
+- ✅ **Modular CSS** - 16 organized modules for easy maintenance
+- ✅ **Pagination** - Client-side pagination on all list pages
+- ✅ **Search & Filter** - Real-time filtering on lists
+- ✅ **Charts** - Interactive visualizations (pie, line, bar)
+- ✅ **File Upload** - Receipt and product photo uploads
+- ✅ **Form Validation** - Ready for backend validation integration
+
+---
 
 ## 📁 Project Structure
 
 ```
-infinexpense-frontend/
-├── styles.css                  # Main stylesheet (organized by component type)
-├── index.html                  # Dashboard with monthly statistics
-├── receipts.html              # List of all receipts with pagination
-├── receipt-1001.html          # Individual receipt detail page
-├── receipt-add.html           # Form to add new receipt
-├── products.html              # List of all products with pagination
-├── product-2001.html          # Individual product detail page
-├── product-add.html           # Form to add new product
-├── product-edit-2001.html     # Form to edit existing product
-├── categories.html            # Categories with pie chart visualization
-├── category-add.html          # Form to add new category
-├── category-edit-3001.html    # Form to edit existing category
-├── merchants.html             # List of all merchants with pagination
-├── merchant-add.html          # Form to add new merchant
-├── merchant-edit-4001.html    # Form to edit existing merchant
-└── README.md                  # This file
+static/
+├── index.html                 # Dashboard (main entry point)
+│
+├── category/                  # Category management (3 pages)
+│   ├── list.html             # List all categories with pie chart
+│   ├── add.html              # Add new category form
+│   └── edit-example.html     # Edit existing category form
+│
+├── merchant/                  # Merchant management (5 pages)
+│   ├── list.html             # List all merchants
+│   ├── view-example.html     # View merchant details & stats
+│   ├── view-example-2.html   # Alternative merchant view
+│   ├── add.html              # Add new merchant form
+│   └── edit-example.html     # Edit existing merchant form
+│
+├── product/                   # Product management (4 pages)
+│   ├── list.html             # List all products
+│   ├── view-example.html     # View product details & price history
+│   ├── add.html              # Add new product form
+│   └── edit-example.html     # Edit existing product form
+│
+├── receipt/                   # Receipt management (4 pages)
+│   ├── list.html             # List all receipts
+│   ├── view-example.html     # View receipt details & products
+│   ├── add.html              # Add new receipt form
+│   └── edit-example.html     # Edit existing receipt form
+│
+├── templates/                 # Reusable HTML templates
+│   ├── header.html           # Navigation (single source of truth)
+│   └── footer.html           # Footer placeholder
+│
+├── css/                       # Modular CSS files
+│   ├── main.css              # Entry point (imports all modules)
+│   ├── variables.css         # CSS custom properties
+│   ├── reset.css             # Browser normalization
+│   ├── layout.css            # Navigation, containers
+│   ├── grids.css             # Grid layouts for lists
+│   ├── cards.css             # Card components
+│   ├── buttons.css           # Button styles
+│   ├── forms.css             # Form inputs, labels
+│   ├── lists.css             # List and table components
+│   ├── details.css           # Detail page layouts
+│   ├── charts.css            # Chart containers
+│   ├── badges.css            # Badges and status indicators
+│   ├── images.css            # Images and upload areas
+│   ├── utilities.css         # Utility classes
+│   ├── responsive.css        # Mobile styles
+│   ├── animations.css        # Transitions
+│   └── styles.css            # ⚠️ DEPRECATED - kept for reference
+│
+├── js/                        # JavaScript modules
+│   ├── template-loader.js    # Template system (loads header/footer)
+│   ├── dashboard.js          # Dashboard interactions
+│   ├── receipts-list.js      # Receipt list pagination
+│   ├── products-list.js      # Product list pagination
+│   ├── merchants-list.js     # Merchant list pagination
+│   ├── category-chart.js     # Category pie chart
+│   ├── product-detail.js     # Product price history chart
+│   └── merchant-detail.js    # Merchant spending chart
+│
+└── docs/                      # Documentation
+    ├── SCRIPTING_IDS_REFERENCE.md   # All IDs and data-* attributes
+    └── BACKEND_INTEGRATION.md       # Backend integration guide
 ```
-
-## 🎨 CSS Architecture
-
-The `styles.css` file is organized into 12 clear sections:
-
-### 1. Reset & Base Styles
-- Box model reset
-- CSS variables (color palette, shadows, spacing)
-- Base body styles
-
-### 2. Layout Components
-- Navigation bar (`.navbar`, `.nav-container`, `.nav-menu`, `.nav-link`)
-- Main container (`.container`)
-- Page headers (`.page-header`, `.page-title`)
-- Grid layouts (`.grid`, `.grid-2`, `.grid-3`, `.stats-grid`)
-
-### 3. Card Components
-- Base card (`.card`)
-- Statistics card (`.stat-card`, `.stat-label`, `.stat-value`)
-- Receipt card (`.receipt-card`, `.receipt-header`, `.receipt-merchant`)
-
-### 4. Button Components
-- Base button (`.btn`)
-- Variants: `.btn-primary`, `.btn-secondary`, `.btn-success`, `.btn-danger`, `.btn-outline`
-- Sizes: `.btn-sm`
-
-### 5. Form Components
-- Form groups (`.form-group`, `.form-label`)
-- Inputs (`.form-input`, `.form-select`, `.form-textarea`)
-- Search bar (`.search-bar`, `.search-input`)
-- File upload (`.file-upload`)
-
-### 6. List & Table Components
-- List container (`.list-container`, `.list-item`)
-- Scrollable lists (`.scrollable-list`)
-- Tables (`.table-container`, `.table`)
-
-### 7. Pagination & Navigation
-- Pagination controls (`.pagination`, `.pagination-btn`)
-
-### 8. Detail Page Components
-- Detail headers (`.detail-header`, `.detail-title`, `.detail-info`)
-
-### 9. Chart & Visualization Components
-- Chart containers (`.chart-container`)
-- Image previews (`.image-preview`)
-
-### 10. Badges & Status Indicators
-- Badges (`.badge`, `.badge-primary`, `.badge-success`, `.badge-warning`)
-
-### 11. Utility Classes
-- Text alignment, spacing, flexbox, colors, font weights
-
-### 12. Responsive Design
-- Mobile-first breakpoints (@media queries)
-
-## 🎯 JavaScript Functionality
-
-### Pagination System
-**Used in**: `receipts.html`, `products.html`, `merchants.html`
-
-```javascript
-/**
- * Display items for a specific page
- * @param {number} page - The page number to display (1-indexed)
- */
-function showPage(page) { ... }
-
-/**
- * Update pagination button states and page numbers
- */
-function updatePagination() { ... }
-
-/**
- * Navigate to previous/next page
- * @param {number} direction - Direction to move (-1 for previous, +1 for next)
- */
-function changePage(direction) { ... }
-
-/**
- * Change number of items displayed per page
- * Triggered by dropdown selection
- */
-function changeItemsPerPage() { ... }
-
-/**
- * Filter items based on search input
- * Shows/hides items matching search term
- */
-function filterItems() { ... }
-```
-
-### Dashboard Toggle
-**Used in**: `index.html`
-
-```javascript
-/**
- * Toggle between percentage and real value display for expense comparison
- * Switches between "+12.5%" and "+€314.52"
- */
-function toggleComparisonMode() { ... }
-```
-
-### Receipt Editing
-**Used in**: `receipt-1001.html`
-
-```javascript
-/**
- * Update product amount or price and recalculate total
- * @param {HTMLInputElement} input - The input element that changed
- */
-function updateProduct(input) { ... }
-
-/**
- * Remove a product from the receipt
- * @param {HTMLButtonElement} button - The remove button clicked
- */
-function removeProduct(button) { ... }
-
-/**
- * Recalculate receipt total based on all products
- * Updates the total display and product count
- */
-function calculateTotal() { ... }
-```
-
-### Chart.js Integration
-**Used in**: `categories.html`, `product-2001.html`
-
-```javascript
-// Pie Chart for Category Spending
-const categoryChart = new Chart(ctx, {
-    type: 'pie',
-    data: { /* category data */ },
-    options: { /* responsive config, tooltips */ }
-});
-
-// Line Chart for Price History
-const priceChart = new Chart(ctx, {
-    type: 'line',
-    data: { /* price history data */ },
-    options: { /* responsive config, tooltips */ }
-});
-```
-
-## 🔌 Backend Integration Guide
-
-### Data Attribute Convention
-
-All dynamic content elements have `data-id` attributes for easy backend integration:
-
-```html
-<!-- Receipts -->
-<div class="receipt-card" data-id="1001" data-merchant-id="4001">
-    <!-- Receipt content -->
-</div>
-
-<!-- Products -->
-<div class="list-item product-item" data-id="2001" data-category-id="3001">
-    <!-- Product details -->
-</div>
-
-<!-- Categories -->
-<div class="list-item category-item" data-id="3001">
-    <!-- Category details -->
-</div>
-
-<!-- Merchants -->
-<div class="list-item merchant-item" data-id="4001">
-    <!-- Merchant details -->
-</div>
-```
-
-### Element ID Naming Convention
-
-Elements that should receive dynamic data have descriptive IDs:
-
-```html
-<!-- Dashboard Statistics -->
-<span id="total-receipts">142</span>
-<span id="monthly-expenses">€2,508.45</span>
-<span id="expense-comparison">+12.5%</span>
-<span id="products-tracked">257</span>
-
-<!-- Receipt Details -->
-<span id="receipt-id">1001</span>
-<span id="receipt-merchant">Pingo Doce</span>
-<span id="receipt-date">2025-11-15</span>
-<span id="receipt-total">€45.67</span>
-
-<!-- Product Details -->
-<span id="product-id">2001</span>
-<span id="product-name">Leite Mimosa</span>
-<span id="product-category">Dairy</span>
-<span id="product-price">€0.89</span>
-```
-
-### Python Integration Example
-
-```python
-from flask import Flask, render_template_string
-import json
-
-app = Flask(__name__)
-
-@app.route('/api/receipts')
-def get_receipts():
-    # Fetch from database
-    receipts = db.execute("SELECT * FROM receipts")
-    return json.dumps(receipts)
-
-@app.route('/dashboard')
-def dashboard():
-    with open('index.html', 'r') as f:
-        template = f.read()
-    
-    stats = {
-        'total_receipts': db.count('receipts'),
-        'monthly_expenses': db.sum('receipts.total', month='current'),
-        'expense_comparison': calculate_comparison(),
-        'products_tracked': db.count('products')
-    }
-    
-    # Replace placeholder IDs with actual data
-    html = template
-    html = html.replace('id="total-receipts">142', f'id="total-receipts">{stats["total_receipts"]}')
-    html = html.replace('id="monthly-expenses">€2,508.45', f'id="monthly-expenses">€{stats["monthly_expenses"]:.2f}')
-    # ... and so on
-    
-    return html
-```
-
-### JavaScript Data Binding Example
-
-```javascript
-// Fetch data from Python backend
-fetch('/api/receipts')
-    .then(response => response.json())
-    .then(receipts => {
-        const container = document.querySelector('.receipt-list');
-        container.innerHTML = ''; // Clear existing
-        
-        receipts.forEach(receipt => {
-            const card = document.createElement('div');
-            card.className = 'receipt-card';
-            card.setAttribute('data-id', receipt.id);
-            card.setAttribute('data-merchant-id', receipt.merchant_id);
-            card.innerHTML = `
-                <div class="receipt-header">
-                    <span class="receipt-merchant">${receipt.merchant}</span>
-                    <span class="receipt-date">${receipt.date}</span>
-                </div>
-                <div class="receipt-details">
-                    <div class="receipt-detail-item">
-                        <span class="receipt-detail-label">Total</span>
-                        <span class="receipt-detail-value">€${receipt.total}</span>
-                    </div>
-                </div>
-            `;
-            container.appendChild(card);
-        });
-    });
-```
-
-## 📊 Chart.js Data Binding
-
-### Category Pie Chart
-
-```javascript
-// Fetch category data from backend
-fetch('/api/categories/spending')
-    .then(response => response.json())
-    .then(data => {
-        new Chart(document.getElementById('categoryChart'), {
-            type: 'pie',
-            data: {
-                labels: data.map(c => c.name),
-                datasets: [{
-                    data: data.map(c => c.spending),
-                    backgroundColor: data.map(c => c.color)
-                }]
-            }
-        });
-    });
-```
-
-### Price History Line Chart
-
-```javascript
-// Fetch price history from backend
-fetch(`/api/products/${productId}/price-history`)
-    .then(response => response.json())
-    .then(data => {
-        new Chart(document.getElementById('priceChart'), {
-            type: 'line',
-            data: {
-                labels: data.map(p => p.date),
-                datasets: [{
-                    label: 'Price',
-                    data: data.map(p => p.price),
-                    borderColor: '#2563eb'
-                }]
-            }
-        });
-    });
-```
-
-## 🎨 Color Palette
-
-```css
---primary-color: #2563eb;     /* Blue - Primary actions */
---success-color: #10b981;     /* Green - Success states */
---danger-color: #ef4444;      /* Red - Danger/Delete actions */
---warning-color: #f59e0b;     /* Orange - Warnings */
---secondary-color: #64748b;   /* Gray - Secondary actions */
-```
-
-## 📱 Responsive Breakpoints
-
-- **Desktop**: > 768px (default)
-- **Mobile**: ≤ 768px (stacked layouts, full-width components)
-
-## 🔧 Development Notes
-
-### Adding New Pages
-
-1. Copy an existing page as template
-2. Update page `<title>` and `.page-title`
-3. Update active state in navigation: add `.active` to corresponding `.nav-link`
-4. Add `data-id` attributes to all dynamic elements
-5. Implement JavaScript functions if needed (pagination, filtering, etc.)
-
-### Adding New Components
-
-1. Add CSS in appropriate section of `styles.css`
-2. Follow BEM naming convention where possible
-3. Use CSS variables for colors and spacing
-4. Test responsiveness on mobile devices
-
-### Performance Optimization
-
-- Chart.js is loaded via CDN (only on pages that need it)
-- Inline JavaScript minimizes HTTP requests
-- CSS uses hardware-accelerated transforms for animations
-- Images should be optimized before use
-
-## 📦 Dependencies
-
-- **Chart.js v3+**: For pie charts and line charts
-  - CDN: `https://cdn.jsdelivr.net/npm/chart.js`
-  - Used in: `categories.html`, `product-2001.html`
-
-## 🚀 Getting Started
-
-1. **Open any HTML file** in a modern web browser
-2. **Navigate** using the top navigation bar
-3. **Interact** with forms, buttons, and charts
-4. **Test pagination** on list pages (receipts, products, merchants)
-5. **Edit products** on receipt detail pages
-
-## 🔐 Security Notes
-
-- All forms use `POST` method (ready for backend integration)
-- Input validation should be implemented server-side
-- CSRF tokens should be added to forms in production
-- Sanitize all user inputs before displaying
-
-## 📝 Future Enhancements
-
-- [ ] Add real-time search (debounced)
-- [ ] Implement sorting on table columns
-- [ ] Add date range pickers for filtering
-- [ ] Export functionality (CSV, PDF)
-- [ ] Batch operations (select multiple items)
-- [ ] Dark mode toggle
-- [ ] Print-friendly receipt views
-- [ ] Barcode scanning integration
-
-## 🤝 Contributing
-
-When contributing:
-1. Follow the existing code style
-2. Add comments to complex logic
-3. Test on Chrome, Firefox, and Safari
-4. Ensure mobile responsiveness
-5. Update this README if adding new features
-
-## 📄 License
-
-This project is part of the ETIC Algarve Database course (2025).
 
 ---
 
-**Last Updated**: November 11, 2025  
-**Version**: 1.0.0  
-**Author**: [Your Name]  
-**Course**: Base de Dados - ETIC Algarve
+## 🚀 Quick Start
+
+### 1. Serve the Application
+
+You need a local web server (templates won't load from `file://`):
+
+**Option A: Python**
+```bash
+cd static
+python3 -m http.server 8000
+```
+Then open: http://localhost:8000/index.html
+
+**Option B: Node.js (with live-server)**
+```bash
+npm install -g live-server
+cd static
+live-server --port=8000
+```
+
+**Option C: VS Code Live Server Extension**
+1. Install "Live Server" extension
+2. Right-click `index.html` → "Open with Live Server"
+
+### 2. Navigate the Application
+
+- **Dashboard**: http://localhost:8000/index.html
+- **Receipts**: http://localhost:8000/receipt/list.html
+- **Products**: http://localhost:8000/product/list.html
+- **Categories**: http://localhost:8000/category/list.html
+- **Merchants**: http://localhost:8000/merchant/list.html
+
+### 3. File Naming Convention
+
+All entity folders follow a consistent, intuitive structure:
+
+```
+entity/
+├── list.html           # List all entities (paginated, searchable)
+├── view-example.html   # View single entity details
+├── add.html            # Add new entity form
+└── edit-example.html   # Edit existing entity form
+```
+
+**Benefits:**
+- ✅ Predictable file names
+- ✅ Easy to find and navigate
+- ✅ Clear purpose from filename
+- ✅ Consistent across all entities
+
+### 4. Test Key Features
+
+1. Click navigation links (header loads dynamically)
+2. Try pagination on list pages
+3. Use search/filter on lists
+4. View charts on dashboard and category pages
+5. Check responsive design (resize browser)
+
+---
+
+## 🎨 Template System
+
+The navigation header is **loaded dynamically** via JavaScript, allowing you to edit it once and update all pages.
+
+### How It Works
+
+1. **Template File**: `templates/header.html` contains the navigation
+2. **Loader Script**: `js/template-loader.js` fetches and injects it
+3. **Placeholder**: Each page has `<div data-template="header"></div>`
+
+### Template Structure
+
+```html
+<!-- templates/header.html -->
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="{BASE_PATH}index.html" class="nav-brand">InfinExpense</a>
+        <ul class="nav-menu">
+            <li><a href="{BASE_PATH}index.html" class="nav-link" data-page="dashboard">Dashboard</a></li>
+            <li><a href="{BASE_PATH}receipt/list.html" class="nav-link" data-page="receipts">Receipts</a></li>
+            <li><a href="{BASE_PATH}product/list.html" class="nav-link" data-page="products">Products</a></li>
+            <li><a href="{BASE_PATH}category/list.html" class="nav-link" data-page="categories">Categories</a></li>
+            <li><a href="{BASE_PATH}merchant/list.html" class="nav-link" data-page="merchants">Merchants</a></li>
+        </ul>
+    </div>
+</nav>
+```
+
+**Key Features:**
+- `{BASE_PATH}` placeholder is replaced with `../` based on page depth
+- `data-page` attributes enable active link highlighting
+- Works from root and subdirectories automatically
+
+### How To Use
+
+**In every HTML page:**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Title - InfinExpense</title>
+    <link rel="stylesheet" href="css/main.css">  <!-- Root level -->
+    <!-- OR -->
+    <link rel="stylesheet" href="../css/main.css">  <!-- Subdirectory -->
+</head>
+<body data-active-page="dashboard">  <!-- Highlights active nav link -->
+    
+    <!-- Navigation Template -->
+    <div data-template="header"></div>
+    <script src="js/template-loader.js"></script>  <!-- Loads right after template div -->
+    
+    <!-- Your page content -->
+    <div class="container">
+        <!-- Content here -->
+    </div>
+    
+</body>
+</html>
+```
+
+### Changing the Navigation
+
+To update navigation **on all pages**:
+
+1. Edit `templates/header.html`
+2. Reload any page
+3. Changes appear everywhere automatically ✨
+
+---
+
+## 🎨 CSS Architecture
+
+### Module Organization
+
+The CSS is split into **16 logical modules** for easy maintenance:
+
+```
+css/main.css              ← Load this in your HTML
+    ├── variables.css     ← Colors, spacing, fonts (47 CSS custom properties)
+    ├── reset.css         ← Browser normalization
+    ├── layout.css        ← Navigation, containers, page structure
+    ├── grids.css         ← 5 grid layouts for different list types
+    ├── cards.css         ← Card components
+    ├── buttons.css       ← Button variants (primary, secondary, danger)
+    ├── forms.css         ← Form inputs, labels, file uploads
+    ├── lists.css         ← Lists and tables
+    ├── details.css       ← Detail page layouts
+    ├── charts.css        ← Chart container styles
+    ├── badges.css        ← Badges and status indicators
+    ├── images.css        ← Images and upload areas
+    ├── utilities.css     ← Utility classes (50+ helpers)
+    ├── responsive.css    ← Mobile breakpoints
+    └── animations.css    ← Transitions and effects
+```
+
+### How To Use
+
+**1. Link to main.css in your HTML:**
+
+```html
+<link rel="stylesheet" href="css/main.css">
+```
+
+The `main.css` file imports all modules in the correct order.
+
+**2. Edit specific modules:**
+
+- Need to change colors? → `css/variables.css`
+- Change button styles? → `css/buttons.css`
+- Update form inputs? → `css/forms.css`
+- Add utility class? → `css/utilities.css`
+
+**3. No inline styles:**
+
+All styles use classes. Category colors are the **only exception** (dynamic from database).
+
+### CSS Custom Properties (Variables)
+
+All colors, spacing, and fonts are centralized in `variables.css`:
+
+```css
+/* Example from variables.css */
+:root {
+    /* Colors */
+    --primary-color: #4169E1;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+    
+    /* Spacing */
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    
+    /* Typography */
+    --font-family: 'Inter', -apple-system, sans-serif;
+    --font-size-base: 1rem;
+    
+    /* And 40 more... */
+}
+```
+
+**To change the color scheme**, just edit these variables!
+
+### Utility Classes
+
+Over **50 utility classes** for common patterns:
+
+```css
+/* Flexbox */
+.flex, .flex-col, .flex-center, .flex-between
+
+/* Text */
+.text-center, .text-right, .text-primary-color
+
+/* Spacing */
+.mb-lg, .mt-2, .mx-auto
+
+/* Width */
+.max-width-800, .width-300
+
+/* Display */
+.hidden, .block, .cursor-pointer
+
+/* And many more in utilities.css */
+```
+
+---
+
+## 📜 JavaScript Modules
+
+### Template Loader (`js/template-loader.js`)
+
+**Purpose**: Loads navigation header dynamically  
+**Features**:
+- Auto-detects page depth
+- Calculates correct `../` path
+- Replaces `{BASE_PATH}` placeholder
+- Highlights active navigation link
+
+**No configuration needed** - works automatically!
+
+### Page-Specific Modules
+
+#### `dashboard.js`
+- **Used by**: `index.html`
+- **Features**: Toggle expense comparison mode, load recent receipts
+
+#### `receipts-list.js`
+- **Used by**: `receipt/receipts.html`
+- **Features**: Pagination, search/filter receipts
+
+#### `products-list.js`
+- **Used by**: `product/products.html`
+- **Features**: Pagination, search/filter products
+
+#### `merchants-list.js`
+- **Used by**: `merchant/merchants.html`
+- **Features**: Pagination, search/filter merchants
+
+#### `category-chart.js`
+- **Used by**: `category/categories.html`
+- **Features**: Renders pie chart of spending by category
+
+#### `product-detail.js`
+- **Used by**: `product/product-*.html`
+- **Features**: Price history line chart
+
+#### `merchant-detail.js`
+- **Used by**: `merchant/merchant-*.html`
+- **Features**: Spending trends bar chart
+
+### How To Add JavaScript
+
+```html
+<!-- At end of body, after content -->
+<script src="../js/template-loader.js"></script>
+<script src="../js/receipts-list.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  <!-- If using charts -->
+```
+
+---
+
+## 🔌 Backend Integration
+
+See **[docs/BACKEND_INTEGRATION.md](docs/BACKEND_INTEGRATION.md)** for complete integration guide.
+
+### Quick Overview
+
+**1. Data Attributes**
+
+All dynamic content uses `data-*` attributes:
+
+```html
+<!-- Example: Receipt item -->
+<div class="list-item" data-receipt-id="1001">
+    <span data-field="merchant-name">Continente</span>
+    <span data-field="receipt-date">Nov 10, 2025</span>
+    <span data-field="receipt-total">87.45 €</span>
+</div>
+```
+
+**2. JavaScript Integration Points**
+
+Your backend should provide JSON data that JavaScript uses to:
+- Populate `data-field` elements
+- Render charts
+- Fill forms
+- Update statistics
+
+**3. Example API Response**
+
+```json
+{
+    "receipt_id": 1001,
+    "merchant_name": "Continente",
+    "date": "2025-11-10",
+    "total": 87.45,
+    "products": [
+        {"id": 2001, "name": "Milk", "price": 1.20}
+    ]
+}
+```
+
+**4. Server-Side Templates (Optional)**
+
+Instead of JavaScript template loader, you can use Flask/Django templates:
+
+```html
+<!-- Flask/Jinja2 Example -->
+{% include 'header.html' %}
+
+<!-- Django Example -->
+{% include "header.html" %}
+```
+
+Then remove `<script src="js/template-loader.js"></script>` from pages.
+
+### Key Integration Files
+
+- **docs/SCRIPTING_IDS_REFERENCE.md** - All IDs and data attributes
+- **docs/BACKEND_INTEGRATION.md** - Flask/Django examples, API design
+
+---
+
+## 🛠️ Development
+
+### Editing the Application
+
+**To edit navigation:**
+```bash
+# Edit this file:
+templates/header.html
+
+# Changes apply to all pages automatically
+```
+
+**To edit styles:**
+```bash
+# Colors, spacing, fonts:
+css/variables.css
+
+# Buttons:
+css/buttons.css
+
+# Forms:
+css/forms.css
+
+# Utility classes:
+css/utilities.css
+```
+
+**To edit page layout:**
+```bash
+# Edit specific HTML file:
+product/products.html
+
+# Or edit shared template:
+templates/header.html
+```
+
+### Adding a New Page
+
+1. **Create HTML file** (copy existing page as template)
+2. **Add to navigation** in `templates/header.html`:
+   ```html
+   <li><a href="{BASE_PATH}newpage/page.html" class="nav-link" data-page="newpage">New Page</a></li>
+   ```
+3. **Set active page** in new page's `<body>`:
+   ```html
+   <body data-active-page="newpage">
+   ```
+4. **Add JavaScript** if needed in `js/` directory
+
+### Testing
+
+**Manual Testing:**
+1. Start local server (see Quick Start)
+2. Test navigation (all links work?)
+3. Test responsive design (resize browser)
+4. Test JavaScript features (pagination, charts, search)
+5. Check console for errors (F12 → Console)
+
+**What To Test:**
+- ✅ Navigation loads on all pages
+- ✅ Active link highlights correctly
+- ✅ All links go to correct pages
+- ✅ CSS loads properly (no broken styles)
+- ✅ JavaScript runs without errors
+- ✅ Charts render correctly
+- ✅ Forms work (validation, submission)
+- ✅ Search/filter functions work
+- ✅ Pagination displays correct items
+
+---
+
+## 🌐 Browser Support
+
+### Supported Browsers
+
+- ✅ Chrome/Edge 90+
+- ✅ Firefox 88+
+- ✅ Safari 14+
+- ✅ Opera 76+
+
+### Required Features
+
+The application uses modern web features:
+- **CSS Grid** and **Flexbox**
+- **CSS Custom Properties** (variables)
+- **Fetch API** (template loader)
+- **ES6 JavaScript** (arrow functions, const/let)
+- **Chart.js** (v4.x)
+
+### Fallbacks
+
+- Template loader gracefully fails if fetch is unsupported
+- CSS Grid falls back to flexbox on older browsers
+- No IE11 support (uses modern JavaScript)
+
+---
+
+## 📝 Notes
+
+### Category Colors
+
+Category color boxes use **inline styles** intentionally:
+
+```html
+<div class="category-color-box" style="background-color: #10b981;"></div>
+```
+
+**Why?** These colors come from the database and are dynamic. This is the **only acceptable inline style** in the project.
+
+### File Naming Convention
+
+- **List pages**: `[entity]s.html` (plural) - e.g., `receipts.html`, `products.html`
+- **Detail pages**: `[entity]-[id].html` - e.g., `receipt-1001.html`, `product-2001.html`
+- **Form pages**: `[entity]-add.html`, `[entity]-edit-[id].html`
+
+### IDs and Classes
+
+- **IDs**: Unique per page, for JavaScript targeting
+- **Classes**: Reusable, for styling
+- **data-* attributes**: For backend integration and JavaScript logic
+
+### Performance
+
+- Template loader caches templates (one request per session)
+- CSS is modular but loaded as single file (via @import)
+- JavaScript modules are independent (no dependencies)
+- Images should be lazy-loaded (to add)
+
+---
+
+## 🤝 Contributing
+
+When adding features:
+
+1. **Follow the modular structure** (keep CSS in modules, JS in separate files)
+2. **No inline styles** (except category colors from database)
+3. **Use utility classes** when possible
+4. **Add data-* attributes** for backend integration
+5. **Update documentation** if you add new IDs or data attributes
+6. **Test in multiple browsers**
+
+---
+
+## 📚 Additional Resources
+
+- **[docs/BACKEND_INTEGRATION.md](docs/BACKEND_INTEGRATION.md)** - Complete backend integration guide
+- **[docs/SCRIPTING_IDS_REFERENCE.md](docs/SCRIPTING_IDS_REFERENCE.md)** - All IDs and data attributes
+
+---
+
+## 📄 License
+
+This project is part of the InfinExpense expense tracking system.
+
+---
+
+**Built with ❤️ using vanilla HTML, CSS, and JavaScript**

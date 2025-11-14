@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Merchant - InfinExpense</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body data-active-page="merchants">
+    <!-- Navigation Template -->
+
+    <div data-template="header"></div>
+
+    <script src="../js/template-loader.js"></script>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Edit Merchant</h1>
+        </div>
+
+        <div class="card max-width-800 mx-auto">
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Merchant Name *</label>
+                    <input type="text" class="form-input" value="Continente" required>
+                </div>
+
+                <div class="photo-upload-container">
+                    <div class="form-group form-group-no-margin">
+                        <label class="form-label">Merchant Photo</label>
+                        <div class="file-upload photo-upload-small">
+                            <input type="file" id="merchant-photo" class="file-upload-input" accept="image/*">
+                            <label for="merchant-photo" class="file-upload-label photo-upload-label-content">
+                                <div class="photo-upload-icon">📷</div>
+                                <div class="photo-upload-text">Upload Photo</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        <div class="form-group form-group-no-margin">
+                            <label class="form-label">Location *</label>
+                            <input type="text" class="form-input" value="Faro Centro" required>
+                        </div>
+
+                        <div class="form-group form-group-no-margin">
+                            <label class="form-label">Notes</label>
+                            <textarea class="form-textarea resize-vertical">Main supermarket near city center. Open daily 8:00-22:00.</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-gap justify-end mt-2">
+                    <a href="view-example.html" class="btn btn-outline">Cancel</a>
+                    <button type="button" class="btn btn-danger" onclick="if(confirm('Are you sure you want to delete this merchant?')) window.location.href='list.html'">Delete Merchant</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

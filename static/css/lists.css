@@ -1,0 +1,22 @@
+/* ==========================================================================
+   8. CATEGORY-SPECIFIC STYLES
+   ========================================================================== */
+
+.category-color-box {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+}
+
+.category-name {
+    font-weight: var(--font-weight-semibold);
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.category-meta {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-align: center;
+}
+

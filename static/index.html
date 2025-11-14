@@ -4,35 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - InfinExpense</title>
-    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="../static/index.html" class="nav-brand">InfinExpense</a>
-            <ul class="nav-menu">
-                <li><a href="../static/index.html" class="nav-link active">Dashboard</a></li>
-                <li><a href="../static/receipts.html" class="nav-link">Receipts</a></li>
-                <li><a href="../static/products.html" class="nav-link">Products</a></li>
-                <li><a href="../static/categories.html" class="nav-link">Categories</a></li>
-                <li><a href="../static/merchants.html" class="nav-link">Merchants</a></li>
-            </ul>
-        </div>
-    </nav>
+<body data-active-page="dashboard">
+    <!-- Navigation Template -->
+
+    <div data-template="header"></div>
+
+    <script src="js/template-loader.js"></script>
 
     <!-- Main Content -->
     <div class="container">
         <div class="page-header">
             <h1 class="page-title">Dashboard</h1>
-            <a href="../static/receipt-add.html" class="btn btn-primary">+ Add Receipt</a>
         </div>
 
         <!-- Monthly Statistics -->
         <div class="stats-grid">
             <div class="stat-card" data-stat-type="monthly-expenses">
                 <div class="stat-label">Total Expenses This Month</div>
-                <div class="stat-value" id="monthly-expenses" data-field="total-expenses">€2,847.65</div>
+                <div class="stat-value" id="monthly-expenses" data-field="total-expenses">2,847.65 €</div>
                 <div class="card-subtitle">
                     <span id="expenseComparison" data-field="expense-comparison" onclick="toggleComparisonMode()" style="text-decoration: underline; cursor: pointer;">+12.5% from last month</span>
                 </div>
@@ -50,15 +41,16 @@
         </div>
 
         <!-- Recent Receipts -->
-        <div class="card">
+        <div class="card" style="margin-bottom: 0; height: calc(100vh - 64px - 2rem - 60px - 2rem - 170px - 1.5rem - 2rem); display: flex; flex-direction: column;">
+            <!-- Match bottom position with other pages: 64px navbar, 2rem container padding, 60px page-header, 2rem header margin, 170px stats-grid, 1.5rem stats margin, 2rem bottom margin -->
             <div class="flex-between mb-2">
                 <h2 class="detail-title" style="margin-bottom: 0;">Recent Receipts</h2>
-                <a href="../static/receipts.html" class="btn btn-outline btn-sm">View All</a>
+                <a href="../receipt/list.html" class="btn btn-outline btn-sm">View All</a>
             </div>
 
-            <div class="receipt-list" id="recent-receipts-list" data-max-items="3">
+            <div class="receipt-list" id="recent-receipts-list" data-max-items="3" style="display: flex; flex-direction: column; justify-content: center; flex: 1; gap: 1rem;">
                 <!-- Receipt 1 -->
-                <a href="../static/receipt-1001.html" class="receipt-card" data-receipt-id="1001" data-merchant-id="4001">
+                <a href="view-example.html" class="receipt-card" data-receipt-id="1001" data-merchant-id="4001">
                     <div class="receipt-header">
                         <div>
                             <div class="receipt-merchant" data-field="merchant-name">Continente</div>
@@ -69,13 +61,13 @@
                         </div>
                         <div style="text-align: right;">
                             <div class="receipt-date" data-field="receipt-date">Nov 10, 2025</div>
-                            <div class="receipt-detail-value" data-field="receipt-total" style="margin-top: 0.5rem; font-size: 1.5rem; color: var(--primary-color);">€87.45</div>
+                            <div class="receipt-detail-value" data-field="receipt-total" style="margin-top: 0.5rem; font-size: 1.5rem; color: var(--primary-color);">87.45 €</div>
                         </div>
                     </div>
                 </a>
 
                 <!-- Receipt 2 -->
-                <a href="../static/receipt-1002.html" class="receipt-card" data-receipt-id="1002" data-merchant-id="4002">
+                <a href="receipt-1002.html" class="receipt-card" data-receipt-id="1002" data-merchant-id="4002">
                     <div class="receipt-header">
                         <div>
                             <div class="receipt-merchant" data-field="merchant-name">Pingo Doce</div>
@@ -86,13 +78,13 @@
                         </div>
                         <div style="text-align: right;">
                             <div class="receipt-date" data-field="receipt-date">Nov 8, 2025</div>
-                            <div class="receipt-detail-value" data-field="receipt-total" style="margin-top: 0.5rem; font-size: 1.5rem; color: var(--primary-color);">€45.20</div>
+                            <div class="receipt-detail-value" data-field="receipt-total" style="margin-top: 0.5rem; font-size: 1.5rem; color: var(--primary-color);">45.20 €</div>
                         </div>
                     </div>
                 </a>
 
                 <!-- Receipt 3 -->
-                <a href="../static/receipt-1003.html" class="receipt-card" data-receipt-id="1003" data-merchant-id="4003">
+                <a href="receipt-1003.html" class="receipt-card" data-receipt-id="1003" data-merchant-id="4003">
                     <div class="receipt-header">
                         <div>
                             <div class="receipt-merchant" data-field="merchant-name">Lidl</div>
@@ -103,7 +95,7 @@
                         </div>
                         <div style="text-align: right;">
                             <div class="receipt-date" data-field="receipt-date">Nov 6, 2025</div>
-                            <div class="receipt-detail-value" data-field="receipt-total" style="margin-top: 0.5rem; font-size: 1.5rem; color: var(--primary-color);">€62.80</div>
+                            <div class="receipt-detail-value" data-field="receipt-total" style="margin-top: 0.5rem; font-size: 1.5rem; color: var(--primary-color);">62.80 €</div>
                         </div>
                     </div>
                 </a>
@@ -111,32 +103,7 @@
         </div>
     </div>
 
-    <script>
-        /**
-         * Toggle between percentage and absolute value for expense comparison
-         * Switches display between "+12.5%" and "+€314.52"
-         * Can be bound to Python backend data via data-field="expense-comparison"
-         */
-        let showPercentage = true;
-        const lastMonthExpense = 2533.13; // Previous month value - populate from DB
-        const currentExpense = 2847.65;    // Current month value - populate from DB
-        const difference = currentExpense - lastMonthExpense;
-        const percentage = ((difference / lastMonthExpense) * 100).toFixed(1);
-
-        /**
-         * Toggle display mode for expense comparison
-         * Called on click of the comparison element
-         */
-        function toggleComparisonMode() {
-            const element = document.getElementById('expenseComparison');
-            showPercentage = !showPercentage;
-            
-            if (showPercentage) {
-                element.textContent = `+${percentage}% from last month`;
-            } else {
-                element.textContent = `+€${difference.toFixed(2)} from last month`;
-            }
-        }
-    </script>
+    <!-- Dashboard JavaScript -->
+    <script src="js/dashboard.js"></script>
 </body>
 </html>

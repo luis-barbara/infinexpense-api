@@ -1,0 +1,237 @@
+# src/services/reports_service.py
+
+from sqlalchemy.orm import Session
+from sqlalchemy import func, case, distinct
+from decimal import Decimal
+from typing import List, Optional
+from datetime import date
+
+from src.models import (
+    merchant as model_merchant,
+    receipt as model_receipt,
+    product as model_product_list,
+    receipt_product as model_receipt_product,
+    category as model_category
+)
+from src.schemas import reports as schema_reports
+
+
+# Relatório 1: GASTOS POR CATEGORIA (para o Gráfico do Dashboard)
+def get_spending_by_category(
+    db: Session,
+    start_date: Optional[date] = None,
+    end_date: Optional[date] = None
+) -> List[schema_report.ReportSpendingByEntity]:
+    """
+    Calcula o total gasto por categoria para o gráfico do dashboard,
+    com filtro de data opcional.
+    
+    Esta query tem de:
+    1. Juntar (JOIN) Categoria -> ProductList -> Product (Item do Recibo) -> Receipt
+    2. Filtrar (FILTER) por data (no 'Receipt')
+    3. Calcular o 'total_item' (price * quantity)
+    4. Agrupar (GROUP BY) por category.id e category.name
+    5. Somar (SUM) o 'total_item'
+    """
+    
+    # 1. Define o cálculo do preço total por item
+    total_item_spend = (model_receipt_product.Product.price * model_receipt_product.Product.quantity).label("total_item_spend")
+
+    # 2. Inicia a query 
+    query = db.query(
+        model_category.Category.id.label("entity_id"),
+        model_category.Category.name.label("name"),
+        # func.coalesce para garantir que o SUM devolve 0 em vez de NULL
+        func.coalesce(func.sum(total_item_spend), Decimal("0.00")).label("total_spent")
+    )
+    
+    # 3. Definição de JOINs ('isouter=True' (LEFT JOIN) para incluir categorias
+    # que possam ter 0 gastos, se assim for solicitado)
+    
+    # Categoria -> ProductList
+    query = query.join(
+        model_product_list.ProductList,
+        model_category.Category.id == model_product_list.ProductList.category_id,
+        isouter=True
+    )
+    # ProductList -> Product (Item do Recibo)
+    query = query.join(
+        model_receipt_product.Product,
+        model_product_list.ProductList.id == model_receipt_product.Product.product_list_id,
+        isouter=True
+    )
+    
+    # 4. Filtros 
+
+    # NOTA: O filtro de data tem de ser feito num 'join' ou 'subquery'
+    # para não quebrar o LEFT JOIN (não excluir categorias com 0 recibos).
+    # JOIN à tabela de Recibos
+    query = query.join(
+        model_receipt.Receipt,
+        model_receipt_product.Product.receipt_id == model_receipt.Receipt.id,
+        isouter=True
+    )
+    
+    # filtros de data 
+    if start_date:
+        query = query.filter(model_receipt.Receipt.date >= start_date)
+    if end_date:
+        query = query.filter(model_receipt.Receipt.date <= end_date)
+
+    # 5. Agrupamento 
+    query = query.group_by(model_category.Category.id, model_category.Category.name)
+    
+    # 6. Ordenação 
+    query = query.order_by(func.sum(total_item_spend).desc().nullslast())
+    
+    # 7. Executa a query
+    results = query.all()
+    
+    # O Pydantic vai converter esta lista de 'Row objects' para o schema
+    return results
+
+
+# Relatório 2: LISTA DE SUPERMERCADOS - "Analytics" 
+def get_enriched_merchant_report(
+    db: Session,
+    start_date: Optional[date] = None,
+    end_date: Optional[date] = None
+) -> List[schema_reports.MerchantReportData]:
+    """
+    Calcula o relatório de supermercados (Ecrã 4).
+    Isto tem de usar LEFT JOINs para incluir supermercados com 0 recibos.
+    
+    Esta query tem de:
+    1. Começar no Merchant (Supermercado)
+    2. Fazer LEFT JOIN para Recibos (Receipts)
+    3. Fazer LEFT JOIN para Itens (Products)
+    4. Aplicar os filtros de data de forma segura (numa subquery)
+    5. Agrupar (GROUP BY) por merchant.id
+    6. Calcular o COUNT(receipts) e o SUM(price * quantity)
+    """
+
+    # Criar uma SubQuery para os Recibos JÁ FILTRADOS por data
+    # crucial para o LEFT JOIN funcionar
+    
+    filtered_receipts_subq = db.query(
+        model_receipt.Receipt.id,
+        model_receipt.Receipt.merchant_id
+    ).filter(model_receipt.Receipt.id != None) 
+
+    if start_date:
+        filtered_receipts_subq = filtered_receipts_subq.filter(
+            model_receipt.Receipt.date >= start_date
+        )
+    if end_date:
+        filtered_receipts_subq = filtered_receipts_subq.filter(
+            model_receipt.Receipt.date <= end_date
+        )
+    
+    # Transforma a query numa "tabela" que podemos usar num JOIN
+    filtered_receipts_subq = filtered_receipts_subq.subquery()
+
+    # Definir os cálculos
+    # Total Gasto (SUM)
+    total_spent = func.coalesce(
+        func.sum(model_receipt_product.Product.price * model_receipt_product.Product.quantity),
+        Decimal("0.00")
+    ).label("total_spent")
+    
+    # Contagem de Recibos (COUNT)
+    receipt_count = func.count(
+        func.distinct(filtered_receipts_subq.c.id)
+    ).label("receipt_count")
+
+    # Query Principal (a partir do Merchant)
+    
+    query = db.query(
+        model_merchant.Merchant.id,
+        model_merchant.Merchant.name,
+        model_merchant.Merchant.location,
+        total_spent,
+        receipt_count
+    )
+    
+    # LEFT JOINs
+    
+    # LEFT JOIN 1: Merchant -> Recibos (Já filtrados pela subquery)
+    query = query.outerjoin(
+        filtered_receipts_subq,
+        model_merchant.Merchant.id == filtered_receipts_subq.c.merchant_id
+    )
+    
+    # LEFT JOIN 2: Recibos (Filtrados) -> Itens do Recibo
+    query = query.outerjoin(
+        model_receipt_product.Product,
+        filtered_receipts_subq.c.id == model_receipt_product.Product.receipt_id
+    )
+    
+    # Agrupamento (GROUP BY)
+    # Agrupa pelo Supermercado
+    query = query.group_by(
+        model_merchant.Merchant.id,
+        model_merchant.Merchant.name,
+        model_merchant.Merchant.location
+    )
+    
+    # Ordenação
+    query = query.order_by(total_spent.desc().nullslast())
+    
+    # Executar
+    results = query.all()
+    
+    # O Pydantic vai mapear os resultados (com 'id', 'name', 'location',
+    # 'total_spent', 'receipt_count') para o schema 'MerchantReportData'.
+    return results
+
+
+# Relatório 3: KPIs para o Dashboard Principal 
+
+def get_dashboard_kpis(
+    db: Session,
+    start_date: Optional[date] = None,
+    end_date: Optional[date] = None
+) -> dict:
+    """
+    Calcula os 3 KPIs (Key Performance Indicators) para o ecrã principal.
+    1. Total Gasto (Month)
+    2. Total de Recibos
+    3. Total de Produtos
+    """
+    
+    # 1. Define o cálculo do preço total por item (preço * quantidade)
+    total_item_spent = (model_receipt_product.Product.price * model_receipt_product.Product.quantity).label("total_item_spent")
+    
+    # 2. Inicia a query
+    query = db.query(
+        # Total gasto (soma de preço * quantidade de todos os produtos)
+        func.coalesce(func.sum(total_item_spent), Decimal("0.00")).label("total_spent"),
+        
+        # Contagem de recibos distintos
+        func.count(distinct(model_receipt.Receipt.id)).label("receipt_count"),
+        
+        # Contagem de produtos distintos
+        func.count(distinct(model_receipt_product.Product.id)).label("product_item_count")
+    )
+    
+    # 3.  JOINs necessários
+    query = query.join(
+        model_receipt_product.Product,
+        model_receipt_product.Product.receipt_id == model_receipt.Receipt.id
+    )
+
+    # 4. Filtros 
+    if start_date:
+        query = query.filter(model_receipt.Receipt.date >= start_date)
+    if end_date:
+        query = query.filter(model_receipt.Receipt.date <= end_date)
+
+    # 5. Executa a query
+    result = query.one()  
+    
+    # 6. Retorna os KPIs calculados
+    return {
+        "total_spent": result.total_spent,
+        "receipt_count": result.receipt_count,
+        "product_item_count": result.product_item_count
+    }
