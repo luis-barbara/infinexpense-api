@@ -45,6 +45,7 @@
 @import 'charts.css';
 @import 'badges.css';
 @import 'images.css';
+@import 'components-extended.css';
 
 /* ========== Utilities & Responsive ========== */
 @import 'utilities.css';

@@ -434,3 +434,17 @@
     display: flex;
     flex-direction: column;
 }
+
+/* === Example Data Styling === */
+/* Applied to all example/demo data to distinguish from real data */
+.example-data {
+    color: #22c55e;
+    text-decoration: underline;
+    text-decoration-color: #22c55e;
+    text-underline-offset: 2px;
+}
+
+.example-data:hover {
+    color: #16a34a;
+    text-decoration-color: #16a34a;
+}

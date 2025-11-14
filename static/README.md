@@ -60,27 +60,29 @@ InfinExpense is a complete frontend application for expense tracking with receip
 static/
 ├── index.html                 # Dashboard (main entry point)
 │
-├── category/                  # Category pages
-│   ├── categories.html       # Category list with pie chart
-│   ├── category-add.html     # Add new category
-│   └── category-edit-*.html  # Edit category form
+├── category/                  # Category management (3 pages)
+│   ├── list.html             # List all categories with pie chart
+│   ├── add.html              # Add new category form
+│   └── edit-example.html     # Edit existing category form
 │
-├── merchant/                  # Merchant pages
-│   ├── merchants.html        # Merchant list
-│   ├── merchant-*.html       # Merchant detail pages
-│   ├── merchant-add.html     # Add new merchant
-│   └── merchant-edit-*.html  # Edit merchant form
+├── merchant/                  # Merchant management (5 pages)
+│   ├── list.html             # List all merchants
+│   ├── view-example.html     # View merchant details & stats
+│   ├── view-example-2.html   # Alternative merchant view
+│   ├── add.html              # Add new merchant form
+│   └── edit-example.html     # Edit existing merchant form
 │
-├── product/                   # Product pages
-│   ├── products.html         # Product list
-│   ├── product-*.html        # Product detail with price history
-│   ├── product-add.html      # Add new product
-│   └── product-edit-*.html   # Edit product form
+├── product/                   # Product management (4 pages)
+│   ├── list.html             # List all products
+│   ├── view-example.html     # View product details & price history
+│   ├── add.html              # Add new product form
+│   └── edit-example.html     # Edit existing product form
 │
-├── receipt/                   # Receipt pages
-│   ├── receipts.html         # Receipt list
-│   ├── receipt-*.html        # Receipt detail with products
-│   └── receipt-add.html      # Add new receipt
+├── receipt/                   # Receipt management (4 pages)
+│   ├── list.html             # List all receipts
+│   ├── view-example.html     # View receipt details & products
+│   ├── add.html              # Add new receipt form
+│   └── edit-example.html     # Edit existing receipt form
 │
 ├── templates/                 # Reusable HTML templates
 │   ├── header.html           # Navigation (single source of truth)
@@ -149,12 +151,30 @@ live-server --port=8000
 ### 2. Navigate the Application
 
 - **Dashboard**: http://localhost:8000/index.html
-- **Receipts**: http://localhost:8000/receipt/receipts.html
-- **Products**: http://localhost:8000/product/products.html
-- **Categories**: http://localhost:8000/category/categories.html
-- **Merchants**: http://localhost:8000/merchant/merchants.html
+- **Receipts**: http://localhost:8000/receipt/list.html
+- **Products**: http://localhost:8000/product/list.html
+- **Categories**: http://localhost:8000/category/list.html
+- **Merchants**: http://localhost:8000/merchant/list.html
 
-### 3. Test Key Features
+### 3. File Naming Convention
+
+All entity folders follow a consistent, intuitive structure:
+
+```
+entity/
+├── list.html           # List all entities (paginated, searchable)
+├── view-example.html   # View single entity details
+├── add.html            # Add new entity form
+└── edit-example.html   # Edit existing entity form
+```
+
+**Benefits:**
+- ✅ Predictable file names
+- ✅ Easy to find and navigate
+- ✅ Clear purpose from filename
+- ✅ Consistent across all entities
+
+### 4. Test Key Features
 
 1. Click navigation links (header loads dynamically)
 2. Try pagination on list pages
@@ -183,8 +203,10 @@ The navigation header is **loaded dynamically** via JavaScript, allowing you to 
         <a href="{BASE_PATH}index.html" class="nav-brand">InfinExpense</a>
         <ul class="nav-menu">
             <li><a href="{BASE_PATH}index.html" class="nav-link" data-page="dashboard">Dashboard</a></li>
-            <li><a href="{BASE_PATH}receipt/receipts.html" class="nav-link" data-page="receipts">Receipts</a></li>
-            <!-- More links... -->
+            <li><a href="{BASE_PATH}receipt/list.html" class="nav-link" data-page="receipts">Receipts</a></li>
+            <li><a href="{BASE_PATH}product/list.html" class="nav-link" data-page="products">Products</a></li>
+            <li><a href="{BASE_PATH}category/list.html" class="nav-link" data-page="categories">Categories</a></li>
+            <li><a href="{BASE_PATH}merchant/list.html" class="nav-link" data-page="merchants">Merchants</a></li>
         </ul>
     </div>
 </nav>

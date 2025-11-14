@@ -18,7 +18,7 @@
         <div class="page-header">
             <h1 class="page-title">Milk Semi-Skimmed</h1>
             <div class="flex flex-gap">
-                <a href="product-edit-2001.html" class="btn btn-primary">Edit Product</a>
+                <a href="edit-example.html" class="btn btn-primary">Edit Product</a>
                 <button class="btn btn-danger">Delete Product</button>
             </div>
         </div>
@@ -34,13 +34,10 @@
                          src="" 
                          alt="Milk Semi-Skimmed" 
                          class="image-preview"
-                         style="width: 100%; aspect-ratio: 3 / 4; object-fit: contain; border-radius: 0.5rem; display: none; cursor: pointer;">
-                    <div id="upload-area" class="file-upload" style="width: 300px; aspect-ratio: 3 / 4; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                        <input type="file" id="photo-upload" class="file-upload-input" accept="image/*">
-                        <label for="photo-upload" class="file-upload-label" style="cursor: pointer;">
-                            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📷</div>
-                            <div style="font-size: 0.875rem;">Upload Photo</div>
-                        </label>
+                         style="display: none; cursor: pointer;">
+                    <div id="no-photo-placeholder" class="no-photo-placeholder">
+                        <div class="no-photo-icon">🚫</div>
+                        <div class="no-photo-text">NO PHOTO</div>
                     </div>
                 </div>
 

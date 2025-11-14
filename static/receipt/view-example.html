@@ -18,7 +18,7 @@
         <div class="page-header">
             <h1 class="page-title">RCPT-2025-1001-CON</h1>
             <div class="flex flex-gap">
-                <a href="receipt-edit-1001.html" class="btn btn-primary">Edit Receipt</a>
+                <a href="edit-example.html" class="btn btn-primary">Edit Receipt</a>
                 <button class="btn btn-danger">Delete Receipt</button>
             </div>
         </div>
@@ -30,9 +30,14 @@
             <div class="card product-detail-layout">
                 <!-- Receipt Photo -->
                 <div class="product-photo-container">
-                    <div class="file-upload" style="width: 300px; aspect-ratio: 3 / 4;">
-                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🧾</div>
-                        <div style="font-size: 0.875rem;">Upload Photo</div>
+                    <img id="receipt-image" 
+                         src="" 
+                         alt="Receipt" 
+                         class="image-preview"
+                         style="display: none; cursor: pointer;">
+                    <div id="no-photo-placeholder" class="no-photo-placeholder">
+                        <div class="no-photo-icon">🚫</div>
+                        <div class="no-photo-text">NO PHOTO</div>
                     </div>
                 </div>
 
@@ -40,7 +45,7 @@
                 <div class="product-info-grid">
                     <div class="product-info-item">
                         <span class="product-info-label">Merchant</span>
-                        <span class="product-info-value"><a href="merchant-4001.html" style="color: var(--text-primary); text-decoration: none;">Continente</a></span>
+                        <span class="product-info-value"><a href="../merchant/view-example.html" class="link-primary">Continente</a></span>
                     </div>
                     <div class="product-info-item">
                         <span class="product-info-label">Location</span>
@@ -88,12 +93,12 @@
                     <div class="list-item">
                         <div class="list-item-main receipt-items-grid">
                             <div class="list-item-value text-center">
-                                <a href="product-2001.html" style="color: var(--primary-color); text-decoration: none;">Milk Semi-Skimmed</a>
+                                <a href="view-example.html" class="example-data">Milk Semi-Skimmed</a>
                             </div>
-                            <div class="list-item-value text-center">Dairy</div>
-                            <div class="list-item-value text-center">5600308532147</div>
-                            <div class="list-item-value text-center">1L</div>
-                            <div class="list-item-value text-center">0.89 €</div>
+                            <div class="list-item-value text-center"><span class="example-data">Dairy</span></div>
+                            <div class="list-item-value text-center"><span class="example-data">5600308532147</span></div>
+                            <div class="list-item-value text-center"><span class="example-data">1L</span></div>
+                            <div class="list-item-value text-center"><span class="example-data">0.89 €</span></div>
                             <div class="list-item-value text-center">✓</div>
                         </div>
                     </div>
@@ -102,7 +107,7 @@
                     <div class="list-item">
                         <div class="list-item-main receipt-items-grid">
                             <div class="list-item-value text-center">
-                                <a href="product-2002.html" style="color: var(--primary-color); text-decoration: none;">Bread Whole Wheat</a>
+                                <a href="../product/view-example.html" class="link-primary">Bread Whole Wheat</a>
                             </div>
                             <div class="list-item-value text-center">Bakery</div>
                             <div class="list-item-value text-center">5600308532148</div>
@@ -116,7 +121,7 @@
                     <div class="list-item">
                         <div class="list-item-main receipt-items-grid">
                             <div class="list-item-value text-center">
-                                <a href="product-2003.html" style="color: var(--primary-color); text-decoration: none;">Chicken Breast</a>
+                                <a href="../product/view-example.html" class="link-primary">Chicken Breast</a>
                             </div>
                             <div class="list-item-value text-center">Meat</div>
                             <div class="list-item-value text-center">5600308532149</div>
@@ -130,7 +135,7 @@
                     <div class="list-item">
                         <div class="list-item-main receipt-items-grid">
                             <div class="list-item-value text-center">
-                                <a href="product-2004.html" style="color: var(--primary-color); text-decoration: none;">Tomatoes</a>
+                                <a href="../product/view-example.html" class="link-primary">Tomatoes</a>
                             </div>
                             <div class="list-item-value text-center">Vegetables</div>
                             <div class="list-item-value text-center">5600308532150</div>
@@ -144,7 +149,7 @@
                     <div class="list-item">
                         <div class="list-item-main receipt-items-grid">
                             <div class="list-item-value text-center">
-                                <a href="product-2005.html" style="color: var(--primary-color); text-decoration: none;">Bananas</a>
+                                <a href="../product/view-example.html" class="link-primary">Bananas</a>
                             </div>
                             <div class="list-item-value text-center">Fruits</div>
                             <div class="list-item-value text-center">5600308532151</div>
@@ -158,7 +163,7 @@
                     <div class="list-item">
                         <div class="list-item-main receipt-items-grid">
                             <div class="list-item-value text-center">
-                                <a href="product-2006.html" style="color: var(--primary-color); text-decoration: none;">Olive Oil Extra Virgin</a>
+                                <a href="../product/view-example.html" class="link-primary">Olive Oil Extra Virgin</a>
                             </div>
                             <div class="list-item-value text-center">Condiments</div>
                             <div class="list-item-value text-center">5600308532152</div>
@@ -172,7 +177,7 @@
                     <div class="list-item">
                         <div class="list-item-main receipt-items-grid">
                             <div class="list-item-value text-center">
-                                <a href="product-2007.html" style="color: var(--primary-color); text-decoration: none;">Rice Basmati</a>
+                                <a href="../product/view-example.html" class="link-primary">Rice Basmati</a>
                             </div>
                             <div class="list-item-value text-center">Grains</div>
                             <div class="list-item-value text-center">5600308532153</div>
@@ -186,7 +191,7 @@
                     <div class="list-item">
                         <div class="list-item-main receipt-items-grid">
                             <div class="list-item-value text-center">
-                                <a href="product-2008.html" style="color: var(--primary-color); text-decoration: none;">Pasta Spaghetti</a>
+                                <a href="../product/view-example.html" class="link-primary">Pasta Spaghetti</a>
                             </div>
                             <div class="list-item-value text-center">Grains</div>
                             <div class="list-item-value text-center">5600308532154</div>
@@ -200,7 +205,7 @@
                     <div class="list-item">
                         <div class="list-item-main receipt-items-grid">
                             <div class="list-item-value text-center">
-                                <a href="product-2009.html" style="color: var(--primary-color); text-decoration: none;">Orange Juice</a>
+                                <a href="../product/view-example.html" class="link-primary">Orange Juice</a>
                             </div>
                             <div class="list-item-value text-center">Beverages</div>
                             <div class="list-item-value text-center">5600308532155</div>
@@ -214,7 +219,7 @@
                     <div class="list-item">
                         <div class="list-item-main receipt-items-grid">
                             <div class="list-item-value text-center">
-                                <a href="product-2010.html" style="color: var(--primary-color); text-decoration: none;">Coffee Beans</a>
+                                <a href="../product/view-example.html" class="link-primary">Coffee Beans</a>
                             </div>
                             <div class="list-item-value text-center">Beverages</div>
                             <div class="list-item-value text-center">5600308532156</div>
@@ -228,7 +233,7 @@
                     <div class="list-item">
                         <div class="list-item-main receipt-items-grid">
                             <div class="list-item-value text-center">
-                                <a href="product-2011.html" style="color: var(--primary-color); text-decoration: none;">Yogurt Natural</a>
+                                <a href="../product/view-example.html" class="link-primary">Yogurt Natural</a>
                             </div>
                             <div class="list-item-value text-center">Dairy</div>
                             <div class="list-item-value text-center">5600308532157</div>
@@ -242,7 +247,7 @@
                     <div class="list-item">
                         <div class="list-item-main receipt-items-grid">
                             <div class="list-item-value text-center">
-                                <a href="product-2012.html" style="color: var(--primary-color); text-decoration: none;">Cheese Mozzarella</a>
+                                <a href="../product/view-example.html" class="link-primary">Cheese Mozzarella</a>
                             </div>
                             <div class="list-item-value text-center">Dairy</div>
                             <div class="list-item-value text-center">5600308532158</div>
