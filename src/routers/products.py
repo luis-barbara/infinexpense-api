@@ -1,5 +1,6 @@
+# src/routers/products.py
+
 from typing import List, Optional
-from datetime import date
 from fastapi import APIRouter, Depends, status, Query, Path, HTTPException
 from sqlalchemy.orm import Session
 
@@ -9,7 +10,13 @@ from src.schemas.product import (
     ProductListUpdate,
     ProductList as ProductListSchema
 )
-from src.services.crud_product_list import ProductListService as get_product_list
+from src.services.crud_product_list import (
+    create_product_list,
+    get_product_list as get_product_list_by_id,
+    get_product_lists,
+    get_product_by_barcode,
+    get_product_by_name
+)
 
 router = APIRouter(
     prefix="/products",
@@ -17,7 +24,7 @@ router = APIRouter(
 )
 
 
-
+# Create
 @router.post(
     "/",
     response_model=ProductListSchema,
@@ -30,20 +37,15 @@ def create_product(
 ):
     """
     Create a new product with the provided details.
-    - **name**: Name of the product
-    - **barcode**: Optional barcode of the product
-    - **measurement_unit_id**: ID of the measurement unit
-    - **category_id**: ID of the category
-    Returns the created product.
     """
-    return get_product_list.create_product(db, product)
+    return create_product_list(db, product)
 
 
-
+# Read All
 @router.get(
     "/",
-    response_model = List[ProductListSchema],
-    summary="Retrieve all products",
+    response_model=List[ProductListSchema],
+    summary="Retrieve all products"
 )
 def get_all_products(
     skip: int = Query(0, ge=0, description="Number of records to skip for pagination"),
@@ -51,28 +53,22 @@ def get_all_products(
     barcode: Optional[str] = Query(None, description="Filter by product barcode"),
     measurement_unit_id: Optional[int] = Query(None, description="Filter by measurement unit ID"),
     category_id: Optional[int] = Query(None, description="Filter by category ID"),
-    db: Session = Depends(get_db),
+    db: Session = Depends(get_db)
 ):
     """
-    Retrieve all products with pagination support.
-    - **skip**: Number of records to skip for pagination
-    - **limit**: Maximum number of records to return
-    - **barcode**: Optional filter by product barcode
-    - **measurement_unit_id**: Optional filter by measurement unit ID
-    - **category_id**: Optional filter by category ID
-    Returns a list of products.
+    Retrieve all products with optional filters and pagination.
     """
-    return get_product_list.get_all_products(
-        db=db, 
-        skip=skip, 
+    return get_product_lists(
+        db=db,
+        skip=skip,
         limit=limit,
         barcode=barcode,
         measurement_unit_id=measurement_unit_id,
         category_id=category_id
-)
+    )
 
 
-
+# Read By 
 @router.get(
     "/{product_id}",
     response_model=ProductListSchema,
@@ -82,58 +78,39 @@ def get_product_by_id(
     product_id: int = Path(..., ge=1, description="ID of the product to retrieve"),
     db: Session = Depends(get_db)
 ):
-    """
-    Retrieve a product by its ID.
-    - **product_id**: ID of the product to retrieve
-    Returns the product details.
-    """
-    product = get_product_list.get_product_by_id(db, product_id)
+    product = get_product_list_by_id(db, product_id)
     if not product:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
     return product
 
 
-
+# Read By Barcode
 @router.get(
     "/barcode/{barcode}",
     response_model=ProductListSchema,
     summary="Retrieve a product by barcode"
 )
-def get_product_by_barcode(
+def get_product_by_barcode_endpoint(
     barcode: str = Path(..., max_length=50, description="Barcode of the product to retrieve"),
     db: Session = Depends(get_db)
 ):
-    """
-    Retrieve a product by its barcode.
-    - **barcode**: Barcode of the product to retrieve
-    Returns the product details.
-    """
-    product = get_product_list.get_product_by_barcode(db, barcode)
+    product = get_product_by_barcode(db, barcode)
     if not product:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
     return product
 
 
+# Read By Name
 @router.get(
     "/name/{name}",
     response_model=ProductListSchema,
     summary="Retrieve a product by name"
 )
-def get_product_by_name(
+def get_product_by_name_endpoint(
     name: str = Path(..., max_length=255, description="Name of the product to retrieve"),
     db: Session = Depends(get_db)
 ):
-    """
-    Retrieve a product by its name.
-
-    - **name**: The name associated with the product
-
-    Returns the product details.
-    """
-    product = get_product_list.get_product_by_name(db, name)
+    product = get_product_by_name(db, name)
     if not product:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="product not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
     return product
-
-
-

@@ -9,7 +9,7 @@ import logging
 # Importa as dependências (DB, Service, Schemas de resposta)
 from src.db.dependencies import get_db
 from src.services import reports_service 
-from src.schemas import report as schema_report  
+from src.schemas import reports as schema_reports
 
 
 router = APIRouter(

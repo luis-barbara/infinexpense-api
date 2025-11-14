@@ -1,13 +1,32 @@
+# src/main.py 
+
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pathlib import Path
 
-from src.routers import receipts  # make sure this import works
+# Imports dos Routers 
 
-# Base directory: project root (/app when inside Docker)
+from src.routers import (
+    receipts, 
+    products, 
+    categories, 
+    merchants, 
+    measurement_units,
+    reports,  
+    uploads   
+)
+
+# Definição dos Caminhos (Paths)
+
 BASE_DIR = Path(__file__).resolve().parent.parent
-STATIC_DIR = BASE_DIR / "static"
+
+STATIC_DIR = BASE_DIR / "static" 
+
+UPLOAD_DIR = BASE_DIR / "uploads"
+
+UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+
 
 app = FastAPI(
     title="Infinexpense API",
@@ -15,18 +34,40 @@ app = FastAPI(
     version="0.1.0",
 )
 
-# --- API routers ---
-# Use ONE prefix for /receipts, not two:
+# API Routers
+# Routers de CRUD
 app.include_router(receipts.router)
-# If your APIRouter already has prefix="/receipts", then instead do:
-# app.include_router(receipts.router)
+app.include_router(products.router)
+app.include_router(categories.router)
+app.include_router(merchants.router)
+app.include_router(measurement_units.router)
 
-# --- Static files ---
+# Router de Reports
+app.include_router(reports.router)
+
+# Router de Uploads
+app.include_router(uploads.router)
+
+
+# Montagem de Ficheiros Estáticos (Static Files)
+# Para o Frontend (HTML/CSS/JS)
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
-# --- HTML homepage ---
+# Para as Fotos dos Produtos
+app.mount("/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
+
+
+# Servidor da Homepage (HTML)
 @app.get("/", include_in_schema=False)
 def read_root():
+    """
+    Serve a página principal (index.html) do teu frontend
+    que está na pasta /static.
+    """
     index_path = STATIC_DIR / "index.html"
+    if not index_path.is_file():
+        return {"error": "index.html not found in static directory"}, 404
     return FileResponse(index_path)
+
+
 
