@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt - InfinExpense</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body data-active-page="receipts">
+    <!-- Navigation Template -->
+    <div data-template="header"></div>
+
+    <script src="../js/template-loader.js"></script>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title" id="receipt-title">Receipt Details</h1>
+            <div class="flex flex-gap">
+                <a href="#" id="edit-btn" class="btn btn-primary">Edit Receipt</a>
+                <button class="btn btn-danger" onclick="deleteCurrentReceipt()">Delete Receipt</button>
+            </div>
+        </div>
+
+        <!-- Two Column Layout -->
+        <div class="grid-2cols-1-2">
+            
+            <!-- LEFT COLUMN: Receipt Info -->
+            <div class="card product-detail-layout">
+                <!-- Receipt Photo -->
+                <div class="product-photo-container">
+                    <img id="receipt-image" 
+                         src="" 
+                         alt="Receipt" 
+                         class="image-preview"
+                         style="display: none; cursor: pointer;">
+                    <div id="no-photo-placeholder" class="no-photo-placeholder">
+                        <div class="no-photo-icon">🚫</div>
+                        <div class="no-photo-text">NO PHOTO</div>
+                    </div>
+                </div>
+
+                <!-- Receipt Info -->
+                <div class="product-info-grid">
+                    <div class="product-info-item">
+                        <span class="product-info-label">Merchant</span>
+                        <span class="product-info-value">
+                            <a id="merchant-link" href="#" class="link-primary">-</a>
+                        </span>
+                    </div>
+                    <div class="product-info-item">
+                        <span class="product-info-label">Location</span>
+                        <span class="product-info-value" id="merchant-location">-</span>
+                    </div>
+                    <div class="product-info-item">
+                        <span class="product-info-label">Date & Time</span>
+                        <span class="product-info-value" id="receipt-datetime">-</span>
+                    </div>
+                    <div class="product-price-section">
+                        <span class="product-info-label">Total Amount</span>
+                        <span class="product-price-value" id="receipt-total">0.00 €</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Products List -->
+            <div class="card">
+                <h3 class="detail-title" id="items-title">Item List (0)</h3>
+                
+                <!-- Table Headers with Sort Buttons -->
+                <div class="list-header receipt-items-grid">
+                    <div class="list-header-item">
+                        <span>Product</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortProducts('product', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortProducts('product', 'desc')">▼</button>
+                        </span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>Category</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortProducts('category', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortProducts('category', 'desc')">▼</button>
+                        </span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>EAN</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortProducts('ean', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortProducts('ean', 'desc')">▼</button>
+                        </span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>Quantity</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortProducts('quantity', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortProducts('quantity', 'desc')">▼</button>
+                        </span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>Price</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortProducts('price', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortProducts('price', 'desc')">▼</button>
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="list-container" id="products-list">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Receipt View Script -->
+    <script type="module" src="../js/receipt-view.js"></script>
+</body>
+</html>

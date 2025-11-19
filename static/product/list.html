@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - InfinExpense</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body data-active-page="products">
+    <!-- Navigation Template -->
+
+    <div data-template="header"></div>
+
+    <script src="../js/template-loader.js"></script>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Products</h1>
+            <a href="add.html" class="btn btn-primary">+ Add Product</a>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input 
+                type="text" 
+                id="searchInput" 
+                class="search-input" 
+                placeholder="Search products by name, category, or barcode..."
+                onkeyup="filterItems()"
+            >
+            <button class="btn btn-primary" onclick="filterItems()">Search</button>
+        </div>
+
+        <!-- Products List -->
+        <div class="content-wrapper">
+            <div class="card card-no-margin card-flex card-flex-1 overflow-hidden">
+                <!-- Table Headers -->
+                <div class="list-header products-list-grid">
+                    <div class="list-header-item">
+                        <span>Product Name</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortProducts('name', 'asc')" title="Sort ascending">▲</button>
+                            <button class="sort-btn" onclick="sortProducts('name', 'desc')" title="Sort descending">▼</button>
+                        </span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>Category</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortProducts('category', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortProducts('category', 'desc')">▼</button>
+                        </span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>Volume</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortProducts('volume', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortProducts('volume', 'desc')">▼</button>
+                        </span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>Barcode</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortProducts('barcode', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortProducts('barcode', 'desc')">▼</button>
+                        </span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>Price</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortProducts('price', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortProducts('price', 'desc')">▼</button>
+                        </span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>Actions</span>
+                    </div>
+                </div>
+                <div class="scrollable-list">
+                    <div class="list-container" id="productsList">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products List JavaScript -->
+    <script type="module" src="../js/products-list.js"></script>
+</body>
+</html>

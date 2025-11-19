@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product - InfinExpense</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body data-active-page="products">
+    <!-- Navigation Template -->
+    <div data-template="header"></div>
+
+    <script src="../js/template-loader.js"></script>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Product Name</h1>
+            <div class="flex flex-gap">
+                <a href="edit.html" class="btn btn-primary">Edit Product</a>
+                <button class="btn btn-danger" onclick="deleteProduct()">Delete Product</button>
+            </div>
+        </div>
+
+        <!-- Product Info Card -->
+        <div class="card product-detail-layout">
+            <!-- Product Photo -->
+            <div class="product-photo-container">
+                <img id="product-image" 
+                     src="" 
+                     alt="Product" 
+                     class="image-preview"
+                     style="display: none; cursor: pointer;">
+                <div id="no-photo-placeholder" class="no-photo-placeholder">
+                    <div class="no-photo-icon">🚫</div>
+                    <div class="no-photo-text">NO PHOTO</div>
+                </div>
+            </div>
+
+            <!-- Product Info -->
+            <div class="product-info-grid">
+                <div class="product-info-item">
+                    <span class="product-info-label">Category</span>
+                    <span class="product-info-value" data-field="category">-</span>
+                </div>
+                <div class="product-info-item">
+                    <span class="product-info-label">Volume</span>
+                    <span class="product-info-value" data-field="volume">-</span>
+                </div>
+                <div class="product-info-item">
+                    <span class="product-info-label">Barcode</span>
+                    <span class="product-info-value" data-field="barcode">-</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product View JavaScript -->
+    <script type="module" src="../js/product-view.js"></script>
+</body>
+</html>
