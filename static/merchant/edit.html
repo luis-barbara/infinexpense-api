@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Merchant - InfinExpense</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body data-active-page="merchants">
+    <!-- Navigation Template -->
+    <div data-template="header"></div>
+
+    <script src="../js/template-loader.js"></script>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Edit Merchant</h1>
+        </div>
+
+        <div class="card max-width-800 mx-auto">
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Merchant Name *</label>
+                    <input type="text" class="form-input" name="name" placeholder="Merchant name" required>
+                </div>
+
+                <div class="photo-upload-container">
+                    <div class="form-group form-group-no-margin">
+                        <label class="form-label">Merchant Photo</label>
+                        <div class="file-upload photo-upload-small">
+                            <input type="file" id="merchant-photo" class="file-upload-input" accept="image/*">
+                            <label for="merchant-photo" class="file-upload-label photo-upload-label-content">
+                                <div class="photo-upload-icon">📷</div>
+                                <div class="photo-upload-text">Upload Photo</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        <div class="form-group form-group-no-margin">
+                            <label class="form-label">Location *</label>
+                            <input type="text" class="form-input" name="location" placeholder="City, address" required>
+                        </div>
+
+                        <div class="form-group form-group-no-margin">
+                            <label class="form-label">Notes</label>
+                            <textarea class="form-textarea resize-vertical" name="notes" placeholder="Add merchant notes or details..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-gap justify-end mt-2">
+                    <a href="list.html" class="btn btn-outline">Cancel</a>
+                    <button type="button" class="btn btn-danger" onclick="deleteMerchantConfirm()">Delete Merchant</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Merchant Edit JavaScript -->
+    <script type="module" src="../js/merchant-edit.js"></script>
+</body>
+</html>

@@ -38,7 +38,7 @@ services:
     links:
       - database:db
     ports:
-      - 5433:8080
+      - 5432:8080
     networks:
       - app-network
 

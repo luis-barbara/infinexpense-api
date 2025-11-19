@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipts - InfinExpense</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body data-active-page="receipts">
+    <!-- Navigation Template -->
+    <div data-template="header"></div>
+
+    <script src="../js/template-loader.js"></script>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Receipts</h1>
+            <a href="add.html" class="btn btn-primary">+ Add Receipt</a>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search receipts by merchant, date, or receipt barcode...">
+            <button class="btn btn-primary" onclick="filterItems()">Search</button>
+        </div>
+
+        <!-- Receipts List -->
+        <div class="content-wrapper">
+            <div class="card card-no-margin card-flex card-flex-1 overflow-hidden">
+                <!-- Table Headers -->
+                <div class="list-header receipts-list-grid">
+                    <div class="list-header-item">
+                        <span>Receipt</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortReceipts('receipt-id', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortReceipts('receipt-id', 'desc')">▼</button>
+                        </span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>Merchant</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortReceipts('merchant', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortReceipts('merchant', 'desc')">▼</button>
+                        </span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>Date</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortReceipts('date', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortReceipts('date', 'desc')">▼</button>
+                        </span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>Products</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortReceipts('products', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortReceipts('products', 'desc')">▼</button>
+                        </span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>Total</span>
+                        <span class="sort-buttons">
+                            <button class="sort-btn" onclick="sortReceipts('total', 'asc')">▲</button>
+                            <button class="sort-btn" onclick="sortReceipts('total', 'desc')">▼</button>
+                        </span>
+                    </div>
+                    <div class="list-header-item">
+                        <span>Actions</span>
+                    </div>
+                </div>
+                <div class="scrollable-list">
+                    <div class="list-container" id="receiptsList">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Module Import -->
+    <script type="module" src="../js/receipts-list.js"></script>
+</body>
+</html>
