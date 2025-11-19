@@ -43,7 +43,7 @@ function renderProducts(products) {
             <div class="list-item-main products-list-grid">
                 <div class="list-item-value"><span>${product.name}</span></div>
                 <div class="list-item-value"><span>${product.category?.name || 'N/A'}</span></div>
-                <div class="list-item-value"><span>${product.measurement_unit?.abbreviation || 'N/A'}</span></div>
+                <div class="list-item-value"><span>${product.measurement_unit.name} - ${product.measurement_unit?.abbreviation || 'N/A'}</span></div>
                 <div class="list-item-value"><span>${product.barcode || 'N/A'}</span></div>
                 <div class="list-item-value"><span>-</span></div>
                 <div class="list-item-actions">

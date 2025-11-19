@@ -1,21 +1,21 @@
 FROM python:3.12-slim
 
+WORKDIR /app
+
 RUN pip install poetry
 
-COPY . .
+COPY pyproject.toml poetry.lock ./
 
 RUN poetry self add poetry-plugin-export
 RUN poetry export -f requirements.txt --output requirements.txt
 RUN pip install -r requirements.txt
 
-RUN poetry install
+RUN poetry install --no-root
 
-# Add entrypoint script
-COPY docker-entrypoint.sh /app/docker-entrypoint.sh
-RUN chmod +x /app/docker-entrypoint.sh
+# Add entrypoint script to a location that won't be overwritten
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-WORKDIR /app/
 EXPOSE 8000
 
-ENTRYPOINT ["/app/docker-entrypoint.sh"]
-#CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
