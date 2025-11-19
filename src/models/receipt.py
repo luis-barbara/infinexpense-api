@@ -21,7 +21,7 @@ class Receipt(Base):
     merchant_id = Column(Integer, ForeignKey("merchants.id", ondelete = "RESTRICT"), nullable=False) # Vendor name
     purchase_date = Column(Date, nullable=False, index=True) # Date of the receipt
     barcode = Column(String(20), nullable=True) # Barcode number associated with the receipt
-    
+    receipt_photo = Column(String(500), nullable=True) # URL or path to the receipt photo
 
     merchant = relationship("Merchant", back_populates="receipts") # Relationship to the Merchant model
     products = relationship("Product", back_populates="receipt", cascade="all, delete-orphan") # Relationship to Product model

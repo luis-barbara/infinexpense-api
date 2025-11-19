@@ -588,7 +588,7 @@ def generate_sample_data(n_products: int = 200, n_receipts: int = 20) -> Dict[st
             if unit in ("kg", "L"):
                 qty = Decimal(str(rng.uniform(0.2, 3.0))).quantize(Decimal("0.0001"))
             elif unit in ("g", "mL"):
-                qty = Decimal(str(rng.randint(100, 2000))).quantize(Decimal("0.0001"))
+                qty = Decimal(str(rng.uniform(0.100, 1.000))).quantize(Decimal("0.0001"))
             else:  # u, pk
                 qty = Decimal(str(rng.randint(1, 6))).quantize(Decimal("0.0001"))
 

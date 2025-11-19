@@ -14,6 +14,7 @@ class ReceiptBase(BaseModel):
         description="Barcode from receipt (optional)"
     )
 
+
 class ReceiptCreate(ReceiptBase):
     pass
 
@@ -37,3 +38,4 @@ class Receipt(ReceiptBase):
             Decimal: lambda v: float(v) if v else None
         }
     )
+

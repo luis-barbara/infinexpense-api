@@ -24,6 +24,8 @@ def upgrade() -> None:
     op.add_column("merchants", sa.Column("notes", sa.Text(), nullable=True))
     op.add_column('category', sa.Column('color', sa.String(length=7), nullable=False, server_default="#808080"))
     op.add_column('receipts', sa.Column('purchase_date', sa.Date(), nullable=False))
+    op.add_column('receipts', sa.Column('receipt_photo', sa.String(length=500), nullable=True))
+    op.add_column('product_list', sa.Column('product_photo', sa.String(length=500), nullable=True))
     op.drop_index(op.f('ix_receipts_date'), table_name='receipts')
     op.create_index(op.f('ix_receipts_purchase_date'), 'receipts', ['purchase_date'], unique=False)
     op.drop_column('receipts', 'date')
