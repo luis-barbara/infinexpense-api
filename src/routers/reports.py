@@ -7,8 +7,8 @@ from datetime import date
 import logging
 
 # Importa as dependências (DB, Service, Schemas de resposta)
-from src.db.dependencies import get_db
-from src.services import reports_service 
+from src.database import get_db
+from src.services import report_services 
 from src.schemas import reports as schema_reports
 
 
@@ -21,7 +21,7 @@ router = APIRouter(
 # Endpoint: Relatório de Gastos por Categoria (para o gráfico)
 @router.get(
     "/spending-by-category",
-    response_model=List[schema_report.ReportSpendingByEntity]
+    response_model=List[schema_reports.ReportSpendingByEntity]
 )
 def get_spending_by_category_endpoint(
     # filtros de data que frontend vai enviar
@@ -34,7 +34,7 @@ def get_spending_by_category_endpoint(
     Usado para o gráfico no Dashboard e no ecrã de Categorias.
     """
     try:
-        report_data = reports_service.get_spending_by_category(
+        report_data = report_services.get_spending_by_category(
             db=db,
             start_date=start_date,
             end_date=end_date
@@ -52,7 +52,7 @@ def get_spending_by_category_endpoint(
 # Endpoint: "Analytics"" de Supermercados 
 @router.get(
     "/enriched-merchants",
-    response_model=List[schema_report.MerchantReportData]
+    response_model=List[schema_reports.MerchantReportData]
 )
 def get_enriched_merchant_report_endpoint(
     # filtros
@@ -66,7 +66,7 @@ def get_enriched_merchant_report_endpoint(
     Usado no ecrã de 'Configurações -> Gerir Supermercados'.
     """
     try:
-        report_data = reports_service.get_enriched_merchant_report(
+        report_data = report_services.get_enriched_merchant_report(
             db=db,
             start_date=start_date,
             end_date=end_date
@@ -95,7 +95,7 @@ def get_dashboard_kpis_endpoint(
     do dashboard ('image_157b8d.jpg').
     """
     try:
-        kpi_data = reports_service.get_dashboard_kpis(
+        kpi_data = report_services.get_dashboard_kpis(
             db=db,
             start_date=start_date,
             end_date=end_date

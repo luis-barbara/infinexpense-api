@@ -3,7 +3,7 @@
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status, Path, Query
 from sqlalchemy.orm import Session
-
+from datetime import date
 from src.database import get_db
 from src.schemas.category import CategoryCreate, CategoryUpdate, Category as CategorySchema
 from src.services.crud_category import CategoryService
@@ -35,9 +35,11 @@ def create_category(category: CategoryCreate, db: Session = Depends(get_db)):
 def get_categories(
     skip: int = Query(0, ge=0, description="Number of records to skip"),
     limit: int = Query(100, ge=1, le=1000, description="Maximum number of records to return"),
+    start_date: date = Query(None, description="Filter by start date (YYYY-MM-DD)"),
+    end_date: date = Query(None, description="Filter by end date (YYYY-MM-DD)"),
     db: Session = Depends(get_db)
 ):
-    return CategoryService.get_categories(db, skip=skip, limit=limit)
+    return CategoryService.get_categories(db, skip=skip, limit=limit, start_date=start_date, end_date=end_date)
 
 # Get category by ID
 @router.get(

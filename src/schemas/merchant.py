@@ -1,35 +1,29 @@
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel
+from typing import Optional
 
 
 class MerchantBase(BaseModel):
-    name: str = Field(
-        min_length=1, 
-        max_length=100, 
-        description="Name of the merchant (required, 1-100 characters)"
-    )
-    location: str | None = Field(
-        default=None, 
-        description="Optional location of the merchant (e.g., 'Olhao', 'Faro')"
-    )
+    name: str
+    location: str
+    notes: Optional[str] = None
 
 
-class MerchantCreate(MerchantBase):
-    pass
+class MerchantCreate(BaseModel):
+    name: str
+    location: str
+    notes: Optional[str] = None
 
 
 class MerchantUpdate(BaseModel):
-    name: str | None = Field(
-        default=None, 
-        min_length=1, 
-        max_length=100, 
-        description="New name for the merchant (optional)"
-    )
-    location: str | None = Field(
-        default=None, 
-        description="New location for the merchant (optional)"
-    )
+    name: Optional[str] = None
+    location: Optional[str] = None
+    notes: Optional[str] = None
+    image_path: Optional[str] = None
 
 
 class Merchant(MerchantBase):
     id: int
-    model_config = ConfigDict(from_attributes=True)
+    image_path: Optional[str] = None
+
+    class Config:
+        from_attributes = True

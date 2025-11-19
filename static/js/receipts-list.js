@@ -1,64 +1,82 @@
-/**
- * Receipts List - Search and Sort Functionality
- * 
- * INTEGRATION INSTRUCTIONS:
- * 1. This script works with dynamically generated receipt items
- * 2. Each receipt item must have class="receipt-item" 
- * 3. Required data attributes: data-receipt-id, data-merchant, data-date, data-products, data-total
- * 4. Container ID: receiptsList
- * 5. Search input ID: searchInput
- * 
- * USAGE:
- * - filterItems() - Called on search input change
- * - sortReceipts(field, direction) - Sort by any data attribute field
- * 
- * @example
- * // HTML Structure Required:
- * // <input id="searchInput" oninput="filterItems()">
- * // <div id="receiptsList">
- * //   <div class="receipt-item" data-merchant="Store" data-date="2025-11-10" data-total="87.45">...</div>
- * // </div>
- */
+import { getReceipts, deleteReceipt } from '../api/receipts_api.js';
 
+let allReceipts = [];
 let sortDirection = {};
 
 /**
- * Filter receipts based on search input
- * Searches through all text content within receipt items
- * Shows/hides items based on match
- * 
- * @function filterItems
- * @listens input#searchInput
+ * Load receipts from API and populate the list
  */
-function filterItems() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    const allItems = document.querySelectorAll('.receipt-item');
+async function loadReceipts() {
+    try {
+        allReceipts = await getReceipts();
+        renderReceipts(allReceipts);
+    } catch (error) {
+        console.error('Erro ao carregar recibos:', error);
+        alert('Erro ao carregar recibos: ' + error.message);
+    }
+}
 
-    allItems.forEach(item => {
-        const text = item.textContent.toLowerCase();
-        const matches = text.includes(searchTerm);
+/**
+ * Render receipts to the DOM
+ */
+function renderReceipts(receipts) {
+    const container = document.getElementById('receiptsList');
+    container.innerHTML = '';
+
+    if (receipts.length === 0) {
+        container.innerHTML = '<div style="padding: 2rem; text-align: center;">Nenhum recibo encontrado.</div>';
+        return;
+    }
+
+    receipts.forEach(receipt => {
+        const receiptDate = new Date(receipt.purchase_date).toLocaleDateString('pt-PT');
+        const receiptId = receipt.id;
         
-        if (matches || searchTerm === '') {
-            item.style.display = 'flex';
-        } else {
-            item.style.display = 'none';
-        }
+        const item = document.createElement('div');
+        item.className = 'list-item receipt-item';
+        item.setAttribute('data-receipt-id', receiptId);
+        item.setAttribute('data-merchant', receipt.merchant?.name || 'N/A');
+        item.setAttribute('data-date', receipt.purchase_date);
+        item.setAttribute('data-products', receipt.products?.length || 0);
+        item.setAttribute('data-total', receipt.total_price || 0);
+
+        item.innerHTML = `
+            <div class="list-item-main receipts-list-grid">
+                <div class="list-item-value"><span>RCPT-${receipt.barcode || `RCPT-${receiptId}`}</span></div>
+                <div class="list-item-value"><span>${receipt.merchant?.name || 'N/A'}</span></div>
+                <div class="list-item-value"><span>${receiptDate}</span></div>
+                <div class="list-item-value"><span>${receipt.products?.length || 0} items</span></div>
+                <div class="list-item-value"><span>${(receipt.total_price || 0).toFixed(2)} €</span></div>
+                <div class="list-item-actions">
+                    <a href="view.html?id=${receiptId}" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                    <a href="edit.html?id=${receiptId}" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                    <button class="btn btn-danger btn-sm" title="Delete" onclick="confirmDelete(${receiptId})">🗑️</button>
+                </div>
+            </div>
+        `;
+
+        container.appendChild(item);
     });
 }
 
 /**
+ * Filter receipts based on search input
+ */
+function filterItems() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const filtered = allReceipts.filter(receipt => {
+        const merchantName = receipt.merchant?.name || '';
+        const barcode = receipt.barcode || '';
+        const receiptDate = new Date(receipt.purchase_date).toLocaleDateString('pt-PT');
+        
+        const searchText = `${merchantName} ${barcode} ${receiptDate}`.toLowerCase();
+        return searchText.includes(searchTerm);
+    });
+    renderReceipts(filtered);
+}
+
+/**
  * Sort receipts by specified field and direction
- * Automatically converts numeric fields (receipt-id, products, total)
- * Keeps string fields (merchant, date) as text comparison
- * 
- * @function sortReceipts
- * @param {string} field - The data attribute to sort by (without 'data-' prefix)
- *                         Examples: 'receipt-id', 'merchant', 'date', 'products', 'total'
- * @param {string} direction - Sort direction: 'asc' or 'desc'
- * 
- * @example
- * sortReceipts('total', 'desc'); // Sort by total amount, highest first
- * sortReceipts('date', 'asc');   // Sort by date, oldest first
  */
 function sortReceipts(field, direction) {
     const container = document.getElementById('receiptsList');
@@ -69,7 +87,7 @@ function sortReceipts(field, direction) {
         let bValue = b.getAttribute('data-' + field);
         
         // Convert to numbers for numeric fields
-        if (field === 'receipt-id' || field === 'products' || field === 'total') {
+        if (field === 'products' || field === 'spent') {
             aValue = parseFloat(aValue);
             bValue = parseFloat(bValue);
         }
@@ -84,3 +102,31 @@ function sortReceipts(field, direction) {
     // Re-append sorted items to container
     items.forEach(item => container.appendChild(item));
 }
+
+/**
+ * Delete receipt with confirmation
+ */
+async function confirmDelete(receiptId) {
+    if (!confirm('Tem a certeza que deseja eliminar este recibo?')) return;
+
+    try {
+        console.log('Deleting receipt:', receiptId);
+        await deleteReceipt(receiptId);
+        console.log('Receipt deleted successfully');
+        alert('Recibo eliminado com sucesso!');
+        loadReceipts(); // Reload list
+    } catch (error) {
+        console.error('Erro ao eliminar recibo:', error);
+        alert('Erro ao eliminar recibo: ' + error.message);
+    }
+}
+
+// Expose to global scope
+window.filterItems = filterItems;
+window.sortReceipts = sortReceipts;
+window.confirmDelete = confirmDelete;
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    loadReceipts();
+});

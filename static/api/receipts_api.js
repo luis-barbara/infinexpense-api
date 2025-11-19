@@ -1,4 +1,3 @@
-
 // static/api/receipts_api.js
 
 
@@ -129,5 +128,15 @@ export async function updateReceipt(id, data) {
     return _handleApiRequest(`/receipts/${id}`, {
         method: "PUT",
         body: JSON.stringify(data),
+    });
+}
+
+/**
+ * Update products for a receipt
+ */
+export async function updateReceiptProducts(id, products) {
+    return _handleApiRequest(`/receipts/${id}/products`, {
+        method: "PUT",
+        body: JSON.stringify({ products }),
     });
 }

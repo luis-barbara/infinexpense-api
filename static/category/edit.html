@@ -8,7 +8,6 @@
 </head>
 <body data-active-page="categories">
     <!-- Navigation Template -->
-
     <div data-template="header"></div>
 
     <script src="../js/template-loader.js"></script>
@@ -20,23 +19,22 @@
         </div>
 
         <div class="card" style="max-width: 800px; margin: 0 auto;">
-            <form>
+            <form id="categoryForm">
                 <div class="form-group">
                     <label class="form-label">Category Name *</label>
-                    <input type="text" class="form-input" value="Dairy" required>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Description</label>
-                    <textarea class="form-textarea">Products including milk, cheese, yogurt, and other dairy-based items.</textarea>
+                    <input type="text" id="categoryName" class="form-input" placeholder="Enter category name" required>
                 </div>
 
                 <div class="flex flex-gap" style="justify-content: flex-end; margin-top: 2rem;">
                     <a href="list.html" class="btn btn-outline">Cancel</a>
                     <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="button" id="deleteBtn" class="btn btn-danger">Delete</button>
                 </div>
             </form>
         </div>
     </div>
+
+    <!-- Category Edit Script -->
+    <script type="module" src="../js/category-edit.js"></script>
 </body>
 </html>

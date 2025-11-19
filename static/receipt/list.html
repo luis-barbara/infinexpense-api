@@ -8,7 +8,6 @@
 </head>
 <body data-active-page="receipts">
     <!-- Navigation Template -->
-
     <div data-template="header"></div>
 
     <script src="../js/template-loader.js"></script>
@@ -22,7 +21,7 @@
 
         <!-- Search Bar -->
         <div class="search-bar">
-            <input type="text" id="searchInput" class="search-input" placeholder="Search receipts by merchant, date, or amount...">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search receipts by merchant, date, or receipt barcode...">
             <button class="btn btn-primary" onclick="filterItems()">Search</button>
         </div>
 
@@ -72,175 +71,14 @@
                 </div>
                 <div class="scrollable-list">
                     <div class="list-container" id="receiptsList">
-            <!-- ============================================================ -->
-            <!-- INTEGRATION INSTRUCTIONS:                                     -->
-            <!-- 1. KEEP the first list item below as a TEMPLATE              -->
-            <!-- 2. DELETE all subsequent list items (they are example data)  -->
-            <!-- 3. Use backend to populate this container dynamically        -->
-            <!-- 4. Each item must have: class="list-item receipt-item"       -->
-            <!-- 5. Required data attributes: data-receipt-id, data-merchant, -->
-            <!--    data-date, data-products, data-total                       -->
-            <!-- ============================================================ -->
-            
-            <!-- TEMPLATE - KEEP THIS ITEM AS REFERENCE -->
-            <div class="list-item receipt-item" data-receipt-id="1001" data-merchant="Continente" data-date="2025-11-10" data-products="12" data-total="87.45">
-                <div class="list-item-main receipts-list-grid">
-                    <div class="list-item-value"><span class="example-data">RCPT-2025-1001-CON</span></div>
-                    <div class="list-item-value"><span class="example-data">Continente</span></div>
-                    <div class="list-item-value"><span class="example-data">10/11/2025</span></div>
-                    <div class="list-item-value"><span class="example-data">12 items</span></div>
-                    <div class="list-item-value"><span class="example-data">87.45 €</span></div>
-                    <div class="list-item-actions">
-                        <a href="view-example.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
-                        <a href="edit-example.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
-                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
+                        <!-- Populated by JavaScript -->
                     </div>
-                </div>
-            </div>
-
-            <!-- DELETE BELOW - Example data only -->
-            <div class="list-item receipt-item" data-receipt-id="1002" data-merchant="Pingo Doce" data-date="2025-11-08" data-products="8" data-total="45.20">
-                <div class="list-item-main receipts-list-grid">
-                    <div class="list-item-value">RCPT-2025-1002-PIN</div>
-                    <div class="list-item-value">Pingo Doce</div>
-                    <div class="list-item-value">08/11/2025</div>
-                    <div class="list-item-value">8 items</div>
-                    <div class="list-item-value">45.20 €</div>
-                    <div class="list-item-actions">
-                        <a href="receipt-1002.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
-                        <a href="receipt-edit-1002.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
-                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="list-item receipt-item" data-receipt-id="1003" data-merchant="Lidl" data-date="2025-11-06" data-products="15" data-total="62.80">
-                <div class="list-item-main receipts-list-grid">
-                    <div class="list-item-value">RCPT-2025-1003-LID</div>
-                    <div class="list-item-value">Lidl</div>
-                    <div class="list-item-value">06/11/2025</div>
-                    <div class="list-item-value">15 items</div>
-                    <div class="list-item-value">62.80 €</div>
-                    <div class="list-item-actions">
-                        <a href="receipt-1003.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
-                        <a href="receipt-edit-1003.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
-                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="list-item receipt-item" data-receipt-id="1004" data-merchant="Auchan" data-date="2025-11-04" data-products="10" data-total="53.90">
-                <div class="list-item-main receipts-list-grid">
-                    <div class="list-item-value">RCPT-2025-1004-AUC</div>
-                    <div class="list-item-value">Auchan</div>
-                    <div class="list-item-value">04/11/2025</div>
-                    <div class="list-item-value">10 items</div>
-                    <div class="list-item-value">53.90 €</div>
-                    <div class="list-item-actions">
-                        <a href="receipt-1004.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
-                        <a href="receipt-edit-1004.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
-                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="list-item receipt-item" data-receipt-id="1005" data-merchant="Minipreço" data-date="2025-11-02" data-products="6" data-total="28.50">
-                <div class="list-item-main receipts-list-grid">
-                    <div class="list-item-value">RCPT-2025-1005-MIN</div>
-                    <div class="list-item-value">Minipreço</div>
-                    <div class="list-item-value">02/11/2025</div>
-                    <div class="list-item-value">6 items</div>
-                    <div class="list-item-value">28.50 €</div>
-                    <div class="list-item-actions">
-                        <a href="receipt-1005.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
-                        <a href="receipt-edit-1005.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
-                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="list-item receipt-item" data-receipt-id="1006" data-merchant="Intermarché" data-date="2025-10-30" data-products="14" data-total="75.30">
-                <div class="list-item-main receipts-list-grid">
-                    <div class="list-item-value">RCPT-2025-1006-INT</div>
-                    <div class="list-item-value">Intermarché</div>
-                    <div class="list-item-value">30/10/2025</div>
-                    <div class="list-item-value">14 items</div>
-                    <div class="list-item-value">75.30 €</div>
-                    <div class="list-item-actions">
-                        <a href="receipt-1006.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
-                        <a href="receipt-edit-1006.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
-                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="list-item receipt-item" data-receipt-id="1007" data-merchant="Continente" data-date="2025-10-28" data-products="9" data-total="42.15">
-                <div class="list-item-main receipts-list-grid">
-                    <div class="list-item-value">RCPT-2025-1007-CON</div>
-                    <div class="list-item-value">Continente</div>
-                    <div class="list-item-value">28/10/2025</div>
-                    <div class="list-item-value">9 items</div>
-                    <div class="list-item-value">42.15 €</div>
-                    <div class="list-item-actions">
-                        <a href="receipt-1007.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
-                        <a href="receipt-edit-1007.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
-                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="list-item receipt-item" data-receipt-id="1008" data-merchant="Pingo Doce" data-date="2025-10-25" data-products="11" data-total="58.60">
-                <div class="list-item-main receipts-list-grid">
-                    <div class="list-item-value">RCPT-2025-1008-PIN</div>
-                    <div class="list-item-value">Pingo Doce</div>
-                    <div class="list-item-value">25/10/2025</div>
-                    <div class="list-item-value">11 items</div>
-                    <div class="list-item-value">58.60 €</div>
-                    <div class="list-item-actions">
-                        <a href="receipt-1008.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
-                        <a href="receipt-edit-1008.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
-                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="list-item receipt-item" data-receipt-id="1009" data-merchant="Lidl" data-date="2025-10-22" data-products="13" data-total="68.40">
-                <div class="list-item-main receipts-list-grid">
-                    <div class="list-item-value">RCPT-2025-1009-LID</div>
-                    <div class="list-item-value">Lidl</div>
-                    <div class="list-item-value">22/10/2025</div>
-                    <div class="list-item-value">13 items</div>
-                    <div class="list-item-value">68.40 €</div>
-                    <div class="list-item-actions">
-                        <a href="receipt-1009.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
-                        <a href="receipt-edit-1009.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
-                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="list-item receipt-item" data-receipt-id="1010" data-merchant="Auchan" data-date="2025-10-20" data-products="7" data-total="35.75">
-                <div class="list-item-main receipts-list-grid">
-                    <div class="list-item-value">RCPT-2025-1010-AUC</div>
-                    <div class="list-item-value">Auchan</div>
-                    <div class="list-item-value">20/10/2025</div>
-                    <div class="list-item-value">7 items</div>
-                    <div class="list-item-value">35.75 €</div>
-                    <div class="list-item-actions">
-                        <a href="receipt-1010.html" class="btn btn-secondary btn-sm" title="View">👁️</a>
-                        <a href="receipt-edit-1010.html" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
-                        <button class="btn btn-danger btn-sm" title="Delete">🗑️</button>
-                    </div>
-                </div>
-            </div>
-            <!-- END OF EXAMPLE DATA - DELETE ABOVE (except template) -->
-            </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Receipts List JavaScript -->
-    <script src="../js/receipts-list.js"></script>
+    <!-- API Module Import -->
+    <script type="module" src="../js/receipts-list.js"></script>
 </body>
 </html>

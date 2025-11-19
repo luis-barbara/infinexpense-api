@@ -5,6 +5,7 @@ from sqlalchemy.exc import IntegrityError
 from typing import List, Optional
 
 from src.models import product as product_list_model
+from src.models.receipt_product import Product  # Change ReceiptProduct to Product
 from src.schemas import product as product_list_schema
 
 from . import crud_measurement_unit
@@ -13,123 +14,78 @@ from . import crud_category
 
 class ProductListService:
     # Read
+    @staticmethod
     def get_product_list(db: Session, product_list_id: int) -> Optional[product_list_model.ProductList]:
-        """
-        Obtém um item da lista de produtos pelo ID
-        """
         return db.query(product_list_model.ProductList).filter(
-            product_list_model.ProductList.id == product_list_id).first()
+            product_list_model.ProductList.id == product_list_id
+        ).first()
 
-
+    @staticmethod
     def get_product_lists(db: Session, skip: int = 0, limit: int = 100) -> List[product_list_model.ProductList]:
-        """
-        Obtém a lista de produtos, com paginação.
-        """
-        return (
-            db.query(product_list_model.ProductList)
-            .offset(skip)
-            .limit(limit)
-            .all()
-        )
+        """Get all product lists with pagination"""
+        return db.query(product_list_model.ProductList).offset(skip).limit(limit).all()
 
+    @staticmethod
+    def get_product_by_barcode(db: Session, barcode: str) -> Optional[product_list_model.ProductList]:
+        return db.query(product_list_model.ProductList).filter(
+            product_list_model.ProductList.barcode == barcode
+        ).first()
+
+    @staticmethod
+    def get_product_by_name(db: Session, name: str) -> Optional[product_list_model.ProductList]:
+        return db.query(product_list_model.ProductList).filter(
+            product_list_model.ProductList.name == name
+        ).first()
 
     # Create
-    def create_product_list(db: Session, product_list_data: product_list_schema.ProductListCreate) -> product_list_model.ProductList:
-        """
-        Cria um novo produto na lista de produtos.
-        Verifica se as dependências (Categoria e Unidade) existem.
-        """
-        # Verificações
-        # 1. O nome já existe? 
-        existing = db.query(product_list_model.ProductList).filter_by(
-            name=product_list_data.name).first()
-        if existing:
-            raise ValueError(f"ProductList name '{product_list_data.name}' already exists")
-
-        # 2. A Categoria existe?
-        category = crud_category.get_category(db, product_list_data.category_id)
-        if not category:
-            raise ValueError(f"Category ID '{product_list_data.category_id}' not found")
-
-        # 3. A Unidade de Medida existe?
-        unit = crud_measurement_unit.get_measurement_unit(db, product_list_data.measurement_unit_id)
-        if not unit:
-            raise ValueError(f"MeasurementUnit ID '{product_list_data.measurement_unit_id}' not found")
-        
-
-        # Se todas as verificações passarem, é criado o objeto
-        db_product_list = product_list_model.ProductList(**product_list_data.model_dump())
-        db.add(db_product_list)
-
-        try:
-            db.commit()
-        except IntegrityError:
-            db.rollback()
-            raise ValueError("Database constraint violation (e.g., duplicate barcode)")
-
-        db.refresh(db_product_list)
-        return db_product_list
-
+    @staticmethod
+    def create_product_list(db: Session, product: product_list_schema.ProductListCreate) -> product_list_model.ProductList:
+        db_product = product_list_model.ProductList(**product.dict())
+        db.add(db_product)
+        db.commit()
+        db.refresh(db_product)
+        return db_product
 
     # Update
-    def update_product_list(db: Session, db_product_list: product_list_model.ProductList,
-                            update_data: product_list_schema.ProductListUpdate,
-                            ) -> product_list_model.ProductList:
-        """
-        Atualiza um produto da lista-mestra.
-        """
-        update_dict = update_data.model_dump(exclude_unset=True)
-
-        # Validação
-        # 1. O nome está a ser mudado? Verifica se ja existe.
-        if 'name' in update_dict:
-            existing = db.query(product_list_model.ProductList).filter_by(
-                name=update_dict['name']
-            ).first()
-            if existing and existing.id != db_product_list.id:
-                raise ValueError(f"ProductList name '{update_dict['name']}' already exists")
-
-        # 2. A Categoria está a ser mudada? Verifica se existe.
-        if 'category_id' in update_dict:
-            category = crud_category.get_category(db, update_dict['category_id'])
-            if not category:
-                raise ValueError(f"Category ID '{update_dict['category_id']}' not found")
-
-        # 3. A Unidade de Medida está a ser mudada? Verifica se existe.
-        if 'measurement_unit_id' in update_dict:
-            unit = crud_measurement_unit.get_measurement_unit(db, update_dict['measurement_unit_id'])
-            if not unit:
-                raise ValueError(f"MeasurementUnit ID '{update_dict['measurement_unit_id']}' not found")
+    @staticmethod
+    def update_product_list(db: Session, product_id: int, product_update: product_list_schema.ProductListUpdate) -> Optional[product_list_model.ProductList]:
+        db_product = db.query(product_list_model.ProductList).filter(
+            product_list_model.ProductList.id == product_id
+        ).first()
         
-
-        # Se passar as validações, são aplicados os updates
-        for key, value in update_dict.items():
-            setattr(db_product_list, key, value)
-
-        try:
+        if db_product:
+            update_data = product_update.dict(exclude_unset=True)
+            for key, value in update_data.items():
+                setattr(db_product, key, value)
             db.commit()
-        except IntegrityError:
-            db.rollback()
-            raise ValueError("Database constraint violation (e.g., duplicate barcode)")
-
-        db.refresh(db_product_list)
-        return db_product_list
-
-
+            db.refresh(db_product)
+        
+        return db_product
 
     # Delete
-    def delete_product_list(
-        db: Session, db_product_list: product_list_model.ProductList) -> product_list_model.ProductList:
-        """
-        Apaga um produto da lista
-        """
-        db.delete(db_product_list)
-        
+    @staticmethod
+    def delete_product_list(db: Session, product_id: int) -> bool:
         try:
-            db.commit()
-        except IntegrityError:
-            db.rollback()
-            # Caso algum produto (Item do Recibo) ainda estiver a apontar para este 'ProductList'
-            raise ValueError("Cannot delete: this product definition is linked to existing receipts")
+            db_product_list = db.query(product_list_model.ProductList).filter(
+                product_list_model.ProductList.id == product_id
+            ).first()
             
-        return db_product_list
+            if not db_product_list:
+                return False
+            
+            # Check if product is associated with any receipts
+            associated_products = db.query(Product).filter(
+                Product.product_list_id == product_id
+            ).count()
+            
+            if associated_products > 0:
+                raise Exception(f"Cannot delete product. It is associated with {associated_products} receipt(s).")
+            
+            # Delete the product_list
+            db.delete(db_product_list)
+            db.commit()
+            return True
+            
+        except Exception as e:
+            db.rollback()
+            raise e

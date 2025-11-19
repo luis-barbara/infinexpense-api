@@ -29,4 +29,11 @@ class Receipt(ReceiptBase):
     products: List[Product] = []
     created_at: datetime
     updated_at: datetime | None = None
-    model_config = ConfigDict(from_attributes=True)
+    model_config = ConfigDict(
+        from_attributes=True,
+        json_encoders={
+            date: lambda v: v.isoformat() if v else None,
+            datetime: lambda v: v.isoformat() if v else None,
+            Decimal: lambda v: float(v) if v else None
+        }
+    )

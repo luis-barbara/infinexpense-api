@@ -1,7 +1,7 @@
 from pydantic import BaseModel, ConfigDict, Field
 from .category import Category
 from .measurement_unit import MeasurementUnit
-from typing import List
+from typing import List, Optional
 from decimal import Decimal
 
 # schemas para Lista de Produtos (PRODUCT_LIST)
@@ -11,7 +11,7 @@ class ProductListBase(BaseModel):
         max_length=255, 
         description="Name of the product (e.g., 'Banana')"
     )
-    barcode: str | None = Field(
+    barcode: Optional[str] = Field(
         default=None, 
         max_length=50, 
         description="Barcode of the product (optional, unique)"
@@ -23,19 +23,19 @@ class ProductListCreate(ProductListBase):
     pass
 
 class ProductListUpdate(BaseModel):
-    name: str | None = Field(
+    name: Optional[str] = Field(
         default=None, 
         min_length=1, 
         max_length=255,
         description="New name for the product (optional)"
     )
-    barcode: str | None = Field(
+    barcode: Optional[str] = Field(
         default=None, 
         max_length=50,
         description="New barcode for the product (optional)"
     )
-    measurement_unit_id: int | None = None
-    category_id: int | None = None
+    measurement_unit_id: Optional[int] = None
+    category_id: Optional[int] = None
 
 class ProductList(ProductListBase):
     id: int
@@ -56,7 +56,7 @@ class ProductBase(BaseModel):
         decimal_places=4, 
         description="Quantity of the item (e.g., 0.5)"
     )
-    description: str | None = Field(
+    description: Optional[str] = Field(
         default=None, 
         max_length=100, 
         description="Optional description (e.g., 'on sale')"
@@ -67,10 +67,10 @@ class ProductCreate(ProductBase):
     pass
 
 class ProductUpdate(BaseModel):
-    price: Decimal | None = Field(default=None, max_digits=12, decimal_places=4)
-    quantity: Decimal | None = Field(default=None, max_digits=12, decimal_places=4)
-    description: str | None = Field(default=None, max_length=100)
-    product_list_id: int | None = None
+    price: Optional[Decimal] = Field(default=None, max_digits=12, decimal_places=4)
+    quantity: Optional[Decimal] = Field(default=None, max_digits=12, decimal_places=4)
+    description: Optional[str] = Field(default=None, max_length=100)
+    product_list_id: Optional[int] = None
 
 class Product(ProductBase):
     id: int

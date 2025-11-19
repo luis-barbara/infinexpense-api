@@ -21,7 +21,7 @@ def get_spending_by_category(
     db: Session,
     start_date: Optional[date] = None,
     end_date: Optional[date] = None
-) -> List[schema_report.ReportSpendingByEntity]:
+) -> List[schema_reports.ReportSpendingByEntity]:
     """
     Calcula o total gasto por categoria para o gráfico do dashboard,
     com filtro de data opcional.

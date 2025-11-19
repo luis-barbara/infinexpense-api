@@ -3,68 +3,82 @@
 const API_BASE_URL = "http://localhost:8000";
 
 /**
- * Função auxiliar para todas as requisições
+ * Helper function for all API requests
  */
 async function _handleApiRequest(endpoint, options = {}) {
-    const config = {
-        ...options,
-        headers: {
-            "Content-Type": "application/json",
-            ...options.headers,
-        },
-    };
-
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
-
-    if (response.ok) {
-        if (response.status === 204) return null; 
+    const url = `${API_BASE_URL}${endpoint}`;
+    console.log('Making request to:', url);
+    
+    const response = await fetch(url, options);
+    
+    if (!response.ok) {
+        let errorDetail = `API Error: ${response.status}`;
         try {
-            return await response.json();
-        } catch {
-            return null;
+            const error = await response.json();
+            console.error('API Error Response:', error);
+            errorDetail = error.detail || JSON.stringify(error);
+        } catch (e) {
+            console.error('Could not parse error response');
         }
+        throw new Error(errorDetail);
     }
-
-    let errorDetail = `Erro ${response.status}: ${response.statusText}`;
-    try {
-        const errorData = await response.json();
-        if (errorData && errorData.detail) errorDetail = errorData.detail;
-    } catch {}
-
-    throw new Error(errorDetail);
+    
+    return response.json();
 }
 
-// CRUD Measurement Units
-
-// Create
-export async function createMeasurementUnit(data) {
-    return _handleApiRequest("/measurement-units/", {
-        method: "POST",
-        body: JSON.stringify(data),
-    });
-}
-
-// Read All
+/**
+ * Get all measurement units
+ * endpoint: GET /measurement-units/
+ */
 export async function getMeasurementUnits(params = {}) {
-    const query = new URLSearchParams(params).toString();
-    const endpoint = query ? `/measurement-units/?${query}` : "/measurement-units/";
+    const validParams = {
+        skip: params.skip || 0,
+        limit: Math.min(params.limit || 100, 1000)
+    };
+    
+    const queryString = new URLSearchParams(validParams).toString();
+    const endpoint = queryString ? `/measurement-units/?${queryString}` : '/measurement-units/';
     return _handleApiRequest(endpoint);
 }
 
-// Read by ID
+/**
+ * Get a specific measurement unit by ID
+ * endpoint: GET /measurement-units/{unit_id}
+ */
 export async function getMeasurementUnitById(id) {
     return _handleApiRequest(`/measurement-units/${id}`);
 }
 
-// Update
-export async function updateMeasurementUnit(id, data) {
-    return _handleApiRequest(`/measurement-units/${id}`, {
-        method: "PUT",
-        body: JSON.stringify(data),
+/**
+ * Create a new measurement unit
+ * endpoint: POST /measurement-units/
+ */
+export async function createMeasurementUnit(data) {
+    return _handleApiRequest('/measurement-units/', {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
     });
 }
 
-// Delete
+/**
+ * Update a measurement unit
+ * endpoint: PUT /measurement-units/{unit_id}
+ */
+export async function updateMeasurementUnit(id, data) {
+    return _handleApiRequest(`/measurement-units/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    });
+}
+
+/**
+ * Delete a measurement unit
+ * endpoint: DELETE /measurement-units/{unit_id}
+ */
 export async function deleteMeasurementUnit(id) {
-    return _handleApiRequest(`/measurement-units/${id}`, { method: "DELETE" });
+    return _handleApiRequest(`/measurement-units/${id}`, {
+        method: "DELETE"
+    });
 }

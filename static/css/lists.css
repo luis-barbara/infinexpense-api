@@ -20,3 +20,16 @@
     text-align: center;
 }
 
+.list-row {
+    display: grid;
+    grid-template-columns: 1.35fr 0.9fr 1fr 0.9fr 0.7fr;
+    border-bottom: 1px solid #e5e7eb;
+    align-items: center;
+    text-align: center;
+}
+
+.list-item-value {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}

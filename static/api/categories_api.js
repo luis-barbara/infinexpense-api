@@ -1,100 +1,107 @@
-// static/js/categories_api.js
+// static/api/categories_api.js
 
-const API_BASE_URL = "http://localhost:8000/categories"; 
-
-/**
- * GET: List all categories with optional pagination
- */
-async function getCategories(skip = 0, limit = 100) {
-    try {
-        const response = await fetch(`${API_BASE_URL}?skip=${skip}&limit=${limit}`);
-        if (!response.ok) throw new Error("Failed to fetch categories");
-        return await response.json();
-    } catch (error) {
-        console.error(error);
-        return [];
-    }
-}
+const API_BASE_URL = "";  // Use relative URLs
 
 /**
- * GET: Get a single category by ID
+ * Helper function for all API requests
  */
-async function getCategoryById(categoryId) {
-    try {
-        const response = await fetch(`${API_BASE_URL}/${categoryId}`);
-        if (!response.ok) throw new Error("Category not found");
-        return await response.json();
-    } catch (error) {
-        console.error(error);
-        return null;
-    }
-}
-
-/**
- * POST: Create a new category
- */
-async function createCategory(name) {
-    try {
-        const response = await fetch(API_BASE_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name })
-        });
-        if (!response.ok) {
-            const data = await response.json();
-            throw new Error(data.detail || "Failed to create category");
+async function _handleApiRequest(endpoint, options = {}) {
+    const url = `${API_BASE_URL}${endpoint}`;
+    console.log('Making request to:', url);
+    
+    const response = await fetch(url, options);
+    
+    if (!response.ok) {
+        let errorDetail = `API Error: ${response.status}`;
+        try {
+            const error = await response.json();
+            console.error('API Error Response:', error);
+            errorDetail = error.detail || JSON.stringify(error);
+        } catch (e) {
+            console.error('Could not parse error response');
         }
-        return await response.json();
-    } catch (error) {
-        console.error(error);
-        return null;
+        throw new Error(errorDetail);
     }
+    
+    return response.json();
 }
 
 /**
- * PUT: Update an existing category
+ * Get all categories
+ * endpoint: GET /categories/
  */
-async function updateCategory(categoryId, name) {
-    try {
-        const response = await fetch(`${API_BASE_URL}/${categoryId}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name })
-        });
-        if (!response.ok) {
-            const data = await response.json();
-            throw new Error(data.detail || "Failed to update category");
+export async function getCategories(params = {}) {
+    const validParams = {
+        skip: params.skip || 0,
+        limit: Math.min(params.limit || 100, 1000)
+    };
+    
+    // Add optional date parameters
+    if (params.start_date) {
+        validParams.start_date = params.start_date;
+    }
+    if (params.end_date) {
+        validParams.end_date = params.end_date;
+    }
+    
+    const queryString = new URLSearchParams(validParams).toString();
+    const endpoint = queryString ? `/categories/?${queryString}` : '/categories/';
+    return _handleApiRequest(endpoint);
+}
+
+/**
+ * Get a specific category by ID
+ * endpoint: GET /categories/{category_id}
+ */
+export async function getCategoryById(id) {
+    return _handleApiRequest(`/categories/${id}`);
+}
+
+/**
+ * Create a new category
+ * endpoint: POST /categories/
+ */
+export async function createCategory(categoryData) {
+    return await _handleApiRequest('/categories/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(categoryData)
+    });
+}
+
+/**
+ * Update a category
+ * endpoint: PUT /categories/{id}
+ */
+export async function updateCategory(id, categoryData) {
+    return await _handleApiRequest(`/categories/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(categoryData)
+    });
+}
+
+/**
+ * Delete a category
+ * endpoint: DELETE /categories/{id}
+ */
+export async function deleteCategory(id) {
+    const response = await fetch(`${API_BASE_URL}/categories/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
         }
-        return await response.json();
-    } catch (error) {
-        console.error(error);
-        return null;
-    }
-}
+    });
 
-/**
- * DELETE: Delete a category by ID
- */
-async function deleteCategory(categoryId) {
-    try {
-        const response = await fetch(`${API_BASE_URL}/${categoryId}`, {
-            method: "DELETE"
-        });
-        if (!response.ok) {
-            const data = await response.json();
-            throw new Error(data.detail || "Failed to delete category");
-        }
-        return true;
-    } catch (error) {
-        console.error(error);
-        return false;
+    if (!response.ok) {
+        const error = await response.text();
+        throw new Error(error || `HTTP error! status: ${response.status}`);
     }
-}
 
-/**
- * Example usage:
- * getCategories().then(console.log);
- * createCategory("Fruits").then(console.log);
- * updateCategory(1, "Vegetables").then(console.log);
- * deleteCategory(2).then(console.log);
- */
+    // 204 No Content returns nothing - don't try to parse JSON
+    if (response.status === 204) {
+        return { success: true };
+    }
+
+    return await response.json();
+}

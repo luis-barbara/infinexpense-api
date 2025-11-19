@@ -1,65 +1,97 @@
 // src/static/js/merchants_api.js
 
-const API_URL = "http://localhost:8000/merchants";
+const API_BASE_URL = "http://localhost:8000";
 
-
-// Função para obter todos os merchants
-async function getMerchants() {
-  try {
-    const response = await fetch(API_URL);
-    if (!response.ok) throw new Error("Erro ao carregar merchants");
-    const merchants = await response.json();
-    console.log(merchants);
-    return merchants;
-  } catch (err) {
-    console.error(err);
-  }
+/**
+ * Helper function for all API requests
+ */
+async function _handleApiRequest(endpoint, options = {}) {
+    const url = `${API_BASE_URL}${endpoint}`;
+    console.log('Making request to:', url);
+    
+    const response = await fetch(url, options);
+    
+    if (!response.ok) {
+        let errorDetail = `API Error: ${response.status}`;
+        try {
+            const error = await response.json();
+            console.error('API Error Response:', error);
+            errorDetail = error.detail || JSON.stringify(error);
+        } catch (e) {
+            console.error('Could not parse error response');
+        }
+        throw new Error(errorDetail);
+    }
+    
+    // Handle 204 No Content
+    if (response.status === 204) {
+        return null;
+    }
+    
+    return response.json();
 }
 
-// Função create
-async function createMerchant(name, location) {
-  try {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, location })
+/**
+ * Get all merchants
+ */
+export async function getMerchants(params = {}) {
+    const validParams = {
+        skip: params.skip || 0,
+        limit: Math.min(params.limit || 100, 1000)
+    };
+    
+    const queryString = new URLSearchParams(validParams).toString();
+    const endpoint = queryString ? `/merchants/?${queryString}` : '/merchants/';
+    return _handleApiRequest(endpoint);
+}
+
+/**
+ * Get merchant by ID
+ */
+export async function getMerchantById(id) {
+    return _handleApiRequest(`/merchants/${id}`);
+}
+
+/**
+ * Create a new merchant
+ */
+export async function createMerchant(data) {
+    return _handleApiRequest('/merchants/', {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
     });
-    if (!response.ok) throw new Error("Erro ao criar merchant");
-    const merchant = await response.json();
-    console.log("Criado:", merchant);
-    return merchant;
-  } catch (err) {
-    console.error(err);
-  }
 }
 
-// Função update
-async function updateMerchant(id, name, location) {
-  try {
-    const response = await fetch(`${API_URL}/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, location })
+/**
+ * Update a merchant
+ */
+export async function updateMerchant(id, data) {
+    return _handleApiRequest(`/merchants/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
     });
-    if (!response.ok) throw new Error("Erro ao atualizar merchant");
-    const merchant = await response.json();
-    console.log("Atualizado:", merchant);
-    return merchant;
-  } catch (err) {
-    console.error(err);
-  }
 }
 
-// Função delete
-async function deleteMerchant(id) {
-  try {
-    const response = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
-    if (!response.ok) throw new Error("Erro ao deletar merchant");
-    console.log("Merchant deletado:", id);
-  } catch (err) {
-    console.error(err);
-  }
+/**
+ * Delete a merchant
+ */
+export async function deleteMerchant(id) {
+    return _handleApiRequest(`/merchants/${id}`, {
+        method: "DELETE"
+    });
 }
 
-
-getMerchants();
+/**
+ * Upload merchant photo
+ */
+export async function uploadMerchantPhoto(id, file) {
+    const formData = new FormData();
+    formData.append('file', file);
+    
+    return _handleApiRequest(`/merchants/${id}/upload-photo`, {
+        method: "POST",
+        body: formData
+    });
+}

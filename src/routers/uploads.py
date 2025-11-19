@@ -5,8 +5,8 @@ from sqlalchemy.orm import Session
 import logging 
 
 # Importa as dependências (DB, Service, Schema de resposta)
-from src.db.dependencies import get_db
-from src.services import file_service 
+from src.database import get_db
+from src.services import file_services 
 from src.schemas import product as schema_product 
 
 

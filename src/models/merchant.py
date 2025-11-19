@@ -17,6 +17,7 @@ class Merchant(Base):
     name = Column(String(100), nullable=False, unique=True, index=True) # Name of the merchant
     receipts = relationship("Receipt", back_populates="merchant", cascade="all, delete-orphan") # Relationship to Receipt model
     location = Column(String(255), nullable=True)  # Optional location of the merchant
+    notes = Column(Text, nullable=True)  # Optional notes about the merchant
 
 
     CheckConstraint('name != ""', name='constraint_check_empty_merchant_name')

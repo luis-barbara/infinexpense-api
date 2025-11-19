@@ -24,6 +24,13 @@ class Category(Base):
         index=True, 
         info={'description':'Name of the category (e.g., "Fruit")'}
     )
+    
+    color = Column(
+        String(7),
+        nullable=False,
+        default="#808080",
+        info={'description':'Hex color code for the category (e.g., "#e6194b")'}
+    )
 
     # The Relationship: "One category can be in many product definitions (ProductList)"
     # This mirrors the relationship in 'product.py'

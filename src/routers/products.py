@@ -10,13 +10,7 @@ from src.schemas.product import (
     ProductListUpdate,
     ProductList as ProductListSchema
 )
-from src.services.crud_product_list import (
-    create_product_list,
-    get_product_list as get_product_list_by_id,
-    get_product_lists,
-    get_product_by_barcode,
-    get_product_by_name
-)
+from src.services.crud_product_list import ProductListService 
 
 router = APIRouter(
     prefix="/products",
@@ -38,7 +32,7 @@ def create_product(
     """
     Create a new product with the provided details.
     """
-    return create_product_list(db, product)
+    return ProductListService.create_product_list(db, product)
 
 
 # Read All
@@ -58,17 +52,10 @@ def get_all_products(
     """
     Retrieve all products with optional filters and pagination.
     """
-    return get_product_lists(
-        db=db,
-        skip=skip,
-        limit=limit,
-        barcode=barcode,
-        measurement_unit_id=measurement_unit_id,
-        category_id=category_id
-    )
+    return ProductListService.get_product_lists(db, skip=skip, limit=limit)
 
 
-# Read By 
+# Read By ID
 @router.get(
     "/{product_id}",
     response_model=ProductListSchema,
@@ -78,7 +65,10 @@ def get_product_by_id(
     product_id: int = Path(..., ge=1, description="ID of the product to retrieve"),
     db: Session = Depends(get_db)
 ):
-    product = get_product_list_by_id(db, product_id)
+    """
+    Retrieve a specific product by its ID.
+    """
+    product = ProductListService.get_product_list(db, product_id)
     if not product:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
     return product
@@ -94,7 +84,10 @@ def get_product_by_barcode_endpoint(
     barcode: str = Path(..., max_length=50, description="Barcode of the product to retrieve"),
     db: Session = Depends(get_db)
 ):
-    product = get_product_by_barcode(db, barcode)
+    """
+    Retrieve a product by its barcode.
+    """
+    product = ProductListService.get_product_by_barcode(db, barcode)
     if not product:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
     return product
@@ -110,7 +103,52 @@ def get_product_by_name_endpoint(
     name: str = Path(..., max_length=255, description="Name of the product to retrieve"),
     db: Session = Depends(get_db)
 ):
-    product = get_product_by_name(db, name)
+    """
+    Retrieve a product by its name.
+    """
+    product = ProductListService.get_product_by_name(db, name)
     if not product:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
     return product
+
+
+# Update
+@router.put(
+    "/{product_id}",
+    response_model=ProductListSchema,
+    summary="Update a product"
+)
+def update_product(
+    product_id: int = Path(..., ge=1, description="ID of the product to update"),
+    product_update: ProductListUpdate = None,
+    db: Session = Depends(get_db)
+):
+    """
+    Update a product's details.
+    """
+    product = ProductListService.update_product_list(db, product_id, product_update)
+    if not product:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
+    return product
+
+
+# Delete
+@router.delete(
+    "/{product_id}",
+    status_code=status.HTTP_204_NO_CONTENT,
+    summary="Delete a product"
+)
+def delete_product(
+    product_id: int = Path(..., ge=1, description="ID of the product to delete"),
+    db: Session = Depends(get_db)
+):
+    """
+    Delete a product by its ID.
+    """
+    try:
+        success = ProductListService.delete_product_list(db, product_id)
+        if not success:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
+    except Exception as e:
+        error_message = str(e)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=error_message)

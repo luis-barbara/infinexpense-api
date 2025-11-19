@@ -24,10 +24,13 @@ def create_merchant(
     merchant: MerchantCreate,
     db: Session = Depends(get_db)
 ):
+    """
+    Create a new merchant.
+    """
     try:
         return MerchantService.create_merchant(db, merchant)
-    except ValueError as e:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 
 
 # Read All
@@ -85,15 +88,19 @@ def update_merchant(
 @router.delete(
     "/{merchant_id}",
     status_code=status.HTTP_204_NO_CONTENT,
-    summary="Delete a merchant by ID"
+    summary="Delete a merchant"
 )
 def delete_merchant(
-    merchant_id: int = Path(..., gt=0, description="ID of the merchant to delete"),
+    merchant_id: int = Path(..., ge=1, description="ID of the merchant to delete"),
     db: Session = Depends(get_db)
 ):
-    merchant = MerchantService.get_merchant(db, merchant_id)
-    if not merchant:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Merchant not found")
-    
-    MerchantService.delete_merchant(db, merchant)
-    return None
+    """
+    Delete a merchant by its ID.
+    """
+    try:
+        success = MerchantService.delete_merchant(db, merchant_id)
+        if not success:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Merchant not found")
+    except Exception as e:
+        error_message = str(e)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=error_message)

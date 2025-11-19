@@ -20,10 +20,14 @@ Example JSON structure (keys optional except where noted):
     "category": "Fruit",
     "measurement_unit": "kg"
   }],
-  "merchants": [{"name": "SuperMart", "location": "Lisbon"}],
+  "merchants": [{
+    "name": "SuperMart",
+    "location": "Lisbon",
+    "notes": "Large 24h supermarket"
+  }],
   "receipts": [{
     "merchant": "SuperMart",
-    "purchase_date": "2025-11-10",   
+    "purchase_date": "2025-11-10",
     "barcode": null,
     "products": [{
       "product_list": "Madeira Banana",
@@ -222,16 +226,36 @@ def get_or_create_product_list(
 
 
 def get_or_create_merchant(
-    db: Session, cache: Cache, *, name: str, location: Optional[str] = None
+    db: Session,
+    cache: Cache,
+    *,
+    name: str,
+    location: Optional[str] = None,
+    notes: Optional[str] = None,
 ) -> Merchant:
     key = name.strip()
     if key in cache.merchants_by_name:
-        return cache.merchants_by_name[key]
+        obj = cache.merchants_by_name[key]
+        # Optionally update missing fields on cached object (non-destructive)
+        if location is not None and not obj.location:
+            obj.location = location
+        if notes is not None and not obj.notes:
+            obj.notes = notes
+        return obj
+
     obj = db.query(Merchant).filter_by(name=key).one_or_none()
     if obj is None:
-        obj = Merchant(name=key, location=location)
+        # Create new merchant with notes
+        obj = Merchant(name=key, location=location, notes=notes)
         db.add(obj)
         db.flush()
+    else:
+        # Optionally update missing fields on existing merchant (non-destructive)
+        if location is not None and not obj.location:
+            obj.location = location
+        if notes is not None and not obj.notes:
+            obj.notes = notes
+
     cache.merchants_by_name[key] = obj
     return obj
 
@@ -294,7 +318,13 @@ def load_merchants(db: Session, cache: Cache, items: Iterable[Dict[str, Any]]) -
         name = rec.get("name")
         if not name:
             raise LoaderError("Merchant requires 'name'")
-        get_or_create_merchant(db, cache, name=name, location=rec.get("location"))
+        get_or_create_merchant(
+            db,
+            cache,
+            name=name,
+            location=rec.get("location"),
+            notes=rec.get("notes"),
+        )
         count += 1
     return count
 
@@ -451,12 +481,36 @@ _ADJECTIVES = [
 ]
 
 _MERCHANTS = [
-    {"name": "SuperMart", "location": "Lisbon"},
-    {"name": "Mercado Azul", "location": "Porto"},
-    {"name": "MiniPreço", "location": "Coimbra"},
-    {"name": "HiperBom", "location": "Braga"},
-    {"name": "EcoFoods", "location": "Faro"},
+    {"name": "SuperMart", "location": "Lisbon", "notes": "Large 24h supermarket"},
+    {"name": "Mercado Azul", "location": "Porto", "notes": "Local fresh market"},
+    {"name": "MiniPreço", "location": "Coimbra", "notes": "Small discount grocery"},
+    {"name": "HiperBom", "location": "Braga", "notes": "Hypermarket in retail park"},
+    {"name": "EcoFoods", "location": "Faro", "notes": "Focus on organic products"},
 ]
+
+# Per-category approximate price-per-unit ranges (EUR)
+_PRICE_RANGES: Dict[str, tuple[float, float]] = {
+    "Fruit": (1.0, 4.0),          # €/kg
+    "Vegetable": (0.8, 3.0),      # €/kg
+    "Dairy": (0.6, 3.0),          # €/L or per unit
+    "Bakery": (0.3, 3.0),         # €/unit
+    "Meat": (4.0, 12.0),          # €/kg
+    "Fish": (5.0, 14.0),          # €/kg
+    "Beverages": (0.5, 3.0),      # €/L
+    "Pantry": (0.5, 6.0),         # €/kg or unit
+    "Snacks": (0.5, 4.0),         # €/unit/pack
+    "Frozen": (1.0, 8.0),         # €/kg or unit
+    "Household": (1.5, 15.0),     # €/unit/pack
+    "Personal Care": (1.5, 12.0), # €/unit
+}
+
+
+def _unit_price_for(category: str, rng: random.Random) -> Decimal:
+    """
+    Return a realistic-ish unit price for a given category, in EUR.
+    """
+    lo, hi = _PRICE_RANGES.get(category, (0.5, 10.0))
+    return Decimal(str(rng.uniform(lo, hi))).quantize(Decimal("0.01"))
 
 
 def _unique_product_names(n: int) -> list[str]:
@@ -528,6 +582,8 @@ def generate_sample_data(n_products: int = 200, n_receipts: int = 20) -> Dict[st
         lines = []
         for pl in chosen_products:
             unit = pl["measurement_unit"]
+            category = pl["category"]
+
             # Quantity distribution per unit
             if unit in ("kg", "L"):
                 qty = Decimal(str(rng.uniform(0.2, 3.0))).quantize(Decimal("0.0001"))
@@ -535,13 +591,25 @@ def generate_sample_data(n_products: int = 200, n_receipts: int = 20) -> Dict[st
                 qty = Decimal(str(rng.randint(100, 2000))).quantize(Decimal("0.0001"))
             else:  # u, pk
                 qty = Decimal(str(rng.randint(1, 6))).quantize(Decimal("0.0001"))
-            price = (Decimal(str(rng.uniform(0.3, 20.0))) * qty).quantize(
-                Decimal("0.0001")
-            )
+
+            # Realistic unit price based on category
+            unit_price = _unit_price_for(category, rng)  # EUR per kg/L/unit
+
+            # Convert quantity to the right "base" for pricing
+            if unit in ("kg", "L"):
+                effective_qty = qty
+            elif unit in ("g", "mL"):
+                # price per kg/L, quantity in g/mL -> divide by 1000
+                effective_qty = (qty / Decimal("1000")).quantize(Decimal("0.0001"))
+            else:  # u, pk
+                effective_qty = qty
+
+            line_price = (unit_price * effective_qty).quantize(Decimal("0.0001"))
+
             lines.append(
                 {
                     "product_list": pl["name"],
-                    "price": str(price),
+                    "price": str(line_price),  # total line price
                     "quantity": str(qty),
                     "description": rng.choice([None, "promo", "coupon", ""]),
                 }

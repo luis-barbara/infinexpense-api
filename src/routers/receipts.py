@@ -2,6 +2,7 @@ from typing import List, Optional
 from datetime import date
 from fastapi import APIRouter, Depends, status, Query, Path, HTTPException
 from sqlalchemy.orm import Session
+from fastapi import Body
 
 from src.database import get_db
 from src.schemas.receipt import (
@@ -187,6 +188,21 @@ def update_receipt(
     Returns the updated receipt.
     """
     return ReceiptService.update_receipt(db, receipt_id, receipt_update)
+
+@router.put(
+    "/{receipt_id}/products",
+    response_model=ReceiptSchema,
+    summary="Update products for a receipt"
+)
+def update_receipt_products(
+    receipt_id: int = Path(..., gt=0),
+    products_data: dict = Body(...),
+    db: Session = Depends(get_db)
+):
+    """
+    Update all products for a receipt.
+    """
+    return ReceiptService.update_receipt_products(db, receipt_id, products_data.get("products", []))
 
 @router.delete(
     "/{receipt_id}",
