@@ -27,3 +27,20 @@ def db():
     finally:
         db.close() # fecha sessao depois do teste
         Base.metadata.drop_all(bind=engine) # e apaga as tabelas
+
+
+@pytest.fixture(scope="function")
+def client(db):
+    """Cria cliente HTTP para testar a API"""
+    def override_get_db():
+        try:
+            yield db
+        finally:
+            pass
+
+    app.dependency_overrides[get_db] = override_get_db
+    
+    with TestClient(app) as test_client:
+        yield test_client
+    
+    app.dependency_overrides.clear()
