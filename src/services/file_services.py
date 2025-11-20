@@ -11,8 +11,8 @@ from src.models import product as model_product_list
 from . import crud_product_list
 
 # Configurações 
-UPLOAD_DIRECTORY = Path("/app/uploads/products")
-os.makedirs(UPLOAD_DIRECTORY, exist_ok=True)
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+UPLOAD_DIRECTORY = BASE_DIR / "uploads" / "products"
 
 # Logging
 logger = logging.getLogger(__name__)
@@ -78,7 +78,7 @@ def save_product_photo(
     # 6. Apagar foto antiga
     if db_product.photo_url:
         try:
-            old_file_path = os.path.join("/app", db_product.photo_url.lstrip('/'))
+            old_file_path = BASE_DIR / db_product.photo_url.lstrip('/')
             if os.path.exists(old_file_path):
                 os.remove(old_file_path)
         except Exception as e:

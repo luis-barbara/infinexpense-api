@@ -7,8 +7,19 @@ import pytest
 
 @pytest.fixture
 def test_merchant(client):
-    """Cria um supermercado de teste e retorna o ID"""
-    response = client.post("/merchants/", json={"name": "Test Merchant"})
+    """
+    Fixture auxiliar: Cria um mercado de teste e retorna o ID.
+    É necessário porque não se pode criar um recibo sem um merchant_id válido.
+    """
+    payload = {
+        "name": "Test Merchant",
+        "location": "Lisboa"}
+    response = client.post("/merchants/", json=payload)
+    
+    if response.status_code == 409:
+        payload["name"] = "Test Merchant 2"
+        response = client.post("/merchants/", json=payload)
+    
     assert response.status_code == 201, f"Failed to create merchant: {response.json()}"
     return response.json()["id"]
 

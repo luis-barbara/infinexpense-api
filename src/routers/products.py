@@ -3,6 +3,7 @@
 from typing import List, Optional
 from fastapi import APIRouter, Depends, status, Query, Path, HTTPException
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError
 
 from src.database import get_db
 from src.schemas.product import (
@@ -32,7 +33,14 @@ def create_product(
     """
     Create a new product with the provided details.
     """
-    return ProductListService.create_product_list(db, product)
+    try:
+        return ProductListService.create_product_list(db, product)
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail=f"Product with name '{product.name}' already exists"
+        )
 
 
 # Read All

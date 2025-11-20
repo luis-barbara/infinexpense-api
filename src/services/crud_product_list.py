@@ -3,6 +3,7 @@
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 from typing import List, Optional
+from fastapi import HTTPException, status
 
 from src.models import product as product_list_model
 from src.models.receipt_product import Product  # Change ReceiptProduct to Product
@@ -39,12 +40,19 @@ class ProductListService:
 
     # Create
     @staticmethod
-    def create_product_list(db: Session, product: product_list_schema.ProductListCreate) -> product_list_model.ProductList:
+    def create_product_list(db: Session, product: product_list_schema.ProductListCreate):  # CORRIGE AQUI
         db_product = product_list_model.ProductList(**product.dict())
         db.add(db_product)
-        db.commit()
-        db.refresh(db_product)
-        return db_product
+        try:
+            db.commit()
+            db.refresh(db_product)
+            return db_product
+        except IntegrityError:
+            db.rollback()
+            raise HTTPException(
+                status_code=status.HTTP_409_CONFLICT,
+                detail=f"Product with name '{product.name}' already exists"
+            )
 
     # Update
     @staticmethod

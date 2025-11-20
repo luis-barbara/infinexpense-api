@@ -1,3 +1,5 @@
+# src/schemas/receipt.py
+
 from pydantic import BaseModel, ConfigDict, Field
 from .merchant import Merchant
 from .product import Product 
@@ -24,7 +26,7 @@ class ReceiptUpdate(BaseModel):
 
 class Receipt(ReceiptBase):
     id: int
-    total_price: Decimal
+    total_price: Decimal 
     merchant: Merchant
     products: List[Product] = []
     created_at: datetime
@@ -34,6 +36,5 @@ class Receipt(ReceiptBase):
         json_encoders={
             date: lambda v: v.isoformat() if v else None,
             datetime: lambda v: v.isoformat() if v else None,
-            Decimal: lambda v: float(v) if v else None
         }
     )
