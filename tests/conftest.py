@@ -1,3 +1,5 @@
+# tests/conftest.py
+
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
@@ -37,10 +39,26 @@ def client(db):
             yield db
         finally:
             pass
-
     app.dependency_overrides[get_db] = override_get_db
-    
     with TestClient(app) as test_client:
         yield test_client
-    
     app.dependency_overrides.clear()
+
+
+@pytest.fixture
+def test_category(client):
+    """cria uma categoria de teste"""
+    response = client.post("/categories/", json={"name": "Test Category"})
+    assert response.status_code == 201, f"Failed to create category: {response.json()}"
+    return response.json()["id"]
+
+
+@pytest.fixture
+def test_unit(client):
+    """cria uma unidade de medida de teste"""
+    response = client.post("/measurement-units/", json={
+        "name": "Test Unit",
+        "abbreviation": "TU"
+    })
+    assert response.status_code == 201, f"Failed to create unit: {response.json()}"
+    return response.json()["id"]
