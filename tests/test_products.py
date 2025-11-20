@@ -2,6 +2,7 @@
 
 from fastapi import status
 from fastapi.testclient import TestClient
+import pytest
 
 
 def test_create_product(client: TestClient, test_category, test_unit):
