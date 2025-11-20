@@ -33,9 +33,11 @@ engine = create_engine(
 
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
+# Esta fixture corre antes de CADA teste individual (scope="function")
 @pytest.fixture(scope="function")
 def db():
     """Cria uma nova base de dados em memória para cada teste."""
+    # Cria todas as tabelas (Category, Product, Receipt, etc.)
     Base.metadata.create_all(bind=engine) # Cria as tabelas
     db = TestingSessionLocal() # Cria sessão
     try:
@@ -44,7 +46,7 @@ def db():
         db.close() # fecha sessao depois do teste
         Base.metadata.drop_all(bind=engine) # e apaga as tabelas
 
-
+# Esta fixture cria o "navegador falso" que vai chamar a API
 @pytest.fixture(scope="function")
 def client(db):
     """Cria cliente HTTP para testar a API"""
@@ -58,7 +60,8 @@ def client(db):
         yield test_client
     app.dependency_overrides.clear() 
 
-
+# Como quase todos os testes precisam de categoria e unidade de medida,
+# foram criadas estas fixtures para não repetir código
 @pytest.fixture
 def test_category(client):
     """cria uma categoria de teste"""
