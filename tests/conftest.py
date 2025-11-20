@@ -9,21 +9,19 @@ from sqlalchemy.pool import StaticPool
 from src.main import app
 from src.database import Base, get_db
 
-# TestClient e SQLite
-# Quando corremos o pytest no terminal, não existe nenhum servidor web real (Uvicorn) a correr, 
-# não existem portas abertas (como a 8000), e não existe Docker. 
-# Tudo acontece dentro de um único processo Python na memória do pc
-# Normalmente, o fluxo é: Utilizador -> Internet (Porta 8000) -> Uvicorn (Servidor) -> FastAPI
-# Nos testes com TestClient, o fluxo é: Pytest -> TestClient -> FastAPI
-# O TestClient é um simulador: nao é enviada uma requisição HTTP pela rede,
-# É criado um objeto que simula esse pedido e chama diretamente a função Python da API
-# Depois é enviado o resultado como objeto que parece a reposta HTTP
-# o "cliente" e o "servidor" são o mesmo programa a comunicar na memória RAM
+"""
+Configuração de Testes com TestClient e SQLite em Memória
 
-# Sem Rede HTTP: O TestClient simula os pedidos HTTP chamando as funções Python diretamente.
-# Sem Postgres: O conftest.py substitui o Postgres "pesado" por um SQLite em memória leve e instantâneo.
+Como funcionam os testes com pytest (sem servidor real):
+- Fluxo normal: Utilizador -> Internet (Porta 8000) -> Uvicorn -> FastAPI
+- Fluxo de teste: Pytest -> TestClient -> FastAPI (tudo em memória)
 
-# "sqlite:///:memory:" significa que a DB vive na RAM, não no disco
+O TestClient simula requisições HTTP, fazendos chamadas às funções Python diretamente.
+O SQLite :memory: substitui o PostgreSQL para testes rápidos e isolados.
+Sem rede, sem Docker, sem portas - tudo corre num único processo Python.
+"""
+
+
 SQLALCHEMY_DATABASE_URL = ("sqlite:///:memory:")
 
 engine = create_engine(
