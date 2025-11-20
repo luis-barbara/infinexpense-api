@@ -4,7 +4,7 @@ from fastapi import status
 from fastapi.testclient import TestClient
 
 
-def test_create_product(client: TestClient):
+def test_create_product(client: TestClient, test_category, test_unit):
     """POST /products - criar um produto na lista de produtos"""
     # criar produto
     payload = {
@@ -24,7 +24,7 @@ def test_create_product(client: TestClient):
     assert "id" in data
 
 
-def test_list_products(client: TestClient):
+def test_list_products(client: TestClient, test_category, test_unit):
     """GET /products - listar produtos na lista de produtos"""
 
     # criar 2 produtos de teste
