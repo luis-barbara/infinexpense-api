@@ -9,7 +9,21 @@ from sqlalchemy.pool import StaticPool
 from src.main import app
 from src.database import Base, get_db
 
+# TestClient e SQLite
+# Quando corremos o pytest no terminal, não existe nenhum servidor web real (Uvicorn) a correr, 
+# não existem portas abertas (como a 8000), e não existe Docker. 
+# Tudo acontece dentro de um único processo Python na memória do pc
+# Normalmente, o fluxo é: Utilizador -> Internet (Porta 8000) -> Uvicorn (Servidor) -> FastAPI
+# Nos testes com TestClient, o fluxo é: Pytest -> TestClient -> FastAPI
+# O TestClient é um simulador: nao é enviada uma requisição HTTP pela rede,
+# É criado um objeto que simula esse pedido e chama diretamente a função Python da API
+# Depois é enviado o resultado como objeto que parece a reposta HTTP
+# o "cliente" e o "servidor" são o mesmo programa a comunicar na memória RAM
 
+# Sem Rede HTTP: O TestClient simula os pedidos HTTP chamando as funções Python diretamente.
+# Sem Postgres: O conftest.py substitui o Postgres "pesado" por um SQLite em memória leve e instantâneo.
+
+# "sqlite:///:memory:" significa que a DB vive na RAM, não no disco
 SQLALCHEMY_DATABASE_URL = ("sqlite:///:memory:")
 
 engine = create_engine(
@@ -39,10 +53,10 @@ def client(db):
             yield db
         finally:
             pass
-    app.dependency_overrides[get_db] = override_get_db
+    app.dependency_overrides[get_db] = override_get_db # O FastAPI em vez de usar a configuração do settings.py (que procuraria o Postgres no Docker), ele usa esta conexão SQLite temporária
     with TestClient(app) as test_client:
         yield test_client
-    app.dependency_overrides.clear()
+    app.dependency_overrides.clear() 
 
 
 @pytest.fixture
