@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Product - InfinExpense</title>
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../css/main.css">
 </head>
 <body data-active-page="products">
@@ -41,7 +42,25 @@
                             </select>
                         </div>
                     </div>
-
+                    <div class="photo-upload-container">
+                        <div class="form-group form-group-no-margin">
+                            <label class="form-label">Product Photo</label>
+                            <div class="file-upload photo-upload-small" id="photoUploadArea">
+                                <input type="file" id="photoUpload" class="file-upload-input" accept="image/*">
+                                <label for="photoUpload" class="file-upload-label photo-upload-label-content" id="photoUploadLabel">
+                                    <div class="photo-upload-icon">📷</div>
+                                    <div class="photo-upload-text">Upload Photo</div>
+                                </label>
+                            </div>
+                            <div class="current-photo" id="currentPhotoContainer" style="display: none; margin-top: 10px;">
+                                <img id="currentPhoto" src="" alt="Current product photo" style="max-width: 200px; max-height: 150px; object-fit: cover; border-radius: 4px; margin-bottom: 10px;">
+                                <div class="flex flex-gap">
+                                    <button type="button" class="btn btn-outline" onclick="triggerPhotoUpload()">Change Photo</button>
+                                    <button type="button" class="btn btn-danger" onclick="removeCurrentPhoto()">Remove Photo</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Barcode</label>

@@ -65,811 +65,811 @@
   ],
   "product_list": [
     {
-      "name": "Family Shampoo",
+      "name": "Whole Milk",
       "barcode": "560000000001",
       "category": "Household",
       "measurement_unit": "u"
     },
     {
-      "name": "Vegan Eggs",
+      "name": "Premium Flour",
       "barcode": "560000000002",
       "category": "Meat",
       "measurement_unit": "kg"
     },
     {
-      "name": "Gluten-Free Chocolate",
+      "name": "Whole Olive Oil",
       "barcode": null,
       "category": "Personal Care",
       "measurement_unit": "u"
     },
     {
-      "name": "Local Yogurt",
+      "name": "Organic Shampoo",
       "barcode": "560000000004",
       "category": "Snacks",
       "measurement_unit": "u"
     },
     {
-      "name": "Fresh Bread",
+      "name": "Vegan Tomato",
       "barcode": "560000000005",
       "category": "Fruit",
       "measurement_unit": "kg"
     },
     {
-      "name": "Local Orange",
+      "name": "Extra Salt",
       "barcode": "560000000006",
       "category": "Bakery",
       "measurement_unit": "u"
     },
     {
-      "name": "Organic Salt",
+      "name": "Classic Orange",
       "barcode": "560000000007",
       "category": "Personal Care",
       "measurement_unit": "pk"
     },
     {
-      "name": "Whole Banana",
+      "name": "Light Milk",
       "barcode": null,
       "category": "Frozen",
       "measurement_unit": "kg"
     },
     {
-      "name": "Vegan Bread",
+      "name": "Gluten-Free Laundry Detergent",
       "barcode": null,
       "category": "Fruit",
       "measurement_unit": "kg"
     },
     {
-      "name": "Local Banana",
+      "name": "Classic Cucumber",
       "barcode": "560000000010",
       "category": "Fish",
       "measurement_unit": "g"
     },
     {
-      "name": "Whole Cheese",
+      "name": "Family Cheese",
       "barcode": "560000000011",
       "category": "Fish",
       "measurement_unit": "kg"
     },
     {
-      "name": "Extra Bread",
+      "name": "Fresh Chicken Breast",
       "barcode": null,
       "category": "Vegetable",
       "measurement_unit": "g"
     },
     {
-      "name": "Local Chips",
+      "name": "Light Flour",
       "barcode": null,
       "category": "Frozen",
       "measurement_unit": "kg"
     },
     {
-      "name": "Whole Flour",
+      "name": "Gluten-Free Sparkling Water",
       "barcode": "560000000014",
       "category": "Personal Care",
       "measurement_unit": "pk"
     },
     {
-      "name": "Extra Orange",
+      "name": "Local Rice",
       "barcode": "560000000015",
       "category": "Beverages",
       "measurement_unit": "L"
     },
     {
-      "name": "Family Cucumber",
+      "name": "Extra Tomato",
       "barcode": "560000000016",
       "category": "Household",
       "measurement_unit": "pk"
     },
     {
-      "name": "Extra Shampoo",
+      "name": "Local Coffee",
       "barcode": "560000000017",
       "category": "Personal Care",
       "measurement_unit": "u"
     },
     {
-      "name": "Family Ice Cream",
+      "name": "Organic Laundry Detergent",
       "barcode": null,
       "category": "Bakery",
       "measurement_unit": "pk"
     },
     {
-      "name": "Imported Chocolate",
+      "name": "Whole Cheese",
       "barcode": "560000000019",
       "category": "Bakery",
       "measurement_unit": "u"
     },
     {
-      "name": "Light Milk",
+      "name": "Extra Pasta",
       "barcode": "560000000020",
       "category": "Pantry",
       "measurement_unit": "kg"
     },
     {
-      "name": "Organic Rice",
+      "name": "Local Tea",
       "barcode": null,
       "category": "Fish",
       "measurement_unit": "kg"
     },
     {
-      "name": "Local Tea",
+      "name": "Fresh Salmon Fillet",
       "barcode": "560000000022",
       "category": "Personal Care",
       "measurement_unit": "u"
     },
     {
-      "name": "Organic Olive Oil",
+      "name": "Organic Coffee",
       "barcode": null,
       "category": "Dairy",
       "measurement_unit": "u"
     },
     {
-      "name": "Family Salt",
+      "name": "Classic Baguette",
       "barcode": "560000000024",
       "category": "Dairy",
       "measurement_unit": "mL"
     },
     {
-      "name": "Premium Cheese",
+      "name": "Whole Tomato",
       "barcode": null,
       "category": "Household",
       "measurement_unit": "u"
     },
     {
-      "name": "Vegan Apple",
+      "name": "Fresh Banana",
       "barcode": null,
       "category": "Fruit",
       "measurement_unit": "kg"
     },
     {
-      "name": "Light Salt",
+      "name": "Local Chocolate",
       "barcode": "560000000027",
       "category": "Fish",
       "measurement_unit": "g"
     },
     {
-      "name": "Light Butter",
+      "name": "Extra Baguette",
       "barcode": "560000000028",
       "category": "Bakery",
       "measurement_unit": "pk"
     },
     {
-      "name": "Classic Coffee",
+      "name": "Local Olive Oil",
       "barcode": null,
       "category": "Pantry",
       "measurement_unit": "g"
     },
     {
-      "name": "Local Olive Oil",
+      "name": "Fresh Baguette",
       "barcode": "560000000030",
       "category": "Household",
       "measurement_unit": "pk"
     },
     {
-      "name": "Gluten-Free Rice",
+      "name": "Fresh Pasta",
       "barcode": null,
       "category": "Dairy",
       "measurement_unit": "L"
     },
     {
-      "name": "Classic Salmon Fillet",
+      "name": "Fresh Sugar",
       "barcode": null,
       "category": "Snacks",
       "measurement_unit": "pk"
     },
     {
-      "name": "Local Chocolate",
+      "name": "Vegan Toothpaste",
       "barcode": "560000000033",
       "category": "Beverages",
       "measurement_unit": "mL"
     },
     {
-      "name": "Gluten-Free Sparkling Water",
+      "name": "Local Baguette",
       "barcode": "560000000034",
       "category": "Dairy",
       "measurement_unit": "u"
     },
     {
-      "name": "Light Chicken Breast",
+      "name": "Vegan Laundry Detergent",
       "barcode": "560000000035",
       "category": "Fruit",
       "measurement_unit": "kg"
     },
     {
-      "name": "Organic Chips",
+      "name": "Classic Pasta",
       "barcode": "560000000036",
       "category": "Dairy",
       "measurement_unit": "u"
     },
     {
-      "name": "Local Coffee",
+      "name": "Premium Banana",
       "barcode": "560000000037",
       "category": "Vegetable",
       "measurement_unit": "g"
     },
     {
-      "name": "Classic Cheese",
+      "name": "Organic Milk",
       "barcode": null,
       "category": "Pantry",
       "measurement_unit": "kg"
     },
     {
-      "name": "Imported Cheese",
+      "name": "Classic Shampoo",
       "barcode": null,
       "category": "Fruit",
       "measurement_unit": "kg"
     },
     {
-      "name": "Family Orange",
+      "name": "Light Tea",
       "barcode": null,
       "category": "Snacks",
       "measurement_unit": "pk"
     },
     {
-      "name": "Whole Eggs",
+      "name": "Gluten-Free Orange",
       "barcode": "560000000041",
       "category": "Fish",
       "measurement_unit": "kg"
     },
     {
-      "name": "Organic Banana",
+      "name": "Imported Eggs",
       "barcode": "560000000042",
       "category": "Dairy",
       "measurement_unit": "mL"
     },
     {
-      "name": "Premium Salt",
+      "name": "Imported Pasta",
       "barcode": null,
       "category": "Personal Care",
       "measurement_unit": "pk"
     },
     {
-      "name": "Premium Rice",
+      "name": "Organic Bread",
       "barcode": null,
       "category": "Dairy",
       "measurement_unit": "u"
     },
     {
-      "name": "Fresh Eggs",
+      "name": "Whole Pork Loin",
       "barcode": null,
       "category": "Household",
       "measurement_unit": "pk"
     },
     {
-      "name": "Gluten-Free Cucumber",
+      "name": "Imported Olive Oil",
       "barcode": "560000000046",
       "category": "Snacks",
       "measurement_unit": "u"
     },
     {
-      "name": "Vegan Ice Cream",
+      "name": "Whole Banana",
       "barcode": null,
       "category": "Dairy",
       "measurement_unit": "u"
     },
     {
-      "name": "Local Laundry Detergent",
+      "name": "Organic Butter",
       "barcode": "560000000048",
       "category": "Snacks",
       "measurement_unit": "u"
     },
     {
-      "name": "Extra Toothpaste",
+      "name": "Family Chips",
       "barcode": "560000000049",
       "category": "Pantry",
       "measurement_unit": "u"
     },
     {
-      "name": "Whole Ice Cream",
+      "name": "Imported Orange",
       "barcode": "560000000050",
       "category": "Fish",
       "measurement_unit": "g"
     },
     {
-      "name": "Classic Apple",
+      "name": "Local Salt",
       "barcode": "560000000051",
       "category": "Bakery",
       "measurement_unit": "u"
     },
     {
-      "name": "Gluten-Free Flour",
+      "name": "Whole Sparkling Water",
       "barcode": null,
       "category": "Pantry",
       "measurement_unit": "u"
     },
     {
-      "name": "Gluten-Free Chips",
+      "name": "Extra Apple",
       "barcode": "560000000053",
       "category": "Snacks",
       "measurement_unit": "u"
     },
     {
-      "name": "Light Laundry Detergent",
+      "name": "Light Tomato",
       "barcode": "560000000054",
       "category": "Pantry",
       "measurement_unit": "pk"
     },
     {
-      "name": "Gluten-Free Ice Cream",
+      "name": "Premium Sparkling Water",
       "barcode": null,
       "category": "Frozen",
       "measurement_unit": "kg"
     },
     {
-      "name": "Whole Salmon Fillet",
+      "name": "Whole Bread",
       "barcode": null,
       "category": "Snacks",
       "measurement_unit": "u"
     },
     {
-      "name": "Gluten-Free Orange",
+      "name": "Extra Orange",
       "barcode": "560000000057",
       "category": "Beverages",
       "measurement_unit": "mL"
     },
     {
-      "name": "Local Pasta",
+      "name": "Whole Orange",
       "barcode": "560000000058",
       "category": "Snacks",
       "measurement_unit": "pk"
     },
     {
-      "name": "Fresh Chocolate",
+      "name": "Fresh Cheese",
       "barcode": "560000000059",
       "category": "Bakery",
       "measurement_unit": "u"
     },
     {
-      "name": "Premium Bread",
+      "name": "Premium Orange",
       "barcode": "560000000060",
       "category": "Frozen",
       "measurement_unit": "u"
     },
     {
-      "name": "Vegan Olive Oil",
+      "name": "Vegan Chicken Breast",
       "barcode": null,
       "category": "Fruit",
       "measurement_unit": "kg"
     },
     {
-      "name": "Local Apple",
+      "name": "Organic Apple",
       "barcode": "560000000062",
       "category": "Fruit",
       "measurement_unit": "kg"
     },
     {
-      "name": "Fresh Butter",
+      "name": "Fresh Coffee",
       "barcode": "560000000063",
       "category": "Fruit",
       "measurement_unit": "g"
     },
     {
-      "name": "Imported Butter",
+      "name": "Whole Pasta",
       "barcode": null,
       "category": "Bakery",
       "measurement_unit": "pk"
     },
     {
-      "name": "Gluten-Free Pork Loin",
+      "name": "Vegan Tea",
       "barcode": null,
       "category": "Bakery",
       "measurement_unit": "u"
     },
     {
-      "name": "Family Chicken Breast",
+      "name": "Fresh Milk",
       "barcode": "560000000066",
       "category": "Frozen",
       "measurement_unit": "kg"
     },
     {
-      "name": "Classic Rice",
+      "name": "Vegan Banana",
       "barcode": "560000000067",
       "category": "Pantry",
       "measurement_unit": "g"
     },
     {
-      "name": "Extra Butter",
+      "name": "Fresh Olive Oil",
       "barcode": "560000000068",
       "category": "Vegetable",
       "measurement_unit": "g"
     },
     {
-      "name": "Premium Coffee",
+      "name": "Whole Rice",
       "barcode": null,
       "category": "Beverages",
       "measurement_unit": "mL"
     },
     {
-      "name": "Extra Coffee",
+      "name": "Fresh Butter",
       "barcode": "560000000070",
       "category": "Fruit",
       "measurement_unit": "kg"
     },
     {
-      "name": "Whole Rice",
+      "name": "Gluten-Free Olive Oil",
       "barcode": null,
       "category": "Personal Care",
       "measurement_unit": "pk"
     },
     {
-      "name": "Family Salmon Fillet",
+      "name": "Premium Butter",
       "barcode": "560000000072",
       "category": "Vegetable",
       "measurement_unit": "kg"
     },
     {
-      "name": "Fresh Coffee",
+      "name": "Local Apple",
       "barcode": "560000000073",
       "category": "Snacks",
       "measurement_unit": "pk"
     },
     {
-      "name": "Vegan Chips",
+      "name": "Classic Milk",
       "barcode": "560000000074",
       "category": "Dairy",
       "measurement_unit": "mL"
     },
     {
-      "name": "Gluten-Free Milk",
+      "name": "Extra Pork Loin",
       "barcode": null,
       "category": "Vegetable",
       "measurement_unit": "g"
     },
     {
-      "name": "Vegan Pasta",
+      "name": "Organic Toothpaste",
       "barcode": "560000000076",
       "category": "Snacks",
       "measurement_unit": "u"
     },
     {
-      "name": "Gluten-Free Salmon Fillet",
+      "name": "Classic Yogurt",
       "barcode": null,
       "category": "Snacks",
       "measurement_unit": "u"
     },
     {
-      "name": "Family Banana",
+      "name": "Whole Eggs",
       "barcode": "560000000078",
       "category": "Bakery",
       "measurement_unit": "u"
     },
     {
-      "name": "Family Flour",
+      "name": "Local Sugar",
       "barcode": null,
       "category": "Pantry",
       "measurement_unit": "pk"
     },
     {
-      "name": "Whole Shampoo",
+      "name": "Imported Cucumber",
       "barcode": "560000000080",
       "category": "Fruit",
       "measurement_unit": "kg"
     },
     {
-      "name": "Vegan Salt",
+      "name": "Classic Bread",
       "barcode": null,
       "category": "Beverages",
       "measurement_unit": "mL"
     },
     {
-      "name": "Organic Pasta",
+      "name": "Extra Cucumber",
       "barcode": "560000000082",
       "category": "Pantry",
       "measurement_unit": "kg"
     },
     {
-      "name": "Whole Pork Loin",
+      "name": "Fresh Chocolate",
       "barcode": "560000000083",
       "category": "Personal Care",
       "measurement_unit": "pk"
     },
     {
-      "name": "Light Tea",
+      "name": "Local Yogurt",
       "barcode": null,
       "category": "Meat",
       "measurement_unit": "kg"
     },
     {
-      "name": "Premium Shampoo",
+      "name": "Light Bread",
       "barcode": null,
       "category": "Frozen",
       "measurement_unit": "u"
     },
     {
-      "name": "Vegan Sugar",
+      "name": "Premium Milk",
       "barcode": "560000000086",
       "category": "Fruit",
       "measurement_unit": "kg"
     },
     {
-      "name": "Classic Salt",
+      "name": "Local Pork Loin",
       "barcode": "560000000087",
       "category": "Snacks",
       "measurement_unit": "u"
     },
     {
-      "name": "Light Coffee",
+      "name": "Whole Chips",
       "barcode": null,
       "category": "Snacks",
       "measurement_unit": "u"
     },
     {
-      "name": "Organic Shampoo",
+      "name": "Whole Cucumber",
       "barcode": null,
       "category": "Vegetable",
       "measurement_unit": "kg"
     },
     {
-      "name": "Premium Yogurt",
+      "name": "Family Butter",
       "barcode": "560000000090",
       "category": "Bakery",
       "measurement_unit": "pk"
     },
     {
-      "name": "Vegan Banana",
+      "name": "Vegan Chips",
       "barcode": "560000000091",
       "category": "Frozen",
       "measurement_unit": "u"
     },
     {
-      "name": "Organic Pork Loin",
+      "name": "Family Flour",
       "barcode": "560000000092",
       "category": "Fruit",
       "measurement_unit": "kg"
     },
     {
-      "name": "Fresh Ice Cream",
+      "name": "Imported Coffee",
       "barcode": null,
       "category": "Frozen",
       "measurement_unit": "kg"
     },
     {
-      "name": "Extra Chocolate",
+      "name": "Fresh Cucumber",
       "barcode": "560000000094",
       "category": "Bakery",
       "measurement_unit": "pk"
     },
     {
-      "name": "Light Bread",
+      "name": "Family Salt",
       "barcode": null,
       "category": "Beverages",
       "measurement_unit": "L"
     },
     {
-      "name": "Premium Ice Cream",
+      "name": "Premium Salt",
       "barcode": "560000000096",
       "category": "Meat",
       "measurement_unit": "g"
     },
     {
-      "name": "Gluten-Free Salt",
+      "name": "Classic Cheese",
       "barcode": "560000000097",
       "category": "Vegetable",
       "measurement_unit": "kg"
     },
     {
-      "name": "Classic Shampoo",
+      "name": "Classic Butter",
       "barcode": "560000000098",
       "category": "Frozen",
       "measurement_unit": "u"
     },
     {
-      "name": "Classic Laundry Detergent",
+      "name": "Classic Salt",
       "barcode": "560000000099",
       "category": "Bakery",
       "measurement_unit": "pk"
     },
     {
-      "name": "Fresh Banana",
+      "name": "Organic Ice Cream",
       "barcode": null,
       "category": "Fish",
       "measurement_unit": "kg"
     },
     {
-      "name": "Organic Toothpaste",
+      "name": "Family Eggs",
       "barcode": "560000000101",
       "category": "Fish",
       "measurement_unit": "g"
     },
     {
-      "name": "Classic Yogurt",
+      "name": "Imported Sparkling Water",
       "barcode": "560000000102",
       "category": "Snacks",
       "measurement_unit": "pk"
     },
     {
-      "name": "Premium Pasta",
+      "name": "Vegan Apple",
       "barcode": null,
       "category": "Household",
       "measurement_unit": "u"
     },
     {
-      "name": "Vegan Coffee",
+      "name": "Extra Milk",
       "barcode": null,
       "category": "Snacks",
       "measurement_unit": "pk"
     },
     {
-      "name": "Premium Eggs",
+      "name": "Light Salmon Fillet",
       "barcode": "560000000105",
       "category": "Vegetable",
       "measurement_unit": "kg"
     },
     {
-      "name": "Family Bread",
+      "name": "Organic Salmon Fillet",
       "barcode": "560000000106",
       "category": "Vegetable",
       "measurement_unit": "kg"
     },
     {
-      "name": "Whole Salt",
+      "name": "Imported Flour",
       "barcode": null,
       "category": "Frozen",
       "measurement_unit": "u"
     },
     {
-      "name": "Organic Sugar",
+      "name": "Local Chips",
       "barcode": "560000000108",
       "category": "Bakery",
       "measurement_unit": "pk"
     },
     {
-      "name": "Vegan Rice",
+      "name": "Premium Shampoo",
       "barcode": "560000000109",
       "category": "Meat",
       "measurement_unit": "kg"
     },
     {
-      "name": "Family Olive Oil",
+      "name": "Gluten-Free Bread",
       "barcode": "560000000110",
       "category": "Beverages",
       "measurement_unit": "mL"
     },
     {
-      "name": "Light Toothpaste",
+      "name": "Fresh Apple",
       "barcode": "560000000111",
       "category": "Fish",
       "measurement_unit": "kg"
     },
     {
-      "name": "Imported Sugar",
+      "name": "Premium Olive Oil",
       "barcode": null,
       "category": "Meat",
       "measurement_unit": "kg"
     },
     {
-      "name": "Extra Salmon Fillet",
+      "name": "Local Cheese",
       "barcode": "560000000113",
       "category": "Snacks",
       "measurement_unit": "pk"
     },
     {
-      "name": "Light Rice",
+      "name": "Fresh Bread",
       "barcode": null,
       "category": "Vegetable",
       "measurement_unit": "kg"
     },
     {
-      "name": "Organic Ice Cream",
+      "name": "Family Orange",
       "barcode": "560000000115",
       "category": "Personal Care",
       "measurement_unit": "u"
     },
     {
-      "name": "Whole Butter",
+      "name": "Light Rice",
       "barcode": "560000000116",
       "category": "Fish",
       "measurement_unit": "kg"
     },
     {
-      "name": "Light Chips",
+      "name": "Imported Ice Cream",
       "barcode": "560000000117",
       "category": "Fruit",
       "measurement_unit": "g"
     },
     {
-      "name": "Organic Tea",
+      "name": "Extra Olive Oil",
       "barcode": "560000000118",
       "category": "Fruit",
       "measurement_unit": "g"
     },
     {
-      "name": "Classic Tea",
+      "name": "Vegan Cheese",
       "barcode": "560000000119",
       "category": "Bakery",
       "measurement_unit": "u"
     },
     {
-      "name": "Classic Toothpaste",
+      "name": "Whole Shampoo",
       "barcode": null,
       "category": "Snacks",
       "measurement_unit": "pk"
-    },
-    {
-      "name": "Fresh Orange",
-      "barcode": null,
-      "category": "Personal Care",
-      "measurement_unit": "u"
-    },
-    {
-      "name": "Light Salmon Fillet",
-      "barcode": null,
-      "category": "Bakery",
-      "measurement_unit": "u"
-    },
-    {
-      "name": "Premium Laundry Detergent",
-      "barcode": "560000000123",
-      "category": "Dairy",
-      "measurement_unit": "mL"
     },
     {
       "name": "Premium Tomato",
       "barcode": null,
       "category": "Personal Care",
+      "measurement_unit": "u"
+    },
+    {
+      "name": "Classic Chips",
+      "barcode": null,
+      "category": "Bakery",
+      "measurement_unit": "u"
+    },
+    {
+      "name": "Premium Bread",
+      "barcode": "560000000123",
+      "category": "Dairy",
+      "measurement_unit": "mL"
+    },
+    {
+      "name": "Premium Chicken Breast",
+      "barcode": null,
+      "category": "Personal Care",
       "measurement_unit": "pk"
     },
     {
-      "name": "Local Milk",
+      "name": "Imported Chips",
       "barcode": "560000000125",
       "category": "Beverages",
       "measurement_unit": "L"
     },
     {
-      "name": "Local Toothpaste",
+      "name": "Local Pasta",
       "barcode": "560000000126",
       "category": "Personal Care",
       "measurement_unit": "u"
     },
     {
-      "name": "Organic Chicken Breast",
+      "name": "Classic Pork Loin",
       "barcode": "560000000127",
       "category": "Fruit",
       "measurement_unit": "g"
     },
     {
-      "name": "Premium Milk",
+      "name": "Whole Laundry Detergent",
       "barcode": "560000000128",
       "category": "Pantry",
       "measurement_unit": "kg"
     },
     {
-      "name": "Classic Baguette",
+      "name": "Organic Yogurt",
       "barcode": "560000000129",
       "category": "Bakery",
       "measurement_unit": "u"
     },
     {
-      "name": "Whole Chicken Breast",
+      "name": "Family Yogurt",
       "barcode": "560000000130",
       "category": "Bakery",
       "measurement_unit": "pk"
     },
     {
-      "name": "Imported Laundry Detergent",
+      "name": "Whole Chicken Breast",
       "barcode": "560000000131",
       "category": "Vegetable",
       "measurement_unit": "g"
     },
     {
-      "name": "Premium Pork Loin",
+      "name": "Family Shampoo",
       "barcode": null,
       "category": "Snacks",
       "measurement_unit": "pk"
     },
     {
-      "name": "Imported Bread",
+      "name": "Gluten-Free Banana",
       "barcode": null,
       "category": "Snacks",
       "measurement_unit": "pk"
     },
     {
-      "name": "Extra Baguette",
+      "name": "Light Yogurt",
       "barcode": "560000000134",
       "category": "Vegetable",
       "measurement_unit": "g"
     },
     {
-      "name": "Extra Banana",
+      "name": "Organic Salt",
       "barcode": "560000000135",
       "category": "Meat",
       "measurement_unit": "kg"
@@ -881,385 +881,385 @@
       "measurement_unit": "mL"
     },
     {
-      "name": "Premium Salmon Fillet",
+      "name": "Light Baguette",
       "barcode": "560000000137",
       "category": "Fish",
       "measurement_unit": "g"
     },
     {
-      "name": "Light Ice Cream",
+      "name": "Vegan Cucumber",
       "barcode": "560000000138",
       "category": "Snacks",
       "measurement_unit": "u"
     },
     {
-      "name": "Classic Banana",
+      "name": "Imported Shampoo",
       "barcode": "560000000139",
       "category": "Frozen",
       "measurement_unit": "u"
     },
     {
-      "name": "Vegan Chocolate",
+      "name": "Imported Pork Loin",
       "barcode": "560000000140",
       "category": "Personal Care",
       "measurement_unit": "pk"
     },
     {
-      "name": "Gluten-Free Pasta",
+      "name": "Premium Apple",
       "barcode": "560000000141",
       "category": "Snacks",
       "measurement_unit": "u"
     },
     {
-      "name": "Organic Flour",
+      "name": "Organic Cucumber",
       "barcode": "560000000142",
       "category": "Vegetable",
       "measurement_unit": "g"
     },
     {
-      "name": "Fresh Flour",
+      "name": "Local Chicken Breast",
       "barcode": null,
       "category": "Household",
       "measurement_unit": "u"
     },
     {
-      "name": "Gluten-Free Baguette",
+      "name": "Light Toothpaste",
       "barcode": null,
       "category": "Meat",
       "measurement_unit": "g"
     },
     {
-      "name": "Family Pasta",
+      "name": "Imported Tea",
       "barcode": null,
       "category": "Fish",
       "measurement_unit": "g"
     },
     {
-      "name": "Premium Chicken Breast",
+      "name": "Fresh Pork Loin",
       "barcode": "560000000146",
       "category": "Snacks",
       "measurement_unit": "u"
     },
     {
-      "name": "Whole Chips",
+      "name": "Family Banana",
       "barcode": null,
       "category": "Household",
       "measurement_unit": "pk"
     },
     {
-      "name": "Extra Apple",
+      "name": "Gluten-Free Eggs",
       "barcode": "560000000148",
       "category": "Dairy",
       "measurement_unit": "u"
     },
     {
-      "name": "Gluten-Free Cheese",
+      "name": "Gluten-Free Milk",
       "barcode": "560000000149",
       "category": "Beverages",
       "measurement_unit": "L"
     },
     {
-      "name": "Extra Pork Loin",
+      "name": "Premium Baguette",
       "barcode": null,
       "category": "Bakery",
       "measurement_unit": "pk"
     },
     {
-      "name": "Vegan Tea",
+      "name": "Light Chips",
       "barcode": "560000000151",
       "category": "Frozen",
       "measurement_unit": "kg"
     },
     {
-      "name": "Classic Ice Cream",
+      "name": "Family Salmon Fillet",
       "barcode": "560000000152",
       "category": "Pantry",
       "measurement_unit": "pk"
     },
     {
-      "name": "Whole Coffee",
+      "name": "Imported Butter",
       "barcode": null,
       "category": "Personal Care",
       "measurement_unit": "u"
     },
     {
-      "name": "Whole Tomato",
+      "name": "Local Toothpaste",
       "barcode": "560000000154",
       "category": "Meat",
       "measurement_unit": "g"
     },
     {
-      "name": "Vegan Flour",
+      "name": "Organic Chicken Breast",
       "barcode": "560000000155",
       "category": "Bakery",
       "measurement_unit": "pk"
     },
     {
-      "name": "Fresh Sugar",
+      "name": "Light Butter",
       "barcode": "560000000156",
       "category": "Bakery",
       "measurement_unit": "u"
     },
     {
-      "name": "Light Baguette",
+      "name": "Premium Pasta",
       "barcode": "560000000157",
       "category": "Bakery",
       "measurement_unit": "pk"
     },
     {
-      "name": "Gluten-Free Butter",
+      "name": "Classic Coffee",
       "barcode": "560000000158",
       "category": "Vegetable",
       "measurement_unit": "g"
     },
     {
-      "name": "Family Chips",
+      "name": "Organic Eggs",
       "barcode": null,
       "category": "Household",
       "measurement_unit": "u"
     },
     {
-      "name": "Classic Eggs",
+      "name": "Fresh Rice",
       "barcode": "560000000160",
       "category": "Beverages",
       "measurement_unit": "mL"
     },
     {
-      "name": "Premium Toothpaste",
+      "name": "Local Cucumber",
       "barcode": null,
       "category": "Dairy",
       "measurement_unit": "u"
     },
     {
-      "name": "Premium Apple",
+      "name": "Imported Banana",
       "barcode": "560000000162",
       "category": "Vegetable",
       "measurement_unit": "g"
     },
     {
-      "name": "Whole Sugar",
+      "name": "Imported Apple",
       "barcode": "560000000163",
       "category": "Personal Care",
       "measurement_unit": "pk"
     },
     {
-      "name": "Fresh Olive Oil",
+      "name": "Gluten-Free Cucumber",
       "barcode": "560000000164",
       "category": "Bakery",
       "measurement_unit": "u"
     },
     {
-      "name": "Classic Chicken Breast",
+      "name": "Whole Butter",
       "barcode": null,
       "category": "Pantry",
       "measurement_unit": "kg"
     },
     {
-      "name": "Imported Tea",
+      "name": "Gluten-Free Ice Cream",
       "barcode": null,
       "category": "Pantry",
       "measurement_unit": "g"
     },
     {
-      "name": "Premium Chocolate",
+      "name": "Vegan Milk",
       "barcode": null,
       "category": "Snacks",
       "measurement_unit": "pk"
     },
     {
-      "name": "Vegan Laundry Detergent",
+      "name": "Classic Salmon Fillet",
       "barcode": "560000000168",
       "category": "Personal Care",
       "measurement_unit": "pk"
     },
     {
-      "name": "Fresh Yogurt",
+      "name": "Gluten-Free Pork Loin",
       "barcode": null,
       "category": "Bakery",
       "measurement_unit": "pk"
     },
     {
-      "name": "Local Salt",
+      "name": "Local Flour",
       "barcode": "560000000170",
       "category": "Snacks",
       "measurement_unit": "pk"
     },
     {
-      "name": "Vegan Butter",
+      "name": "Imported Toothpaste",
       "barcode": "560000000171",
       "category": "Meat",
       "measurement_unit": "g"
     },
     {
-      "name": "Light Apple",
+      "name": "Imported Sugar",
       "barcode": "560000000172",
       "category": "Meat",
       "measurement_unit": "kg"
     },
     {
-      "name": "Family Apple",
+      "name": "Imported Yogurt",
       "barcode": "560000000173",
       "category": "Fish",
       "measurement_unit": "kg"
     },
     {
-      "name": "Light Sugar",
+      "name": "Gluten-Free Shampoo",
       "barcode": null,
       "category": "Bakery",
       "measurement_unit": "pk"
     },
     {
-      "name": "Classic Cucumber",
+      "name": "Classic Chocolate",
       "barcode": "560000000175",
       "category": "Personal Care",
       "measurement_unit": "u"
     },
     {
-      "name": "Extra Tomato",
+      "name": "Organic Tomato",
       "barcode": "560000000176",
       "category": "Beverages",
       "measurement_unit": "mL"
     },
     {
-      "name": "Fresh Toothpaste",
+      "name": "Light Ice Cream",
       "barcode": "560000000177",
       "category": "Beverages",
       "measurement_unit": "L"
     },
     {
-      "name": "Whole Orange",
+      "name": "Organic Rice",
       "barcode": null,
       "category": "Beverages",
       "measurement_unit": "mL"
     },
     {
-      "name": "Classic Olive Oil",
+      "name": "Family Ice Cream",
       "barcode": null,
       "category": "Frozen",
       "measurement_unit": "u"
     },
     {
-      "name": "Imported Salmon Fillet",
+      "name": "Family Milk",
       "barcode": "560000000180",
       "category": "Frozen",
       "measurement_unit": "kg"
     },
     {
-      "name": "Fresh Tomato",
+      "name": "Family Pork Loin",
       "barcode": null,
       "category": "Fish",
       "measurement_unit": "g"
     },
     {
-      "name": "Whole Milk",
+      "name": "Premium Chocolate",
       "barcode": "560000000182",
       "category": "Beverages",
       "measurement_unit": "L"
     },
     {
-      "name": "Organic Milk",
+      "name": "Imported Cheese",
       "barcode": "560000000183",
       "category": "Meat",
       "measurement_unit": "g"
     },
     {
-      "name": "Classic Pork Loin",
+      "name": "Light Coffee",
       "barcode": null,
       "category": "Beverages",
       "measurement_unit": "mL"
     },
     {
-      "name": "Classic Sugar",
+      "name": "Imported Baguette",
       "barcode": null,
       "category": "Beverages",
       "measurement_unit": "L"
     },
     {
-      "name": "Vegan Tomato",
+      "name": "Whole Toothpaste",
       "barcode": "560000000186",
       "category": "Dairy",
       "measurement_unit": "u"
     },
     {
-      "name": "Fresh Chips",
+      "name": "Gluten-Free Apple",
       "barcode": "560000000187",
       "category": "Beverages",
       "measurement_unit": "L"
     },
     {
-      "name": "Extra Laundry Detergent",
+      "name": "Vegan Sugar",
       "barcode": null,
       "category": "Beverages",
       "measurement_unit": "L"
     },
     {
-      "name": "Extra Rice",
+      "name": "Family Cucumber",
       "barcode": "560000000189",
       "category": "Dairy",
       "measurement_unit": "L"
     },
     {
-      "name": "Imported Milk",
+      "name": "Vegan Salmon Fillet",
       "barcode": "560000000190",
       "category": "Fish",
       "measurement_unit": "kg"
     },
     {
-      "name": "Local Chicken Breast",
+      "name": "Extra Sugar",
       "barcode": "560000000191",
       "category": "Fish",
       "measurement_unit": "g"
     },
     {
-      "name": "Local Flour",
+      "name": "Light Pasta",
       "barcode": null,
       "category": "Beverages",
       "measurement_unit": "mL"
     },
     {
-      "name": "Classic Sparkling Water",
+      "name": "Premium Chips",
       "barcode": null,
       "category": "Pantry",
       "measurement_unit": "u"
     },
     {
-      "name": "Light Banana",
+      "name": "Family Chocolate",
       "barcode": "560000000194",
       "category": "Fruit",
       "measurement_unit": "g"
     },
     {
-      "name": "Premium Tea",
+      "name": "Vegan Baguette",
       "barcode": null,
       "category": "Vegetable",
       "measurement_unit": "kg"
     },
     {
-      "name": "Imported Rice",
+      "name": "Imported Salt",
       "barcode": null,
       "category": "Bakery",
       "measurement_unit": "u"
     },
     {
-      "name": "Extra Eggs",
+      "name": "Vegan Pork Loin",
       "barcode": "560000000197",
       "category": "Frozen",
       "measurement_unit": "u"
     },
     {
-      "name": "Fresh Rice",
+      "name": "Fresh Eggs",
       "barcode": "560000000198",
       "category": "Pantry",
       "measurement_unit": "u"
     },
     {
-      "name": "Gluten-Free Apple",
+      "name": "Extra Eggs",
       "barcode": null,
       "category": "Bakery",
       "measurement_unit": "pk"
     },
     {
-      "name": "Local Sugar",
+      "name": "Fresh Sparkling Water",
       "barcode": "560000000200",
       "category": "Fish",
       "measurement_unit": "kg"
@@ -1295,59 +1295,59 @@
   "receipts": [
     {
       "merchant": "SuperMart",
-      "purchase_date": "2025-10-30",
-      "barcode": "036585774234",
+      "purchase_date": "2025-10-31",
+      "barcode": "973524010979",
       "products": [
         {
-          "product_list": "Light Butter",
+          "product_list": "Extra Baguette",
           "price": "1.0200",
           "quantity": "2.0000",
           "description": "promo"
         },
         {
-          "product_list": "Gluten-Free Cheese",
+          "product_list": "Gluten-Free Milk",
           "price": "1.1793",
           "quantity": "0.4853",
           "description": null
         },
         {
-          "product_list": "Organic Salt",
+          "product_list": "Classic Orange",
           "price": "48.6000",
           "quantity": "5.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Whole Shampoo",
+          "product_list": "Imported Cucumber",
           "price": "5.0413",
           "quantity": "1.6917",
           "description": null
         },
         {
-          "product_list": "Extra Apple",
+          "product_list": "Gluten-Free Eggs",
           "price": "10.7500",
           "quantity": "5.0000",
           "description": null
         },
         {
-          "product_list": "Light Sugar",
+          "product_list": "Gluten-Free Shampoo",
           "price": "10.0800",
           "quantity": "4.0000",
           "description": null
         },
         {
-          "product_list": "Gluten-Free Salt",
+          "product_list": "Classic Cheese",
           "price": "2.2622",
           "quantity": "1.4139",
           "description": ""
         },
         {
-          "product_list": "Classic Yogurt",
+          "product_list": "Imported Sparkling Water",
           "price": "6.2400",
           "quantity": "6.0000",
           "description": "promo"
         },
         {
-          "product_list": "Classic Pork Loin",
+          "product_list": "Light Coffee",
           "price": "0.0023",
           "quantity": "0.7604",
           "description": "coupon"
@@ -1356,77 +1356,77 @@
     },
     {
       "merchant": "EcoFoods",
-      "purchase_date": "2025-09-12",
-      "barcode": "0366209001",
+      "purchase_date": "2025-09-13",
+      "barcode": "8824052294",
       "products": [
         {
-          "product_list": "Classic Toothpaste",
+          "product_list": "Whole Shampoo",
           "price": "13.2000",
           "quantity": "5.0000",
           "description": ""
         },
         {
-          "product_list": "Imported Sugar",
+          "product_list": "Premium Olive Oil",
           "price": "9.0781",
           "quantity": "1.1419",
           "description": "coupon"
         },
         {
-          "product_list": "Extra Laundry Detergent",
+          "product_list": "Vegan Sugar",
           "price": "0.7305",
           "quantity": "0.7092",
           "description": "coupon"
         },
         {
-          "product_list": "Classic Ice Cream",
+          "product_list": "Family Salmon Fillet",
           "price": "6.1200",
           "quantity": "3.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Premium Coffee",
+          "product_list": "Whole Rice",
           "price": "0.0011",
           "quantity": "0.6002",
           "description": "promo"
         },
         {
-          "product_list": "Whole Pork Loin",
+          "product_list": "Fresh Chocolate",
           "price": "4.0300",
           "quantity": "1.0000",
           "description": ""
         },
         {
-          "product_list": "Fresh Butter",
+          "product_list": "Fresh Coffee",
           "price": "0.0016",
           "quantity": "0.5397",
           "description": ""
         },
         {
-          "product_list": "Organic Olive Oil",
+          "product_list": "Organic Coffee",
           "price": "13.8600",
           "quantity": "6.0000",
           "description": ""
         },
         {
-          "product_list": "Family Salmon Fillet",
+          "product_list": "Premium Butter",
           "price": "2.4202",
           "quantity": "2.4202",
           "description": "promo"
         },
         {
-          "product_list": "Whole Butter",
+          "product_list": "Light Rice",
           "price": "9.5792",
           "quantity": "1.3323",
           "description": "coupon"
         },
         {
-          "product_list": "Classic Sparkling Water",
+          "product_list": "Premium Chips",
           "price": "14.1600",
           "quantity": "4.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Classic Tea",
+          "product_list": "Vegan Cheese",
           "price": "11.9600",
           "quantity": "4.0000",
           "description": "coupon"
@@ -1435,77 +1435,77 @@
     },
     {
       "merchant": "MiniPre\u00e7o",
-      "purchase_date": "2025-08-22",
-      "barcode": "05789908280",
+      "purchase_date": "2025-08-23",
+      "barcode": "33531654136",
       "products": [
         {
-          "product_list": "Extra Coffee",
+          "product_list": "Fresh Butter",
           "price": "1.1854",
           "quantity": "0.7184",
           "description": ""
         },
         {
-          "product_list": "Family Flour",
+          "product_list": "Local Sugar",
           "price": "13.4700",
           "quantity": "3.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Gluten-Free Pork Loin",
+          "product_list": "Vegan Tea",
           "price": "2.5500",
           "quantity": "1.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Premium Bread",
+          "product_list": "Premium Orange",
           "price": "7.0600",
           "quantity": "2.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Gluten-Free Rice",
+          "product_list": "Fresh Pasta",
           "price": "0.4504",
           "quantity": "0.2396",
           "description": "coupon"
         },
         {
-          "product_list": "Classic Sugar",
+          "product_list": "Imported Baguette",
           "price": "0.2095",
           "quantity": "0.3274",
           "description": "coupon"
         },
         {
-          "product_list": "Whole Ice Cream",
+          "product_list": "Imported Orange",
           "price": "0.0043",
           "quantity": "0.7277",
           "description": ""
         },
         {
-          "product_list": "Vegan Salt",
+          "product_list": "Classic Bread",
           "price": "0.0001",
           "quantity": "0.1923",
           "description": "coupon"
         },
         {
-          "product_list": "Local Chicken Breast",
+          "product_list": "Extra Sugar",
           "price": "0.0045",
           "quantity": "0.5225",
           "description": "promo"
         },
         {
-          "product_list": "Light Ice Cream",
+          "product_list": "Vegan Cucumber",
           "price": "1.3800",
           "quantity": "1.0000",
           "description": ""
         },
         {
-          "product_list": "Imported Rice",
+          "product_list": "Imported Salt",
           "price": "2.5200",
           "quantity": "1.0000",
           "description": ""
         },
         {
-          "product_list": "Fresh Toothpaste",
+          "product_list": "Light Ice Cream",
           "price": "3.0592",
           "quantity": "1.5769",
           "description": null
@@ -1514,89 +1514,89 @@
     },
     {
       "merchant": "Mercado Azul",
-      "purchase_date": "2025-10-31",
-      "barcode": "12513306918",
+      "purchase_date": "2025-11-01",
+      "barcode": "8022083968",
       "products": [
         {
-          "product_list": "Family Banana",
+          "product_list": "Whole Eggs",
           "price": "11.0000",
           "quantity": "4.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Local Tea",
+          "product_list": "Fresh Salmon Fillet",
           "price": "59.5000",
           "quantity": "5.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Imported Butter",
+          "product_list": "Whole Pasta",
           "price": "9.9000",
           "quantity": "5.0000",
           "description": null
         },
         {
-          "product_list": "Gluten-Free Rice",
+          "product_list": "Fresh Pasta",
           "price": "3.1386",
           "quantity": "2.8533",
           "description": "promo"
         },
         {
-          "product_list": "Fresh Flour",
+          "product_list": "Local Chicken Breast",
           "price": "31.2600",
           "quantity": "3.0000",
           "description": "promo"
         },
         {
-          "product_list": "Imported Rice",
+          "product_list": "Imported Salt",
           "price": "1.5400",
           "quantity": "2.0000",
           "description": null
         },
         {
-          "product_list": "Whole Salt",
+          "product_list": "Imported Flour",
           "price": "2.0400",
           "quantity": "2.0000",
           "description": ""
         },
         {
-          "product_list": "Fresh Sugar",
+          "product_list": "Light Butter",
           "price": "11.4000",
           "quantity": "6.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Whole Coffee",
+          "product_list": "Imported Butter",
           "price": "3.9300",
           "quantity": "1.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Family Chips",
+          "product_list": "Organic Eggs",
           "price": "78.6000",
           "quantity": "6.0000",
           "description": null
         },
         {
-          "product_list": "Local Pasta",
+          "product_list": "Whole Orange",
           "price": "7.9200",
           "quantity": "6.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Gluten-Free Apple",
+          "product_list": "Extra Eggs",
           "price": "11.3400",
           "quantity": "6.0000",
           "description": "promo"
         },
         {
-          "product_list": "Extra Baguette",
+          "product_list": "Light Yogurt",
           "price": "0.0010",
           "quantity": "0.4826",
           "description": "promo"
         },
         {
-          "product_list": "Classic Shampoo",
+          "product_list": "Classic Butter",
           "price": "20.3700",
           "quantity": "3.0000",
           "description": null
@@ -1605,59 +1605,59 @@
     },
     {
       "merchant": "SuperMart",
-      "purchase_date": "2025-10-29",
-      "barcode": "1443390043",
+      "purchase_date": "2025-10-30",
+      "barcode": "07796701054",
       "products": [
         {
-          "product_list": "Whole Coffee",
+          "product_list": "Imported Butter",
           "price": "34.3800",
           "quantity": "6.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Local Flour",
+          "product_list": "Light Pasta",
           "price": "0.0010",
           "quantity": "0.5504",
           "description": null
         },
         {
-          "product_list": "Premium Chicken Breast",
+          "product_list": "Fresh Pork Loin",
           "price": "3.2000",
           "quantity": "5.0000",
           "description": ""
         },
         {
-          "product_list": "Vegan Chips",
+          "product_list": "Classic Milk",
           "price": "0.0016",
           "quantity": "0.7611",
           "description": null
         },
         {
-          "product_list": "Extra Salmon Fillet",
+          "product_list": "Local Cheese",
           "price": "1.3000",
           "quantity": "1.0000",
           "description": null
         },
         {
-          "product_list": "Classic Salmon Fillet",
+          "product_list": "Fresh Sugar",
           "price": "20.2200",
           "quantity": "6.0000",
           "description": null
         },
         {
-          "product_list": "Classic Toothpaste",
+          "product_list": "Whole Shampoo",
           "price": "4.3000",
           "quantity": "2.0000",
           "description": ""
         },
         {
-          "product_list": "Fresh Toothpaste",
+          "product_list": "Light Ice Cream",
           "price": "2.6268",
           "quantity": "2.7650",
           "description": ""
         },
         {
-          "product_list": "Family Banana",
+          "product_list": "Whole Eggs",
           "price": "15.0000",
           "quantity": "6.0000",
           "description": null
@@ -1666,71 +1666,71 @@
     },
     {
       "merchant": "HiperBom",
-      "purchase_date": "2025-10-06",
-      "barcode": "9574722324",
+      "purchase_date": "2025-10-07",
+      "barcode": "071479206931",
       "products": [
         {
-          "product_list": "Vegan Sugar",
+          "product_list": "Premium Milk",
           "price": "9.7920",
           "quantity": "2.8465",
           "description": null
         },
         {
-          "product_list": "Whole Pork Loin",
+          "product_list": "Fresh Chocolate",
           "price": "9.6800",
           "quantity": "4.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Light Apple",
+          "product_list": "Imported Sugar",
           "price": "12.9972",
           "quantity": "1.1052",
           "description": ""
         },
         {
-          "product_list": "Light Salt",
+          "product_list": "Local Chocolate",
           "price": "0.0112",
           "quantity": "0.8784",
           "description": null
         },
         {
-          "product_list": "Organic Banana",
+          "product_list": "Imported Eggs",
           "price": "0.0013",
           "quantity": "0.6919",
           "description": ""
         },
         {
-          "product_list": "Premium Shampoo",
+          "product_list": "Light Bread",
           "price": "2.3100",
           "quantity": "1.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Family Bread",
+          "product_list": "Organic Salmon Fillet",
           "price": "3.6925",
           "quantity": "1.9434",
           "description": ""
         },
         {
-          "product_list": "Whole Orange",
+          "product_list": "Organic Rice",
           "price": "0.0008",
           "quantity": "0.7840",
           "description": "promo"
         },
         {
-          "product_list": "Organic Chicken Breast",
+          "product_list": "Classic Pork Loin",
           "price": "0.0021",
           "quantity": "0.9349",
           "description": ""
         },
         {
-          "product_list": "Vegan Chips",
+          "product_list": "Classic Milk",
           "price": "0.0006",
           "quantity": "0.2093",
           "description": "promo"
         },
         {
-          "product_list": "Local Salt",
+          "product_list": "Local Flour",
           "price": "6.3000",
           "quantity": "6.0000",
           "description": null
@@ -1739,41 +1739,41 @@
     },
     {
       "merchant": "EcoFoods",
-      "purchase_date": "2025-09-28",
-      "barcode": "9626280941",
+      "purchase_date": "2025-09-29",
+      "barcode": "58407319984",
       "products": [
         {
-          "product_list": "Local Pasta",
+          "product_list": "Whole Orange",
           "price": "15.0400",
           "quantity": "4.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Local Olive Oil",
+          "product_list": "Fresh Baguette",
           "price": "55.1000",
           "quantity": "5.0000",
           "description": ""
         },
         {
-          "product_list": "Classic Tea",
+          "product_list": "Vegan Cheese",
           "price": "11.8000",
           "quantity": "4.0000",
           "description": "promo"
         },
         {
-          "product_list": "Gluten-Free Rice",
+          "product_list": "Fresh Pasta",
           "price": "1.4050",
           "quantity": "1.4790",
           "description": "promo"
         },
         {
-          "product_list": "Imported Tea",
+          "product_list": "Gluten-Free Ice Cream",
           "price": "0.0030",
           "quantity": "0.9297",
           "description": "promo"
         },
         {
-          "product_list": "Family Orange",
+          "product_list": "Light Tea",
           "price": "1.4700",
           "quantity": "1.0000",
           "description": ""
@@ -1782,59 +1782,59 @@
     },
     {
       "merchant": "MiniPre\u00e7o",
-      "purchase_date": "2025-09-16",
-      "barcode": "92531316165",
+      "purchase_date": "2025-09-17",
+      "barcode": "843308605742",
       "products": [
         {
-          "product_list": "Family Shampoo",
+          "product_list": "Whole Milk",
           "price": "35.0800",
           "quantity": "4.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Fresh Coffee",
+          "product_list": "Local Apple",
           "price": "7.2900",
           "quantity": "3.0000",
           "description": ""
         },
         {
-          "product_list": "Vegan Tomato",
+          "product_list": "Whole Toothpaste",
           "price": "11.3600",
           "quantity": "4.0000",
           "description": "promo"
         },
         {
-          "product_list": "Gluten-Free Salmon Fillet",
+          "product_list": "Classic Yogurt",
           "price": "8.0400",
           "quantity": "6.0000",
           "description": ""
         },
         {
-          "product_list": "Vegan Tea",
+          "product_list": "Light Chips",
           "price": "5.4912",
           "quantity": "0.8540",
           "description": null
         },
         {
-          "product_list": "Gluten-Free Cheese",
+          "product_list": "Gluten-Free Milk",
           "price": "1.8327",
           "quantity": "1.0909",
           "description": ""
         },
         {
-          "product_list": "Fresh Yogurt",
+          "product_list": "Gluten-Free Pork Loin",
           "price": "11.8800",
           "quantity": "4.0000",
           "description": "promo"
         },
         {
-          "product_list": "Local Toothpaste",
+          "product_list": "Local Pasta",
           "price": "46.5200",
           "quantity": "4.0000",
           "description": "promo"
         },
         {
-          "product_list": "Imported Cheese",
+          "product_list": "Classic Shampoo",
           "price": "4.4497",
           "quantity": "1.6064",
           "description": null
@@ -1843,83 +1843,83 @@
     },
     {
       "merchant": "HiperBom",
-      "purchase_date": "2025-11-07",
-      "barcode": "347274128362",
+      "purchase_date": "2025-11-08",
+      "barcode": "13853164849",
       "products": [
         {
-          "product_list": "Light Chips",
+          "product_list": "Imported Ice Cream",
           "price": "0.0006",
           "quantity": "0.4577",
           "description": "coupon"
         },
         {
-          "product_list": "Local Yogurt",
+          "product_list": "Organic Shampoo",
           "price": "21.0600",
           "quantity": "6.0000",
           "description": ""
         },
         {
-          "product_list": "Classic Sugar",
+          "product_list": "Imported Baguette",
           "price": "5.9442",
           "quantity": "2.8716",
           "description": ""
         },
         {
-          "product_list": "Local Coffee",
+          "product_list": "Premium Banana",
           "price": "0.0008",
           "quantity": "0.8851",
           "description": null
         },
         {
-          "product_list": "Premium Eggs",
+          "product_list": "Light Salmon Fillet",
           "price": "1.9806",
           "quantity": "0.8574",
           "description": "coupon"
         },
         {
-          "product_list": "Vegan Laundry Detergent",
+          "product_list": "Classic Salmon Fillet",
           "price": "18.6800",
           "quantity": "2.0000",
           "description": ""
         },
         {
-          "product_list": "Family Orange",
+          "product_list": "Light Tea",
           "price": "3.1600",
           "quantity": "1.0000",
           "description": null
         },
         {
-          "product_list": "Light Milk",
+          "product_list": "Extra Pasta",
           "price": "6.2307",
           "quantity": "1.4423",
           "description": null
         },
         {
-          "product_list": "Fresh Orange",
+          "product_list": "Premium Tomato",
           "price": "4.9100",
           "quantity": "1.0000",
           "description": null
         },
         {
-          "product_list": "Extra Butter",
+          "product_list": "Fresh Olive Oil",
           "price": "0.0006",
           "quantity": "0.3640",
           "description": "promo"
         },
         {
-          "product_list": "Classic Salt",
+          "product_list": "Local Pork Loin",
           "price": "4.7200",
           "quantity": "2.0000",
           "description": "promo"
         },
         {
-          "product_list": "Classic Eggs",
+          "product_list": "Fresh Rice",
           "price": "0.0002",
           "quantity": "0.2530",
           "description": ""
         },
         {
-          "product_list": "Whole Orange",
+          "product_list": "Organic Rice",
           "price": "0.0008",
           "quantity": "0.6577",
           "description": "promo"
@@ -1928,95 +1928,95 @@
     },
     {
       "merchant": "Mercado Azul",
-      "purchase_date": "2025-09-21",
-      "barcode": "945799419821",
+      "purchase_date": "2025-09-22",
+      "barcode": "6632218880",
       "products": [
         {
-          "product_list": "Family Chicken Breast",
+          "product_list": "Fresh Milk",
           "price": "16.8703",
           "quantity": "2.8937",
           "description": ""
         },
         {
-          "product_list": "Organic Tea",
+          "product_list": "Extra Olive Oil",
           "price": "0.0014",
           "quantity": "0.8608",
           "description": ""
         },
         {
-          "product_list": "Vegan Butter",
+          "product_list": "Imported Toothpaste",
           "price": "0.0044",
           "quantity": "0.8680",
           "description": ""
         },
         {
-          "product_list": "Gluten-Free Chocolate",
+          "product_list": "Whole Olive Oil",
           "price": "26.3500",
           "quantity": "5.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Classic Toothpaste",
+          "product_list": "Whole Shampoo",
           "price": "9.1800",
           "quantity": "6.0000",
           "description": ""
         },
         {
-          "product_list": "Vegan Chips",
+          "product_list": "Classic Milk",
           "price": "0.0006",
           "quantity": "0.3470",
           "description": null
         },
         {
-          "product_list": "Light Sugar",
+          "product_list": "Gluten-Free Shampoo",
           "price": "11.5500",
           "quantity": "5.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Vegan Chocolate",
+          "product_list": "Imported Pork Loin",
           "price": "15.7400",
           "quantity": "2.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Whole Eggs",
+          "product_list": "Gluten-Free Orange",
           "price": "5.4566",
           "quantity": "0.8132",
           "description": "coupon"
         },
         {
-          "product_list": "Imported Chocolate",
+          "product_list": "Whole Cheese",
           "price": "14.0400",
           "quantity": "6.0000",
           "description": "promo"
         },
         {
-          "product_list": "Light Rice",
+          "product_list": "Fresh Bread",
           "price": "5.4659",
           "quantity": "1.9591",
           "description": null
         },
         {
-          "product_list": "Organic Shampoo",
+          "product_list": "Whole Cucumber",
           "price": "1.8850",
           "quantity": "1.0650",
           "description": "coupon"
         },
         {
-          "product_list": "Vegan Tea",
+          "product_list": "Light Chips",
           "price": "3.6685",
           "quantity": "2.2506",
           "description": "coupon"
         },
         {
-          "product_list": "Gluten-Free Salmon Fillet",
+          "product_list": "Classic Yogurt",
           "price": "9.3600",
           "quantity": "3.0000",
           "description": "promo"
         },
         {
-          "product_list": "Fresh Olive Oil",
+          "product_list": "Gluten-Free Cucumber",
           "price": "1.3200",
           "quantity": "2.0000",
           "description": "coupon"
@@ -2025,59 +2025,59 @@
     },
     {
       "merchant": "EcoFoods",
-      "purchase_date": "2025-09-16",
-      "barcode": "9126296507",
+      "purchase_date": "2025-09-17",
+      "barcode": "3648942406",
       "products": [
         {
-          "product_list": "Premium Salt",
+          "product_list": "Imported Pasta",
           "price": "18.8400",
           "quantity": "2.0000",
           "description": "promo"
         },
         {
-          "product_list": "Family Chicken Breast",
+          "product_list": "Fresh Milk",
           "price": "15.8330",
           "quantity": "2.6084",
           "description": ""
         },
         {
-          "product_list": "Premium Tomato",
+          "product_list": "Premium Chicken Breast",
           "price": "26.7000",
           "quantity": "5.0000",
           "description": ""
         },
         {
-          "product_list": "Vegan Pasta",
+          "product_list": "Organic Toothpaste",
           "price": "1.4300",
           "quantity": "1.0000",
           "description": null
         },
         {
-          "product_list": "Local Flour",
+          "product_list": "Light Pasta",
           "price": "0.0011",
           "quantity": "0.5093",
           "description": "coupon"
         },
         {
-          "product_list": "Classic Salt",
+          "product_list": "Local Pork Loin",
           "price": "9.1500",
           "quantity": "5.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Local Olive Oil",
+          "product_list": "Fresh Baguette",
           "price": "10.6100",
           "quantity": "1.0000",
           "description": ""
         },
         {
-          "product_list": "Classic Toothpaste",
+          "product_list": "Whole Shampoo",
           "price": "2.6700",
           "quantity": "1.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Light Milk",
+          "product_list": "Extra Pasta",
           "price": "4.7518",
           "quantity": "2.7627",
           "description": null
@@ -2086,59 +2086,59 @@
     },
     {
       "merchant": "HiperBom",
-      "purchase_date": "2025-08-22",
-      "barcode": "28699201910",
+      "purchase_date": "2025-08-23",
+      "barcode": "23126652475",
       "products": [
         {
-          "product_list": "Premium Chocolate",
+          "product_list": "Vegan Milk",
           "price": "7.2200",
           "quantity": "2.0000",
           "description": "promo"
         },
         {
-          "product_list": "Premium Eggs",
+          "product_list": "Light Salmon Fillet",
           "price": "2.0869",
           "quantity": "1.2882",
           "description": ""
         },
         {
-          "product_list": "Local Olive Oil",
+          "product_list": "Fresh Baguette",
           "price": "57.6000",
           "quantity": "5.0000",
           "description": "promo"
         },
         {
-          "product_list": "Organic Chips",
+          "product_list": "Classic Pasta",
           "price": "8.6800",
           "quantity": "4.0000",
           "description": ""
         },
         {
-          "product_list": "Extra Bread",
+          "product_list": "Fresh Chicken Breast",
           "price": "0.0020",
           "quantity": "0.6541",
           "description": "coupon"
         },
         {
-          "product_list": "Local Banana",
+          "product_list": "Classic Cucumber",
           "price": "0.0008",
           "quantity": "0.1294",
           "description": ""
         },
         {
-          "product_list": "Family Banana",
+          "product_list": "Whole Eggs",
           "price": "11.4800",
           "quantity": "4.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Organic Chicken Breast",
+          "product_list": "Classic Pork Loin",
           "price": "0.0006",
           "quantity": "0.1894",
           "description": "coupon"
         },
         {
-          "product_list": "Premium Cheese",
+          "product_list": "Whole Tomato",
           "price": "6.8700",
           "quantity": "1.0000",
           "description": "promo"
@@ -2147,41 +2147,41 @@
     },
     {
       "merchant": "SuperMart",
-      "purchase_date": "2025-09-22",
-      "barcode": "5906156613",
+      "purchase_date": "2025-09-23",
+      "barcode": "53691779075",
       "products": [
         {
-          "product_list": "Local Salt",
+          "product_list": "Local Flour",
           "price": "3.2500",
           "quantity": "1.0000",
           "description": "promo"
         },
         {
-          "product_list": "Gluten-Free Ice Cream",
+          "product_list": "Premium Sparkling Water",
           "price": "19.3262",
           "quantity": "2.9687",
           "description": "promo"
         },
         {
-          "product_list": "Classic Chicken Breast",
+          "product_list": "Whole Butter",
           "price": "1.8468",
           "quantity": "0.3921",
           "description": "promo"
         },
         {
-          "product_list": "Fresh Olive Oil",
+          "product_list": "Gluten-Free Cucumber",
           "price": "4.4000",
           "quantity": "5.0000",
           "description": "promo"
         },
         {
-          "product_list": "Whole Coffee",
+          "product_list": "Imported Butter",
           "price": "28.8900",
           "quantity": "3.0000",
           "description": null
         },
         {
-          "product_list": "Local Orange",
+          "product_list": "Extra Salt",
           "price": "7.8600",
           "quantity": "3.0000",
           "description": "promo"
@@ -2190,59 +2190,59 @@
     },
     {
       "merchant": "Mercado Azul",
-      "purchase_date": "2025-09-11",
-      "barcode": "79289235567",
+      "purchase_date": "2025-09-12",
+      "barcode": "60968122062",
       "products": [
         {
-          "product_list": "Fresh Eggs",
+          "product_list": "Whole Pork Loin",
           "price": "5.1300",
           "quantity": "3.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Classic Coffee",
+          "product_list": "Local Olive Oil",
           "price": "0.0005",
           "quantity": "0.1472",
           "description": null
         },
         {
-          "product_list": "Local Salt",
+          "product_list": "Local Flour",
           "price": "4.3200",
           "quantity": "6.0000",
           "description": ""
         },
         {
-          "product_list": "Organic Salt",
+          "product_list": "Classic Orange",
           "price": "20.6700",
           "quantity": "3.0000",
           "description": null
         },
         {
-          "product_list": "Gluten-Free Sparkling Water",
+          "product_list": "Local Baguette",
           "price": "7.2400",
           "quantity": "4.0000",
           "description": null
         },
         {
-          "product_list": "Local Yogurt",
+          "product_list": "Organic Shampoo",
           "price": "19.4400",
           "quantity": "6.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Organic Pork Loin",
+          "product_list": "Family Flour",
           "price": "5.7669",
           "quantity": "1.4825",
           "description": null
         },
         {
-          "product_list": "Vegan Olive Oil",
+          "product_list": "Vegan Chicken Breast",
           "price": "10.6058",
           "quantity": "2.9960",
           "description": ""
         },
         {
-          "product_list": "Vegan Tea",
+          "product_list": "Light Chips",
           "price": "9.3965",
           "quantity": "2.1211",
           "description": ""
@@ -2251,65 +2251,65 @@
     },
     {
       "merchant": "SuperMart",
-      "purchase_date": "2025-11-09",
-      "barcode": "315718344902",
+      "purchase_date": "2025-11-10",
+      "barcode": "9774434264",
       "products": [
         {
-          "product_list": "Fresh Sugar",
+          "product_list": "Light Butter",
           "price": "3.9900",
           "quantity": "3.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Classic Cheese",
+          "product_list": "Organic Milk",
           "price": "5.6316",
           "quantity": "1.4704",
           "description": null
         },
         {
-          "product_list": "Extra Shampoo",
+          "product_list": "Local Coffee",
           "price": "16.2000",
           "quantity": "6.0000",
           "description": "promo"
         },
         {
-          "product_list": "Local Chocolate",
+          "product_list": "Vegan Toothpaste",
           "price": "0.0014",
           "quantity": "0.4871",
           "description": ""
         },
         {
-          "product_list": "Whole Rice",
+          "product_list": "Gluten-Free Olive Oil",
           "price": "30.5700",
           "quantity": "3.0000",
           "description": ""
         },
         {
-          "product_list": "Classic Eggs",
+          "product_list": "Fresh Rice",
           "price": "0.0004",
           "quantity": "0.4744",
           "description": ""
         },
         {
-          "product_list": "Whole Sugar",
+          "product_list": "Imported Apple",
           "price": "25.4400",
           "quantity": "3.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Extra Pork Loin",
+          "product_list": "Premium Baguette",
           "price": "4.3000",
           "quantity": "2.0000",
           "description": ""
         },
         {
-          "product_list": "Gluten-Free Pasta",
+          "product_list": "Premium Apple",
           "price": "0.8200",
           "quantity": "1.0000",
           "description": null
         },
         {
-          "product_list": "Organic Milk",
+          "product_list": "Imported Cheese",
           "price": "0.0010",
           "quantity": "0.1839",
           "description": "coupon"
@@ -2318,35 +2318,35 @@
     },
     {
       "merchant": "Mercado Azul",
-      "purchase_date": "2025-09-09",
-      "barcode": "9098891605",
+      "purchase_date": "2025-09-10",
+      "barcode": "704961397409",
       "products": [
         {
-          "product_list": "Vegan Tea",
+          "product_list": "Light Chips",
           "price": "9.6141",
           "quantity": "1.3503",
           "description": ""
         },
         {
-          "product_list": "Gluten-Free Baguette",
+          "product_list": "Light Toothpaste",
           "price": "0.0088",
           "quantity": "0.8813",
           "description": "coupon"
         },
         {
-          "product_list": "Premium Shampoo",
+          "product_list": "Light Bread",
           "price": "15.9500",
           "quantity": "5.0000",
           "description": null
         },
         {
-          "product_list": "Light Apple",
+          "product_list": "Imported Sugar",
           "price": "10.3637",
           "quantity": "1.8182",
           "description": ""
         },
         {
-          "product_list": "Classic Salmon Fillet",
+          "product_list": "Fresh Sugar",
           "price": "6.9400",
           "quantity": "2.0000",
           "description": "coupon"
@@ -2355,41 +2355,41 @@
     },
     {
       "merchant": "EcoFoods",
-      "purchase_date": "2025-10-03",
-      "barcode": "6604292264",
+      "purchase_date": "2025-10-04",
+      "barcode": "932871552356",
       "products": [
         {
-          "product_list": "Imported Rice",
+          "product_list": "Imported Salt",
           "price": "9.8000",
           "quantity": "5.0000",
           "description": null
         },
         {
-          "product_list": "Family Salmon Fillet",
+          "product_list": "Premium Butter",
           "price": "4.2867",
           "quantity": "1.9052",
           "description": "coupon"
         },
         {
-          "product_list": "Whole Chips",
+          "product_list": "Family Banana",
           "price": "3.9400",
           "quantity": "1.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Local Pasta",
+          "product_list": "Whole Orange",
           "price": "5.1900",
           "quantity": "3.0000",
           "description": "promo"
         },
         {
-          "product_list": "Family Olive Oil",
+          "product_list": "Gluten-Free Bread",
           "price": "0.0017",
           "quantity": "0.8829",
           "description": ""
         },
         {
-          "product_list": "Gluten-Free Baguette",
+          "product_list": "Light Toothpaste",
           "price": "0.0020",
           "quantity": "0.1626",
           "description": null
@@ -2398,53 +2398,53 @@
     },
     {
       "merchant": "SuperMart",
-      "purchase_date": "2025-09-13",
-      "barcode": "03078820665",
+      "purchase_date": "2025-09-14",
+      "barcode": "965820060348",
       "products": [
         {
-          "product_list": "Gluten-Free Salt",
+          "product_list": "Classic Cheese",
           "price": "3.1808",
           "quantity": "1.1083",
           "description": null
         },
         {
-          "product_list": "Organic Sugar",
+          "product_list": "Local Chips",
           "price": "0.7200",
           "quantity": "1.0000",
           "description": null
         },
         {
-          "product_list": "Light Chips",
+          "product_list": "Imported Ice Cream",
           "price": "0.0013",
           "quantity": "0.7066",
           "description": ""
         },
         {
-          "product_list": "Light Coffee",
+          "product_list": "Whole Chips",
           "price": "10.4800",
           "quantity": "4.0000",
           "description": ""
         },
         {
-          "product_list": "Whole Eggs",
+          "product_list": "Gluten-Free Orange",
           "price": "11.3762",
           "quantity": "0.9649",
           "description": null
         },
         {
-          "product_list": "Light Bread",
+          "product_list": "Family Salt",
           "price": "0.9099",
           "quantity": "1.1665",
           "description": ""
         },
         {
-          "product_list": "Whole Shampoo",
+          "product_list": "Imported Cucumber",
           "price": "3.2335",
           "quantity": "1.6754",
           "description": "promo"
         },
         {
-          "product_list": "Classic Sugar",
+          "product_list": "Imported Baguette",
           "price": "2.6134",
           "quantity": "1.3067",
           "description": null
@@ -2453,53 +2453,53 @@
     },
     {
       "merchant": "Mercado Azul",
-      "purchase_date": "2025-10-12",
-      "barcode": "95401706557",
+      "purchase_date": "2025-10-13",
+      "barcode": "588806611681",
       "products": [
         {
-          "product_list": "Extra Eggs",
+          "product_list": "Vegan Pork Loin",
           "price": "24.9200",
           "quantity": "4.0000",
           "description": "promo"
         },
         {
-          "product_list": "Organic Chips",
+          "product_list": "Classic Pasta",
           "price": "3.0200",
           "quantity": "2.0000",
           "description": "promo"
         },
         {
-          "product_list": "Imported Rice",
+          "product_list": "Imported Salt",
           "price": "9.0500",
           "quantity": "5.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Family Chicken Breast",
+          "product_list": "Fresh Milk",
           "price": "2.8247",
           "quantity": "0.4018",
           "description": null
         },
         {
-          "product_list": "Gluten-Free Milk",
+          "product_list": "Extra Pork Loin",
           "price": "0.0009",
           "quantity": "0.4926",
           "description": null
         },
         {
-          "product_list": "Light Tea",
+          "product_list": "Local Yogurt",
           "price": "22.5057",
           "quantity": "2.6139",
           "description": ""
         },
         {
-          "product_list": "Gluten-Free Rice",
+          "product_list": "Fresh Pasta",
           "price": "3.4986",
           "quantity": "2.1866",
           "description": null
         },
         {
-          "product_list": "Vegan Eggs",
+          "product_list": "Premium Flour",
           "price": "15.6490",
           "quantity": "1.3341",
           "description": "promo"
@@ -2508,65 +2508,65 @@
     },
     {
       "merchant": "EcoFoods",
-      "purchase_date": "2025-09-22",
-      "barcode": "79509668669",
+      "purchase_date": "2025-09-23",
+      "barcode": "990687479480",
       "products": [
         {
-          "product_list": "Organic Olive Oil",
+          "product_list": "Organic Coffee",
           "price": "8.4600",
           "quantity": "6.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Imported Sugar",
+          "product_list": "Premium Olive Oil",
           "price": "10.9787",
           "quantity": "2.3815",
           "description": null
         },
         {
-          "product_list": "Light Butter",
+          "product_list": "Extra Baguette",
           "price": "8.4000",
           "quantity": "5.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Fresh Butter",
+          "product_list": "Fresh Coffee",
           "price": "0.0015",
           "quantity": "0.4160",
           "description": "promo"
         },
         {
-          "product_list": "Vegan Tea",
+          "product_list": "Light Chips",
           "price": "1.7490",
           "quantity": "0.8616",
           "description": "promo"
         },
         {
-          "product_list": "Premium Pasta",
+          "product_list": "Vegan Apple",
           "price": "19.2600",
           "quantity": "2.0000",
           "description": null
         },
         {
-          "product_list": "Extra Banana",
+          "product_list": "Organic Salt",
           "price": "7.0853",
           "quantity": "0.6960",
           "description": ""
         },
         {
-          "product_list": "Organic Rice",
+          "product_list": "Local Tea",
           "price": "15.0959",
           "quantity": "1.4991",
           "description": ""
         },
         {
-          "product_list": "Classic Yogurt",
+          "product_list": "Imported Sparkling Water",
           "price": "22.3800",
           "quantity": "6.0000",
           "description": "coupon"
         },
         {
-          "product_list": "Whole Shampoo",
+          "product_list": "Imported Cucumber",
           "price": "7.5453",
           "quantity": "2.6199",
           "description": "promo"

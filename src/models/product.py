@@ -50,7 +50,7 @@ class ProductList(Base):
         index=True
     )
 
-    product_photo = Column(String(500), nullable=True) # URL or path to the receipt photo
+    product_list_photo = Column(String(500), nullable=True) # URL or path to the receipt photo
 
     category = relationship("Category", back_populates="product_lists")
     measurement_unit = relationship("MeasurementUnit", back_populates="product_lists")

@@ -71,9 +71,9 @@ function populateReceipt(receipt) {
     renderProducts(receipt.products || []);
     
     // Image
-    if (receipt.image_path) {
+    if (receipt.receipt_photo) {
         const img = document.getElementById('receipt-image');
-        img.src = receipt.image_path;
+        img.src = receipt.receipt_photo;
         img.style.display = 'block';
         document.getElementById('no-photo-placeholder').style.display = 'none';
     }

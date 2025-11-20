@@ -1,11 +1,16 @@
 import { getProductById, updateProduct } from '../api/products_api.js';
 import { getCategories } from '../api/categories_api.js';
 import { getMeasurementUnits } from '../api/measurement_units_api.js';
+import { uploadProductPhoto } from '../api/uploads_api.js';
 
 let currentProductId = null;
 let currentProduct = null;
 let allCategories = [];
 let allUnits = [];
+let pendingPhotoRemoval = false;
+let pendingPhotoFile = null;
+let pendingPhotoPreview = null;
+
 
 /**
  * Get product ID from URL
@@ -147,6 +152,14 @@ function populateForm(product) {
         console.log('Set barcode to:', product.barcode);
     }
     
+    // Image 
+    displayCurrentPhoto(product.product_list_photo);
+
+    // Reset all pending photo changes
+    pendingPhotoRemoval = false;
+    pendingPhotoFile = null;
+    pendingPhotoPreview = null;
+
     // Add form submit listener
     form.addEventListener('submit', handleSubmit);
 }
@@ -178,17 +191,32 @@ async function handleSubmit(e) {
             alert('Volume is required');
             return;
         }
-        
+
         const updateData = {
             name: nameInput.value,
             category_id: parseInt(categorySelect.value),
             measurement_unit_id: parseInt(volumeSelect.value),
             barcode: barcodeInput.value || null
         };
+
+        // Handle photo removal if pending
+        if (pendingPhotoRemoval) {
+            updateData.product_list_photo = null;
+        }
         
         console.log('Updating product:', updateData);
         await updateProduct(currentProductId, updateData);
-        
+
+        if (pendingPhotoFile && !pendingPhotoRemoval) {
+            try {
+                const updatedProduct = await uploadProductPhoto(currentProductId, pendingPhotoFile);
+                console.log('Photo uploaded successfully:', updatedProduct);
+            } catch (photoError) {
+                console.error('Erro ao fazer upload da foto:', photoError);
+                alert('Product saved but photo upload failed: ' + photoError.message);
+            }
+        }
+
         alert('Produto atualizado com sucesso!');
         window.location.href = `view.html?id=${currentProductId}`;
     } catch (error) {
@@ -204,10 +232,130 @@ function cancelEdit() {
     window.location.href = `view.html?id=${currentProductId}`;
 }
 
-// Expose to global scope
-window.cancelEdit = cancelEdit;
+
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
     loadProduct();
+
+    // Photo upload file input change
+    const photoInput = document.getElementById('photoUpload');
+    if (photoInput) {
+        photoInput.addEventListener('change', function() {
+            if (this.files[0]) {
+                uploadPhoto(); // Automatically upload when file is selected
+            }
+        });
+    }
+
 });
+
+// Expose to global scope
+window.cancelEdit = cancelEdit;
+
+
+/**
+ * Display current photo if exists
+ */
+function displayCurrentPhoto(photoPath) {
+    const container = document.getElementById('currentPhotoContainer');
+    const img = document.getElementById('currentPhoto');
+    const uploadArea = document.getElementById('photoUploadArea');
+    
+    // Show pending photo if exists, otherwise show current photo
+    const displayPath = pendingPhotoPreview || photoPath;
+    const shouldShowPhoto = (displayPath && !pendingPhotoRemoval) || pendingPhotoFile;
+    
+    if (shouldShowPhoto) {
+        if (pendingPhotoFile) {
+            // Show pending photo preview
+            img.src = pendingPhotoPreview;
+        } else {
+            // Show current photo
+            img.src = photoPath;
+        }
+        container.style.display = 'flex';
+        uploadArea.style.display = 'none';
+    } else {
+        container.style.display = 'none';
+        uploadArea.style.display = 'flex';
+        
+        // Update upload area text based on state
+        const uploadLabel = document.getElementById('photoUploadLabel');
+        if (uploadLabel) {
+            if (pendingPhotoRemoval && currentProduct.product_list_photo) {
+                uploadLabel.innerHTML = `
+                    <div class="photo-upload-icon">⚠️</div>
+                    <div class="photo-upload-text">Photo will be removed</div>
+                `;
+            } else {
+                uploadLabel.innerHTML = `
+                    <div class="photo-upload-icon">📷</div>
+                    <div class="photo-upload-text">Upload Photo</div>
+                `;
+            }
+        }
+    }
+}
+
+/**
+ * Trigger photo upload by clicking the hidden file input
+ */
+function triggerPhotoUpload() {
+    const fileInput = document.getElementById('photoUpload');
+    fileInput.click();
+}
+
+/**
+ * Upload photo for receipt (stage for later upload)
+ */
+async function uploadPhoto() {
+    const fileInput = document.getElementById('photoUpload');
+    const file = fileInput.files[0];
+    
+    if (!file) {
+        alert('Please select a photo first');
+        return;
+    }
+    
+    // Stage the file for upload when Save Changes is clicked
+    pendingPhotoFile = file;
+    pendingPhotoRemoval = false; // Clear any pending removal
+    
+    // Create preview URL
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        pendingPhotoPreview = e.target.result;
+        displayCurrentPhoto(currentProduct.product_list_photo);
+    };
+    reader.readAsDataURL(file);
+    
+    // Clear file input
+    fileInput.value = '';
+    
+    alert('Photo staged for upload. Click "Save Changes" to apply.');
+}
+
+/**
+ * Remove current photo (staged until Save Changes)
+ */
+function removeCurrentPhoto() {
+    if (!confirm('Are you sure you want to remove this photo? Changes will be saved when you click "Save Changes".')) return;
+    
+    // Clear any pending photo upload
+    pendingPhotoFile = null;
+    pendingPhotoPreview = null;
+    
+    // Mark photo for removal but don't delete from database yet
+    pendingPhotoRemoval = true;
+    
+    // Update UI
+    displayCurrentPhoto(currentProduct.product_list_photo);
+    
+    alert('Photo marked for removal. Click "Save Changes" to apply.');
+}
+
+// Expose photo functions to global scope
+window.uploadPhoto = uploadPhoto;
+window.removeCurrentPhoto = removeCurrentPhoto;
+window.triggerPhotoUpload = triggerPhotoUpload;

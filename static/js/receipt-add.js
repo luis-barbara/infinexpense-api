@@ -1,5 +1,6 @@
 import { createReceipt } from '../api/receipts_api.js';
 import { getMerchants } from '../api/merchants_api.js';
+import { uploadReceiptPhoto } from '../api/uploads_api.js';
 
 let selectedPhotoFile = null;
 
@@ -39,15 +40,16 @@ function handlePhotoSelect(e) {
     if (!file) return;
     selectedPhotoFile = file;
     console.log('Photo selected:', file.name);
-    // Show preview
-    const reader = new FileReader();
-    reader.onload = function(event) {
-        const preview = document.querySelector('.photo-upload-label-content');
-        if (preview) {
-            preview.innerHTML = `<img src="${event.target.result}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">`;
-        }
-    };
-    reader.readAsDataURL(file);
+    
+    // Show preview in the upload label
+    const label = document.querySelector('label[for="receiptPhoto"]');
+    if (label) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            label.innerHTML = `<img src="${event.target.result}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">`;
+        };
+        reader.readAsDataURL(file);
+    }
 }
 
 /**
@@ -56,15 +58,7 @@ function handlePhotoSelect(e) {
 async function uploadPhoto(receiptId) {
     if (!selectedPhotoFile) return null;
     try {
-        const formData = new FormData();
-        formData.append('file', selectedPhotoFile);
-        const response = await fetch(`http://localhost:8000/receipts/${receiptId}/upload-photo`, {
-            method: 'POST',
-            body: formData
-        });
-        if (!response.ok) {
-            throw new Error('Failed to upload photo');
-        }
+        await uploadReceiptPhoto(receiptId, selectedPhotoFile);
         console.log('Photo uploaded successfully');
         return true;
     } catch (error) {
@@ -115,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
         form.addEventListener('submit', handleSubmit);
     }
     // Handle photo input
-    const photoInput = document.getElementById('receipt-photo');
+    const photoInput = document.getElementById('receiptPhoto');
     if (photoInput) {
         photoInput.addEventListener('change', handlePhotoSelect);
     }

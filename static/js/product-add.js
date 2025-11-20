@@ -1,6 +1,7 @@
 import { createProduct } from '../api/products_api.js';
 import { getCategories } from '../api/categories_api.js';
 import { getMeasurementUnits } from '../api/measurement_units_api.js';
+import { uploadProductPhoto } from '../api/uploads_api.js';
 
 let allCategories = [];
 let allUnits = [];
@@ -92,20 +93,8 @@ function handlePhotoSelect(e) {
  */
 async function uploadPhoto(productId) {
     if (!selectedPhotoFile) return null;
-    
     try {
-        const formData = new FormData();
-        formData.append('file', selectedPhotoFile);
-        
-        const response = await fetch(`http://localhost:8000/products/${productId}/upload-photo`, {
-            method: 'POST',
-            body: formData
-        });
-        
-        if (!response.ok) {
-            throw new Error('Failed to upload photo');
-        }
-        
+        await uploadProductPhoto(productId, selectedPhotoFile);
         console.log('Photo uploaded successfully');
         return true;
     } catch (error) {
@@ -189,7 +178,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
     
     // Handle photo input
-    const photoInput = document.getElementById('product-photo');
+    const photoInput = document.getElementById('productPhoto');
     if (photoInput) {
         photoInput.addEventListener('change', handlePhotoSelect);
     }
