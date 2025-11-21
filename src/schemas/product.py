@@ -1,3 +1,5 @@
+# src/schemas/product.py
+
 from pydantic import BaseModel, ConfigDict, Field
 from .category import Category
 from .measurement_unit import MeasurementUnit

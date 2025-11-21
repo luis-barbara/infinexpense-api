@@ -1,3 +1,5 @@
+# src/schemas/receipt.py
+
 from pydantic import BaseModel, ConfigDict, Field
 from .merchant import Merchant
 from .product import Product 
@@ -42,7 +44,6 @@ class Receipt(ReceiptBase):
         json_encoders={
             date: lambda v: v.isoformat() if v else None,
             datetime: lambda v: v.isoformat() if v else None,
-            Decimal: lambda v: float(v) if v else None
         }
     )
 

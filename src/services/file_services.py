@@ -13,11 +13,18 @@ from .crud_product_list import ProductListService
 from .crud_receipt import ReceiptService
 
 # Configurações 
-PRODUCT_UPLOAD_DIRECTORY = Path("/app/uploads/products")
-RECEIPT_UPLOAD_DIRECTORY = Path("/app/uploads/receipts")
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+PRODUCT_UPLOAD_DIRECTORY = BASE_DIR / "uploads" / "products"
+RECEIPT_UPLOAD_DIRECTORY = BASE_DIR / "uploads" / "receipts"
 
-os.makedirs(PRODUCT_UPLOAD_DIRECTORY, exist_ok=True)
-os.makedirs(RECEIPT_UPLOAD_DIRECTORY, exist_ok=True)
+
+
+#####
+# PRODUCT_UPLOAD_DIRECTORY = Path("/app/uploads/products")
+# RECEIPT_UPLOAD_DIRECTORY = Path("/app/uploads/receipts")
+
+# os.makedirs(PRODUCT_UPLOAD_DIRECTORY, exist_ok=True)
+# os.makedirs(RECEIPT_UPLOAD_DIRECTORY, exist_ok=True)
 
 # Logging
 logger = logging.getLogger(__name__)
@@ -83,7 +90,10 @@ def save_product_photo(
     # 6. Apagar foto antiga
     if db_product.product_list_photo:
         try:
-            old_file_path = os.path.join("/app", db_product.product_list_photo.lstrip('/'))
+            old_file_path = BASE_DIR / db_product.photo_url.lstrip('/')
+            
+            ########## old_file_path = os.path.join("/app", db_product.product_list_photo.lstrip('/'))
+            
             if os.path.exists(old_file_path):
                 os.remove(old_file_path)
         except Exception as e:

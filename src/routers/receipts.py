@@ -1,3 +1,5 @@
+# src/routers/receipts.py
+
 from typing import List, Optional
 from datetime import date
 from fastapi import APIRouter, Depends, status, Query, Path, HTTPException
@@ -37,7 +39,15 @@ def create_receipt(
     - **products**: List of products associated with the receipt
     Returns the created receipt.
     """
-    return ReceiptService.create_receipt(db, receipt)
+    try:
+        return ReceiptService.create_receipt(db, receipt)
+    except ValueError as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(e)
+        )
+ 
+    
 
 
 
@@ -85,7 +95,7 @@ def get_receipt_by_filter(
 )
 def get_receipt_by_id(
     receipt_id: int = Path(..., gt=0, description="The ID of the receipt to retrieve"),
-    db:  Session = Depends(get_db)
+    db: Session = Depends(get_db)
 ):
     """
     Retrive a receipt by its unique ID.
@@ -98,7 +108,13 @@ def get_receipt_by_id(
     - Barcode (if available)
     - List of products associated with the receipt
     """
-    return ReceiptService.get_receipt_by_id(db, receipt_id)
+    try:
+        return ReceiptService.get_receipt_by_id(db, receipt_id)
+    except ValueError as e:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Receipt not found" 
+        )
 
 
 
