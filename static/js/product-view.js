@@ -74,6 +74,14 @@ function populateProduct(product) {
     if (barcodeEl) {
         barcodeEl.textContent = product.barcode || '-';
     }
+    
+    // Product photo
+    if (product.product_list_photo) {
+        const img = document.getElementById('product-image');
+        img.src = product.product_list_photo;
+        img.style.display = 'block';
+        document.getElementById('no-photo-placeholder').style.display = 'none';
+    }
 }
 
 /**

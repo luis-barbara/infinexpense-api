@@ -15,6 +15,12 @@ class ReceiptBase(BaseModel):
         max_length=20, 
         description="Barcode from receipt (optional)"
     )
+    receipt_photo: str | None = Field(
+        default=None, 
+        max_length=500, 
+        description="Path to receipt photo (optional)"
+    )
+
 
 class ReceiptCreate(ReceiptBase):
     pass
@@ -23,10 +29,12 @@ class ReceiptUpdate(BaseModel):
     merchant_id: int | None = None
     purchase_date: date | None = None
     barcode: str | None = Field(default=None, max_length=20)
+    receipt_photo: str | None = Field(default=None, max_length=500)
 
 class Receipt(ReceiptBase):
     id: int
-    total_price: Decimal 
+    total_price: Decimal
+    receipt_photo: str | None = None
     merchant: Merchant
     products: List[Product] = []
     created_at: datetime
@@ -38,3 +46,4 @@ class Receipt(ReceiptBase):
             datetime: lambda v: v.isoformat() if v else None,
         }
     )
+

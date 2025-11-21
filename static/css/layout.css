@@ -21,6 +21,17 @@
     height: var(--navbar-height);
 }
 
+.nav-brand-container {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.nav-logo {
+    height: 32px;
+    width: auto;
+}
+
 .nav-brand {
     font-size: var(--font-size-xl);
     font-weight: var(--font-weight-bold);

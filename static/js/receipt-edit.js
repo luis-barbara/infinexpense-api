@@ -1,11 +1,15 @@
 import { getReceiptById, updateReceipt, deleteReceipt, updateReceiptProducts } from '../api/receipts_api.js';
 import { getMerchants } from '../api/merchants_api.js';
 import { getProducts } from '../api/products_api.js';
+import { uploadReceiptPhoto } from '../api/uploads_api.js';
 
 let currentReceiptId = null;
 let currentReceipt = null;
 let allMerchants = [];
 let allProducts = [];
+let pendingPhotoRemoval = false; // Track if photo removal is pending
+let pendingPhotoFile = null; // Track new photo file waiting to be uploaded
+let pendingPhotoPreview = null; // Track preview URL for pending photo
 
 /**
  * Get receipt ID from URL
@@ -132,6 +136,14 @@ function populateForm(receipt) {
     const notesField = document.getElementById('receiptNotes');
     notesField.value = receipt.notes || '';
     console.log('Set receiptNotes to:', notesField.value);
+    
+    // Photo
+    displayCurrentPhoto(receipt.receipt_photo);
+    
+    // Reset all pending photo changes
+    pendingPhotoRemoval = false;
+    pendingPhotoFile = null;
+    pendingPhotoPreview = null;
     
     // Render products
     renderProducts(receipt.products || []);
@@ -334,8 +346,25 @@ async function handleSubmit(e) {
             notes: document.getElementById('receiptNotes').value || null
         };
 
-        // Update receipt metadata
+        // Handle photo removal if pending
+        if (pendingPhotoRemoval) {
+            receiptData.receipt_photo = null;
+        }
+
+        // Update receipt metadata first
         await updateReceipt(currentReceiptId, receiptData);
+        
+        // Handle photo upload if pending
+        if (pendingPhotoFile && !pendingPhotoRemoval) {
+            try {
+                const updatedReceipt = await uploadReceiptPhoto(currentReceiptId, pendingPhotoFile);
+                console.log('Photo uploaded successfully:', updatedReceipt.receipt_photo);
+            } catch (photoError) {
+                console.error('Erro ao fazer upload da foto:', photoError);
+                alert('Erro ao fazer upload da foto: ' + photoError.message);
+                // Continue with the rest of the save process
+            }
+        }
         
         // Get products from form
         const products = getProductsFromForm();
@@ -406,7 +435,123 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+    
+    // Photo upload file input change
+    const photoInput = document.getElementById('photoUpload');
+    if (photoInput) {
+        photoInput.addEventListener('change', function() {
+            if (this.files[0]) {
+                uploadPhoto(); // Automatically upload when file is selected
+            }
+        });
+    }
 });
 
 // Expose to global scope
 window.deleteCurrentReceipt = deleteCurrentReceipt;
+
+/**
+ * Display current photo if exists
+ */
+function displayCurrentPhoto(photoPath) {
+    const container = document.getElementById('currentPhotoContainer');
+    const img = document.getElementById('currentPhoto');
+    const uploadArea = document.getElementById('photoUploadArea');
+    
+    // Show pending photo if exists, otherwise show current photo
+    const displayPath = pendingPhotoPreview || photoPath;
+    const shouldShowPhoto = (displayPath && !pendingPhotoRemoval) || pendingPhotoFile;
+    
+    if (shouldShowPhoto) {
+        if (pendingPhotoFile) {
+            // Show pending photo preview
+            img.src = pendingPhotoPreview;
+        } else {
+            // Show current photo
+            img.src = photoPath;
+        }
+        container.style.display = 'block';
+        uploadArea.style.display = 'none';
+    } else {
+        container.style.display = 'none';
+        uploadArea.style.display = 'block';
+        
+        // Update upload area text based on state
+        const uploadLabel = document.getElementById('photoUploadLabel');
+        if (uploadLabel) {
+            if (pendingPhotoRemoval && currentReceipt.receipt_photo) {
+                uploadLabel.innerHTML = `
+                    <div class="photo-upload-icon">⚠️</div>
+                    <div class="photo-upload-text">Photo will be removed</div>
+                `;
+            } else {
+                uploadLabel.innerHTML = `
+                    <div class="photo-upload-icon">📷</div>
+                    <div class="photo-upload-text">Upload Photo</div>
+                `;
+            }
+        }
+    }
+}
+
+/**
+ * Trigger photo upload by clicking the hidden file input
+ */
+function triggerPhotoUpload() {
+    const fileInput = document.getElementById('photoUpload');
+    fileInput.click();
+}
+
+/**
+ * Upload photo for receipt (stage for later upload)
+ */
+async function uploadPhoto() {
+    const fileInput = document.getElementById('photoUpload');
+    const file = fileInput.files[0];
+    
+    if (!file) {
+        alert('Please select a photo first');
+        return;
+    }
+    
+    // Stage the file for upload when Save Changes is clicked
+    pendingPhotoFile = file;
+    pendingPhotoRemoval = false; // Clear any pending removal
+    
+    // Create preview URL
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        pendingPhotoPreview = e.target.result;
+        displayCurrentPhoto(currentReceipt.receipt_photo);
+    };
+    reader.readAsDataURL(file);
+    
+    // Clear file input
+    fileInput.value = '';
+    
+    alert('Photo staged for upload. Click "Save Changes" to apply.');
+}
+
+/**
+ * Remove current photo (staged until Save Changes)
+ */
+function removeCurrentPhoto() {
+    if (!confirm('Are you sure you want to remove this photo? Changes will be saved when you click "Save Changes".')) return;
+    
+    // Clear any pending photo upload
+    pendingPhotoFile = null;
+    pendingPhotoPreview = null;
+    
+    // Mark photo for removal but don't delete from database yet
+    pendingPhotoRemoval = true;
+    
+    // Update UI
+    displayCurrentPhoto(currentReceipt.receipt_photo);
+    
+    alert('Photo marked for removal. Click "Save Changes" to apply.');
+}
+
+// Expose photo functions to global scope
+window.uploadPhoto = uploadPhoto;
+window.removeCurrentPhoto = removeCurrentPhoto;
+window.triggerPhotoUpload = triggerPhotoUpload;

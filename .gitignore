@@ -1,0 +1,7 @@
+.poetry
+.vscode
+__pycache__/
+env/
+*.pyc
+*.pyo
+*.pyd

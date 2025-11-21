@@ -18,6 +18,11 @@ class ProductListBase(BaseModel):
         max_length=50, 
         description="Barcode of the product (optional, unique)"
     )
+    product_list_photo: str | None = Field(
+        default=None, 
+        max_length=500, 
+        description="Path to receipt photo (optional)"
+    )
     measurement_unit_id: int 
     category_id: int 
 
@@ -36,12 +41,17 @@ class ProductListUpdate(BaseModel):
         max_length=50,
         description="New barcode for the product (optional)"
     )
+    product_list_photo: Optional[str] = Field(
+        default=None, 
+        max_length=500,
+    )
     measurement_unit_id: Optional[int] = None
     category_id: Optional[int] = None
 
 class ProductList(ProductListBase):
     id: int
-    category: Category 
+    category: Category
+    product_list_photo: Optional[str] = None
     measurement_unit: MeasurementUnit 
     model_config = ConfigDict(from_attributes=True)
 
