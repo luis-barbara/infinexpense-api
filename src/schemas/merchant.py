@@ -25,5 +25,5 @@ class Merchant(MerchantBase):
     id: int
     image_path: Optional[str] = None
 
-    class Config:
+    class ConfigDict:
         from_attributes = True

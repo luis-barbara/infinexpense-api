@@ -25,7 +25,7 @@ class MerchantService:
     # Create
     @staticmethod
     def create_merchant(db: Session, merchant: merchant_schema.MerchantCreate) -> merchant_model.Merchant:
-        db_merchant = merchant_model.Merchant(**merchant.dict())
+        db_merchant = merchant_model.Merchant(**merchant.model_dump())
         db.add(db_merchant)
         db.commit()
         db.refresh(db_merchant)
@@ -39,7 +39,7 @@ class MerchantService:
         ).first()
         
         if db_merchant:
-            update_data = merchant_update.dict(exclude_unset=True)
+            update_data = merchant_update.model_dump(exclude_unset=True)
             for key, value in update_data.items():
                 setattr(db_merchant, key, value)
             db.commit()

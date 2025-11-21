@@ -41,7 +41,7 @@ class ProductListService:
     # Create
     @staticmethod
     def create_product_list(db: Session, product: product_list_schema.ProductListCreate):  # CORRIGE AQUI
-        db_product = product_list_model.ProductList(**product.dict())
+        db_product = product_list_model.ProductList(**product.model_dump())
         db.add(db_product)
         try:
             db.commit()
@@ -62,7 +62,7 @@ class ProductListService:
         ).first()
         
         if db_product:
-            update_data = product_update.dict(exclude_unset=True)
+            update_data = product_update.model_dump(exclude_unset=True)
             for key, value in update_data.items():
                 setattr(db_product, key, value)
             db.commit()

@@ -12,6 +12,10 @@ RUN pip install -r requirements.txt
 
 RUN poetry install --no-root
 
+# Create uploads directories with proper permissions
+RUN mkdir -p /app/uploads/products /app/uploads/receipts && \
+    chmod -R 755 /app/uploads
+
 # Add entrypoint script to a location that won't be overwritten
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
