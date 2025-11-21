@@ -75,10 +75,35 @@
     }
 
     /**
+     * Load dark mode CSS and JS
+     * @param {string} basePath - Base path for URLs
+     */
+    function loadDarkMode(basePath) {
+        // Load dark mode CSS if not already loaded
+        if (!document.querySelector('link[href*="dark-mode.css"]')) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = `${basePath}css/dark-mode.css`;
+            document.head.appendChild(link);
+        }
+        
+        // Load and initialize dark mode JavaScript if not already loaded
+        if (!document.querySelector('script[src*="dark-mode-toggle.js"]')) {
+            const script = document.createElement('script');
+            script.src = `${basePath}js/dark-mode-toggle.js`;
+            document.head.appendChild(script);
+        }
+    }
+
+    /**
      * Initialize template loading on DOM ready
      */
     function init() {
         const basePath = getBasePath();
+        
+        // Load dark mode automatically
+        loadDarkMode(basePath);
+        
         const templateElements = document.querySelectorAll('[data-template]');
         
         templateElements.forEach(element => {

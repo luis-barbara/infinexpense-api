@@ -31,6 +31,7 @@
 /* ========== Core Styles (Load First) ========== */
 @import 'variables.css';
 @import 'reset.css';
+@import 'dark-mode.css';
 
 /* ========== Layout & Structure ========== */
 @import 'layout.css';
