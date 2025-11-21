@@ -10,6 +10,8 @@ from src.services import file_services
 from src.schemas import product as schema_product 
 from src.schemas import receipt as schema_receipt 
 
+logger = logging.getLogger(__name__)
+
 
 router = APIRouter(
     prefix="/uploads", 
@@ -50,7 +52,7 @@ def upload_product_list_photo(
     except HTTPException as e:
         raise e
     except Exception as e:
-        logging.error(f"Erro inesperado no upload de foto para product_list_id {product_list_id}: {e}")
+        logger.error(f"Unexpected error uploading photo for product_list_id {product_list_id}: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Ocorreu um erro inesperado no servidor."
@@ -89,7 +91,7 @@ def upload_receipt_photo(
     except HTTPException as e:
         raise e
     except Exception as e:
-        logging.error(f"Erro inesperado no upload de foto para receipt_id {receipt_id}: {e}")
+        logger.error(f"Unexpected error uploading photo for receipt_id {receipt_id}: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Ocorreu um erro inesperado no servidor."

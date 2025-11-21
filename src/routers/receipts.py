@@ -5,6 +5,7 @@ from datetime import date
 from fastapi import APIRouter, Depends, status, Query, Path, HTTPException
 from sqlalchemy.orm import Session
 from fastapi import Body
+import logging
 
 from src.database import get_db
 from src.schemas.receipt import (
@@ -13,6 +14,10 @@ from src.schemas.receipt import (
     Receipt as ReceiptSchema
 )
 from src.services.crud_receipt import ReceiptService
+
+
+logger = logging.getLogger(__name__)
+
 
 router = APIRouter(
     prefix="/receipts",
@@ -42,9 +47,16 @@ def create_receipt(
     try:
         return ReceiptService.create_receipt(db, receipt)
     except ValueError as e:
+        logger.warning(f"Validation error creating receipt: {str(e)}")
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=str(e)
+        )
+    except Exception as e:
+        logger.error(f"Error in create_receipt endpoint: {str(e)}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Error creating receipt"
         )
  
     
@@ -76,16 +88,22 @@ def get_receipt_by_filter(
 
     Returns a list of receipts matching the criteria.
     """
-    return ReceiptService.get_receipts(
-        db=db, 
-        skip=skip, 
-        limit=limit, 
-        merchant_id=merchant_id, 
-        barcode=barcode, 
-        start_date=start_date, 
-        end_date=end_date
-    )
-
+    try:
+        return ReceiptService.get_receipts(
+            db=db, 
+            skip=skip, 
+            limit=limit, 
+            merchant_id=merchant_id, 
+            barcode=barcode, 
+            start_date=start_date, 
+            end_date=end_date
+        )
+    except Exception as e:
+        logger.error(f"Error in get_receipt_by_filter endpoint: {str(e)}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Error fetching receipts"
+        )
 
 
 @router.get(
@@ -111,9 +129,16 @@ def get_receipt_by_id(
     try:
         return ReceiptService.get_receipt_by_id(db, receipt_id)
     except ValueError as e:
+        logger.warning(f"Receipt not found: {receipt_id}")
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Receipt not found" 
+        )
+    except Exception as e:
+        logger.error(f"Error fetching receipt {receipt_id}: {str(e)}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Error fetching receipt"
         )
 
 
@@ -134,8 +159,14 @@ def get_receipts_products(
 
     Returns a list of products linked to the specified receipt.
     """
-    return ReceiptService.get_receipt_products(db, receipt_id)
-
+    try:
+        return ReceiptService.get_receipt_products(db, receipt_id)
+    except Exception as e:
+        logger.error(f"Error fetching products for receipt {receipt_id}: {str(e)}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Error fetching receipt products"
+        )
 
 
 @router.get(
@@ -158,7 +189,23 @@ def get_receipt_by_barcode(
     - Barcode
     - List of products associated with the receipt
     """
-    return ReceiptService.get_receipt_by_barcode(db, barcode)
+    try:
+        receipt = ReceiptService.get_receipt_by_barcode(db, barcode)
+        if not receipt:
+            logger.warning(f"Receipt not found with barcode: {barcode}")
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Receipt not found"
+            )
+        return receipt
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error fetching receipt by barcode {barcode}: {str(e)}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Error fetching receipt"
+        )
 
 
 
@@ -180,7 +227,14 @@ def get_receipts_by_merchant(
 
     Returns a list of receipts linked to the specified merchant.
     """
-    return ReceiptService.get_receipts_by_merchant(db, merchant_id)
+    try:
+        return ReceiptService.get_receipts_by_merchant(db, merchant_id)
+    except Exception as e:
+        logger.error(f"Error fetching receipts for merchant {merchant_id}: {str(e)}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Error fetching receipts"
+        )
 
 
 
@@ -203,7 +257,21 @@ def update_receipt(
     - **barcode**: Updated optional barcode number for the receipt
     Returns the updated receipt.
     """
-    return ReceiptService.update_receipt(db, receipt_id, receipt_update)
+    try:
+        return ReceiptService.update_receipt(db, receipt_id, receipt_update)
+    except ValueError as e:
+        logger.warning(f"Validation error updating receipt {receipt_id}: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(e)
+        )
+    except Exception as e:
+        logger.error(f"Error updating receipt {receipt_id}: {str(e)}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Error updating receipt"
+        )
+    
 
 @router.put(
     "/{receipt_id}/products",
@@ -218,7 +286,21 @@ def update_receipt_products(
     """
     Update all products for a receipt.
     """
-    return ReceiptService.update_receipt_products(db, receipt_id, products_data.get("products", []))
+    try:
+        return ReceiptService.update_receipt_products(db, receipt_id, products_data.get("products", []))
+    except ValueError as e:
+        logger.warning(f"Validation error updating products for receipt {receipt_id}: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(e)
+        )
+    except Exception as e:
+        logger.error(f"Error updating products for receipt {receipt_id}: {str(e)}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Error updating receipt products"
+        )
+    
 
 @router.delete(
     "/{receipt_id}",
@@ -236,5 +318,18 @@ def delete_receipt(
 
     This operation will remove the receipt and all associated products from the database.
     """
-    ReceiptService.delete_receipt(db, receipt_id)
-    return None
+    try:
+        ReceiptService.delete_receipt(db, receipt_id)
+        return None
+    except ValueError as e:
+        logger.warning(f"Receipt not found for deletion: {receipt_id}")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Receipt not found"
+        )
+    except Exception as e:
+        logger.error(f"Error deleting receipt {receipt_id}: {str(e)}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Error deleting receipt"
+        )
