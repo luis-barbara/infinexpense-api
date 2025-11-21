@@ -4,7 +4,7 @@ A lightweight FastAPI backend for tracking receipts, merchants, products and cat
 
 ## TL;DR
 
-- **Start development stack:** `docker-compose up --build`
+- **Start development stack:** `docker compose up --build`
 - **API:** `http://localhost:8000`
 - **Swagger UI:** `http://localhost:8000/docs`
 
@@ -240,7 +240,7 @@ def get_db():
 
 ### 7️⃣ `settings.py` — Configuration
 - Uses Pydantic BaseSettings to read environment variables
-- Defaults match `docker-compose.yaml` for local development
+- Defaults match `docker compose.yaml` for local development
 
 Example (`src/settings.py`):
 ```python
@@ -321,7 +321,7 @@ def create_product_list(db: Session, product):
 1. Start development stack (recommended):
 
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
 
 2. API: `http://localhost:8000`
@@ -344,7 +344,7 @@ The application reads DB configuration from environment variables (used by `src/
 - `DATABASE_PORT` (default: `5432`)
 - `DATABASE_NAME` (default: `db`)
 
-These are configured already in `docker-compose.yaml` for the development stack.
+These are configured already in `docker compose.yaml` for the development stack.
 
 ## Quickstart (Docker Compose)
 Recommended for local development — sets up API, Postgres and Adminer.
@@ -352,7 +352,7 @@ Recommended for local development — sets up API, Postgres and Adminer.
 1. Build and start services:
 
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
 
 2. API will be available at: `http://localhost:8000`
@@ -361,7 +361,7 @@ docker-compose up --build
 - Swagger UI: `http://localhost:8000/docs`
 - Redoc: `http://localhost:8000/redoc`
 
-4. Adminer (DB GUI) is exposed on host port `5432` mapped to container port `8080` in `docker-compose.yml`. This can conflict with a local Postgres instance that also listens on `5432`; consider changing the host mapping (for example to `8080:8080`) to avoid port collisions.
+4. Adminer (DB GUI) is exposed on host port `5432` mapped to container port `8080` in `docker compose.yml`. This can conflict with a local Postgres instance that also listens on `5432`; consider changing the host mapping (for example to `8080:8080`) to avoid port collisions.
 
 ## Run locally (without Docker)
 If you prefer running locally in a virtualenv or via Poetry:
@@ -381,7 +381,7 @@ poetry install
 poetry run uvicorn src.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-2. Ensure a Postgres instance is running and environment variables point to it, or use the `docker-compose` database service.
+2. Ensure a Postgres instance is running and environment variables point to it, or use the `docker compose` database service.
 
 ## Database and Migrations (Alembic)
 The database URL is assembled in `src/database.py` from `src/settings.py` (environment variables listed above).
@@ -409,7 +409,7 @@ Alembic configuration lives in `alembic.ini` and migration scripts are in `alemb
 Key files and folders:
 
 - `pyproject.toml` — project metadata and dependencies
-- `docker-compose.yaml` — containerized development services (api, database, adminer)
+- `docker compose.yaml` — containerized development services (api, database, adminer)
 - `ops/poetry.Dockerfile` — Dockerfile used by the `api` service in compose
 - `src/` — Python application code
 	- `main.py` — FastAPI application factory and router mounting
@@ -455,7 +455,7 @@ The following section explains the purpose and key functionality of the main fil
 
 **Top-level files**
 - `pyproject.toml`: Project metadata and dependency declarations. Lists runtime dependencies (FastAPI, SQLAlchemy, Alembic, psycopg2-binary, etc.) and Python version requirement (>=3.12).
-- `docker-compose.yaml`: Development stack that spins up the `api` service (built using `ops/poetry.Dockerfile`), a `database` service (Postgres 17) and `adminer` for DB browsing. It mounts the repo into the container for fast local development.
+- `docker compose.yaml`: Development stack that spins up the `api` service (built using `ops/poetry.Dockerfile`), a `database` service (Postgres 17) and `adminer` for DB browsing. It mounts the repo into the container for fast local development.
 - `alembic.ini`: Alembic configuration for database migrations. Points to `alembic/` for migration scripts.
 
 **`ops/`**
@@ -469,7 +469,7 @@ The following section explains the purpose and key functionality of the main fil
 	- Registers routers for receipts, products, categories, merchants, measurement units, reports and uploads.
 	- Adds `CORSMiddleware` preconfigured for typical localhost frontend development ports.
 - `src/settings.py`:
-	- Pydantic `BaseSettings` class for loading environment variables. Fields mirror the `docker-compose.yaml` environment variables for DB configuration (driver, username, password, host, port, name).
+	- Pydantic `BaseSettings` class for loading environment variables. Fields mirror the `docker compose.yaml` environment variables for DB configuration (driver, username, password, host, port, name).
 	- Instantiates `settings` which is used by `src/database.py`.
 - `src/database.py`:
 	- Builds the SQLAlchemy database URL from `settings`.
