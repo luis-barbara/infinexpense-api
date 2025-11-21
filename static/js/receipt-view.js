@@ -107,9 +107,9 @@ function renderProducts(products) {
         item.innerHTML = `
             <div class="list-item-value">${product.product_list?.name || '-'}</div>
             <div class="list-item-value">${product.product_list?.category?.name || '-'}</div>
-            <div class="list-item-value">${product.product_list?.barcode || '-'}</div>
             <div class="list-item-value">${quantity.toFixed(2)}</div>
             <div class="list-item-value">${price.toFixed(2)} €</div>
+            <div class="list-item-value">${(quantity*price).toFixed(2)} €</div>
         `;
         
         container.appendChild(item);

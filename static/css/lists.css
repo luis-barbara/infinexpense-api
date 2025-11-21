@@ -22,7 +22,7 @@
 
 .list-row {
     display: grid;
-    grid-template-columns: 1.35fr 0.9fr 1fr 0.9fr 0.7fr;
+    grid-template-columns: 1.2fr 0.75fr 0.9fr 0.6fr 0.6fr;
     border-bottom: 1px solid #e5e7eb;
     align-items: center;
     text-align: center;
