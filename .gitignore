@@ -8,3 +8,5 @@ env/
 ./uploads/
 /uploads/
 sample.json
+.venv
+.pytest_cache/
