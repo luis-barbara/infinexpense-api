@@ -23,9 +23,15 @@
      */
     function getBasePath() {
         const path = window.location.pathname;
-        const depth = path.split('/').filter(p => p && p !== 'static').length - 1;
+        console.log('Current path:', path); // Debug log
         
-        if (depth === 0) return ''; // Root level (index.html)
+        // If we're at root (/) or /index.html, use empty base path
+        if (path === '/' || path === '/index.html') {
+            return '';
+        }
+        
+        // For other paths, calculate depth
+        const depth = path.split('/').filter(p => p && p !== 'static').length - 1;
         return '../'.repeat(depth);
     }
 
@@ -37,13 +43,18 @@
      */
     async function loadTemplate(element, templateName, basePath) {
         try {
-            const response = await fetch(`${basePath}templates/${templateName}.html`);
-            if (!response.ok) throw new Error(`Template ${templateName} not found`);
+            const templatePath = basePath === '' ? `/templates/${templateName}.html` : `${basePath}templates/${templateName}.html`;
+            console.log('Loading template from:', templatePath); // Debug log
+            
+            const response = await fetch(templatePath);
+            if (!response.ok) throw new Error(`Template ${templateName} not found at ${templatePath}`);
             
             let html = await response.text();
             
             // Replace {BASE_PATH} placeholder with actual base path
-            html = html.replace(/{BASE_PATH}/g, basePath);
+            const replacementPath = basePath === '' ? '/' : basePath;
+            html = html.replace(/{BASE_PATH}/g, replacementPath);
+            console.log('Replaced BASE_PATH with:', replacementPath); // Debug log
             
             // Inject the template
             element.innerHTML = html;

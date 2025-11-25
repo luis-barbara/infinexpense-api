@@ -59,8 +59,17 @@ app.include_router(uploads.router)
 
 
 # Montagem de Ficheiros Estáticos (Static Files)
-# Para o Frontend (HTML/CSS/JS)
-app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+# Serving static assets without /static prefix for cleaner URLs
+app.mount("/css", StaticFiles(directory=str(STATIC_DIR / "css")), name="css")
+app.mount("/js", StaticFiles(directory=str(STATIC_DIR / "js")), name="js")
+app.mount("/images", StaticFiles(directory=str(STATIC_DIR / "images")), name="images")
+app.mount("/templates", StaticFiles(directory=str(STATIC_DIR / "templates")), name="templates")
+app.mount("/api", StaticFiles(directory=str(STATIC_DIR / "api")), name="api")
+app.mount("/category", StaticFiles(directory=str(STATIC_DIR / "category")), name="category")
+app.mount("/merchant", StaticFiles(directory=str(STATIC_DIR / "merchant")), name="merchant")
+app.mount("/product", StaticFiles(directory=str(STATIC_DIR / "product")), name="product")
+app.mount("/receipt", StaticFiles(directory=str(STATIC_DIR / "receipt")), name="receipt")
+app.mount("/docs", StaticFiles(directory=str(STATIC_DIR / "docs")), name="docs")
 
 # Para as Fotos dos Produtos
 app.mount("/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
@@ -72,6 +81,16 @@ def read_root():
     """
     Serve a página principal (index.html) do teu frontend
     que está na pasta /static.
+    """
+    index_path = STATIC_DIR / "index.html"
+    if not index_path.is_file():
+        return {"error": "index.html not found in static directory"}, 404
+    return FileResponse(index_path)
+
+@app.get("/index.html", include_in_schema=False)
+def read_index():
+    """
+    Alternative route to serve index.html directly at /index.html
     """
     index_path = STATIC_DIR / "index.html"
     if not index_path.is_file():
