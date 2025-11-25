@@ -18,7 +18,7 @@ A lightweight FastAPI backend for tracking receipts, merchants, products and cat
 - [API notes](#api-notes)
 - [Development tips](#development-tips)
 - [Detailed Code Reference](#detailed-code-reference)
- - [Examples](#examples)
+- [Examples](#examples)
 
 ## Examples
 
@@ -63,7 +63,7 @@ curl -s http://localhost:8000/receipts
 
 Notes:
 - Replace IDs (`merchant_id`, `product_list_id`, `receipt_id`) with values returned by the API.
-- If you run the app with Docker Compose the API base URL is `http://localhost:8000`.
+- If you run the app with docker compose the API base URL is `http://localhost:8000`.
 
 ## 🏗️ FastAPI Architecture — Complete Guide
 
@@ -332,7 +332,7 @@ docker compose up --build
 
 ## Requirements
 - Python >= 3.12
-- Docker & Docker Compose (for containerized setup)
+- Docker & docker compose (for containerized setup)
 
 ## Environment variables
 The application reads DB configuration from environment variables (used by `src/settings.py`).
@@ -344,9 +344,9 @@ The application reads DB configuration from environment variables (used by `src/
 - `DATABASE_PORT` (default: `5432`)
 - `DATABASE_NAME` (default: `db`)
 
-These are configured already in `docker compose.yaml` for the development stack.
+These are configured in `docker compose.yaml` for the development stack.
 
-## Quickstart (Docker Compose)
+## Quickstart (docker compose)
 Recommended for local development — sets up API, Postgres and Adminer.
 
 1. Build and start services:
@@ -355,13 +355,13 @@ Recommended for local development — sets up API, Postgres and Adminer.
 docker compose up --build
 ```
 
-2. API will be available at: `http://localhost:8000`
+2. API is available at: `http://localhost:8000`
 
 3. FastAPI interactive docs:
 - Swagger UI: `http://localhost:8000/docs`
 - Redoc: `http://localhost:8000/redoc`
 
-4. Adminer (DB GUI) is exposed on host port `5432` mapped to container port `8080` in `docker compose.yml`. This can conflict with a local Postgres instance that also listens on `5432`; consider changing the host mapping (for example to `8080:8080`) to avoid port collisions.
+4. Adminer (DB GUI) is exposed on host port `5432` mapped to container port `8080` in `docker compose.yaml`. This can conflict with a local Postgres instance that also listens on `5432`; consider changing the host mapping (for example to `8080:8080`) to avoid port collisions.
 
 ## Run locally (without Docker)
 If you prefer running locally in a virtualenv or via Poetry:
@@ -433,10 +433,42 @@ Key files and folders:
 - Use the existing `static/docs/API_INTEGRATION_GUIDE.md` for frontend integration examples and API expectations.
 
 ## Tests
-There are no automated tests included in the repo currently. Recommended next steps:
+An automated test suite is included under `tests/` (FastAPI + pytest).
 
-- Add unit tests for service/crud functions (pytest + test database fixture)
-- Add simple integration tests for API endpoints (httpx or requests + test DB)
+Key points:
+- Tests live in the `tests/` folder: `tests/test_products.py`, `tests/test_receipts.py` and `tests/conftest.py`.
+- Tests use `fastapi.testclient.TestClient` and an in-memory SQLite database (see `tests/conftest.py`).
+	- The test fixtures override the `get_db` dependency so tests run entirely in-process — no Docker or external Postgres required.
+- The project lists `pytest` in `pyproject.toml` so running tests is straightforward.
+
+Run tests (recommended via Poetry):
+
+```bash
+# install deps (once)
+poetry install
+
+# run the full test suite
+poetry run pytest -q
+```
+
+Run a single test file or single test function:
+
+```bash
+# single file
+poetry run pytest tests/test_products.py -q
+
+# single test function
+poetry run pytest tests/test_products.py::test_create_product -q
+```
+
+Notes for contributors:
+- Tests use an in-memory SQLite database and `Base.metadata.create_all()` / `drop_all()` per test function; the DB state is isolated between tests.
+- If you need to run tests against Postgres (for integration testing), set up a test database and adjust `get_db` dependency accordingly or run the test suite inside a container that exposes the DB. Most unit-level and API contract tests will run faster and reliably using the current in-memory setup.
+- The existing test coverage focuses on core API endpoints (products, receipts) and demonstrates fixtures for reusable setup (`client`, `db`, `test_category`, `test_unit`). Use `tests/conftest.py` as a template for adding more fixtures.
+
+Recommended follow-ups (optional):
+- Add `coverage` reporting (`coverage` or `pytest-cov`) and a CI job to run tests on pull requests.
+- Add a `Makefile` or `scripts/` entry to run `poetry run pytest` and export coverage reports.
 
 ## Contributing
 - Fork the repo and open a pull request for changes.
