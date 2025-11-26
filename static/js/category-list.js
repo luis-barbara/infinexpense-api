@@ -214,18 +214,22 @@ function setupEventListeners() {
         searchInput.addEventListener('input', handleSearch);
     }
     
-    // Date filter
-    const filterBars = document.querySelectorAll('.search-bar');
-    const dateFilterBar = filterBars[filterBars.length - 1];
-    const applyFilterBtn = dateFilterBar.querySelector('.btn-primary');
-    const resetBtn = dateFilterBar.querySelector('.btn-secondary');
+    // Search button
+    const searchBtn = document.getElementById('searchBtn');
+    if (searchBtn) {
+        searchBtn.addEventListener('click', handleSearch);
+    }
+    
+    // Date filter buttons
+    const applyFilterBtn = document.getElementById('applyFilterBtn');
+    const resetFilterBtn = document.getElementById('resetFilterBtn');
     
     if (applyFilterBtn) {
         applyFilterBtn.addEventListener('click', handleDateFilter);
     }
     
-    if (resetBtn) {
-        resetBtn.addEventListener('click', handleResetFilter);
+    if (resetFilterBtn) {
+        resetFilterBtn.addEventListener('click', handleResetFilter);
     }
 }
 
@@ -253,12 +257,8 @@ function handleSearch(event) {
  * Handle date range filter
  */
 async function handleDateFilter() {
-    const filterBars = document.querySelectorAll('.search-bar');
-    const dateFilterBar = filterBars[filterBars.length - 1];
-    
-    const dateInputs = dateFilterBar.querySelectorAll('input[type="date"]');
-    const startInput = dateInputs[0];
-    const endInput = dateInputs[1];
+    const startInput = document.getElementById('startDate');
+    const endInput = document.getElementById('endDate');
     
     if (startInput && endInput) {
         const startDate = startInput.value;
@@ -275,6 +275,7 @@ async function handleDateFilter() {
         }
         
         try {
+            console.log('Filtering with dates:', { start_date: startDate, end_date: endDate });
             const categories = await getCategories({
                 start_date: startDate,
                 end_date: endDate
@@ -285,7 +286,7 @@ async function handleDateFilter() {
             showSuccess(`Showing spending from ${startDate} to ${endDate}`);
         } catch (error) {
             console.error('Error filtering categories:', error);
-            showError('Failed to filter categories by date');
+            showError(`Failed to filter categories: ${error.message}`);
         }
     }
 }
@@ -294,12 +295,16 @@ async function handleDateFilter() {
  * Reset date filter and load all categories
  */
 async function handleResetFilter() {
-    const filterBars = document.querySelectorAll('.search-bar');
-    const dateFilterBar = filterBars[filterBars.length - 1];
+    const startInput = document.getElementById('startDate');
+    const endInput = document.getElementById('endDate');
     
-    const dateInputs = dateFilterBar.querySelectorAll('input[type="date"]');
-    dateInputs[0].value = '';
-    dateInputs[1].value = '';
+    // Reset to current month
+    const today = new Date();
+    const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+    const lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+    
+    startInput.value = firstDay.toISOString().split('T')[0];
+    endInput.value = lastDay.toISOString().split('T')[0];
     
     try {
         const categories = await getCategories();

@@ -30,21 +30,25 @@
             </a>
         </div>
 
-        <!-- Search Bar -->
-        <div class="flex gap-3 mb-6 animate-slide-up" style="animation-delay: 0.1s;">
-            <div class="search-bar">
-                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="11" cy="11" r="8"/>
-                    <path d="m21 21-4.3-4.3"/>
-                </svg>
-                <input type="text" id="searchInput" class="input" placeholder="Search categories...">
-            </div>
-            <button class="btn btn-secondary">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="11" cy="11" r="8"/>
-                    <path d="m21 21-4.3-4.3"/>
-                </svg>
-            </button>
+        <!-- Date Range Filter -->
+        <div class="filter-bar animate-slide-up" style="animation-delay: 0.1s;">
+            <!-- Search Bar (Left) -->
+            <input type="text" id="searchInput" class="search-input form-input-flex" placeholder="Search categories...">
+            
+            <!-- Date Range (Middle) -->
+            <label class="form-label-inline">
+                <span class="form-label-span">Start Date</span>
+                <input type="date" id="startDate" class="form-input form-input-flex" value="2025-11-01">
+            </label>
+            
+            <label class="form-label-inline">
+                <span class="form-label-span">End Date</span>
+                <input type="date" id="endDate" class="form-input form-input-flex" value="2025-11-30">
+            </label>
+            
+            <!-- Buttons (Right) -->
+            <button class="btn btn-primary" id="applyFilterBtn">Apply</button>
+            <button class="btn btn-secondary" id="resetFilterBtn">Reset</button>
         </div>
 
         <!-- Categories and Chart Layout -->

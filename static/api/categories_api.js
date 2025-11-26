@@ -43,6 +43,7 @@ export async function getCategories(params = {}) {
     
     const queryString = new URLSearchParams(validParams).toString();
     const endpoint = queryString ? `/categories/?${queryString}` : '/categories/';
+    console.log('getCategories request:', { endpoint, params: validParams });
     return _handleApiRequest(endpoint);
 }
 
