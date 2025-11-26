@@ -27,6 +27,12 @@
     gap: var(--spacing-sm);
 }
 
+.nav-content {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
 .nav-logo {
     height: 32px;
     width: auto;

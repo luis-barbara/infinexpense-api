@@ -1,0 +1,168 @@
+/* Dark Mode Toggle Styles */
+.theme-toggle {
+    position: relative;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    width: 3.5rem;
+    height: 3.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+    padding: 0;
+}
+
+.theme-toggle:hover {
+    background: rgba(59, 130, 246, 0.1);
+    transform: scale(1.1);
+}
+
+.theme-toggle:focus {
+    outline: none;
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.theme-toggle-icon {
+    position: absolute;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+/* Icon visibility logic - show moon in light mode, sun in dark mode */
+.sun-icon {
+    display: none;
+}
+
+.moon-icon {
+    display: block;
+}
+
+/* Dark mode state */
+.theme-toggle[data-theme="dark"] .sun-icon {
+    display: block;
+}
+
+.theme-toggle[data-theme="dark"] .moon-icon {
+    display: none;
+}
+
+/* Add to navigation */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-content {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xl);
+}
+
+.nav-container .theme-toggle {
+    margin-left: var(--spacing-lg);
+    flex-shrink: 0;
+}
+
+/* Basic Dark Mode Variables */
+:root {
+    /* Light mode colors (default) */
+    --bg-color: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-tertiary: #f1f5f9;
+    --text-color: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --border-color: #e2e8f0;
+    --border-light: #f1f5f9;
+    --primary-color: #3b82f6;
+    --primary-hover: #2563eb;
+    --danger-color: #ef4444;
+    --danger-hover: #dc2626;
+    --success-color: #22c55e;
+    --warning-color: #f59e0b;
+    --navbar-bg: #ffffff;
+    --card-bg: #ffffff;
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+/* Dark mode colors */
+.dark-mode {
+    --bg-color: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-tertiary: #334155;
+    --text-color: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --border-color: #334155;
+    --border-light: #475569;
+    --primary-color: #60a5fa;
+    --primary-hover: #3b82f6;
+    --danger-color: #f87171;
+    --danger-hover: #ef4444;
+    --success-color: #4ade80;
+    --warning-color: #fbbf24;
+    --navbar-bg: #1e293b;
+    --card-bg: #1e293b;
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+}
+
+/* Apply dark mode to basic elements */
+.dark-mode body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.dark-mode .navbar {
+    background-color: var(--navbar-bg);
+    border-bottom-color: var(--border-color);
+}
+
+.dark-mode .card {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+    box-shadow: var(--shadow);
+}
+
+.dark-mode .btn-outline {
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+}
+
+.dark-mode .btn-outline:hover {
+    background-color: var(--bg-tertiary);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.dark-mode input,
+.dark-mode select,
+.dark-mode textarea {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+.dark-mode input:focus,
+.dark-mode select:focus,
+.dark-mode textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+}
+
+/* Smooth transitions for theme switching */
+* {
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Prevent transition on page load */
+.preload * {
+    transition: none !important;
+}

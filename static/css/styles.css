@@ -3,6 +3,9 @@
    Modern, Optimized & Globally Configurable Stylesheet
    ========================================================================== */
 
+/* Import Dark Mode Styles */
+@import url('./dark-mode.css');
+
 /* ==========================================================================
    1. CSS VARIABLES - GLOBAL CONFIGURATION
    ========================================================================== */
