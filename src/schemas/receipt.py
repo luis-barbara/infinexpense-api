@@ -7,6 +7,7 @@ from decimal import Decimal
 
 
 class ReceiptBase(BaseModel):
+    """Base schema for receipt"""
     merchant_id: int
     purchase_date: date
     barcode: str | None = Field(default=None, max_length=20)
@@ -19,6 +20,7 @@ class ReceiptCreate(ReceiptBase):
 
 
 class ReceiptUpdate(BaseModel):
+    """Schema for updating an existing receipt"""
     merchant_id: int | None = None
     purchase_date: date | None = None
     barcode: str | None = Field(default=None, max_length=20)
@@ -27,6 +29,7 @@ class ReceiptUpdate(BaseModel):
 
 
 class Receipt(ReceiptBase):
+    """Complete receipt schema with ID"""
     id: int
     total_price: Decimal
     merchant: Merchant

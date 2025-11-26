@@ -1,7 +1,7 @@
 import { createMerchant } from '/static/api/merchants_api.js';
 
 /**
- * Handle form submission
+ * Handle form submission.
  */
 async function handleSubmit(e) {
     e.preventDefault();
@@ -12,13 +12,6 @@ async function handleSubmit(e) {
         const locationInput = form.querySelector('input[name="location"]');
         const notesTextarea = form.querySelector('textarea[name="notes"]');
         
-        console.log('Form inputs:', {
-            nameInput: nameInput?.value,
-            locationInput: locationInput?.value,
-            notesTextarea: notesTextarea?.value
-        });
-        
-        // Validation
         if (!nameInput || !nameInput.value) {
             alert('Merchant name is required');
             return;
@@ -37,32 +30,24 @@ async function handleSubmit(e) {
         
         console.log('Creating merchant:', newMerchant);
         const createdMerchant = await createMerchant(newMerchant);
-        console.log('Merchant created:', createdMerchant);
         
         alert('Comerciante criado com sucesso!');
         window.location.href = `/static/merchant/view.html?id=${createdMerchant.id}`;
     } catch (error) {
-        console.error('Erro ao criar comerciante:', error);
-        alert('Erro ao criar comerciante: ' + error.message);
+        console.error('Error creating merchant:', error);
+        alert('Error creating merchant: ' + error.message);
     }
 }
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', async function() {
-    console.log('Merchant add page loaded');
-    
     const form = document.querySelector('form');
     if (form) {
-        console.log('Form found, adding submit listener');
         form.addEventListener('submit', handleSubmit);
-    } else {
-        console.warn('Form not found');
     }
     
-    // Handle photo input
     const photoInput = document.getElementById('merchant-photo');
     if (photoInput) {
-        console.log('Photo input found');
         photoInput.addEventListener('change', handlePhotoSelect);
     }
 });

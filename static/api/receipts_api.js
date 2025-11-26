@@ -1,13 +1,7 @@
-// static/api/receipts_api.js
-
-
-
 const API_BASE_URL = "http://localhost:8000"; 
 
 /**
- * Função auxiliar para TODAS as requisições
- * @param {string} endpoint endpoint da API 
- * @param {object} options opções do 'fetch' 
+ * Handle all API requests with error handling.
  */
 async function _handleApiRequest(endpoint, options = {}) {
     const config = {
@@ -20,13 +14,10 @@ async function _handleApiRequest(endpoint, options = {}) {
 
     const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
 
-    // Gestão de Erros 
     if (response.ok) {
-        // Se for um '204 No Content' (como o Delete), não há JSON para ler, devolve 'null'
         if (response.status === 204) {
             return null;
         }
-        // Tenta ler o JSON (pode falhar se o body estiver vazio)
         try {
             return await response.json();
         } catch (e) {
@@ -35,18 +26,16 @@ async function _handleApiRequest(endpoint, options = {}) {
     }
 
     
-    let errorDetail = "Ocorreu um erro desconhecido.";
+    let errorDetail = "An unknown error occurred.";
     try {
-        // Tenta ler o JSON de erro do FastAPI (ex: {"detail": "Receipt not found"})
         const errorData = await response.json();
         if (errorData && errorData.detail) {
             errorDetail = errorData.detail;
         } else {
-            errorDetail = `Erro ${response.status}: ${response.statusText}`;
+            errorDetail = `Error ${response.status}: ${response.statusText}`;
         }
     } catch (e) {
-        // Se o erro nao for JSON
-        errorDetail = `Erro ${response.status}: ${response.statusText}`;
+        errorDetail = `Error ${response.status}: ${response.statusText}`;
     }
     
     throw new Error(errorDetail);
@@ -55,8 +44,7 @@ async function _handleApiRequest(endpoint, options = {}) {
 
 
 /**
- * Obtém a lista de recibos, com todos os filtros do router.
- * endpoint: GET /receipts/
+ * Get all receipts with filters and pagination.
  */
 export async function getReceipts(params = {}) {
     const query = new URLSearchParams(params).toString();
@@ -65,8 +53,7 @@ export async function getReceipts(params = {}) {
 }
 
 /**
- * Cria um novo recibo.
- * endpoint: POST /receipts/
+ * Create a new receipt.
  */
 export async function createReceipt(data) {
     return _handleApiRequest("/receipts/", {
@@ -76,8 +63,7 @@ export async function createReceipt(data) {
 }
 
 /**
- * Apaga um recibo.
- * endpoint: DELETE /receipts/{receipt_id}
+ * Delete a receipt.
  */
 export async function deleteReceipt(id) {
     return _handleApiRequest(`/receipts/${id}`, { method: "DELETE" });
@@ -86,43 +72,37 @@ export async function deleteReceipt(id) {
 
 
 /**
- * Obtém um recibo específico pelo ID.
- * endpoint: GET /receipts/{receipt_id}
+ * Get receipt by ID.
  */
 export async function getReceiptById(id) {
     return _handleApiRequest(`/receipts/${id}`);
 }
 
 /**
- * Obtém os produtos de um recibo.
- * endpoint: GET /receipts/{receipt_id}/products
+ * Get products in a receipt.
  */
 export async function getReceiptProducts(id) {
     return _handleApiRequest(`/receipts/${id}/products`);
 }
 
 /**
- * Obtém um recibo pelo barcode.
- * endpoint: GET /receipts/barcode/{barcode}
+ * Get receipt by barcode.
  */
 export async function getReceiptByBarcode(barcode) {
     return _handleApiRequest(`/receipts/barcode/${barcode}`);
 }
 
 /**
- * Obtém recibos de um supermercado.
- * endpoint: GET /receipts/merchant/{merchant_id}
+ * Get receipts by merchant.
  */
 export async function getReceiptsByMerchant(id, params = {}) {
-    // router tem 'skip' e 'limit' neste endpoint
     const query = new URLSearchParams(params).toString();
     const endpoint = query ? `/receipts/merchant/${id}?${query}` : `/receipts/merchant/${id}`;
     return _handleApiRequest(endpoint);
 }
 
 /**
- * Atualiza um recibo.
- * endpoint: PUT /receipts/{receipt_id}
+ * Update a receipt.
  */
 export async function updateReceipt(id, data) {
     return _handleApiRequest(`/receipts/${id}`, {

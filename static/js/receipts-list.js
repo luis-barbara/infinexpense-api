@@ -134,7 +134,6 @@ async function confirmDelete(receiptId) {
     if (!confirm('Are you sure you want to delete this receipt?')) return;
 
     try {
-        console.log('Deleting receipt:', receiptId);
         await deleteReceipt(receiptId);
         console.log('Receipt deleted successfully');
         alert('Receipt deleted successfully!');

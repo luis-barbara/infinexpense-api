@@ -24,10 +24,7 @@ async function loadMerchant() {
             return;
         }
 
-        console.log('Loading merchant ID:', currentMerchantId);
         currentMerchant = await getMerchantById(currentMerchantId);
-        console.log('Merchant loaded:', currentMerchant);
-        
         populateMerchant(currentMerchant);
         
         // Load recent receipts
@@ -67,9 +64,6 @@ function populateMerchant(merchant) {
     if (notesP) {
         const notesText = merchant.notes || merchant.description || 'No notes available.';
         notesP.textContent = notesText;
-        console.log('Set notes to:', notesText);
-    } else {
-        console.warn('Notes paragraph element not found');
     }
     
     console.log('Full merchant object:', merchant);
@@ -81,11 +75,9 @@ function populateMerchant(merchant) {
 async function loadRecentReceipts() {
     try {
         const receipts = await getReceiptsByMerchant(currentMerchantId);
-        console.log('Receipts loaded:', receipts.length);
-        
         renderReceipts(receipts);
     } catch (error) {
-        console.error('Erro ao carregar recibos:', error);
+        console.error('Error loading receipts:', error);
     }
 }
 
@@ -170,15 +162,15 @@ function renderReceipts(receipts) {
  * Delete merchant with confirmation
  */
 async function deleteMerchantConfirm() {
-    if (!confirm('Tem a certeza que deseja eliminar este comerciante?')) return;
+    if (!confirm('Are you sure you want to delete this merchant?')) return;
 
     try {
         await deleteMerchant(currentMerchantId);
         alert('Comerciante eliminado com sucesso!');
         window.location.href = '/static/merchant/list.html';
     } catch (error) {
-        console.error('Erro ao eliminar comerciante:', error);
-        alert('Erro ao eliminar comerciante: ' + error.message);
+        console.error('Error deleting merchant:', error);
+        alert('Error deleting merchant: ' + error.message);
     }
 }
 

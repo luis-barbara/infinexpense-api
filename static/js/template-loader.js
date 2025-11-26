@@ -1,31 +1,21 @@
 /**
- * Template Loader - Load Header and Footer Templates
- * 
- * USAGE:
- * 1. Add data-template attribute to placeholder divs
- * 2. Add data-active-page attribute to body element
- * 3. Script will automatically load and inject templates
- * 
- * @example
- * <body data-active-page="dashboard">
- *     <div data-template="header"></div>
- *     <!-- Your page content -->
- *     <div data-template="footer"></div>
- * </body>
+ * Template Loader - Load Header and Footer Templates.
  */
 
 (function() {
     'use strict';
 
     /**
-     * Determine the base path based on current URL depth
-     * @returns {string} Base path (e.g., '', '../', '../../')
+     * Determine the base path based on current URL depth.
      */
     function getBasePath() {
         const path = window.location.pathname;
-        const depth = path.split('/').filter(p => p && p !== 'static').length - 1;
         
-        if (depth === 0) return ''; // Root level (index.html)
+        if (path === '/' || path === '/index.html') {
+            return '';
+        }
+        
+        const depth = path.split('/').filter(p => p && p !== 'static').length - 1;
         return '../'.repeat(depth);
     }
 
@@ -55,7 +45,7 @@
     }
 
     /**
-     * Set active class on navigation link based on current page
+     * Set active class on navigation link based on current page.
      */
     function setActiveNavLink() {
         const activePage = document.body.getAttribute('data-active-page');
@@ -69,6 +59,27 @@
                 link.classList.remove('active');
             }
         });
+    }
+
+    /**
+     * Load dark mode CSS and JS
+     * @param {string} basePath - Base path for URLs
+     */
+    function loadDarkMode(basePath) {
+        // Load dark mode CSS if not already loaded
+        if (!document.querySelector('link[href*="dark-mode.css"]')) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = `${basePath}css/dark-mode.css`;
+            document.head.appendChild(link);
+        }
+        
+        // Load and initialize dark mode JavaScript if not already loaded
+        if (!document.querySelector('script[src*="dark-mode-toggle.js"]')) {
+            const script = document.createElement('script');
+            script.src = `${basePath}js/dark-mode-toggle.js`;
+            document.head.appendChild(script);
+        }
     }
 
     /**
@@ -93,7 +104,6 @@
         }, 0);
     }
 
-    // Run initialization when DOM is ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {

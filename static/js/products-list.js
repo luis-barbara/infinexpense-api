@@ -14,7 +14,7 @@ async function loadProducts() {
         console.log('Products loaded:', allProducts.length);
         renderProducts(allProducts);
     } catch (error) {
-        console.error('Erro ao carregar produtos:', error);
+        console.error('Error loading products:', error);
     }
 }
 
@@ -26,7 +26,7 @@ function renderProducts(products) {
     container.innerHTML = '';
 
     if (products.length === 0) {
-        container.innerHTML = '<div style="padding: 2rem; text-align: center;">Nenhum produto encontrado.</div>';
+        container.innerHTML = '<div style="padding: 2rem; text-align: center;">No products found.</div>';
         return;
     }
 
@@ -115,16 +115,16 @@ function sortProducts(field, direction) {
  * Delete product with confirmation
  */
 async function confirmDelete(productId) {
-    if (!confirm('Tem a certeza que deseja eliminar este produto?')) return;
+    if (!confirm('Are you sure you want to delete this product?')) return;
 
     try {
         const { deleteProduct } = await import('/static/api/products_api.js');
         await deleteProduct(productId);
-        alert('Produto eliminado com sucesso!');
+        alert('Product deleted successfully!');
         loadProducts(); // Reload list
     } catch (error) {
-        console.error('Erro ao eliminar produto:', error);
-        alert('Erro ao eliminar produto: ' + error.message);
+        console.error('Error deleting product:', error);
+        alert('Error deleting product: ' + error.message);
     }
 }
 

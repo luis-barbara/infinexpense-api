@@ -16,8 +16,6 @@ class Product(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     
-    
-    # Numeric for precision, matching the 'Decimal' in the schema
     price = Column(
         Numeric(12, 4), 
         nullable=False, 
@@ -35,20 +33,16 @@ class Product(Base):
         info={'description':'Optional description (e.g., "on sale")'}
     )
 
-  
-    
-    # Link to the Receipt 
     receipt_id = Column(
         Integer, 
-        ForeignKey("receipts.id", ondelete="CASCADE"), # If receipt is deleted, delete item
+        ForeignKey("receipts.id", ondelete="CASCADE"),
         nullable=False,
         index=True
     )
     
-    # Link to the Master Product List 
     product_list_id = Column(
         Integer, 
-        ForeignKey("product_list.id", ondelete="RESTRICT"), # Don't allow deleting a master product if it's in a receipt
+        ForeignKey("product_list.id", ondelete="RESTRICT"),
         nullable=False,
         index=True
     )

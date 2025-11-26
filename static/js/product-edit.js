@@ -26,10 +26,9 @@ function getProductIdFromUrl() {
 async function loadCategories() {
     try {
         allCategories = await getCategories();
-        console.log('Categories loaded:', allCategories.length);
         return true;
     } catch (error) {
-        console.error('Erro ao carregar categorias:', error);
+        console.error('Error loading categories:', error);
         return false;
     }
 }
@@ -40,10 +39,9 @@ async function loadCategories() {
 async function loadMeasurementUnits() {
     try {
         allUnits = await getMeasurementUnits();
-        console.log('Measurement units loaded:', allUnits.length);
         return true;
     } catch (error) {
-        console.error('Erro ao carregar unidades de medida:', error);
+        console.error('Error loading measurement units:', error);
         return false;
     }
 }
@@ -92,8 +90,6 @@ async function loadProduct() {
             return;
         }
 
-        console.log('Loading product ID:', currentProductId);
-
         // Load dropdowns first
         await loadCategories();
         await loadMeasurementUnits();
@@ -104,7 +100,6 @@ async function loadProduct() {
 
         // Then load product
         currentProduct = await getProductById(currentProductId);
-        console.log('Product loaded:', currentProduct);
 
         // Update page title
         const titleEl = document.querySelector('h1.gradient-text');
@@ -115,8 +110,8 @@ async function loadProduct() {
         // Populate form
         populateForm(currentProduct);
     } catch (error) {
-        console.error('Erro ao carregar produto:', error);
-        alert('Erro ao carregar produto: ' + error.message);
+        console.error('Error loading product:', error);
+        alert('Error loading product: ' + error.message);
         window.location.href = 'list.html';
     }
 }
@@ -131,28 +126,24 @@ function populateForm(product) {
     const nameInput = form.querySelector('input[name="name"]');
     if (nameInput) {
         nameInput.value = product.name;
-        console.log('Set product name to:', product.name);
     }
     
     // Category
     const categorySelect = form.querySelector('select[name="category"]');
     if (categorySelect && product.category_id) {
         categorySelect.value = product.category_id;
-        console.log('Set category to:', product.category_id);
     }
     
     // Volume/Measurement Unit
     const volumeSelect = form.querySelector('select[name="volume"]');
     if (volumeSelect && product.measurement_unit_id) {
         volumeSelect.value = product.measurement_unit_id;
-        console.log('Set volume to:', product.measurement_unit_id);
     }
     
     // Barcode
     const barcodeInput = form.querySelector('input[name="barcode"]');
     if (barcodeInput) {
         barcodeInput.value = product.barcode || '';
-        console.log('Set barcode to:', product.barcode);
     }
     
     // Image 
@@ -205,17 +196,15 @@ async function handleSubmit(e) {
         // Handle photo removal if pending
         if (pendingPhotoRemoval) {
             updateData.product_list_photo = null;
-        }
+        };
         
-        console.log('Updating product:', updateData);
         await updateProduct(currentProductId, updateData);
 
         if (pendingPhotoFile && !pendingPhotoRemoval) {
             try {
                 const updatedProduct = await uploadProductPhoto(currentProductId, pendingPhotoFile);
-                console.log('Photo uploaded successfully:', updatedProduct);
             } catch (photoError) {
-                console.error('Erro ao fazer upload da foto:', photoError);
+                console.error('Error uploading photo:', photoError);
                 alert('Product saved but photo upload failed: ' + photoError.message);
             }
         }
@@ -223,8 +212,8 @@ async function handleSubmit(e) {
         alert('Produto atualizado com sucesso!');
         window.location.href = `/static/product/view.html?id=${currentProductId}`;
     } catch (error) {
-        console.error('Erro ao atualizar produto:', error);
-        alert('Erro ao atualizar produto: ' + error.message);
+        console.error('Error updating product:', error);
+        alert('Error updating product: ' + error.message);
     }
 }
 

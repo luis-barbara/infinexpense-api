@@ -3,11 +3,10 @@ import { getCategories, deleteCategory } from '/static/api/categories_api.js';
 let allCategories = [];
 let categoryChart = null;
 
-// Make function globally available
 window.handleDeleteCategory = handleDeleteCategory;
 
 /**
- * Initialize the categories page
+ * Initialize the categories page.
  */
 async function initializePage() {
     await loadCategories();
@@ -15,14 +14,12 @@ async function initializePage() {
 }
 
 /**
- * Fetch categories from backend and render them
+ * Fetch categories from backend and render them.
  */
 async function loadCategories() {
     try {
         const categories = await getCategories();
         allCategories = categories;
-        console.log('Full API response:', categories);  // Log entire response
-        console.log('First category:', categories[0]);  // Log first category object
         renderCategoriesList();
         renderChart();
     } catch (error) {
@@ -32,15 +29,11 @@ async function loadCategories() {
 }
 
 /**
- * Render the categories list
+ * Render the categories list.
  */
 function renderCategoriesList() {
     const container = document.getElementById('categoriesList');
-    
-    if (!container) {
-        console.error('Categories list container not found');
-        return;
-    }
+    if (!container) return;
     
     if (allCategories.length === 0) {
         container.innerHTML = '<p style="text-align: center; padding: 2rem; color: #666;">No categories found</p>';
@@ -69,7 +62,7 @@ function renderCategoriesList() {
 
 
 /**
- * Render the pie chart
+ * Render the pie chart.
  */
 function renderChart() {
     const ctx = document.getElementById('categoryChart');
@@ -178,7 +171,7 @@ function renderChart() {
 }
 
 /**
- * Handle category deletion
+ * Handle category deletion.
  */
 async function handleDeleteCategory(id) {
     try {
@@ -189,27 +182,20 @@ async function handleDeleteCategory(id) {
             return;
         }
         
-        // Check if category has items (products)
         if (category.item_count > 0) {
             showError(`Cannot delete category with ${category.item_count} items. Please remove all items first.`);
             return;
         }
         
-        // Confirm deletion
         if (!confirm('Are you sure you want to delete this category?')) {
             return;
         }
         
-        // Attempt to delete
         await deleteCategory(id);
-        
-        // If deletion was successful, reload categories
         await loadCategories();
         showSuccess('Category deleted successfully');
     } catch (error) {
         console.error('Error deleting category:', error);
-        
-        // Check if error is due to associated data
         if (error.message.includes('foreign key') || error.message.includes('associated')) {
             showError('Cannot delete category with associated receipts. Please remove all items first.');
         } else {
@@ -256,9 +242,9 @@ function handleSearch(event) {
         const categoryName = item.querySelector('.category-name').textContent.toLowerCase();
         
         if (categoryName.includes(searchTerm)) {
-            item.style.display = '';  // Show
+            item.style.display = '';
         } else {
-            item.style.display = 'none';  // Hide
+            item.style.display = 'none';
         }
     });
 }
@@ -353,5 +339,4 @@ function showSuccess(message) {
     // showToast(message, 'success');
 }
 
-// Initialize page on load
 document.addEventListener('DOMContentLoaded', initializePage);

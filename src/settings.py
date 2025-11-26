@@ -3,13 +3,9 @@ from pydantic import Field
 
 
 class Settings(BaseSettings):
-    """
-    Project Settings
-    (from 'docker-compose.yml')
-    """
+    """Application configuration settings."""
 
     database_driver: str = Field(alias="DATABASE_DRIVER", default="postgresql")
-    
     database_username: str = Field(
         alias="DATABASE_USERNAME", 
         default="user" 

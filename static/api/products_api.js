@@ -1,5 +1,3 @@
-// frontend/api/products_api.js
-
 const API_BASE_URL = "http://localhost:8000";
 
 /**
@@ -32,14 +30,12 @@ async function _handleApiRequest(endpoint, options = {}) {
 }
 
 /**
- * Get all products
- * endpoint: GET /products/
+ * Get all products with pagination.
  */
 export async function getProducts(params = {}) {
-    // Use valid parameters - limit max is 1000
     const validParams = {
         skip: params.skip || 0,
-        limit: Math.min(params.limit || 100, 1000)  // Cap at 1000
+        limit: Math.min(params.limit || 100, 1000)
     };
     
     const queryString = new URLSearchParams(validParams).toString();

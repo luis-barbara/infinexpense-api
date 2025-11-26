@@ -1,10 +1,7 @@
-// static/api/reports_api.js
-
-
 const API_BASE_URL = "http://localhost:8000";
 
 /**
- * Função auxiliar para todas as requisições
+ * Handle all API requests with error handling.
  */
 async function _handleApiRequest(endpoint, options = {}) {
     const config = {
@@ -35,23 +32,18 @@ async function _handleApiRequest(endpoint, options = {}) {
     throw new Error(errorDetail);
 }
 
-// Reports API 
-
-// 1. Gastos por categoria (Dashboard)
 export async function getSpendingByCategory(params = {}) {
     const query = new URLSearchParams(params).toString();
     const endpoint = query ? `/reports/spending-by-category?${query}` : `/reports/spending-by-category`;
     return _handleApiRequest(endpoint);
 }
 
-// 2. Report Supermercados (Analytics)
 export async function getEnrichedMerchants(params = {}) {
     const query = new URLSearchParams(params).toString();
     const endpoint = query ? `/reports/enriched-merchants?${query}` : `/reports/enriched-merchants`;
     return _handleApiRequest(endpoint);
 }
 
-// 3. KPIs do Dashboard
 export async function getDashboardKPIs(params = {}) {
     const query = new URLSearchParams(params).toString();
     const endpoint = query ? `/reports/dashboard-kpis?${query}` : `/reports/dashboard-kpis`;
