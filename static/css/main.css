@@ -1,0 +1,50 @@
+/* ==================== Infinexpense - Main CSS ==================== */
+/*
+ * Modular CSS Architecture
+ * 
+ * This file imports all CSS modules in the correct order.
+ * 
+ * Structure:
+ * 1. variables.css      - CSS custom properties and theme tokens
+ * 2. layout.css         - Core layout and container styles
+ * 3. typography.css     - Text styling and font definitions
+ * 4. cards.css          - Card components and stat cards
+ * 5. buttons.css        - Button styles and variants
+ * 6. forms.css          - Input fields and form elements
+ * 7. grids.css          - Grid layouts and responsive columns
+ * 8. tables.css         - Table components and data displays
+ * 9. lists.css          - List items and data rows
+ * 10. navigation.css    - Header, nav menu, and theme toggle
+ * 11. utilities.css     - Utility classes (flex, spacing, etc)
+ * 12. icons.css         - Icon and logo styling
+ * 13. animations.css    - Keyframes and animation utilities
+ * 14. responsive.css    - Mobile responsive breakpoints
+ * 
+ * To add new styles:
+ * - Add to appropriate module file
+ * - Or create new module and @import it here
+ * 
+ * Last Updated: November 26, 2025
+ */
+
+/* ========== Core Styles (Load First) ========== */
+@import 'variables.css';
+@import 'layout.css';
+@import 'typography.css';
+
+/* ========== Layout & Structure ========== */
+@import 'grids.css';
+
+/* ========== Components ========== */
+@import 'cards.css';
+@import 'buttons.css';
+@import 'forms.css';
+@import 'tables.css';
+@import 'lists.css';
+@import 'navigation.css';
+@import 'icons.css';
+
+/* ========== Utilities & Responsive ========== */
+@import 'utilities.css';
+@import 'animations.css';
+@import 'responsive.css';

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Merchant - InfinExpense</title>
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body data-active-page="merchants">
+    <!-- Navigation Template -->
+    <div data-template="header"></div>
+
+    <script src="/static/js/template-loader.js"></script>
+
+    <!-- Main Content -->
+    <div class="container py-8">
+        <!-- Header -->
+        <div class="mb-8 animate-fade-in">
+            <h1 class="gradient-text mb-2">Edit Merchant</h1>
+            <p class="text-muted">Update merchant information</p>
+        </div>
+
+        <!-- Form Card -->
+        <div class="card glow-strong animate-slide-up max-w-2xl" style="animation-delay: 0.1s;">
+            <form>
+                <!-- Merchant Name -->
+                <div class="mb-6">
+                    <label class="font-semibold mb-2 block">Merchant Name *</label>
+                    <input type="text" class="input" name="name" placeholder="Merchant name" required>
+                </div>
+
+                <!-- Location and Notes -->
+                <div class="grid grid-cols-1 gap-6 mb-8">
+                    <div>
+                        <label class="font-semibold mb-2 block">Location *</label>
+                        <input type="text" class="input" name="location" placeholder="City, address" required>
+                    </div>
+
+                    <div>
+                        <label class="font-semibold mb-2 block">Notes</label>
+                        <textarea class="input" name="notes" rows="3" placeholder="Add merchant notes or details..." style="resize: vertical;"></textarea>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex gap-3 justify-end">
+                    <a href="list.html" class="btn btn-secondary">Cancel</a>
+                    <button type="button" class="btn btn-danger" onclick="deleteMerchantConfirm()">Delete Merchant</button>
+                    <button type="submit" class="btn btn-primary glow-cyan">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Merchant Edit JavaScript -->
+    <script type="module" src="/static/js/merchant-edit.js"></script>
+</body>
+</html>

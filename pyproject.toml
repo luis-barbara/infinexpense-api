@@ -12,7 +12,11 @@ dependencies = [
     "uvicorn (>=0.38.0,<0.39.0)",
     "pydantic-settings (>=2.11.0,<3.0.0)",
     "sqlalchemy (>=2.0.44,<3.0.0)",
-    "psycopg2-binary (>=2.9.11,<3.0.0)"
+    "psycopg2-binary (>=2.9.11,<3.0.0)",
+    "alembic (>=1.17.1,<2.0.0)",
+    "python-multipart (>=0.0.20,<0.0.21)",
+    "pytest (>=9.0.1,<10.0.0)",
+    "pytest-cov (>=7.0.0,<8.0.0)"
 ]
 
 [tool.poetry]
@@ -26,3 +30,8 @@ poetry-plugin-export = ">=1.8"
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "httpx (>=0.28.1,<0.29.0)"
+]

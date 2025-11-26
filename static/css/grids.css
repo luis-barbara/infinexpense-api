@@ -1,0 +1,29 @@
+/* Grid */
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+@media (max-width: 767px) {
+  .stats-grid { 
+    grid-template-columns: repeat(1, 1fr) !important; 
+  }
+}
+
+/* Receipt View Grid Layout */
+.receipt-view-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 2rem;
+}
+
+.receipt-items-section {
+    grid-column: 1 / -1;
+    grid-row: 2;
+}

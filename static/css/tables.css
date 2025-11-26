@@ -1,0 +1,131 @@
+/* Tables */
+
+.table-container {
+  background: var(--gradient-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid hsl(var(--border) / 0.5);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-strong);
+  padding: 1.5rem;
+}
+
+.table-header {
+  padding: 0.75rem 1rem;
+  background: hsl(var(--secondary) / 0.5);
+  border-bottom: 1px solid hsl(var(--border) / 0.5);
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.table-header button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  font-weight: inherit;
+  font-size: inherit;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.table-header button:hover {
+  color: hsl(var(--primary));
+}
+
+.table-header button svg {
+  flex-shrink: 0;
+}
+
+.table-row {
+  display: grid;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid hsl(var(--border) / 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.table-row:hover {
+  background: linear-gradient(145deg, hsl(220 20% 10% / 0.6) 0%, hsl(220 25% 12% / 0.4) 100%);
+  backdrop-filter: blur(8px);
+  border-color: hsl(var(--primary) / 0.2);
+  transform: translateX(4px);
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+/* Receipts Table Grid */
+.receipts-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.1fr 0.85fr 0.85fr 0.85fr 140px;
+  gap: 1.2rem;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  background: hsl(var(--secondary) / 0.2);
+  border-radius: 0.5rem;
+  border: 1px solid hsl(var(--border) / 0.3);
+}
+
+/* Products Table Grid */
+.products-list-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 120px;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Merchants Table Grid */
+.merchants-list-grid {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1fr 120px;
+  gap: 1rem;
+  align-items: center;
+}
+
+.table-cell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Products Table Grid */
+.products-table-grid {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 0.8fr 1fr 1fr;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid hsl(var(--border) / 0.3);
+    transition: none !important;
+    transform: none !important;
+    background: transparent !important;
+    border-color: hsl(var(--border) / 0.3) !important;
+    cursor: default !important;
+}
+
+.products-table-grid:hover {
+    background: transparent !important;
+    transform: none !important;
+    border-color: hsl(var(--border) / 0.3) !important;
+}
+
+#products-list .products-table-grid {
+    transition: none !important;
+}
+
+#products-list .products-table-grid:hover {
+    background: transparent !important;
+    transform: none !important;
+}
+

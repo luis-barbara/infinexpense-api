@@ -1,0 +1,15 @@
+.poetry
+.vscode
+__pycache__/
+env/
+*.pyc
+*.pyo
+*.pyd
+./uploads/
+/uploads/
+/sample.json
+.venv
+.pytest_cache/
+sample.json
+./logs/
+/logs/

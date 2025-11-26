@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merchant - InfinExpense</title>
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body data-active-page="merchants">
+    <!-- Navigation Template -->
+    <div data-template="header"></div>
+
+    <script src="/static/js/template-loader.js"></script>
+
+    <!-- Main Content -->
+    <div class="container py-8">
+        <!-- Header -->
+        <div class="mb-8 animate-fade-in">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <a href="list.html" class="btn btn-secondary btn-sm">← Back</a>
+                    <div>
+                        <h1 class="gradient-text mb-2">Merchant Name</h1>
+                        <p class="text-muted">Merchant details and receipts</p>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                    <a href="edit.html" class="btn btn-primary glow-cyan">✏️ Edit</a>
+                    <button class="btn btn-danger" onclick="deleteMerchantConfirm()">🗑️ Delete</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Two Column Layout -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+            
+            <!-- LEFT COLUMN: Merchant Info -->
+            <div class="card glow-strong animate-slide-up" style="animation-delay: 0.1s;">
+                <h3 class="font-semibold mb-4" style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="color: hsl(var(--neon-cyan));">🏪</span>
+                    Merchant Information
+                </h3>
+
+                <!-- Merchant Info -->
+                <div style="display: grid; gap: 1.5rem; margin-bottom: 2rem;">
+                    <div>
+                        <div style="font-size: 0.875rem; color: hsl(var(--muted-foreground)); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <span>📍</span>
+                            Location
+                        </div>
+                        <div class="font-semibold text-lg location" style="color: hsl(var(--foreground));">-</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.875rem; color: hsl(var(--muted-foreground)); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <span>🧾</span>
+                            Total Receipts
+                        </div>
+                        <div class="font-semibold text-lg" style="color: hsl(var(--foreground));">0 receipts</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.875rem; color: hsl(var(--muted-foreground)); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <span>📅</span>
+                            Last Visit
+                        </div>
+                        <div class="font-semibold text-lg" style="color: hsl(var(--foreground));">-</div>
+                    </div>
+                </div>
+
+                <!-- Notes Section -->
+                <div style="padding-top: 1.5rem; border-top: 1px solid hsl(var(--border) / 0.5);">
+                    <h3 class="font-semibold mb-3" style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span>📝</span>
+                        Notes
+                    </h3>
+                    <p id="merchant-notes" class="text-muted" style="line-height: 1.6;">
+                        No notes available.
+                    </p>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Recent Receipts -->
+            <div class="card glow-strong animate-slide-up" style="animation-delay: 0.2s; display: flex; flex-direction: column;">
+                <h3 class="font-semibold mb-4" id="receipts-title" style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="color: hsl(var(--accent));">🧾</span>
+                    Recent Receipts (0)
+                </h3>
+                
+                <!-- List Header -->
+                <div style="display: grid; grid-template-columns: 2fr 1.5fr 1fr 1fr; gap: 1rem; padding: 0.75rem 1rem; background: hsl(var(--secondary) / 0.5); border-radius: 0.5rem; margin-bottom: 1rem; font-weight: 600; font-size: 0.875rem;">
+                    <div>Receipt ID</div>
+                    <div>Date</div>
+                    <div>Items</div>
+                    <div>Total</div>
+                </div>
+                
+                <!-- Scrollable List -->
+                <div class="list-container" style="flex: 1; overflow-y: auto; max-height: 500px;">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Merchant View JavaScript -->
+    <script type="module" src="/static/js/merchant-view.js"></script>
+</body>
+</html>

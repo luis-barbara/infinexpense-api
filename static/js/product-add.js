@@ -1,0 +1,202 @@
+import { createProduct } from '/static/api/products_api.js';
+import { getCategories } from '/static/api/categories_api.js';
+import { getMeasurementUnits } from '/static/api/measurement_units_api.js';
+import { uploadProductPhoto } from '/static/api/uploads_api.js';
+
+let allCategories = [];
+let allUnits = [];
+let selectedPhotoFile = null;
+
+/**
+ * Load categories for dropdown
+ */
+async function loadCategories() {
+    try {
+        allCategories = await getCategories();
+        populateCategorySelect();
+        return true;
+    } catch (error) {
+        console.error('Error loading categories:', error);
+        return false;
+    }
+}
+
+/**
+ * Load measurement units for dropdown
+ */
+async function loadMeasurementUnits() {
+    try {
+        allUnits = await getMeasurementUnits();
+        populateVolumeSelect();
+        return true;
+    } catch (error) {
+        console.error('Error loading measurement units:', error);
+        return false;
+    }
+}
+
+/**
+ * Populate category select
+ */
+function populateCategorySelect() {
+    const select = document.querySelector('select[name="category"]');
+    if (!select) return;
+    
+    select.innerHTML = '<option value="">Select a category</option>';
+    allCategories.forEach(category => {
+        const option = document.createElement('option');
+        option.value = category.id;
+        option.textContent = category.name;
+        select.appendChild(option);
+    });
+}
+
+/**
+ * Populate volume select
+ */
+function populateVolumeSelect() {
+    const select = document.querySelector('select[name="volume"]');
+    if (!select) return;
+    
+    select.innerHTML = '<option value="">Select volume</option>';
+    allUnits.forEach(unit => {
+        const option = document.createElement('option');
+        option.value = unit.id;
+        option.textContent = `${unit.abbreviation} (${unit.name})`;
+        select.appendChild(option);
+    });
+}
+
+/**
+ * Handle photo file selection
+ */
+function handlePhotoSelect(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    selectedPhotoFile = file;
+    console.log('Photo selected:', file.name);
+    
+    // Show preview
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        const previewImg = document.getElementById('photoPreview');
+        const previewContainer = document.getElementById('photoPreviewContainer');
+        const uploadArea = document.getElementById('photoUploadArea');
+        
+        if (previewImg) {
+            previewImg.src = event.target.result;
+            previewContainer.style.display = 'block';
+            uploadArea.style.display = 'none';
+        }
+    };
+    reader.readAsDataURL(file);
+}
+
+/**
+ * Clear photo preview and reset upload
+ */
+function clearPhotoPreview() {
+    const fileInput = document.getElementById('productPhoto');
+    const previewContainer = document.getElementById('photoPreviewContainer');
+    const uploadArea = document.getElementById('photoUploadArea');
+    
+    fileInput.value = '';
+    selectedPhotoFile = null;
+    previewContainer.style.display = 'none';
+    uploadArea.style.display = 'block';
+}
+
+/**
+ * Upload photo to server
+ */
+async function uploadPhoto(productId) {
+    if (!selectedPhotoFile) return null;
+    try {
+        await uploadProductPhoto(productId, selectedPhotoFile);
+        return true;
+    } catch (error) {
+        console.error('Error uploading photo:', error);
+        return false;
+    }
+}
+
+/**
+ * Handle form submission
+ */
+async function handleSubmit(e) {
+    e.preventDefault();
+    
+    try {
+        const form = document.querySelector('form');
+        const nameInput = form.querySelector('input[type="text"]');
+        const categorySelect = form.querySelector('select[name="category"]') || form.querySelectorAll('select')[0];
+        const volumeSelect = form.querySelector('select[name="volume"]') || form.querySelectorAll('select')[1];
+        const barcodeInput = form.querySelector('input[placeholder*="barcode"]');
+        
+        // Validation
+        if (!nameInput.value) {
+            alert('Product name is required');
+            return;
+        }
+        
+        if (!categorySelect.value) {
+            alert('Category is required');
+            return;
+        }
+        
+        if (!volumeSelect.value) {
+            alert('Volume is required');
+            return;
+        }
+        
+        const newProduct = {
+            name: nameInput.value,
+            category_id: parseInt(categorySelect.value),
+            measurement_unit_id: parseInt(volumeSelect.value),
+            barcode: barcodeInput.value || null
+        };
+        
+        const createdProduct = await createProduct(newProduct);
+        
+        // Upload photo if selected
+        if (selectedPhotoFile) {
+            await uploadPhoto(createdProduct.id);
+        }
+        
+        alert('Produto criado com sucesso!');
+        window.location.href = `/static/product/view.html?id=${createdProduct.id}`;
+    } catch (error) {
+        console.error('Error creating product:', error);
+        alert('Error creating product: ' + error.message);
+    }
+}
+
+/**
+ * Cancel add
+ */
+function cancelAdd() {
+    window.location.href = '/static/product/list.html';
+}
+
+// Expose to global scope
+window.cancelAdd = cancelAdd;
+window.handlePhotoSelect = handlePhotoSelect;
+window.clearPhotoPreview = clearPhotoPreview;
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', async function() {
+    await loadCategories();
+    await loadMeasurementUnits();
+    
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', handleSubmit);
+    }
+    
+    // Handle photo input
+    const photoInput = document.getElementById('productPhoto');
+    if (photoInput) {
+        photoInput.addEventListener('change', handlePhotoSelect);
+    }
+});

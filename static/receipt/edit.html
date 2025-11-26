@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Receipt - InfinExpense</title>
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body data-active-page="receipts">
+    <!-- Navigation Template -->
+    <div data-template="header"></div>
+
+    <script src="/static/js/template-loader.js"></script>
+
+    <!-- Main Content -->
+    <div class="container py-8">
+        <!-- Header -->
+        <div class="mb-8 animate-fade-in">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <a href="/static/receipt/view.html" class="btn btn-secondary btn-sm" id="back-btn">← Back</a>
+                <div>
+                    <h1 class="gradient-text mb-2" id="page-title">Edit Receipt: RCPT-7</h1>
+                    <p class="text-muted">Modify receipt details and items</p>
+                </div>
+            </div>
+        </div>
+
+        <form id="editReceiptForm">
+            <div class="edit-grid">
+                <!-- Top Row: Receipt Info and Photo (Same Height) -->
+                <div>
+                    <!-- Receipt Information -->
+                    <div class="form-section animate-slide-up">
+                        <h2>Receipt Information</h2>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="receiptMerchant">Merchant *</label>
+                                <select id="receiptMerchant" required>
+                                    <option value="">Select a merchant</option>
+                                    <!-- Populated by JavaScript -->
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="receiptCode">Receipt Code</label>
+                                <input type="text" id="receiptCode" placeholder="RCPT-XXX">
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="receiptDate">Date & Time *</label>
+                                <input type="datetime-local" id="receiptDate" required>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="receiptNotes">Notes</label>
+                                <textarea id="receiptNotes" class="input" rows="4" placeholder="Add any additional notes about this receipt..."></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Photo Upload -->
+                    <div class="form-section animate-slide-up" style="animation-delay: 0.2s;">
+                        <h2 style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="color: hsl(var(--neon-purple));">📷</span>
+                            Receipt Photo
+                        </h2>
+
+                        <div id="currentPhotoContainer" style="display: none;">
+                            <div class="photo-preview-container" style="display: flex; justify-content: center; align-items: center; margin-bottom: 1rem;">
+                                <img id="currentPhoto" src="" alt="Current receipt photo">
+                            </div>
+                            <button type="button" class="btn btn-danger btn-sm" onclick="removeCurrentPhoto()" style="width: 100%;">
+                                <span style="margin-right: 0.5rem;">🗑️</span>
+                                Remove Photo
+                            </button>
+                        </div>
+
+                        <div id="photoUploadArea">
+                            <label id="photoUploadLabel" class="photo-upload-area" onclick="triggerPhotoUpload()">
+                                <div style="font-size: 2rem; margin-bottom: 0.75rem;">📤</div>
+                                <div style="font-size: 0.875rem; color: hsl(var(--muted-foreground)); margin-bottom: 0.5rem;">
+                                    Click to upload photo
+                                </div>
+                                <div style="font-size: 0.75rem; color: hsl(var(--muted-foreground));">
+                                    PNG, JPG up to 10MB
+                                </div>
+                            </label>
+                            <input type="file" id="photoUpload" accept="image/*">
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div style="margin-top: auto; display: flex; flex-direction: column; gap: 0.75rem;">
+                            <button type="submit" class="btn btn-primary" style="width: 100%; box-shadow: var(--shadow-glow);">
+                                <span style="margin-right: 0.5rem;">💾</span>
+                                Save Changes
+                            </button>
+                            <button type="button" class="btn btn-danger" data-action="delete-receipt" style="width: 100%;">
+                                <span style="margin-right: 0.5rem;">🗑️</span>
+                                Delete Receipt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Row: Products Section (Full Width) -->
+                <div>
+                    <!-- Products Section -->
+                    <div class="form-section animate-slide-up" style="animation-delay: 0.1s;">
+                        <div class="products-section-header">
+                            <h2 id="products-title" style="margin: 0;">Products in Receipt (0)</h2>
+                            <button type="button" class="btn btn-primary btn-sm" data-action="add-product">
+                                <span style="margin-right: 0.5rem;">➕</span>
+                                Add Product
+                            </button>
+                        </div>
+
+                        <div style="padding: 1.5rem;">
+                            <div id="products-list">
+                                <!-- Products populated by JavaScript -->
+                            </div>
+                            <div id="no-products" style="text-align: center; padding: 2rem; color: hsl(var(--muted-foreground)); display: none;">
+                                No products added yet. Click "Add Product" to start.
+                            </div>
+                        </div>
+
+                        <div id="products-total-section" class="products-total" style="display: none;">
+                            <span style="font-size: 1.125rem;">Total:</span>
+                            <span id="products-total" class="total-amount">€0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- API Module Import -->
+    <script type="module" src="/static/js/receipt-edit.js"></script>
+</body>
+</html>

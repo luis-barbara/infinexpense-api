@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Category - InfinExpense</title>
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body data-active-page="categories">
+    <!-- Navigation Template -->
+    <div data-template="header"></div>
+
+    <script src="../js/template-loader.js"></script>
+
+    <!-- Main Content -->
+    <div class="container py-8">
+        <!-- Header -->
+        <div class="mb-8 animate-fade-in">
+            <h1 class="gradient-text mb-2">Add New Category</h1>
+            <p class="text-muted">Create a new product category</p>
+        </div>
+
+        <!-- Form Card -->
+        <div class="card glow-strong animate-slide-up max-w-2xl" style="animation-delay: 0.1s;">
+            <form id="categoryForm">
+                <!-- Category Name -->
+                <div class="mb-8">
+                    <label class="font-semibold mb-2 block">Category Name *</label>
+                    <input type="text" id="categoryName" class="input" placeholder="Enter category name" required>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex gap-3 justify-end">
+                    <a href="list.html" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary glow-cyan">Add Category</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Category Add Script -->
+    <script type="module" src="../js/category-add.js"></script>
+</body>
+</html>

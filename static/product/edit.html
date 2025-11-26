@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product - InfinExpense</title>
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body data-active-page="products">
+    <!-- Navigation Template -->
+    <div data-template="header"></div>
+
+    <script src="/static/js/template-loader.js"></script>
+
+    <!-- Main Content -->
+    <div class="container py-8">
+        <!-- Header -->
+        <div class="mb-8 animate-fade-in">
+            <h1 class="gradient-text mb-2">Edit Product</h1>
+            <p class="text-muted">Update product information</p>
+        </div>
+
+        <!-- Form Card -->
+        <div class="card glow-strong animate-slide-up max-w-2xl" style="animation-delay: 0.1s;">
+            <form>
+                <!-- Product Name -->
+                <div class="mb-6">
+                    <label class="font-semibold mb-2 block">Product Name *</label>
+                    <input type="text" class="input" placeholder="Product name" name="name" required>
+                </div>
+
+                <!-- Category and Volume -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class="font-semibold mb-2 block">Category *</label>
+                        <select class="input" name="category" required>
+                            <option value="">Select a category</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="font-semibold mb-2 block">Volume *</label>
+                        <select class="input" name="volume" required>
+                            <option value="">Select volume</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Photo Upload -->
+                <div class="mb-6">
+                    <label class="font-semibold mb-2 block">Product Photo</label>
+                    <div id="currentPhotoContainer" style="display: none;">
+                        <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem;">
+                            <img id="currentPhoto" src="" alt="Current product photo" style="max-width: 200px; max-height: 150px; object-fit: cover; border-radius: 0.5rem; border: 1px solid hsl(var(--border));">
+                            <div class="flex gap-2">
+                                <button type="button" class="btn btn-secondary btn-sm" style="font-size: 0.75rem; padding: 0.35rem 0.7rem;" onclick="triggerPhotoUpload()">Change</button>
+                                <button type="button" class="btn btn-danger btn-sm" style="font-size: 0.75rem; padding: 0.35rem 0.7rem;" onclick="removeCurrentPhoto()">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="photoUploadArea">
+                        <div class="card" style="padding: 2rem; text-align: center; cursor: pointer; border: 2px dashed hsl(var(--border));">
+                            <input type="file" id="photoUpload" class="hidden" accept="image/*">
+                            <label for="photoUpload" id="photoUploadLabel" style="cursor: pointer; display: block;">
+                                <div style="font-size: 3rem; margin-bottom: 0.5rem;">📷</div>
+                                <div class="text-muted">Click to upload photo</div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Barcode -->
+                <div class="mb-8">
+                    <label class="font-semibold mb-2 block">Barcode</label>
+                    <input type="text" class="input" placeholder="Barcode" name="barcode">
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex gap-3 justify-end">
+                    <button type="button" class="btn btn-secondary" onclick="cancelEdit()">Cancel</button>
+                    <button type="submit" class="btn btn-primary glow-cyan">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Product Edit JavaScript -->
+    <script type="module" src="/static/js/product-edit.js"></script>
+</body>
+</html>
