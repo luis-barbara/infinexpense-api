@@ -1,4 +1,4 @@
-import { getReceipts, deleteReceipt } from '../api/receipts_api.js';
+import { getReceipts, deleteReceipt } from '/static/api/receipts_api.js';
 
 let allReceipts = [];
 let sortDirection = {};
@@ -12,7 +12,7 @@ async function loadReceipts() {
         renderReceipts(allReceipts);
     } catch (error) {
         console.error('Error loading receipts:', error);
-        alert('Error loading receipts: ' + error.message);
+        document.getElementById('receiptsList').innerHTML = `<div style="padding: 2rem; text-align: center; color: var(--text-error);">Error loading receipts: ${error.message}</div>`;
     }
 }
 
@@ -24,7 +24,8 @@ function renderReceipts(receipts) {
     container.innerHTML = '';
 
     if (receipts.length === 0) {
-        container.innerHTML = '<div style="padding: 2rem; text-align: center;">No receipts found.</div>';
+        container.innerHTML = '<div style="padding: 2rem; text-align: center; color: var(--text-muted);">No receipts found.</div>';
+        document.getElementById('resultsCount').textContent = '0 receipts';
         return;
     }
 
@@ -32,31 +33,48 @@ function renderReceipts(receipts) {
         const receiptDate = new Date(receipt.purchase_date).toLocaleDateString('pt-PT');
         const receiptId = receipt.id;
         
-        const item = document.createElement('div');
-        item.className = 'list-item receipt-item';
-        item.setAttribute('data-receipt-id', receiptId);
-        item.setAttribute('data-merchant', receipt.merchant?.name || 'N/A');
-        item.setAttribute('data-date', receipt.purchase_date);
-        item.setAttribute('data-products', receipt.products?.length || 0);
-        item.setAttribute('data-total', receipt.total_price || 0);
+        const row = document.createElement('div');
+        row.className = 'receipts-grid animate-slide-up';
+        row.setAttribute('data-receipt-id', receiptId);
+        row.setAttribute('data-barcode', receipt.barcode || `RCPT-${receiptId}`);
+        row.setAttribute('data-merchant', receipt.merchant?.name || 'N/A');
+        row.setAttribute('data-date', receipt.purchase_date);
+        row.setAttribute('data-products', receipt.products?.length || 0);
+        row.setAttribute('data-total', receipt.total_price || 0);
 
-        item.innerHTML = `
-            <div class="list-item-main receipts-list-grid">
-                <div class="list-item-value"><span>RCPT-${receipt.barcode || `RCPT-${receiptId}`}</span></div>
-                <div class="list-item-value"><span>${receipt.merchant?.name || 'N/A'}</span></div>
-                <div class="list-item-value"><span>${receiptDate}</span></div>
-                <div class="list-item-value"><span>${receipt.products?.length || 0} items</span></div>
-                <div class="list-item-value"><span>${(receipt.total_price || 0).toFixed(2)} €</span></div>
-                <div class="list-item-actions">
-                    <a href="view.html?id=${receiptId}" class="btn btn-secondary btn-sm" title="View">👁️</a>
-                    <a href="edit.html?id=${receiptId}" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
-                    <button class="btn btn-danger btn-sm" title="Delete" onclick="confirmDelete(${receiptId})">🗑️</button>
-                </div>
+        row.innerHTML = `
+            <div><span>RCPT-${receipt.barcode || `RCPT-${receiptId}`}</span></div>
+            <div><span>${receipt.merchant?.name || 'N/A'}</span></div>
+            <div><span>${receiptDate}</span></div>
+            <div><span>${receipt.products?.length || 0} items</span></div>
+            <div><span>${(receipt.total_price || 0).toFixed(2)} €</span></div>
+            <div style="display: flex; gap: 0.5rem;">
+                <a href="view.html?id=${receiptId}" class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.875rem;" title="View">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                </a>
+                <a href="edit.html?id=${receiptId}" class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.875rem;" title="Edit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
+                    </svg>
+                </a>
+                <button class="btn btn-danger" style="padding: 0.4rem 0.8rem; font-size: 0.875rem;" title="Delete" onclick="confirmDelete(${receiptId})">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"/>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                        <line x1="10" y1="11" x2="10" y2="17"/>
+                        <line x1="14" y1="11" x2="14" y2="17"/>
+                    </svg>
+                </button>
             </div>
         `;
 
-        container.appendChild(item);
+        container.appendChild(row);
     });
+
+    document.getElementById('resultsCount').textContent = `${receipts.length} receipt${receipts.length !== 1 ? 's' : ''}`;
 }
 
 /**
@@ -78,16 +96,21 @@ function filterItems() {
 /**
  * Sort receipts by specified field and direction
  */
-function sortReceipts(field, direction) {
+function sortReceipts(field) {
     const container = document.getElementById('receiptsList');
-    const items = Array.from(container.querySelectorAll('.receipt-item'));
+    const items = Array.from(container.querySelectorAll('.receipts-grid'));
+    
+    const direction = sortDirection[field] === 'asc' ? 'desc' : 'asc';
+    sortDirection[field] = direction;
     
     items.sort((a, b) => {
-        let aValue = a.getAttribute('data-' + field);
-        let bValue = b.getAttribute('data-' + field);
+        let aValue = a.getAttribute(`data-${field}`);
+        let bValue = b.getAttribute(`data-${field}`);
+        
+        if (!aValue || !bValue) return 0;
         
         // Convert to numbers for numeric fields
-        if (field === 'products' || field === 'spent') {
+        if (field === 'products' || field === 'total') {
             aValue = parseFloat(aValue);
             bValue = parseFloat(bValue);
         }
@@ -99,7 +122,8 @@ function sortReceipts(field, direction) {
         }
     });
     
-    // Re-append sorted items to container
+    // Clear and re-append sorted items
+    container.innerHTML = '';
     items.forEach(item => container.appendChild(item));
 }
 
@@ -111,13 +135,15 @@ async function confirmDelete(receiptId) {
 
     try {
         await deleteReceipt(receiptId);
+        console.log('Receipt deleted successfully');
         alert('Receipt deleted successfully!');
-        loadReceipts(); // Reload list
+        loadReceipts();
     } catch (error) {
         console.error('Error deleting receipt:', error);
         alert('Error deleting receipt: ' + error.message);
     }
 }
+
 
 // Expose to global scope
 window.filterItems = filterItems;

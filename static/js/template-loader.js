@@ -20,21 +20,17 @@
     }
 
     /**
-     * Load a template file and inject it into the DOM.
+     * Load a template file and inject it into the DOM
+     * @param {HTMLElement} element - The element with data-template attribute
+     * @param {string} templateName - Name of the template (header/footer)
      */
-    async function loadTemplate(element, templateName, basePath) {
+    async function loadTemplate(element, templateName) {
         try {
-            const templatePath = basePath === '' ? `/templates/${templateName}.html` : `${basePath}templates/${templateName}.html`;
-            
-            const response = await fetch(templatePath);
-            if (!response.ok) throw new Error(`Template ${templateName} not found at ${templatePath}`);
+            // Always use /static/templates/ path since we're serving from root
+            const response = await fetch(`/static/templates/${templateName}.html`);
+            if (!response.ok) throw new Error(`Template ${templateName} not found`);
             
             let html = await response.text();
-            
-            // Replace {BASE_PATH} placeholder with actual base path
-            const replacementPath = basePath === '' ? '/' : basePath;
-            html = html.replace(/{BASE_PATH}/g, replacementPath);
-            console.log('Replaced BASE_PATH with:', replacementPath);
             
             // Inject the template
             element.innerHTML = html;
@@ -90,18 +86,23 @@
      * Initialize template loading on DOM ready
      */
     function init() {
-        const basePath = getBasePath();
-        
-        // Load dark mode automatically
-        loadDarkMode(basePath);
-        
-        const templateElements = document.querySelectorAll('[data-template]');
-        
-        templateElements.forEach(element => {
-            const templateName = element.getAttribute('data-template');
-            loadTemplate(element, templateName, basePath);
-        });
-    };
+        // Wait a tick to ensure DOM is fully parsed
+        setTimeout(() => {
+            const templateElements = document.querySelectorAll('[data-template]');
+            
+            if (templateElements.length > 0) {
+                templateElements.forEach(element => {
+                    const templateName = element.getAttribute('data-template');
+                    loadTemplate(element, templateName);
+                });
+            }
+            
+            // Load theme script
+            const themeScript = document.createElement('script');
+            themeScript.src = '/static/js/theme.js';
+            document.head.appendChild(themeScript);
+        }, 0);
+    }
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);

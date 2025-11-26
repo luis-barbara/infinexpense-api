@@ -22,7 +22,8 @@ class Receipt(Base):
     purchase_date = Column(Date, nullable=False, index=True)
     barcode = Column(String(20), nullable=True)
     total_price = Column(Numeric(10, 2), default=Decimal('0.00'), nullable=False) 
-    receipt_photo = Column(String(500), nullable=True)
+    receipt_photo = Column(String(500), nullable=True) # URL or path to the receipt photo
+    notes = Column(String(1000), nullable=True)
     
     merchant = relationship("Merchant", back_populates="receipts")
     products = relationship("Product", back_populates="receipt", cascade="all, delete-orphan")

@@ -1,7 +1,7 @@
-import { createProduct } from '../api/products_api.js';
-import { getCategories } from '../api/categories_api.js';
-import { getMeasurementUnits } from '../api/measurement_units_api.js';
-import { uploadProductPhoto } from '../api/uploads_api.js';
+import { createProduct } from '/static/api/products_api.js';
+import { getCategories } from '/static/api/categories_api.js';
+import { getMeasurementUnits } from '/static/api/measurement_units_api.js';
+import { uploadProductPhoto } from '/static/api/uploads_api.js';
 
 let allCategories = [];
 let allUnits = [];
@@ -80,12 +80,31 @@ function handlePhotoSelect(e) {
     // Show preview
     const reader = new FileReader();
     reader.onload = function(event) {
-        const preview = document.querySelector('.photo-upload-label-content');
-        if (preview) {
-            preview.innerHTML = `<img src="${event.target.result}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">`;
+        const previewImg = document.getElementById('photoPreview');
+        const previewContainer = document.getElementById('photoPreviewContainer');
+        const uploadArea = document.getElementById('photoUploadArea');
+        
+        if (previewImg) {
+            previewImg.src = event.target.result;
+            previewContainer.style.display = 'block';
+            uploadArea.style.display = 'none';
         }
     };
     reader.readAsDataURL(file);
+}
+
+/**
+ * Clear photo preview and reset upload
+ */
+function clearPhotoPreview() {
+    const fileInput = document.getElementById('productPhoto');
+    const previewContainer = document.getElementById('photoPreviewContainer');
+    const uploadArea = document.getElementById('photoUploadArea');
+    
+    fileInput.value = '';
+    selectedPhotoFile = null;
+    previewContainer.style.display = 'none';
+    uploadArea.style.display = 'block';
 }
 
 /**
@@ -145,8 +164,8 @@ async function handleSubmit(e) {
             await uploadPhoto(createdProduct.id);
         }
         
-        alert('Product created successfully!');
-        window.location.href = `view.html?id=${createdProduct.id}`;
+        alert('Produto criado com sucesso!');
+        window.location.href = `/static/product/view.html?id=${createdProduct.id}`;
     } catch (error) {
         console.error('Error creating product:', error);
         alert('Error creating product: ' + error.message);
@@ -157,12 +176,13 @@ async function handleSubmit(e) {
  * Cancel add
  */
 function cancelAdd() {
-    window.location.href = 'list.html';
+    window.location.href = '/static/product/list.html';
 }
 
 // Expose to global scope
 window.cancelAdd = cancelAdd;
 window.handlePhotoSelect = handlePhotoSelect;
+window.clearPhotoPreview = clearPhotoPreview;
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', async function() {

@@ -1,6 +1,7 @@
 import { getReceipts } from '../api/receipts_api.js';
 
 let showPercentage = true;
+let autoSwitchInterval = null;
 
 /**
  * Toggle between percentage and absolute value display.
@@ -8,6 +9,17 @@ let showPercentage = true;
 function toggleComparisonMode() {
     showPercentage = !showPercentage;
     updateComparisonDisplay();
+}
+
+/**
+ * Start auto-switching between % and €
+ */
+function startAutoSwitch() {
+    if (autoSwitchInterval) clearInterval(autoSwitchInterval);
+    autoSwitchInterval = setInterval(() => {
+        showPercentage = !showPercentage;
+        updateComparisonDisplay();
+    }, 5000);
 }
 
 function updateComparisonDisplay() {
@@ -21,10 +33,10 @@ function updateComparisonDisplay() {
 
     if (showPercentage) {
         comparisonEl.textContent = `${percentage > 0 ? '+' : ''}${percentage}%`;
-        comparisonEl.className = percentage > 0 ? 'comparison-negative' : 'comparison-positive';
+        comparisonEl.className = `stat-counter ${percentage > 0 ? 'stat-counter-negative' : 'stat-counter-positive'}`;
     } else {
         comparisonEl.textContent = `${difference > 0 ? '+' : ''}${difference.toFixed(2)} €`;
-        comparisonEl.className = difference > 0 ? 'comparison-negative' : 'comparison-positive';
+        comparisonEl.className = `stat-counter ${difference > 0 ? 'stat-counter-negative' : 'stat-counter-positive'}`;
     }
 }
 
@@ -33,8 +45,10 @@ function updateComparisonDisplay() {
  */
 async function loadRecentReceipts() {
     try {
-        const receipts = await getReceipts({ skip: 0, limit: 3 });
-        renderRecentReceipts(receipts);
+        const receipts = await getReceipts({ skip: 0, limit: 100 });
+        // Sort by creation date descending (newest first)
+        receipts.sort((a, b) => new Date(b.created_at || b.purchase_date) - new Date(a.created_at || a.purchase_date));
+        renderRecentReceipts(receipts.slice(0, 3));
     } catch (error) {
         console.error('Error loading recent receipts:', error);
     }
@@ -49,32 +63,36 @@ function renderRecentReceipts(receipts) {
 
     container.innerHTML = '';
 
+    if (receipts.length === 0) {
+        container.innerHTML = '<div style="padding: 2rem; text-align: center; color: hsl(var(--muted-foreground));">No receipts found. <a href="receipts/add.html">Create one</a></div>';
+        return;
+    }
+
     receipts.forEach(receipt => {
-        const receiptDate = new Date(receipt.purchase_date).toLocaleDateString('pt-PT', {
+        const receiptDate = new Date(receipt.purchase_date).toLocaleDateString('en-US', {
             year: 'numeric',
-            month: 'short',
-            day: 'numeric'
+            month: '2-digit',
+            day: '2-digit'
         });
 
         const card = document.createElement('a');
-        card.href = `receipt/view.html?id=${receipt.id}`;
-        card.className = 'receipt-card';
+        card.href = `/static/receipt/view.html?id=${receipt.id}`;
+        card.className = 'card glow-strong block';
+        card.style.cssText = 'text-decoration: none; transition: all 0.2s ease;';
         card.setAttribute('data-receipt-id', receipt.id);
+        card.setAttribute('onmouseover', "this.style.transform='translateY(-2px)'");
+        card.setAttribute('onmouseout', "this.style.transform='translateY(0)'");
 
         card.innerHTML = `
-            <div class="receipt-header">
-                <div>
-                    <div class="receipt-merchant">${receipt.merchant?.name || 'Unknown Merchant'}</div>
-                    <div class="receipt-detail-item" style="margin-top: 0.5rem;">
-                        <span class="receipt-detail-label">Products</span>
-                        <span class="receipt-detail-value">${receipt.products?.length || 0} items</span>
-                    </div>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div style="flex: 1;">
+                    <h3 style="font-size: 1.125rem; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 0.25rem;">${receipt.merchant?.name || 'Unknown Merchant'}</h3>
+                    <p style="font-size: 0.75rem; color: hsl(var(--muted-foreground)); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">PRODUCTS</p>
+                    <p style="font-size: 0.875rem; color: hsl(var(--muted-foreground));">${receipt.products?.length || 0} items</p>
                 </div>
                 <div style="text-align: right;">
-                    <div class="receipt-date">${receiptDate}</div>
-                    <div class="receipt-detail-value" style="margin-top: 0.5rem; font-size: 1.5rem; color: var(--primary-color);">
-                        ${parseFloat(receipt.total_price || 0).toFixed(2)} €
-                    </div>
+                    <p style="font-size: 0.875rem; color: hsl(var(--muted-foreground)); margin-bottom: 0.5rem;">${receiptDate}</p>
+                    <p style="font-size: 1.5rem; font-weight: 700; color: hsl(var(--primary));">${parseFloat(receipt.total_price || 0).toFixed(2)} €</p>
                 </div>
             </div>
         `;
@@ -130,7 +148,7 @@ async function loadDashboardStats() {
         const receiptsComparisonEl = document.getElementById('receipts-comparison');
         if (receiptsComparisonEl) {
             receiptsComparisonEl.textContent = `${receiptsDifference > 0 ? '+' : ''}${receiptsDifference} from last month`;
-            receiptsComparisonEl.className = receiptsDifference > 0 ? 'comparison-positive' : 'comparison-negative';
+            receiptsComparisonEl.className = `stat-counter ${receiptsDifference > 0 ? 'stat-counter-negative' : 'stat-counter-positive'}`;
         }
 
         const productsEl = document.getElementById('products-purchased');
@@ -141,7 +159,7 @@ async function loadDashboardStats() {
         const productsComparisonEl = document.getElementById('products-comparison');
         if (productsComparisonEl) {
             productsComparisonEl.textContent = `${productsDifference > 0 ? '+' : ''}${productsDifference} from last month`;
-            productsComparisonEl.className = productsDifference > 0 ? 'comparison-positive' : 'comparison-negative';
+            productsComparisonEl.className = `stat-counter ${productsDifference > 0 ? 'stat-counter-negative' : 'stat-counter-positive'}`;
         }
 
         const comparisonEl = document.getElementById('expense-comparison');
@@ -149,6 +167,12 @@ async function loadDashboardStats() {
             comparisonEl.setAttribute('data-current-expense', currentExpenses);
             comparisonEl.setAttribute('data-last-month-expense', lastMonthExpenses);
             updateComparisonDisplay();
+            comparisonEl.style.cursor = 'pointer';
+            comparisonEl.onclick = function(e) {
+                e.stopPropagation();
+                showPercentage = !showPercentage;
+                updateComparisonDisplay();
+            };
         }
     } catch (error) {
         console.error('Error loading statistics:', error);
@@ -160,4 +184,5 @@ window.toggleComparisonMode = toggleComparisonMode;
 document.addEventListener('DOMContentLoaded', function() {
     loadRecentReceipts();
     loadDashboardStats();
+    startAutoSwitch();
 });

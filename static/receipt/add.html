@@ -3,69 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Receipt - InfinExpense</title>
-    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-    <link rel="stylesheet" href="../css/main.css">
+    <title>Add Receipt - Infinexpense</title>
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+    <link rel="stylesheet" href="/static/css/main.css">
 </head>
 <body data-active-page="receipts">
     <!-- Navigation Template -->
     <div data-template="header"></div>
 
-    <script src="../js/template-loader.js"></script>
+    <script src="/static/js/template-loader.js"></script>
 
     <!-- Main Content -->
-    <div class="container">
-        <div class="page-header">
-            <h1 class="page-title">Add New Receipt</h1>
+    <div class="container py-8">
+        <!-- Header -->
+        <div class="mb-8 animate-fade-in">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <a href="/static/receipt/list.html" class="btn btn-secondary btn-sm">← Back</a>
+                <div>
+                    <h1 class="gradient-text mb-2">Add New Receipt</h1>
+                    <p class="text-muted">Create a new receipt entry</p>
+                </div>
+            </div>
         </div>
 
-        <div class="card" style="max-width: 800px; margin: 0 auto;">
+        <!-- Form Card -->
+        <div class="card glow-strong animate-slide-up" style="animation-delay: 0.1s; max-width: 600px; margin: 0 auto;">
             <form id="addReceiptForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label">Merchant *</label>
-                        <select id="merchantSelect" class="form-select" required>
+                <!-- Merchant and Date Row -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+                    <div>
+                        <label class="font-semibold mb-2 block">Merchant *</label>
+                        <select id="merchantSelect" class="input" required>
                             <option value="">Select a merchant</option>
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label">Date *</label>
-                        <input type="date" id="receiptDate" class="form-input" required>
+                    <div>
+                        <label class="font-semibold mb-2 block">Date *</label>
+                        <input type="date" id="receiptDate" class="input" required>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-label">Receipt Code</label>
-                    <input type="text" id="receiptCode" class="form-input" placeholder="e.g., RCPT-2025-1001-CON">
+                <!-- Receipt Code -->
+                <div style="margin-bottom: 1.5rem;">
+                    <label class="font-semibold mb-2 block">Receipt Code</label>
+                    <input type="text" id="receiptCode" class="input" placeholder="e.g., RCPT-2025-1001-CON">
                 </div>
 
-                <div class="form-group">
-                    <label class="form-label">Notes</label>
-                    <textarea id="receiptNotes" class="form-textarea" placeholder="Add any additional notes about this receipt..."></textarea>
+                <!-- Notes -->
+                <div style="margin-bottom: 1.5rem;">
+                    <label class="font-semibold mb-2 block">Notes</label>
+                    <textarea id="receiptNotes" class="input" rows="4" placeholder="Add any additional notes about this receipt..."></textarea>
                 </div>
 
-                <div class="photo-upload-container">
-                    <div class="form-group form-group-no-margin">
-                        <label class="form-label">Receipt Photo</label>
-                        <div class="file-upload photo-upload-small">
-                            <input type="file" id="receiptPhoto" class="file-upload-input" accept="image/*">
-                            <label for="receiptPhoto" class="file-upload-label photo-upload-label-content">
-                                <div class="photo-upload-icon">📷</div>
-                                <div class="photo-upload-text">Upload Photo</div>
-                            </label>
-                        </div>
-                    </div>
+                <!-- Photo Upload -->
+                <div style="margin-bottom: 2rem;">
+                    <label class="font-semibold mb-2 block">Receipt Photo</label>
+                    <input type="file" id="receiptPhoto" style="display: none;" accept="image/*">
+                    <label for="receiptPhoto" style="padding: 1rem; text-align: center; cursor: pointer; display: block; border: 2px dashed hsl(var(--border) / 0.5); border-radius: var(--radius); background: hsl(var(--secondary) / 0.3); transition: border-color 0.3s, background-color 0.3s;">
+                        <div style="font-size: 1.5rem; margin-bottom: 0.3rem;">📷</div>
+                        <div class="text-muted" style="font-size: 0.9rem;">Click to upload</div>
+                        <div style="font-size: 0.8rem; color: hsl(var(--muted-foreground)); margin-top: 0.3rem;">Max 5MB</div>
+                    </label>
                 </div>
                      
-                <div class="flex flex-gap" style="justify-content: flex-end; margin-top: 2rem;">
-                    <a href="list.html" class="btn btn-outline">Cancel</a>
-                    <button type="submit" class="btn btn-primary">Create Receipt</button>
+                <!-- Action Buttons -->
+                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                    <a href="/static/receipt/list.html" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary glow-cyan">Create Receipt</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <script type="module" src="../js/receipt-add.js"></script>
+    <script type="module" src="/static/js/receipt-add.js"></script>
 </body>
 </html>

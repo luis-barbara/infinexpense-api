@@ -93,14 +93,7 @@ def update_merchant(
     db: Session = Depends(get_db)
 ):
     try:
-        merchant = MerchantService.get_merchant(db, merchant_id)
-        if not merchant:
-            logger.warning(f"Merchant not found for update: {merchant_id}")
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Merchant not found")
-        
-        return MerchantService.update_merchant(db, merchant, update_data)
-    except HTTPException:
-        raise
+        return MerchantService.update_merchant(db, merchant_id, update_data)
     except ValueError as e:
         logger.warning(f"Validation error updating merchant {merchant_id}: {str(e)}")
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))

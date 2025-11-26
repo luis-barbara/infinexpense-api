@@ -12,6 +12,7 @@ class ReceiptBase(BaseModel):
     purchase_date: date
     barcode: str | None = Field(default=None, max_length=20)
     receipt_photo: str | None = Field(default=None, max_length=500)
+    notes: str | None = Field(default=None, max_length=1000)
 
 
 class ReceiptCreate(ReceiptBase):
@@ -24,6 +25,7 @@ class ReceiptUpdate(BaseModel):
     purchase_date: date | None = None
     barcode: str | None = Field(default=None, max_length=20)
     receipt_photo: str | None = Field(default=None, max_length=500)
+    notes: str | None = Field(default=None, max_length=1000)
 
 
 class Receipt(ReceiptBase):
@@ -32,6 +34,7 @@ class Receipt(ReceiptBase):
     total_price: Decimal
     merchant: Merchant
     products: List[Product] = Field(default_factory=list)
+    notes: str | None = Field(default=None, max_length=1000)
     created_at: datetime
     updated_at: datetime | None = None
 

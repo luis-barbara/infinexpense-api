@@ -4,49 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Categories - InfinExpense</title>
-    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+    <link rel="stylesheet" href="/static/css/main.css">
 </head>
 <body data-active-page="categories">
     <!-- Navigation Template -->
     <div data-template="header"></div>
 
-    <script src="../js/template-loader.js"></script>
+    <script src="/static/js/template-loader.js"></script>
 
     <!-- Main Content -->
-    <div class="container">
-        <div class="page-header">
-            <h1 class="page-title">Categories</h1>
-            <a href="add.html" class="btn btn-primary">+ Add Category</a>
+    <div class="container py-8">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-8 animate-fade-in">
+            <div>
+                <h1 class="gradient-text mb-2">Categories</h1>
+                <p class="text-muted">Manage and track all your categories</p>
+            </div>
+            <a href="/static/category/add.html" class="btn btn-primary glow-cyan">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14"/>
+                    <path d="M12 5v14"/>
+                </svg>
+                Add Category
+            </a>
         </div>
 
-        <!-- Date Range Filter -->
-        <div class="filter-grid">
-            <!-- Search Bar (Left) -->
-            <div class="search-bar search-bar-no-margin">
-                <input type="text" id="searchInput" class="search-input form-input-flex" placeholder="Search categories...">
-                <button class="btn btn-primary">Search</button>
+        <!-- Search Bar -->
+        <div class="flex gap-3 mb-6 animate-slide-up" style="animation-delay: 0.1s;">
+            <div class="search-bar">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.3-4.3"/>
+                </svg>
+                <input type="text" id="searchInput" class="input" placeholder="Search categories...">
             </div>
-            
-            <!-- Date Filter (Right) -->
-            <div class="search-bar search-bar-no-margin">
-                <label class="form-label form-label-inline">
-                    <span class="form-label-span">Start<br>Date</span>
-                    <input type="date" class="form-input form-input-flex" value="2025-11-01">
-                </label>
-                <label class="form-label form-label-inline">
-                    <span class="form-label-span">End<br>Date</span>
-                    <input type="date" class="form-input form-input-flex" value="2025-11-30">
-                </label>
-                <button class="btn btn-primary">Apply</button>
-                <button class="btn btn-secondary">Reset</button>
-            </div>
+            <button class="btn btn-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.3-4.3"/>
+                </svg>
+            </button>
         </div>
 
         <!-- Categories and Chart Layout -->
-        <div class="grid-2cols">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem;">
             <!-- Categories List (Left Side) -->
-            <div class="card card-no-margin card-flex">
+            <div class="card card-no-margin card-flex glow-strong animate-slide-up" style="animation-delay: 0.15s;">
                 <h3 class="detail-title" style="margin-bottom: 0.75rem; font-size: 1.1rem;">All Categories</h3>
                 <div class="flex-1 overflow-auto">
                     <div class="list-container list-container-no-shadow" id="categoriesList">
@@ -56,8 +60,8 @@
             </div>
 
             <!-- Category Spending Chart (Right Side) -->
-            <div class="card" style="margin-bottom: 0; display: flex; flex-direction: column; overflow: hidden;">
-                <h3 class="detail-title" style="margin-bottom: 0.75rem; font-size: 1.1rem; text-align: center;">Category Spending Pie Chart</h3>
+            <div class="card glow-strong animate-slide-up" style="margin-bottom: 0; display: flex; flex-direction: column; overflow: hidden; animation-delay: 0.2s;">
+                <h3 class="detail-title" style="margin-bottom: 0.75rem; font-size: 1.1rem; text-align: center;">Category Spending</h3>
                 <div style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 1rem;">
                     <canvas id="categoryChart" style="max-width: 100%; max-height: 400px;"></canvas>
                 </div>
@@ -70,6 +74,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
     
     <!-- Category List JavaScript Module -->
-    <script type="module" src="../js/category-list.js"></script>
+    <script type="module" src="/static/js/category-list.js"></script>
 </body>
 </html>

@@ -45,7 +45,10 @@ function handlePhotoSelect(e) {
     if (label) {
         const reader = new FileReader();
         reader.onload = function(event) {
-            label.innerHTML = `<img src="${event.target.result}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">`;
+            label.innerHTML = `
+                <img src="${event.target.result}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                <div style="text-align: center; margin-top: 0.5rem; font-size: 0.875rem; color: hsl(var(--muted-foreground));">${file.name}</div>
+            `;
         };
         reader.readAsDataURL(file);
     }

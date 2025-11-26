@@ -1,7 +1,7 @@
-import { getProductById, updateProduct } from '../api/products_api.js';
-import { getCategories } from '../api/categories_api.js';
-import { getMeasurementUnits } from '../api/measurement_units_api.js';
-import { uploadProductPhoto } from '../api/uploads_api.js';
+import { getProductById, updateProduct } from '/static/api/products_api.js';
+import { getCategories } from '/static/api/categories_api.js';
+import { getMeasurementUnits } from '/static/api/measurement_units_api.js';
+import { uploadProductPhoto } from '/static/api/uploads_api.js';
 
 let currentProductId = null;
 let currentProduct = null;
@@ -102,7 +102,10 @@ async function loadProduct() {
         currentProduct = await getProductById(currentProductId);
 
         // Update page title
-        document.querySelector('.page-title').textContent = `Edit Product: ${currentProduct.name}`;
+        const titleEl = document.querySelector('h1.gradient-text');
+        if (titleEl) {
+            titleEl.textContent = `Edit Product: ${currentProduct.name}`;
+        }
 
         // Populate form
         populateForm(currentProduct);
@@ -206,8 +209,8 @@ async function handleSubmit(e) {
             }
         }
 
-        alert('Product updated successfully!');
-        window.location.href = `view.html?id=${currentProductId}`;
+        alert('Produto atualizado com sucesso!');
+        window.location.href = `/static/product/view.html?id=${currentProductId}`;
     } catch (error) {
         console.error('Error updating product:', error);
         alert('Error updating product: ' + error.message);
@@ -218,7 +221,7 @@ async function handleSubmit(e) {
  * Cancel edit
  */
 function cancelEdit() {
-    window.location.href = `view.html?id=${currentProductId}`;
+    window.location.href = `/static/product/view.html?id=${currentProductId}`;
 }
 
 
@@ -291,6 +294,7 @@ function displayCurrentPhoto(photoPath) {
  * Trigger photo upload by clicking the hidden file input
  */
 function triggerPhotoUpload() {
+    if (!confirm('Are you sure you want to change the photo?')) return;
     const fileInput = document.getElementById('photoUpload');
     fileInput.click();
 }

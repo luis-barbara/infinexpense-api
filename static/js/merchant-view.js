@@ -1,5 +1,5 @@
-import { getMerchantById, deleteMerchant } from '../api/merchants_api.js';
-import { getReceiptsByMerchant } from '../api/receipts_api.js';
+import { getMerchantById, deleteMerchant } from '/static/api/merchants_api.js';
+import { getReceiptsByMerchant } from '/static/api/receipts_api.js';
 
 let currentMerchantId = null;
 let currentMerchant = null;
@@ -20,7 +20,7 @@ async function loadMerchant() {
         currentMerchantId = getMerchantIdFromUrl();
         if (!currentMerchantId) {
             alert('Merchant ID not provided');
-            window.location.href = 'list.html';
+            window.location.href = '/static/merchant/list.html';
             return;
         }
 
@@ -30,9 +30,9 @@ async function loadMerchant() {
         // Load recent receipts
         await loadRecentReceipts();
     } catch (error) {
-        console.error('Error loading merchant:', error);
-        alert('Error loading merchant: ' + error.message);
-        window.location.href = 'list.html';
+        console.error('Erro ao carregar comerciante:', error);
+        alert('Erro ao carregar comerciante: ' + error.message);
+        window.location.href = '/static/merchant/list.html';
     }
 }
 
@@ -40,19 +40,23 @@ async function loadMerchant() {
  * Populate merchant details
  */
 function populateMerchant(merchant) {
-    document.querySelector('.page-title').textContent = merchant.name;
+    // Set title in header
+    const titleEl = document.querySelector('h1.gradient-text');
+    if (titleEl) {
+        titleEl.textContent = merchant.name;
+    }
     
     // Set edit button link
-    document.querySelector('a[href*="edit"]').href = `edit.html?id=${merchant.id}`;
+    const editBtn = document.querySelector('a[href*="edit"]');
+    if (editBtn) {
+        editBtn.href = `/static/merchant/edit.html?id=${merchant.id}`;
+    }
     
-    // Set delete button
-    document.querySelector('button.btn-danger').onclick = function() {
-        deleteMerchantConfirm();
-    };
-    
-    const locationEl = document.querySelector('.product-info-grid .product-info-item:nth-child(1) .product-info-value');
-    if (locationEl) {
-        locationEl.textContent = merchant.location || '-';
+    // Location - find by the location div class
+    const locationValueEl = document.querySelector('div.location');
+    if (locationValueEl) {
+        locationValueEl.textContent = merchant.location || '-';
+        console.log('Set location to:', merchant.location);
     }
     
     // Notes - Handle missing notes field
@@ -62,13 +66,7 @@ function populateMerchant(merchant) {
         notesP.textContent = notesText;
     }
     
-    // Merchant image
-    if (merchant.image_path) {
-        const img = document.getElementById('merchant-image');
-        img.src = merchant.image_path;
-        img.style.display = 'block';
-        document.getElementById('no-photo-placeholder').style.display = 'none';
-    }
+    console.log('Full merchant object:', merchant);
 }
 
 /**
@@ -87,34 +85,38 @@ async function loadRecentReceipts() {
  * Render receipts list
  */
 function renderReceipts(receipts) {
-    const container = document.querySelector('.scrollable-list .list-container');
+    const container = document.querySelector('.list-container');
+    if (!container) {
+        console.error('Container not found');
+        return;
+    }
     container.innerHTML = '';
     
     // Update receipts title with count
     const receiptsTitle = document.getElementById('receipts-title');
     if (receiptsTitle) {
-        receiptsTitle.textContent = `Recent Receipts (${receipts.length})`;
+        receiptsTitle.textContent = `🧾 Recent Receipts (${receipts.length})`;
         console.log('Updated receipts title to:', receipts.length);
     }
     
-    // Update total receipts count
-    const totalReceiptsEl = document.querySelector('.product-info-grid .product-info-item:nth-child(2) .product-info-value');
-    if (totalReceiptsEl) {
-        totalReceiptsEl.textContent = `${receipts.length} receipt${receipts.length !== 1 ? 's' : ''}`;
+    // Update Total Receipts - find all font-semibold text-lg divs and update the second one
+    const allInfoDivs = document.querySelectorAll('.font-semibold.text-lg');
+    if (allInfoDivs.length >= 2) {
+        allInfoDivs[1].textContent = `${receipts.length} receipt${receipts.length !== 1 ? 's' : ''}`;
         console.log('Set total receipts to:', receipts.length);
     }
     
-    // Update last visit
+    // Update Last Visit - update the third info div
     if (receipts.length > 0) {
-        const lastReceipt = receipts[0];
+        const sortedReceipts = [...receipts].sort((a, b) => new Date(b.purchase_date) - new Date(a.purchase_date));
+        const lastReceipt = sortedReceipts[0];
         const lastVisitDate = new Date(lastReceipt.purchase_date).toLocaleDateString('pt-PT', {
             year: 'numeric',
             month: 'short',
             day: 'numeric'
         });
-        const lastVisitEl = document.querySelector('.product-info-grid .product-info-item:nth-child(3) .product-info-value');
-        if (lastVisitEl) {
-            lastVisitEl.textContent = lastVisitDate;
+        if (allInfoDivs.length >= 3) {
+            allInfoDivs[2].textContent = lastVisitDate;
             console.log('Set last visit to:', lastVisitDate);
         }
     }
@@ -138,16 +140,18 @@ function renderReceipts(receipts) {
         const total = receipt.total_price || 0;
         
         const item = document.createElement('div');
-        item.className = 'list-item';
+        item.style.display = 'grid';
         item.style.gridTemplateColumns = '2fr 1.5fr 1fr 1fr';
+        item.style.gap = '1rem';
+        item.style.padding = '1rem';
+        item.style.borderBottom = '1px solid hsl(var(--border) / 0.2)';
+        item.style.alignItems = 'center';
         
         item.innerHTML = `
-            <div class="list-item-main" style="grid-template-columns: 2fr 1.5fr 1fr 1fr;">
-                <div class="list-item-value"><a href="../receipt/view.html?id=${receipt.id}" class="link-primary">${receipt.barcode || `RCPT-${receipt.id}`}</a></div>
-                <div class="list-item-value">${receiptDate}</div>
-                <div class="list-item-value">${itemCount} items</div>
-                <div class="list-item-value" style="font-weight: 600; color: var(--primary);">${total.toFixed(2)} €</div>
-            </div>
+            <a href="/static/receipt/view.html?id=${receipt.id}" style="color: hsl(var(--primary)); text-decoration: none; font-weight: 500;">${receipt.barcode || `RCPT-${receipt.id}`}</a>
+            <div>${receiptDate}</div>
+            <div>${itemCount} item${itemCount !== 1 ? 's' : ''}</div>
+            <div style="font-weight: 600; color: hsl(var(--primary));">${total.toFixed(2)} €</div>
         `;
         
         container.appendChild(item);
@@ -162,8 +166,8 @@ async function deleteMerchantConfirm() {
 
     try {
         await deleteMerchant(currentMerchantId);
-        alert('Merchant deleted successfully!');
-        window.location.href = 'list.html';
+        alert('Comerciante eliminado com sucesso!');
+        window.location.href = '/static/merchant/list.html';
     } catch (error) {
         console.error('Error deleting merchant:', error);
         alert('Error deleting merchant: ' + error.message);
