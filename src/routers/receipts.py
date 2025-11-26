@@ -20,7 +20,6 @@ router = APIRouter(
 )
 
 
-
 @router.post(
     "/", 
     response_model=ReceiptSchema, 
@@ -31,14 +30,7 @@ def create_receipt(
     receipt: ReceiptCreate,
     db: Session = Depends(get_db)
 ):
-    """
-    Create a new receipt with the provided details.
-    - **merchant_id**: ID of the merchant associated with the receipt
-    - **date**: Date of the receipt
-    - **barcode**: Optional barcode number for the receipt
-    - **products**: List of products associated with the receipt
-    Returns the created receipt.
-    """
+    """Create a new receipt."""
     try:
         return ReceiptService.create_receipt(db, receipt)
     except ValueError as e:
@@ -46,9 +38,6 @@ def create_receipt(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=str(e)
         )
- 
-    
-
 
 
 @router.get(
@@ -65,17 +54,7 @@ def get_receipt_by_filter(
     end_date: Optional[date] = Query(None, description="Filter receipts up to this date (inclusive)"),
     db: Session = Depends(get_db),
 ):
-    """
-    Retrieve all receipts with optional filtering by:
-    - **skip**: Number of records to skip for pagination
-    - **limit**: Maximum number of records to return
-    - **merchant_id**: Filter receipts by the associated merchant ID
-    - **barcode**: Filter receipts by barcode
-    - **start_date** and **end_date**: Filter receipts within a date range
-    - **end_date**: Filter receipts up to this date (inclusive)
-
-    Returns a list of receipts matching the criteria.
-    """
+    """Get all receipts with optional filtering and pagination."""
     return ReceiptService.get_receipts(
         db=db, 
         skip=skip, 
@@ -87,7 +66,6 @@ def get_receipt_by_filter(
     )
 
 
-
 @router.get(
     "/{receipt_id}",
     response_model=ReceiptSchema,
@@ -97,17 +75,7 @@ def get_receipt_by_id(
     receipt_id: int = Path(..., gt=0, description="The ID of the receipt to retrieve"),
     db: Session = Depends(get_db)
 ):
-    """
-    Retrive a receipt by its unique ID.
-
-    - **receipt_id**: The unique identifier of the receipt to retrieve
-    
-    Returns the receipt details including:
-    - Merchant information
-    - Date of the receipt
-    - Barcode (if available)
-    - List of products associated with the receipt
-    """
+    """Get a single receipt by ID."""
     try:
         return ReceiptService.get_receipt_by_id(db, receipt_id)
     except ValueError as e:
@@ -115,7 +83,6 @@ def get_receipt_by_id(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Receipt not found" 
         )
-
 
 
 @router.get(
@@ -127,13 +94,7 @@ def get_receipts_products(
     receipt_id: int = Path(..., gt=0, description="The ID of the receipt to retrieve products for"),
     db: Session = Depends(get_db)
 ):
-    """
-    Retrieve all products associated with a specific receipt.
-
-    - **receipt_id**: The unique identifier of the receipt
-
-    Returns a list of products linked to the specified receipt.
-    """
+    """Get all products for a receipt."""
     return ReceiptService.get_receipt_products(db, receipt_id)
 
 
@@ -147,17 +108,7 @@ def get_receipt_by_barcode(
     barcode: str = Path(..., description="The barcode of the receipt to retrieve"),
     db: Session = Depends(get_db)
 ):
-    """
-    Retrieve a receipt by its barcode.
-
-    - **barcode**: The barcode associated with the receipt
-
-    Returns the receipt details including:
-    - Merchant information
-    - Date of the receipt
-    - Barcode
-    - List of products associated with the receipt
-    """
+    """Get a receipt by barcode."""
     return ReceiptService.get_receipt_by_barcode(db, barcode)
 
 
@@ -173,13 +124,7 @@ def get_receipts_by_merchant(
     limit: int = Query(100, ge=1, le=1000, description="Maximum number of records to return"),
     db: Session = Depends(get_db)
 ):
-    """
-    Retrieve all receipts associated with a specific merchant.
-
-    - **merchant_id**: The unique identifier of the merchant
-
-    Returns a list of receipts linked to the specified merchant.
-    """
+    """Get all receipts for a merchant."""
     return ReceiptService.get_receipts_by_merchant(db, merchant_id)
 
 
@@ -194,15 +139,7 @@ def update_receipt(
     receipt_update: ReceiptUpdate = ...,
     db: Session = Depends(get_db)
 ):
-    """
-    Update an existing receipt with the provided details.
-
-    - **receipt_id**: The unique identifier of the receipt to update
-    - **merchant_id**: Updated ID of the merchant associated with the receipt
-    - **date**: Updated date of the receipt
-    - **barcode**: Updated optional barcode number for the receipt
-    Returns the updated receipt.
-    """
+    """Update a receipt by ID."""
     return ReceiptService.update_receipt(db, receipt_id, receipt_update)
 
 @router.put(
@@ -215,9 +152,7 @@ def update_receipt_products(
     products_data: dict = Body(...),
     db: Session = Depends(get_db)
 ):
-    """
-    Update all products for a receipt.
-    """
+    """Update all products for a receipt."""
     return ReceiptService.update_receipt_products(db, receipt_id, products_data.get("products", []))
 
 @router.delete(
@@ -229,12 +164,6 @@ def delete_receipt(
     receipt_id: int = Path(..., gt=0, description="The ID of the receipt to delete"),
     db: Session = Depends(get_db)
 ):
-    """
-    Delete a receipt by its unique ID.
-
-    - **receipt_id**: The unique identifier of the receipt to delete
-
-    This operation will remove the receipt and all associated products from the database.
-    """
+    """Delete a receipt by ID."""
     ReceiptService.delete_receipt(db, receipt_id)
     return None

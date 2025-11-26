@@ -1,5 +1,3 @@
-// static/api/categories_api.js
-
 const API_BASE_URL = "";  // Use relative URLs
 
 /**
@@ -27,8 +25,7 @@ async function _handleApiRequest(endpoint, options = {}) {
 }
 
 /**
- * Get all categories
- * endpoint: GET /categories/
+ * Get all categories with optional date filtering.
  */
 export async function getCategories(params = {}) {
     const validParams = {

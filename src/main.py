@@ -1,12 +1,8 @@
-# src/main.py 
-
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
-
-# Imports dos Routers 
 
 from src.routers import (
     receipts, 
@@ -17,8 +13,6 @@ from src.routers import (
     reports,  
     uploads   
 )
-
-# Definição dos Caminhos (Paths)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -43,36 +37,38 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# API Routers
-# Routers de CRUD
 app.include_router(receipts.router)
 app.include_router(products.router)
 app.include_router(categories.router)
 app.include_router(merchants.router)
 app.include_router(measurement_units.router)
-
-# Router de Reports
 app.include_router(reports.router)
-
-# Router de Uploads
 app.include_router(uploads.router)
 
-
-# Montagem de Ficheiros Estáticos (Static Files)
-# Para o Frontend (HTML/CSS/JS)
-app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
-
-# Para as Fotos dos Produtos
+app.mount("/css", StaticFiles(directory=str(STATIC_DIR / "css")), name="css")
+app.mount("/js", StaticFiles(directory=str(STATIC_DIR / "js")), name="js")
+app.mount("/images", StaticFiles(directory=str(STATIC_DIR / "images")), name="images")
+app.mount("/templates", StaticFiles(directory=str(STATIC_DIR / "templates")), name="templates")
+app.mount("/api", StaticFiles(directory=str(STATIC_DIR / "api")), name="api")
+app.mount("/category", StaticFiles(directory=str(STATIC_DIR / "category")), name="category")
+app.mount("/merchant", StaticFiles(directory=str(STATIC_DIR / "merchant")), name="merchant")
+app.mount("/product", StaticFiles(directory=str(STATIC_DIR / "product")), name="product")
+app.mount("/receipt", StaticFiles(directory=str(STATIC_DIR / "receipt")), name="receipt")
+app.mount("/docs", StaticFiles(directory=str(STATIC_DIR / "docs")), name="docs")
 app.mount("/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
 
 
-# Servidor da Homepage (HTML)
 @app.get("/", include_in_schema=False)
 def read_root():
-    """
-    Serve a página principal (index.html) do teu frontend
-    que está na pasta /static.
-    """
+    """Serve the homepage from static directory."""
+    index_path = STATIC_DIR / "index.html"
+    if not index_path.is_file():
+        return {"error": "index.html not found in static directory"}, 404
+    return FileResponse(index_path)
+
+@app.get("/index.html", include_in_schema=False)
+def read_index():
+    """Serve index.html directly."""
     index_path = STATIC_DIR / "index.html"
     if not index_path.is_file():
         return {"error": "index.html not found in static directory"}, 404

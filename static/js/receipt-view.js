@@ -28,8 +28,8 @@ async function loadReceipt() {
         
         populateReceipt(currentReceipt);
     } catch (error) {
-        console.error('Erro ao carregar recibo:', error);
-        alert('Erro ao carregar recibo: ' + error.message);
+        console.error('Error loading receipt:', error);
+        alert('Error loading receipt: ' + error.message);
         window.location.href = 'list.html';
     }
 }
@@ -148,16 +148,16 @@ function sortProducts(field, direction) {
  * Delete receipt with confirmation
  */
 async function deleteCurrentReceipt() {
-    if (!confirm('Tem a certeza que deseja eliminar este recibo?')) return;
+    if (!confirm('Are you sure you want to delete this receipt?')) return;
 
     try {
         const { deleteReceipt } = await import('../api/receipts_api.js');
         await deleteReceipt(currentReceiptId);
-        alert('Recibo eliminado com sucesso!');
+        alert('Receipt deleted successfully!');
         window.location.href = 'list.html';
     } catch (error) {
-        console.error('Erro ao eliminar recibo:', error);
-        alert('Erro ao eliminar recibo: ' + error.message);
+        console.error('Error deleting receipt:', error);
+        alert('Error deleting receipt: ' + error.message);
     }
 }
 

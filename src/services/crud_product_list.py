@@ -1,5 +1,3 @@
-# src/services/crud_product_list.py
-
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 from typing import List, Optional
@@ -14,33 +12,35 @@ from . import crud_category
 
 
 class ProductListService:
-    # Read
     @staticmethod
     def get_product_list(db: Session, product_list_id: int) -> Optional[product_list_model.ProductList]:
+        """Get a product by ID."""
         return db.query(product_list_model.ProductList).filter(
             product_list_model.ProductList.id == product_list_id
         ).first()
 
     @staticmethod
     def get_product_lists(db: Session, skip: int = 0, limit: int = 100) -> List[product_list_model.ProductList]:
-        """Get all product lists with pagination"""
+        """Get all products with pagination."""
         return db.query(product_list_model.ProductList).offset(skip).limit(limit).all()
 
     @staticmethod
     def get_product_by_barcode(db: Session, barcode: str) -> Optional[product_list_model.ProductList]:
+        """Get a product by barcode."""
         return db.query(product_list_model.ProductList).filter(
             product_list_model.ProductList.barcode == barcode
         ).first()
 
     @staticmethod
     def get_product_by_name(db: Session, name: str) -> Optional[product_list_model.ProductList]:
+        """Get a product by name."""
         return db.query(product_list_model.ProductList).filter(
             product_list_model.ProductList.name == name
         ).first()
 
-    # Create
     @staticmethod
-    def create_product_list(db: Session, product: product_list_schema.ProductListCreate):  # CORRIGE AQUI
+    def create_product_list(db: Session, product: product_list_schema.ProductListCreate):
+        """Create a new product."""
         db_product = product_list_model.ProductList(**product.model_dump())
         db.add(db_product)
         try:
@@ -54,9 +54,9 @@ class ProductListService:
                 detail=f"Product with name '{product.name}' already exists"
             )
 
-    # Update
     @staticmethod
     def update_product_list(db: Session, product_id: int, product_update: product_list_schema.ProductListUpdate) -> Optional[product_list_model.ProductList]:
+        """Update a product."""
         db_product = db.query(product_list_model.ProductList).filter(
             product_list_model.ProductList.id == product_id
         ).first()
@@ -70,9 +70,9 @@ class ProductListService:
         
         return db_product
 
-    # Delete
     @staticmethod
     def delete_product_list(db: Session, product_id: int) -> bool:
+        """Delete a product by ID."""
         try:
             db_product_list = db.query(product_list_model.ProductList).filter(
                 product_list_model.ProductList.id == product_id

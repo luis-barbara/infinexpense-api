@@ -3,16 +3,14 @@ import { createMerchant, uploadMerchantPhoto } from '../api/merchants_api.js';
 let selectedPhotoFile = null;
 
 /**
- * Handle photo file selection
+ * Handle photo file selection.
  */
 function handlePhotoSelect(e) {
     const file = e.target.files[0];
     if (!file) return;
     
     selectedPhotoFile = file;
-    console.log('Photo selected:', file.name);
     
-    // Show preview
     const reader = new FileReader();
     reader.onload = function(event) {
         const preview = document.querySelector('.photo-upload-label-content');
@@ -24,7 +22,7 @@ function handlePhotoSelect(e) {
 }
 
 /**
- * Handle form submission
+ * Handle form submission.
  */
 async function handleSubmit(e) {
     e.preventDefault();
@@ -35,13 +33,6 @@ async function handleSubmit(e) {
         const locationInput = form.querySelector('input[name="location"]');
         const notesTextarea = form.querySelector('textarea[name="notes"]');
         
-        console.log('Form inputs:', {
-            nameInput: nameInput?.value,
-            locationInput: locationInput?.value,
-            notesTextarea: notesTextarea?.value
-        });
-        
-        // Validation
         if (!nameInput || !nameInput.value) {
             alert('Merchant name is required');
             return;
@@ -60,48 +51,37 @@ async function handleSubmit(e) {
         
         console.log('Creating merchant:', newMerchant);
         const createdMerchant = await createMerchant(newMerchant);
-        console.log('Merchant created:', createdMerchant);
         
-        // Upload photo if selected
         if (selectedPhotoFile) {
             await uploadMerchantPhoto(createdMerchant.id, selectedPhotoFile);
         }
         
-        alert('Comerciante criado com sucesso!');
+        alert('Merchant created successfully!');
         window.location.href = `view.html?id=${createdMerchant.id}`;
     } catch (error) {
-        console.error('Erro ao criar comerciante:', error);
-        alert('Erro ao criar comerciante: ' + error.message);
+        console.error('Error creating merchant:', error);
+        alert('Error creating merchant: ' + error.message);
     }
 }
 
 /**
- * Cancel add
+ * Cancel add.
  */
 function cancelAdd() {
     window.location.href = 'list.html';
 }
 
-// Expose to global scope
 window.cancelAdd = cancelAdd;
 window.handlePhotoSelect = handlePhotoSelect;
 
-// Initialize on page load
 document.addEventListener('DOMContentLoaded', async function() {
-    console.log('Merchant add page loaded');
-    
     const form = document.querySelector('form');
     if (form) {
-        console.log('Form found, adding submit listener');
         form.addEventListener('submit', handleSubmit);
-    } else {
-        console.warn('Form not found');
     }
     
-    // Handle photo input
     const photoInput = document.getElementById('merchant-photo');
     if (photoInput) {
-        console.log('Photo input found');
         photoInput.addEventListener('change', handlePhotoSelect);
     }
 });

@@ -1,13 +1,9 @@
 import { getReceipts } from '../api/receipts_api.js';
 
-/**
- * Dashboard - Expense Comparison Toggle
- */
-
 let showPercentage = true;
 
 /**
- * Toggle between percentage and absolute value display
+ * Toggle between percentage and absolute value display.
  */
 function toggleComparisonMode() {
     showPercentage = !showPercentage;
@@ -33,19 +29,19 @@ function updateComparisonDisplay() {
 }
 
 /**
- * Load recent receipts for dashboard
+ * Load recent receipts for dashboard.
  */
 async function loadRecentReceipts() {
     try {
         const receipts = await getReceipts({ skip: 0, limit: 3 });
         renderRecentReceipts(receipts);
     } catch (error) {
-        console.error('Erro ao carregar recibos recentes:', error);
+        console.error('Error loading recent receipts:', error);
     }
 }
 
 /**
- * Render recent receipts to dashboard
+ * Render recent receipts to dashboard.
  */
 function renderRecentReceipts(receipts) {
     const container = document.getElementById('recent-receipts-list');
@@ -88,36 +84,31 @@ function renderRecentReceipts(receipts) {
 }
 
 /**
- * Load statistics from receipts
+ * Load statistics from receipts.
  */
 async function loadDashboardStats() {
     try {
         const receipts = await getReceipts({ limit: 1000 });
 
-        // Get current month and year
         const now = new Date();
         const currentMonth = now.getMonth();
         const currentYear = now.getFullYear();
 
-        // Get last month
         const lastMonth = currentMonth === 0 ? 11 : currentMonth - 1;
         const lastMonthYear = currentMonth === 0 ? currentYear - 1 : currentYear;
 
-        // Filter receipts for current month
         const currentMonthReceipts = receipts.filter(r => {
             const receiptDate = new Date(r.purchase_date);
             return receiptDate.getMonth() === currentMonth && 
                    receiptDate.getFullYear() === currentYear;
         });
 
-        // Filter receipts for last month
         const lastMonthReceipts = receipts.filter(r => {
             const receiptDate = new Date(r.purchase_date);
             return receiptDate.getMonth() === lastMonth && 
                    receiptDate.getFullYear() === lastMonthYear;
         });
 
-        // Calculate statistics
         const currentExpenses = currentMonthReceipts.reduce((sum, r) => sum + parseFloat(r.total_price || 0), 0);
         const lastMonthExpenses = lastMonthReceipts.reduce((sum, r) => sum + parseFloat(r.total_price || 0), 0);
         const currentProducts = currentMonthReceipts.reduce((sum, r) => sum + (r.products?.length || 0), 0);
@@ -126,13 +117,11 @@ async function loadDashboardStats() {
         const receiptsDifference = currentMonthReceipts.length - lastMonthReceipts.length;
         const productsDifference = currentProducts - lastMonthProducts;
 
-        // Update UI - Monthly Expenses
         const monthlyExpensesEl = document.getElementById('monthly-expenses');
         if (monthlyExpensesEl) {
             monthlyExpensesEl.textContent = `${currentExpenses.toFixed(2)} €`;
         }
 
-        // Update UI - Total Receipts
         const totalReceiptsEl = document.getElementById('total-receipts');
         if (totalReceiptsEl) {
             totalReceiptsEl.textContent = currentMonthReceipts.length;
@@ -144,7 +133,6 @@ async function loadDashboardStats() {
             receiptsComparisonEl.className = receiptsDifference > 0 ? 'comparison-positive' : 'comparison-negative';
         }
 
-        // Update UI - Products Purchased
         const productsEl = document.getElementById('products-purchased');
         if (productsEl) {
             productsEl.textContent = currentProducts;
@@ -156,7 +144,6 @@ async function loadDashboardStats() {
             productsComparisonEl.className = productsDifference > 0 ? 'comparison-positive' : 'comparison-negative';
         }
 
-        // Update comparison display for expenses
         const comparisonEl = document.getElementById('expense-comparison');
         if (comparisonEl) {
             comparisonEl.setAttribute('data-current-expense', currentExpenses);
@@ -164,14 +151,12 @@ async function loadDashboardStats() {
             updateComparisonDisplay();
         }
     } catch (error) {
-        console.error('Erro ao carregar estatísticas:', error);
+        console.error('Error loading statistics:', error);
     }
 }
 
-// Expose to global scope
 window.toggleComparisonMode = toggleComparisonMode;
 
-// Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
     loadRecentReceipts();
     loadDashboardStats();

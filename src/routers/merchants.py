@@ -13,7 +13,7 @@ router = APIRouter(
     tags=["Merchants"]
 )
 
-# Create
+
 @router.post(
     "/",
     response_model=MerchantSchema,
@@ -24,16 +24,13 @@ def create_merchant(
     merchant: MerchantCreate,
     db: Session = Depends(get_db)
 ):
-    """
-    Create a new merchant.
-    """
+    """Create a new merchant."""
     try:
         return MerchantService.create_merchant(db, merchant)
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 
 
-# Read All
 @router.get(
     "/",
     response_model=List[MerchantSchema],
@@ -44,10 +41,10 @@ def get_merchants(
     limit: int = Query(100, ge=1, le=1000, description="Maximum number of records to return"),
     db: Session = Depends(get_db)
 ):
+    """Get all merchants with pagination."""
     return MerchantService.get_merchants(db, skip=skip, limit=limit)
 
 
-# Read By ID
 @router.get(
     "/{merchant_id}",
     response_model=MerchantSchema,
@@ -57,13 +54,13 @@ def get_merchant_by_id(
     merchant_id: int = Path(..., gt=0, description="ID of the merchant to retrieve"),
     db: Session = Depends(get_db)
 ):
+    """Get a single merchant by ID."""
     merchant = MerchantService.get_merchant(db, merchant_id)
     if not merchant:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Merchant not found")
     return merchant
 
 
-# Update
 @router.put(
     "/{merchant_id}",
     response_model=MerchantSchema,
@@ -74,17 +71,17 @@ def update_merchant(
     update_data: MerchantUpdate = ...,
     db: Session = Depends(get_db)
 ):
+    """Update a merchant by ID."""
     merchant = MerchantService.get_merchant(db, merchant_id)
     if not merchant:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Merchant not found")
     
     try:
-        return MerchantService.update_merchant(db, merchant, update_data)
+        return MerchantService.update_merchant(db, merchant_id, update_data)
     except ValueError as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 
 
-# Delete
 @router.delete(
     "/{merchant_id}",
     status_code=status.HTTP_204_NO_CONTENT,
@@ -94,9 +91,7 @@ def delete_merchant(
     merchant_id: int = Path(..., ge=1, description="ID of the merchant to delete"),
     db: Session = Depends(get_db)
 ):
-    """
-    Delete a merchant by its ID.
-    """
+    """Delete a merchant by ID."""
     try:
         success = MerchantService.delete_merchant(db, merchant_id)
         if not success:

@@ -13,7 +13,7 @@ router = APIRouter(
     tags=["Categories"]
 )
 
-# Create a new category
+
 @router.post(
     "/", 
     response_model=CategorySchema, 
@@ -21,12 +21,13 @@ router = APIRouter(
     summary="Create a new category"
 )
 def create_category(category: CategoryCreate, db: Session = Depends(get_db)):
+    """Create a new category."""
     try:
         return CategoryService.create_category(db, category)
     except ValueError as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 
-# Get all categories with optional pagination
+
 @router.get(
     "/", 
     response_model=List[CategorySchema], 
@@ -41,19 +42,20 @@ def get_categories(
 ):
     return CategoryService.get_categories(db, skip=skip, limit=limit, start_date=start_date, end_date=end_date)
 
-# Get category by ID
+
 @router.get(
     "/{category_id}", 
     response_model=CategorySchema,
     summary="Retrieve a category by its ID"
 )
 def get_category_by_id(category_id: int = Path(..., gt=0), db: Session = Depends(get_db)):
+    """Get a single category by ID."""
     category = CategoryService.get_category(db, category_id)
     if not category:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Category not found")
     return category
 
-# Update a category by ID
+
 @router.put(
     "/{category_id}", 
     response_model=CategorySchema,
@@ -64,6 +66,7 @@ def update_category(
     category_update: CategoryUpdate = ...,
     db: Session = Depends(get_db)
 ):
+    """Update a category by ID."""
     db_category = CategoryService.get_category(db, category_id)
     if not db_category:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Category not found")
@@ -73,13 +76,14 @@ def update_category(
     except ValueError as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 
-# Delete a category by ID
+
 @router.delete(
     "/{category_id}", 
     status_code=status.HTTP_204_NO_CONTENT,
     summary="Delete a category by its ID"
 )
 def delete_category(category_id: int = Path(..., gt=0), db: Session = Depends(get_db)):
+    """Delete a category by ID."""
     db_category = CategoryService.get_category(db, category_id)
     if not db_category:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Category not found")

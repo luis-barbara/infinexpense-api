@@ -17,35 +17,39 @@ router = APIRouter(
     tags=["Measurement Units"]
 )
 
-# Create
+
 @router.post("/", response_model=MeasurementUnitSchema, status_code=status.HTTP_201_CREATED)
 def create_measurement_unit(unit: MeasurementUnitCreate, db: Session = Depends(get_db)):
+    """Create a new measurement unit."""
     return MeasurementUnitService.create_measurement_unit(db, unit)
 
-# Read All
+
 @router.get("/", response_model=List[MeasurementUnitSchema])
 def get_all_measurement_units(skip: int = Query(0, ge=0), limit: int = Query(100, ge=1, le=1000), db: Session = Depends(get_db)):
     return MeasurementUnitService.get_measurement_units(db, skip=skip, limit=limit)
 
-# Read by ID
+
 @router.get("/{unit_id}", response_model=MeasurementUnitSchema)
 def get_measurement_unit_by_id(unit_id: int = Path(..., gt=0), db: Session = Depends(get_db)):
+    """Get a single measurement unit by ID."""
     unit = MeasurementUnitService.get_measurement_unit(db, unit_id)
     if not unit:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Measurement Unit not found")
     return unit
 
-# Update
+
 @router.put("/{unit_id}", response_model=MeasurementUnitSchema)
 def update_measurement_unit(unit_id: int, update_data: MeasurementUnitUpdate, db: Session = Depends(get_db)):
+    """Update a measurement unit by ID."""
     unit = MeasurementUnitService.get_measurement_unit(db, unit_id)
     if not unit:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Measurement Unit not found")
     return MeasurementUnitService.update_measurement_unit(db, unit, update_data)
 
-# Delete
+
 @router.delete("/{unit_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_measurement_unit(unit_id: int, db: Session = Depends(get_db)):
+    """Delete a measurement unit by ID."""
     unit = MeasurementUnitService.get_measurement_unit(db, unit_id)
     if not unit:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Measurement Unit not found")

@@ -13,11 +13,11 @@ class Merchant(Base):
 
     __tablename__ = "merchants"
 
-    id = Column(Integer, primary_key=True, index=True) # Unique identifier for each merchant
-    name = Column(String(100), nullable=False, unique=True, index=True) # Name of the merchant
-    receipts = relationship("Receipt", back_populates="merchant", cascade="all, delete-orphan") # Relationship to Receipt model
-    location = Column(String(255), nullable=True)  # Optional location of the merchant
-    notes = Column(Text, nullable=True)  # Optional notes about the merchant
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(100), nullable=False, unique=True, index=True)
+    receipts = relationship("Receipt", back_populates="merchant", cascade="all, delete-orphan")
+    location = Column(String(255), nullable=True)
+    notes = Column(Text, nullable=True)
 
 
     CheckConstraint('name != ""', name='constraint_check_empty_merchant_name')

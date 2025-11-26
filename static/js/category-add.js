@@ -1,7 +1,7 @@
 import { createCategory } from '../api/categories_api.js';
 
 /**
- * Handle category form submission
+ * Handle category form submission.
  */
 document.getElementById('categoryForm').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -16,7 +16,6 @@ document.getElementById('categoryForm').addEventListener('submit', async (e) => 
     
     try {
         const newCategory = await createCategory({ name });
-        console.log('Category created:', newCategory);
         alert(`Category "${name}" created successfully!`);
         window.location.href = 'list.html';
     } catch (error) {

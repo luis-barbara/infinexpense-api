@@ -1,5 +1,3 @@
-// frontend/api/measurement_units_api.js
-
 const API_BASE_URL = "http://localhost:8000";
 
 /**
@@ -27,8 +25,7 @@ async function _handleApiRequest(endpoint, options = {}) {
 }
 
 /**
- * Get all measurement units
- * endpoint: GET /measurement-units/
+ * Get all measurement units with pagination.
  */
 export async function getMeasurementUnits(params = {}) {
     const validParams = {
@@ -42,16 +39,14 @@ export async function getMeasurementUnits(params = {}) {
 }
 
 /**
- * Get a specific measurement unit by ID
- * endpoint: GET /measurement-units/{unit_id}
+ * Get a measurement unit by ID.
  */
 export async function getMeasurementUnitById(id) {
     return _handleApiRequest(`/measurement-units/${id}`);
 }
 
 /**
- * Create a new measurement unit
- * endpoint: POST /measurement-units/
+ * Create a measurement unit.
  */
 export async function createMeasurementUnit(data) {
     return _handleApiRequest('/measurement-units/', {
@@ -62,8 +57,7 @@ export async function createMeasurementUnit(data) {
 }
 
 /**
- * Update a measurement unit
- * endpoint: PUT /measurement-units/{unit_id}
+ * Update a measurement unit.
  */
 export async function updateMeasurementUnit(id, data) {
     return _handleApiRequest(`/measurement-units/${id}`, {
@@ -74,8 +68,7 @@ export async function updateMeasurementUnit(id, data) {
 }
 
 /**
- * Delete a measurement unit
- * endpoint: DELETE /measurement-units/{unit_id}
+ * Delete a measurement unit.
  */
 export async function deleteMeasurementUnit(id) {
     return _handleApiRequest(`/measurement-units/${id}`, {

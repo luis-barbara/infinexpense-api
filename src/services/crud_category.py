@@ -1,5 +1,3 @@
-# src/services/crud_category.py
-
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import func
@@ -20,23 +18,15 @@ AVAILABLE_COLORS = [
 
 
 class CategoryService:
-    # Read 
     @staticmethod
     def get_category(db: Session, category_id: int) -> Optional[Category]:
-        """
-        Obtem uma categoria através do ID
-        """
+        """Get a category by ID."""
         return db.query(Category).filter(Category.id == category_id).first()
 
     @staticmethod
     def get_categories(db: Session, skip: int = 0, limit: int = 100, start_date: date = None, end_date: date = None) -> List[dict]:
-        """
-        Obtem uma lista de categorias com paginação e dados agregados.
-        Opcionalmente filtra por intervalo de datas.
-        """
+        """Get all categories with pagination, aggregated data, and optional date filtering."""
         all_categories = db.query(Category).all()
-        
-        # Auto-assign colors to categories that don't have one
         for idx, category in enumerate(all_categories):
             if not category.color or category.color == '#808080':
                 category.color = AVAILABLE_COLORS[idx % len(AVAILABLE_COLORS)]
@@ -108,13 +98,9 @@ class CategoryService:
         # Apply pagination to the result
         return result[skip:skip + limit]
 
-    # Create
     @staticmethod
     def create_category(db: Session, category_data: category_schema.CategoryCreate) -> Category:
-        """
-        Cria uma nova categoria.
-        """
-        # Verificar se existem duplicados
+        """Create a new category with auto-assigned color."""
         existing = db.query(Category).filter_by(name=category_data.name).first()
         if existing:
             raise ValueError("Category with this name already exists")
@@ -138,15 +124,10 @@ class CategoryService:
         db.refresh(db_category)
         return db_category
 
-    # Update
     @staticmethod
     def update_category(db: Session, db_category: Category, update_data: category_schema.CategoryUpdate) -> Category:
-        """
-        Atualiza uma categoria existente.
-        """
+        """Update a category."""
         update_dict = update_data.model_dump(exclude_unset=True)
-
-        # Verificar se existe o nome duplicado
         if 'name' in update_dict:
             existing = db.query(Category).filter(
                 Category.name == update_dict['name'],
@@ -163,12 +144,9 @@ class CategoryService:
         db.refresh(db_category)
         return db_category
 
-    # Delete
     @staticmethod
     def delete_category(db: Session, db_category: Category) -> Category:
-        """
-        Deleta uma categoria.
-        """
+        """Delete a category."""
         db.delete(db_category)
         db.commit()
         return db_category
