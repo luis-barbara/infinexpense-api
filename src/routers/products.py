@@ -4,6 +4,7 @@ from typing import List, Optional
 from fastapi import APIRouter, Depends, status, Query, Path, HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
+import logging
 
 from src.database import get_db
 from src.schemas.product import (
@@ -12,6 +13,9 @@ from src.schemas.product import (
     ProductList as ProductListSchema
 )
 from src.services.crud_product_list import ProductListService 
+
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(
     prefix="/products",
@@ -34,9 +38,16 @@ def create_product(
         return ProductListService.create_product_list(db, product)
     except IntegrityError:
         db.rollback()
+        logger.warning(f"Duplicate product name: {product.name}")
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail=f"Product with name '{product.name}' already exists"
+        )
+    except Exception as e:
+        logger.error(f"Error in create_product endpoint: {str(e)}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Error creating product"
         )
 
 
@@ -53,7 +64,17 @@ def get_all_products(
     category_id: Optional[int] = Query(None, description="Filter by category ID"),
     db: Session = Depends(get_db)
 ):
-    return ProductListService.get_product_lists(db, skip=skip, limit=limit)
+    """
+    Retrieve all products with optional filters and pagination.
+    """
+    try:
+        return ProductListService.get_product_lists(db, skip=skip, limit=limit)
+    except Exception as e:
+        logger.error(f"Error in get_all_products endpoint: {str(e)}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Error fetching products"
+        )
 
 
 @router.get(
@@ -65,11 +86,23 @@ def get_product_by_id(
     product_id: int = Path(..., ge=1, description="ID of the product to retrieve"),
     db: Session = Depends(get_db)
 ):
-    """Get a single product by ID."""
-    product = ProductListService.get_product_list(db, product_id)
-    if not product:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
-    return product
+    """
+    Retrieve a specific product by its ID.
+    """
+    try:
+        product = ProductListService.get_product_list(db, product_id)
+        if not product:
+            logger.warning(f"Product not found: {product_id}")
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
+        return product
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error fetching product {product_id}: {str(e)}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Error fetching product"
+        )
 
 
 @router.get(
@@ -81,11 +114,23 @@ def get_product_by_barcode_endpoint(
     barcode: str = Path(..., max_length=50, description="Barcode of the product to retrieve"),
     db: Session = Depends(get_db)
 ):
-    """Get a product by barcode."""
-    product = ProductListService.get_product_by_barcode(db, barcode)
-    if not product:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
-    return product
+    """
+    Retrieve a product by its barcode.
+    """
+    try:
+        product = ProductListService.get_product_by_barcode(db, barcode)
+        if not product:
+            logger.warning(f"Product not found with barcode: {barcode}")
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
+        return product
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error fetching product by barcode {barcode}: {str(e)}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Error fetching product"
+        )
 
 
 @router.get(
@@ -97,11 +142,23 @@ def get_product_by_name_endpoint(
     name: str = Path(..., max_length=255, description="Name of the product to retrieve"),
     db: Session = Depends(get_db)
 ):
-    """Get a product by name."""
-    product = ProductListService.get_product_by_name(db, name)
-    if not product:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
-    return product
+    """
+    Retrieve a product by its name.
+    """
+    try:
+        product = ProductListService.get_product_by_name(db, name)
+        if not product:
+            logger.warning(f"Product not found with name: {name}")
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
+        return product
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error fetching product by name {name}: {str(e)}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Error fetching product"
+        )
 
 
 @router.put(
@@ -114,11 +171,23 @@ def update_product(
     product_update: ProductListUpdate = None,
     db: Session = Depends(get_db)
 ):
-    """Update a product by ID."""
-    product = ProductListService.update_product_list(db, product_id, product_update)
-    if not product:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
-    return product
+    """
+    Update a product's details.
+    """
+    try:
+        product = ProductListService.update_product_list(db, product_id, product_update)
+        if not product:
+            logger.warning(f"Product not found for update: {product_id}")
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
+        return product
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error updating product {product_id}: {str(e)}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Error updating product"
+        )
 
 
 @router.delete(
@@ -134,7 +203,11 @@ def delete_product(
     try:
         success = ProductListService.delete_product_list(db, product_id)
         if not success:
+            logger.warning(f"Product not found for deletion: {product_id}")
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
+    except HTTPException:
+        raise
     except Exception as e:
         error_message = str(e)
+        logger.error(f"Error deleting product {product_id}: {error_message}", exc_info=True)
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=error_message)

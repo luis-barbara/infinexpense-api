@@ -12,6 +12,8 @@ from src.services import report_services
 from src.schemas import reports as schema_reports
 
 
+logger = logging.getLogger(__name__)
+
 router = APIRouter(
     prefix="/reports",  
     tags=["Reports"] 
@@ -42,7 +44,7 @@ def get_spending_by_category_endpoint(
         return report_data
     except Exception as e:
         # Qualquer erro inesperado da query SQL complexa
-        logging.error(f"Erro ao gerar 'spending-by-category' report: {e}")
+        logger.error(f"Error generating spending-by-category report: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Ocorreu um erro ao calcular o relatório."
@@ -73,7 +75,7 @@ def get_enriched_merchant_report_endpoint(
         )
         return report_data
     except Exception as e:
-        logging.error(f"Erro ao gerar 'enriched-merchant' report: {e}")
+        logger.error(f"Error generating enriched-merchant report: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Ocorreu um erro ao calcular o relatório de supermercados."
@@ -102,7 +104,7 @@ def get_dashboard_kpis_endpoint(
         )
         return kpi_data
     except Exception as e:
-        logging.error(f"Erro ao gerar 'dashboard-kpis' report: {e}")
+        logger.error(f"Error generating dashboard-kpis report: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Ocorreu um erro ao calcular os KPIs do dashboard."
