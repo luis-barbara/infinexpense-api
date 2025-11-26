@@ -3,83 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Receipts - InfinExpense</title>
-    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-    <link rel="stylesheet" href="../css/main.css">
+    <title>Receipts - Infinexpense</title>
+    <meta name="description" content="Manage and track all your receipts">
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+    <link rel="stylesheet" href="/static/css/main.css">
 </head>
 <body data-active-page="receipts">
     <!-- Navigation Template -->
     <div data-template="header"></div>
 
-    <script src="../js/template-loader.js"></script>
-
-    <!-- Main Content -->
-    <div class="container">
-        <div class="page-header">
-            <h1 class="page-title">Receipts</h1>
-            <a href="add.html" class="btn btn-primary">+ Add Receipt</a>
+    <script src="/static/js/template-loader.js"></script>
+    <div class="container py-8">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-8 animate-fade-in">
+            <div>
+                <h1 class="gradient-text mb-2">Receipts</h1>
+                <p class="text-muted">Manage and track all your receipts</p>
+            </div>
+            <a href="add.html" class="btn btn-primary glow-cyan">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14"/>
+                    <path d="M12 5v14"/>
+                </svg>
+                Add Receipt
+            </a>
         </div>
 
         <!-- Search Bar -->
-        <div class="search-bar">
-            <input type="text" id="searchInput" class="search-input" placeholder="Search receipts by merchant, date, or receipt barcode...">
-            <button class="btn btn-primary" onclick="filterItems()">Search</button>
+        <div class="flex gap-3 mb-6 animate-slide-up" style="animation-delay: 0.1s;">
+            <div class="search-bar">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.3-4.3"/>
+                </svg>
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    class="input" 
+                    placeholder="Search receipts by merchant, date, or receipt barcode..."
+                >
+            </div>
+            <button class="btn btn-secondary" onclick="filterItems()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.3-4.3"/>
+                </svg>
+            </button>
         </div>
 
-        <!-- Receipts List -->
-        <div class="content-wrapper">
-            <div class="card card-no-margin card-flex card-flex-1 overflow-hidden">
-                <!-- Table Headers -->
-                <div class="list-header receipts-list-grid">
-                    <div class="list-header-item">
-                        <span>Receipt</span>
-                        <span class="sort-buttons">
-                            <button class="sort-btn" onclick="sortReceipts('receipt-id', 'asc')">▲</button>
-                            <button class="sort-btn" onclick="sortReceipts('receipt-id', 'desc')">▼</button>
-                        </span>
-                    </div>
-                    <div class="list-header-item">
-                        <span>Merchant</span>
-                        <span class="sort-buttons">
-                            <button class="sort-btn" onclick="sortReceipts('merchant', 'asc')">▲</button>
-                            <button class="sort-btn" onclick="sortReceipts('merchant', 'desc')">▼</button>
-                        </span>
-                    </div>
-                    <div class="list-header-item">
-                        <span>Date</span>
-                        <span class="sort-buttons">
-                            <button class="sort-btn" onclick="sortReceipts('date', 'asc')">▲</button>
-                            <button class="sort-btn" onclick="sortReceipts('date', 'desc')">▼</button>
-                        </span>
-                    </div>
-                    <div class="list-header-item">
-                        <span>Products</span>
-                        <span class="sort-buttons">
-                            <button class="sort-btn" onclick="sortReceipts('products', 'asc')">▲</button>
-                            <button class="sort-btn" onclick="sortReceipts('products', 'desc')">▼</button>
-                        </span>
-                    </div>
-                    <div class="list-header-item">
-                        <span>Total</span>
-                        <span class="sort-buttons">
-                            <button class="sort-btn" onclick="sortReceipts('total', 'asc')">▲</button>
-                            <button class="sort-btn" onclick="sortReceipts('total', 'desc')">▼</button>
-                        </span>
-                    </div>
-                    <div class="list-header-item">
-                        <span>Actions</span>
-                    </div>
-                </div>
-                <div class="scrollable-list">
-                    <div class="list-container" id="receiptsList">
-                        <!-- Populated by JavaScript -->
-                    </div>
-                </div>
+        <!-- Receipts Table -->
+        <div class="table-container glow-strong animate-slide-up" style="animation-delay: 0.2s;">
+            <!-- Table Header -->
+            <div class="table-header receipts-grid">
+                <button class="flex items-center gap-2" onclick="sortReceipts('barcode')" style="background: none; border: none; color: inherit; cursor: pointer; text-align: left;">
+                    Receipt
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m7 15 5 5 5-5"/>
+                        <path d="m7 9 5-5 5 5"/>
+                    </svg>
+                </button>
+                <button class="flex items-center gap-2" onclick="sortReceipts('merchant')" style="background: none; border: none; color: inherit; cursor: pointer; text-align: left;">
+                    Merchant
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m7 15 5 5 5-5"/>
+                        <path d="m7 9 5-5 5 5"/>
+                    </svg>
+                </button>
+                <button class="flex items-center gap-2" onclick="sortReceipts('date')" style="background: none; border: none; color: inherit; cursor: pointer; text-align: left;">
+                    Date
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m7 15 5 5 5-5"/>
+                        <path d="m7 9 5-5 5 5"/>
+                    </svg>
+                </button>
+                <button class="flex items-center gap-2" onclick="sortReceipts('products')" style="background: none; border: none; color: inherit; cursor: pointer; text-align: left;">
+                    Products
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m7 15 5 5 5-5"/>
+                        <path d="m7 9 5-5 5 5"/>
+                    </svg>
+                </button>
+                <button class="flex items-center gap-2" onclick="sortReceipts('total')" style="background: none; border: none; color: inherit; cursor: pointer; text-align: left;">
+                    Total
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m7 15 5 5 5-5"/>
+                        <path d="m7 9 5-5 5 5"/>
+                    </svg>
+                </button>
+                <div>Actions</div>
             </div>
+
+            <!-- Table Body -->
+            <div id="receiptsList">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Results Count -->
+        <div class="mt-4 text-center text-sm text-muted animate-fade-in" style="animation-delay: 0.3s;">
+            <span id="resultsCount">Loading...</span>
         </div>
     </div>
 
-    <!-- API Module Import -->
-    <script type="module" src="../js/receipts-list.js"></script>
+    <script type="module" src="/static/js/receipts-list.js"></script>
 </body>
 </html>

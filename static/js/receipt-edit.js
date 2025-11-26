@@ -91,7 +91,7 @@ async function loadReceipt() {
         console.log('Receipt loaded:', currentReceipt);
         
         // Update page title
-        document.querySelector('.page-title').textContent =
+        document.getElementById('page-title').textContent =
             `Edit Receipt: ${currentReceipt.barcode || `RCPT-${currentReceiptId}`}`;
         
         // THEN populate form
@@ -179,8 +179,8 @@ function renderProducts(products) {
                 type="number"
                 class="form-input-compact form-input-number-xs"
                 value="${quantity}"
-                min="1"
-                step="0.01"
+                min="0"
+                step="0.00001"
                 data-product-index="${index}"
                 data-field="quantity"
             >
@@ -188,7 +188,7 @@ function renderProducts(products) {
                 type="number"
                 class="form-input-compact form-input-number-sm"
                 value="${price.toFixed(2)}"
-                step="0.01"
+                step="0.00001"
                 min="0"
                 data-product-index="${index}"
                 data-field="price"
@@ -246,15 +246,15 @@ function addProduct() {
             type="number"
             class="form-input-compact form-input-number-xs"
             value="1"
-            min="1"
-            step="0.01"
+            min="0"
+            step="0.00001"
             data-field="quantity"
         >
         <input
             type="number"
             class="form-input-compact form-input-number-sm"
             value="0.00"
-            step="0.01"
+            step="0.00001"
             min="0"
             data-field="price"
         >

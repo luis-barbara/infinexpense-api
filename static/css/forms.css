@@ -1,154 +1,52 @@
-/* ==========================================================================
-   7. LIST & TABLE COMPONENTS
-   ========================================================================== */
+/* Forms */
 
-.list-container {
-    background-color: var(--card-bg);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    overflow: hidden;
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: hsl(var(--input));
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.5rem;
+  color: hsl(var(--foreground));
+  font-size: 1rem;
+  transition: all 0.2s ease;
 }
 
-.list-container-no-shadow {
-    box-shadow: none;
+.input:focus {
+  outline: none;
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
 }
 
-/* === List Header === */
-.list-header {
-    display: grid;
-    gap: 0;
-    padding: var(--spacing-lg) 0;
-    background-color: var(--bg-color);
-    border-bottom: var(--border-width) solid var(--border-color);
-    font-weight: var(--font-weight-bold);
-    font-size: var(--font-size-xs);
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+.input::placeholder {
+  color: hsl(var(--muted-foreground));
 }
 
-.list-header-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-sm);
-    user-select: none;
-    padding: 0 var(--spacing-md);
-    border-right: 1px solid var(--border-color);
-    flex-direction: row;
+textarea.input {
+  resize: vertical;
+  min-height: 100px;
 }
 
-.list-header-item > span:first-child {
-    font-weight: var(--font-weight-semibold);
+select.input {
+  cursor: pointer;
 }
 
-.list-header-item:last-child {
-    border-right: none;
+/* Search Bar */
+.search-bar {
+  position: relative;
+  flex: 1;
 }
 
-/* === Sort Buttons === */
-.sort-buttons {
-    display: flex;
-    gap: 0.15rem;
-    margin-left: 0.25rem;
+.search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.25rem;
+  height: 1.25rem;
+  color: hsl(var(--muted-foreground));
+  pointer-events: none;
 }
 
-.sort-btn {
-    background: none;
-    border: none;
-    color: var(--text-secondary);
-    cursor: pointer;
-    padding: 0.15rem 0.25rem;
-    font-size: 0.7rem;
-    line-height: 1;
-    transition: all var(--transition-base);
-    border-radius: 0.2rem;
+.search-bar .input {
+  padding-left: 2.75rem;
 }
-
-.sort-btn:hover {
-    color: var(--primary-color);
-    background-color: rgba(37, 99, 235, 0.1);
-}
-
-.sort-btn:active {
-    transform: scale(0.95);
-}
-
-/* === List Items === */
-.list-item {
-    padding: var(--spacing-md) 0;
-    border-bottom: 1px solid var(--border-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: background-color var(--transition-base);
-    cursor: pointer;
-}
-
-.list-item:last-child {
-    border-bottom: none;
-}
-
-.list-item:hover {
-    background-color: var(--bg-color);
-}
-
-.list-item-compact {
-    padding: var(--spacing-sm) var(--spacing-md);
-}
-
-.list-item-main {
-    flex: 1;
-    display: grid;
-    gap: 0;
-    align-items: center;
-}
-
-.list-item-value {
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
-    color: var(--text-primary);
-    text-align: center;
-    padding: 0 var(--spacing-md);
-    border-right: 1px solid var(--border-color);
-}
-
-.list-item-value:last-child {
-    border-right: none;
-}
-
-.list-item-actions {
-    display: flex;
-    gap: var(--spacing-sm);
-    justify-content: center;
-    align-items: center;
-    padding: 0 var(--spacing-md);
-}
-
-/* === Specific Grid Layouts === */
-/* Categories List */
-.categories-list-grid {
-    grid-template-columns: 32px 1fr 80px 70px 90px 80px;
-    gap: var(--spacing-md);
-}
-
-/* Receipts List */
-.receipts-list-grid {
-    grid-template-columns: 1.2fr 2fr 1fr 0.8fr 0.8fr 180px;
-}
-
-/* Products List */
-.products-list-grid {
-    grid-template-columns: 2fr 1.5fr 1.2fr 1.5fr 1fr 180px;
-}
-
-/* Merchants List */
-.merchants-list-grid {
-    grid-template-columns: 2fr 1.5fr 1.2fr 1.2fr 180px;
-}
-
-/* Receipt Items List */
-.receipt-items-grid {
-    grid-template-columns: 2fr 1.2fr 1.5fr 0.8fr 0.8fr;
-}
-

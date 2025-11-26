@@ -79,4 +79,32 @@ def read_root():
     return FileResponse(index_path)
 
 
+# Serve HTML pages from subdirectories (receipts, products, categories, merchants)
+@app.get("/{folder}/{page}", include_in_schema=False)
+def serve_page(folder: str, page: str):
+    """
+    Serve HTML pages from subdirectories like /receipts/list.html, /products/add.html, etc.
+    """
+    # Only serve HTML files, reject other extensions
+    if not page.endswith('.html'):
+        return {"error": "Not found"}, 404
+    
+    file_path = STATIC_DIR / folder / page
+    if not file_path.is_file():
+        return {"error": f"{folder}/{page} not found"}, 404
+    return FileResponse(file_path)
+
+
+# Serve individual receipt/product/category/merchant view pages with query params
+@app.get("/{folder}/{action}.html", include_in_schema=False)
+def serve_action_page(folder: str, action: str):
+    """
+    Serve action pages like /receipts/view.html?id=1
+    """
+    file_path = STATIC_DIR / folder / f"{action}.html"
+    if not file_path.is_file():
+        return {"error": f"{folder}/{action}.html not found"}, 404
+    return FileResponse(file_path)
+
+
 

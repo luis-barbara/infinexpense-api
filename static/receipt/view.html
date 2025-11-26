@@ -3,119 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Receipt - InfinExpense</title>
-    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-    <link rel="stylesheet" href="../css/main.css">
+    <title>View Receipt - InfinExpense</title>
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+    <link rel="stylesheet" href="/static/css/main.css">
 </head>
 <body data-active-page="receipts">
     <!-- Navigation Template -->
     <div data-template="header"></div>
 
-    <script src="../js/template-loader.js"></script>
+    <script src="/static/js/template-loader.js"></script>
 
     <!-- Main Content -->
-    <div class="container">
-        <div class="page-header">
-            <h1 class="page-title" id="receipt-title">Receipt Details</h1>
-            <div class="flex flex-gap">
-                <a href="#" id="edit-btn" class="btn btn-primary">Edit Receipt</a>
-                <button class="btn btn-danger" onclick="deleteCurrentReceipt()">Delete Receipt</button>
+    <div class="container py-8">
+        <!-- Header -->
+        <div class="mb-8 animate-fade-in">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <a href="list.html" class="btn btn-secondary btn-sm">← Back</a>
+                    <div>
+                        <h1 class="gradient-text mb-2" id="receipt-title">Receipt: RCPT-7</h1>
+                        <p class="text-muted">Receipt details and items</p>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                    <a href="#" id="edit-btn" class="btn btn-primary glow-cyan">✏️ Edit</a>
+                    <button class="btn btn-danger" onclick="deleteCurrentReceipt()">🗑️ Delete</button>
+                </div>
             </div>
         </div>
 
-        <!-- Two Column Layout -->
-        <div class="grid-2cols-1-2">
-            
-            <!-- LEFT COLUMN: Receipt Info -->
-            <div class="card product-detail-layout">
+        <div class="receipt-view-grid">
+            <!-- Left Column: Receipt Info -->
+            <div>
+                <!-- Receipt Information Card -->
+                <div class="receipt-info-card animate-slide-up">
+                    <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="color: hsl(var(--neon-cyan));">🛍️</span>
+                        Receipt Information
+                    </h2>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                        <div class="info-section">
+                            <div class="info-label">
+                                <span>📍</span>
+                                Merchant
+                            </div>
+                            <a href="#" id="merchant-link" class="info-value merchant-link">EcoFoods</a>
+                            <p id="merchant-location" style="font-size: 0.875rem; color: hsl(var(--muted-foreground)); margin-top: 0.25rem;">
+                                Lisbon Downtown
+                            </p>
+                        </div>
+
+                        <div class="info-section">
+                            <div class="info-label">
+                                <span>📅</span>
+                                Date & Time
+                            </div>
+                            <div id="receipt-datetime" class="info-value">
+                                January 15, 2024, 14:30
+                            </div>
+                        </div>
+
+                        <div class="info-section">
+                            <div class="info-label">
+                                <span>💰</span>
+                                Total Amount
+                            </div>
+                            <div id="receipt-total" class="info-value primary">
+                                €87.50
+                            </div>
+                        </div>
+
+                        <div class="info-section" id="notes-section" style="display: none;">
+                            <div class="info-label">
+                                <span>📝</span>
+                                Notes
+                            </div>
+                            <div id="receipt-notes" class="notes-box" style="margin-top: 0.5rem; padding: 0.75rem; border-radius: var(--radius); font-size: 0.9rem; line-height: 1.4;">
+                                Weekly grocery shopping
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Receipt Photo -->
+            <div>
                 <!-- Receipt Photo -->
-                <div class="product-photo-container">
-                    <img id="receipt-image" 
-                         src="" 
-                         alt="Receipt" 
-                         class="image-preview"
-                         style="display: none; cursor: pointer;">
-                    <div id="no-photo-placeholder" class="no-photo-placeholder">
-                        <div class="no-photo-icon">🚫</div>
-                        <div class="no-photo-text">NO PHOTO</div>
+                <div class="photo-container animate-slide-up" style="animation-delay: 0.2s;">
+                    <h2 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="color: hsl(var(--neon-purple));">📷</span>
+                        Receipt Photo
+                    </h2>
+                    <div id="receipt-image-container" style="display: none;">
+                        <div class="photo-preview" onclick="openImageModal()">
+                            <img id="receipt-image" src="" alt="Receipt photo">
+                        </div>
                     </div>
-                </div>
-
-                <!-- Receipt Info -->
-                <div class="product-info-grid">
-                    <div class="product-info-item">
-                        <span class="product-info-label">Merchant</span>
-                        <span class="product-info-value">
-                            <a id="merchant-link" href="#" class="link-primary">-</a>
-                        </span>
-                    </div>
-                    <div class="product-info-item">
-                        <span class="product-info-label">Location</span>
-                        <span class="product-info-value" id="merchant-location">-</span>
-                    </div>
-                    <div class="product-info-item">
-                        <span class="product-info-label">Date & Time</span>
-                        <span class="product-info-value" id="receipt-datetime">-</span>
-                    </div>
-                    <div class="product-price-section">
-                        <span class="product-info-label">Total Amount</span>
-                        <span class="product-price-value" id="receipt-total">0.00 €</span>
+                    <div id="no-photo-placeholder" class="no-photo">
+                        <span style="font-size: 3rem; margin-bottom: 0.75rem;">📷</span>
+                        <p style="font-size: 0.875rem; color: hsl(var(--muted-foreground)); text-align: center;">
+                            No photo attached
+                        </p>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- RIGHT COLUMN: Products List -->
-            <div class="card">
-                <h3 class="detail-title" id="items-title">Item List (0)</h3>
-                
-                <!-- Table Headers with Sort Buttons -->
-                <div class="list-header receipt-items-grid">
-                    <div class="list-header-item">
-                        <span>Product</span>
-                        <span class="sort-buttons">
-                            <button class="sort-btn" onclick="sortProducts('product', 'asc')">▲</button>
-                            <button class="sort-btn" onclick="sortProducts('product', 'desc')">▼</button>
-                        </span>
+        <!-- Products List: Full Width Below -->
+        <div class="receipt-items-section">
+                <!-- Products List Card -->
+                <div class="card card-no-margin card-flex-1 overflow-hidden" style="box-shadow: var(--shadow-strong);">
+                    <div class="list-header" style="background: hsl(var(--secondary) / 0.5); padding: 1.5rem; border-bottom: 1px solid hsl(var(--border) / 0.5);">
+                        <h2 id="items-title" style="font-size: 1.25rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="color: hsl(var(--accent));">🛒</span>
+                            Item List (0)
+                        </h2>
                     </div>
-                    <div class="list-header-item">
-                        <span>Category</span>
-                        <span class="sort-buttons">
-                            <button class="sort-btn" onclick="sortProducts('category', 'asc')">▲</button>
-                            <button class="sort-btn" onclick="sortProducts('category', 'desc')">▼</button>
-                        </span>
+
+                    <!-- Table Headers -->
+                    <div class="list-header products-table-grid" style="background: hsl(var(--secondary) / 0.5); padding: 1rem 1.5rem; border-bottom: 1px solid hsl(var(--border) / 0.5); font-weight: 600; font-size: 0.875rem;">
+                        <div>Product</div>
+                        <div>Category</div>
+                        <div style="text-align: right;">Qty</div>
+                        <div style="text-align: right;">Price</div>
+                        <div style="text-align: right;">Total</div>
                     </div>
-                    <div class="list-header-item">
-                        <span>Quantity</span>
-                        <span class="sort-buttons">
-                            <button class="sort-btn" onclick="sortProducts('quantity', 'asc')">▲</button>
-                            <button class="sort-btn" onclick="sortProducts('quantity', 'desc')">▼</button>
-                        </span>
+
+                    <!-- Products List -->
+                    <div class="scrollable-list" style="max-height: 400px; overflow-y: auto;">
+                        <div id="products-list" style="padding: 0.5rem 0;">
+                            <!-- Populated by JavaScript -->
+                        </div>
                     </div>
-                    <div class="list-header-item">
-                        <span>Price</span>
-                        <span class="sort-buttons">
-                            <button class="sort-btn" onclick="sortProducts('price', 'asc')">▲</button>
-                            <button class="sort-btn" onclick="sortProducts('price', 'desc')">▼</button>
-                        </span>
-                    </div>
-                    <div class="list-header-item">
-                        <span>Total</span>
-                        <span class="sort-buttons">
-                            <button class="sort-btn" onclick="sortProducts('ean', 'asc')">▲</button>
-                            <button class="sort-btn" onclick="sortProducts('ean', 'desc')">▼</button>
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="list-container" id="products-list">
-                    <!-- Populated by JavaScript -->
                 </div>
             </div>
-
         </div>
     </div>
 
-    <!-- Receipt View Script -->
-    <script type="module" src="../js/receipt-view.js"></script>
+    <!-- Image Modal for Zoomed View -->
+    <div id="imageModal" class="image-modal" onclick="closeImageModal(event)">
+        <button class="image-modal-close" onclick="closeImageModal()">✕</button>
+        <img id="modalImage" class="image-modal-content" src="" alt="Zoomed receipt photo">
+    </div>
+
+    <!-- API Module Import -->
+    <script type="module" src="/static/js/receipt-view.js"></script>
 </body>
 </html>

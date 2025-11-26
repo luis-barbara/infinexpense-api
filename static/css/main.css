@@ -1,53 +1,50 @@
-/**
- * INFINEXPENSE - Main CSS Entry Point
+/* ==================== Infinexpense - Main CSS ==================== */
+/*
+ * Modular CSS Architecture
  * 
  * This file imports all CSS modules in the correct order.
- * Modify individual module files for specific changes.
  * 
- * Module Structure:
- * 1. variables.css     - CSS custom properties (colors, spacing, etc.)
- * 2. reset.css         - Browser resets and base styles
- * 3. layout.css        - Navigation, container, page structure
- * 4. grids.css         - Grid layouts for lists
- * 5. cards.css         - Card components
- * 6. buttons.css       - Button styles and variants
- * 7. forms.css         - Form inputs, labels, file uploads
- * 8. lists.css         - List and table components
- * 9. details.css       - Detail page components
- * 10. charts.css       - Chart containers
- * 11. badges.css       - Badge and status indicators
- * 12. images.css       - Image components
- * 13. utilities.css    - Utility classes (flex, spacing, etc.)
- * 14. responsive.css   - Mobile responsive styles
- * 15. animations.css   - Animations and transitions
+ * Structure:
+ * 1. variables.css      - CSS custom properties and theme tokens
+ * 2. layout.css         - Core layout and container styles
+ * 3. typography.css     - Text styling and font definitions
+ * 4. cards.css          - Card components and stat cards
+ * 5. buttons.css        - Button styles and variants
+ * 6. forms.css          - Input fields and form elements
+ * 7. grids.css          - Grid layouts and responsive columns
+ * 8. tables.css         - Table components and data displays
+ * 9. lists.css          - List items and data rows
+ * 10. navigation.css    - Header, nav menu, and theme toggle
+ * 11. utilities.css     - Utility classes (flex, spacing, etc)
+ * 12. icons.css         - Icon and logo styling
+ * 13. animations.css    - Keyframes and animation utilities
+ * 14. responsive.css    - Mobile responsive breakpoints
  * 
  * To add new styles:
  * - Add to appropriate module file
  * - Or create new module and @import it here
  * 
- * Last Updated: November 14, 2025
+ * Last Updated: November 26, 2025
  */
 
 /* ========== Core Styles (Load First) ========== */
 @import 'variables.css';
-@import 'reset.css';
+@import 'layout.css';
+@import 'typography.css';
 
 /* ========== Layout & Structure ========== */
-@import 'layout.css';
 @import 'grids.css';
 
 /* ========== Components ========== */
 @import 'cards.css';
 @import 'buttons.css';
 @import 'forms.css';
+@import 'tables.css';
 @import 'lists.css';
-@import 'details.css';
-@import 'charts.css';
-@import 'badges.css';
-@import 'images.css';
-@import 'components-extended.css';
+@import 'navigation.css';
+@import 'icons.css';
 
 /* ========== Utilities & Responsive ========== */
 @import 'utilities.css';
-@import 'responsive.css';
 @import 'animations.css';
+@import 'responsive.css';

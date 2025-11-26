@@ -1,4 +1,4 @@
-import { getCategories, deleteCategory } from '../api/categories_api.js';
+import { getCategories, deleteCategory } from '/static/api/categories_api.js';
 
 let allCategories = [];
 let categoryChart = null;
@@ -49,25 +49,24 @@ function renderCategoriesList() {
     
     container.innerHTML = allCategories.map(category => {
         const itemPercentage = category.item_percentage || 0;
-        const color = category.color;
+        const color = category.color || '#999999';
         
         return `
-            <div class="list-item list-item-compact">
-                <div class="list-item-main categories-list-grid">
-                    <div class="category-color-box" style="background-color: ${color};"></div>
-                    <div class="category-name">${category.name}</div>
-                    <div class="category-meta">${category.item_count || 0} Items</div>
-                    <div class="category-meta">${itemPercentage}%</div>
-                    <div style="color: var(--primary-color); font-weight: 500; font-size: 0.95rem; text-align: center;">${(category.total_spent || 0).toFixed(2)} €</div>
-                    <div class="list-item-actions">
-                        <a href="edit.html?id=${category.id}" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
-                        <button class="btn btn-danger btn-sm" title="Delete" onclick="handleDeleteCategory(${category.id})">🗑️</button>
-                    </div>
+            <div style="display: grid; grid-template-columns: 30px 1fr 1fr 0.8fr 1fr 0.8fr; gap: 1rem; padding: 0.75rem; border-bottom: 1px solid hsl(var(--border) / 0.2); align-items: center;">
+                <div class="category-color-box" style="background-color: ${color}; width: 24px; height: 24px; border-radius: 4px;"></div>
+                <div class="category-name">${category.name}</div>
+                <div class="category-meta">${category.item_count || 0} Items</div>
+                <div class="category-meta">${itemPercentage}%</div>
+                <div style="color: hsl(var(--primary)); font-weight: 500; font-size: 0.9rem;">${(category.total_spent || 0).toFixed(2)} €</div>
+                <div style="display: flex; gap: 0.5rem;">
+                    <a href="/static/category/edit.html?id=${category.id}" class="btn btn-secondary btn-sm" style="font-size: 0.7rem; padding: 0.3rem 0.6rem;" title="Edit">✏️</a>
+                    <button class="btn btn-danger btn-sm" style="font-size: 0.7rem; padding: 0.3rem 0.6rem;" title="Delete" onclick="handleDeleteCategory(${category.id})">🗑️</button>
                 </div>
             </div>
         `;
     }).join('');
 }
+
 
 /**
  * Render the pie chart
@@ -140,7 +139,7 @@ function renderChart() {
                     }
                 },
                 datalabels: {
-                    color: '#000000ff',
+                    color: document.documentElement.getAttribute('data-theme') === 'light' ? '#000000' : '#ffffff',
                     font: {
                         weight: 'bold',
                         size: 12
@@ -151,8 +150,8 @@ function renderChart() {
                     textAlign: 'center',
                     anchor: 'end',
                     align: 'end',
-                    offset: 5,
-                    distance: 25
+                    offset: 10,
+                    distance: 45
                 },
                 datalabelsInside: {
                     color: '#ffffff',

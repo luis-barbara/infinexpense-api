@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Category - InfinExpense</title>
-    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
     <link rel="stylesheet" href="../css/main.css">
 </head>
 <body data-active-page="categories">
@@ -14,22 +14,27 @@
     <script src="../js/template-loader.js"></script>
 
     <!-- Main Content -->
-    <div class="container">
-        <div class="page-header">
-            <h1 class="page-title">Edit Category</h1>
+    <div class="container py-8">
+        <!-- Header -->
+        <div class="mb-8 animate-fade-in">
+            <h1 class="gradient-text mb-2">Edit Category</h1>
+            <p class="text-muted">Update category information</p>
         </div>
 
-        <div class="card" style="max-width: 800px; margin: 0 auto;">
+        <!-- Form Card -->
+        <div class="card glow-strong animate-slide-up max-w-2xl" style="animation-delay: 0.1s;">
             <form id="categoryForm">
-                <div class="form-group">
-                    <label class="form-label">Category Name *</label>
-                    <input type="text" id="categoryName" class="form-input" placeholder="Enter category name" required>
+                <!-- Category Name -->
+                <div class="mb-8">
+                    <label class="font-semibold mb-2 block">Category Name *</label>
+                    <input type="text" id="categoryName" class="input" placeholder="Enter category name" required>
                 </div>
 
-                <div class="flex flex-gap" style="justify-content: flex-end; margin-top: 2rem;">
-                    <a href="list.html" class="btn btn-outline">Cancel</a>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                <!-- Action Buttons -->
+                <div class="flex gap-3 justify-end">
+                    <a href="list.html" class="btn btn-secondary">Cancel</a>
                     <button type="button" id="deleteBtn" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-primary glow-cyan">Save Changes</button>
                 </div>
             </form>
         </div>

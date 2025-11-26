@@ -1,4 +1,4 @@
-import { getProducts } from '../api/products_api.js';
+import { getProducts } from '/static/api/products_api.js';
 
 let allProducts = [];
 let sortDirection = {};
@@ -38,19 +38,22 @@ function renderProducts(products) {
         item.setAttribute('data-volume', product.measurement_unit?.name || 'N/A');
         item.setAttribute('data-barcode', product.barcode || 'N/A');
         item.setAttribute('data-price', '0.00');
+        item.style.display = 'grid';
+        item.style.gridTemplateColumns = '1fr 1fr 0.8fr 1fr 0.6fr';
+        item.style.gap = '1rem';
+        item.style.padding = '1rem';
+        item.style.borderBottom = '1px solid hsl(var(--border) / 0.2)';
+        item.style.alignItems = 'center';
 
         item.innerHTML = `
-            <div class="list-item-main products-list-grid">
-                <div class="list-item-value"><span>${product.name}</span></div>
-                <div class="list-item-value"><span>${product.category?.name || 'N/A'}</span></div>
-                <div class="list-item-value"><span>${product.measurement_unit.name} - ${product.measurement_unit?.abbreviation || 'N/A'}</span></div>
-                <div class="list-item-value"><span>${product.barcode || 'N/A'}</span></div>
-                <div class="list-item-value"><span>-</span></div>
-                <div class="list-item-actions">
-                    <a href="view.html?id=${product.id}" class="btn btn-secondary btn-sm" title="View">👁️</a>
-                    <a href="edit.html?id=${product.id}" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
-                    <button class="btn btn-danger btn-sm" title="Delete" onclick="confirmDelete(${product.id})">🗑️</button>
-                </div>
+            <div><span>${product.name}</span></div>
+            <div><span>${product.category?.name || 'N/A'}</span></div>
+            <div><span>${product.measurement_unit.name} - ${product.measurement_unit?.abbreviation || 'N/A'}</span></div>
+            <div><span>${product.barcode || 'N/A'}</span></div>
+            <div style="display: flex; gap: 0.5rem; justify-content: flex-start;">
+                <a href="/static/product/view.html?id=${product.id}" class="btn btn-secondary btn-sm" title="View">👁️</a>
+                <a href="/static/product/edit.html?id=${product.id}" class="btn btn-secondary btn-sm" title="Edit">✏️</a>
+                <button class="btn btn-danger btn-sm" title="Delete" onclick="confirmDelete(${product.id})">🗑️</button>
             </div>
         `;
 
@@ -76,7 +79,7 @@ function filterItems() {
             category.includes(searchTerm) ||
             barcode.includes(searchTerm);
         
-        item.style.display = (matches || searchTerm === '') ? 'flex' : 'none';
+        item.style.display = (matches || searchTerm === '') ? 'grid' : 'none';
     });
 }
 
@@ -115,7 +118,7 @@ async function confirmDelete(productId) {
     if (!confirm('Tem a certeza que deseja eliminar este produto?')) return;
 
     try {
-        const { deleteProduct } = await import('../api/products_api.js');
+        const { deleteProduct } = await import('/static/api/products_api.js');
         await deleteProduct(productId);
         alert('Produto eliminado com sucesso!');
         loadProducts(); // Reload list

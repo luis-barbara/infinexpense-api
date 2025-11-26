@@ -4,80 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Product - InfinExpense</title>
-    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+    <link rel="stylesheet" href="/static/css/main.css">
 </head>
 <body data-active-page="products">
     <!-- Navigation Template -->
     <div data-template="header"></div>
 
-    <script src="../js/template-loader.js"></script>
+    <script src="/static/js/template-loader.js"></script>
 
     <!-- Main Content -->
-    <div class="container">
-        <div style="max-width: 800px; margin: 0 auto;">
-            <div class="page-header">
-                <h1 class="page-title">Add New Product</h1>
-            </div>
+    <div class="container py-8">
+        <!-- Header -->
+        <div class="mb-8 animate-fade-in">
+            <h1 class="gradient-text mb-2">Add New Product</h1>
+            <p class="text-muted">Create a new product entry</p>
+        </div>
 
-            <div class="card" style="margin-bottom: 2rem;">
-                <form>
-                    <div class="form-group">
-                        <label class="form-label">Product Name *</label>
-                        <input type="text" class="form-input" placeholder="Enter product name" name="name" required>
-                    </div>
+        <!-- Form Card -->
+        <div class="card glow-strong animate-slide-up max-w-2xl" style="animation-delay: 0.1s;">
+            <form>
+                <!-- Product Name -->
+                <div class="mb-6">
+                    <label class="font-semibold mb-2 block">Product Name *</label>
+                    <input type="text" class="input" placeholder="Enter product name" name="name" required>
+                </div>
 
-                    <div class="photo-upload-container">
-                        <div class="form-group form-group-no-margin">
-                            <label class="form-label">Product Photo</label>
-                            <div class="file-upload photo-upload-small">
-                                <input type="file" id="productPhoto" class="file-upload-input" accept="image/*">
-                                <label for="productPhoto" class="file-upload-label photo-upload-label-content">
-                                    <div class="photo-upload-icon">📷</div>
-                                    <div class="photo-upload-text">Upload Photo</div>
+                <!-- Photo and Description -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="font-semibold mb-2 block">Product Photo</label>
+                        <div id="photoPreviewContainer" style="display: none; margin-bottom: 1rem;">
+                            <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem;">
+                                <img id="photoPreview" src="" alt="Product photo preview" style="max-width: 200px; max-height: 150px; object-fit: cover; border-radius: 0.5rem; border: 1px solid hsl(var(--border));">
+                                <button type="button" class="btn btn-secondary btn-sm" style="font-size: 0.75rem; padding: 0.35rem 0.7rem;" onclick="clearPhotoPreview()">Change</button>
+                            </div>
+                        </div>
+                        <div id="photoUploadArea">
+                            <div class="card" style="padding: 2rem; text-align: center; cursor: pointer; border: 2px dashed hsl(var(--border));">
+                                <input type="file" id="productPhoto" class="hidden" accept="image/*">
+                                <label for="productPhoto" style="cursor: pointer; display: block;">
+                                    <div style="font-size: 3rem; margin-bottom: 0.5rem;">📷</div>
+                                    <div class="text-muted">Click to upload</div>
                                 </label>
                             </div>
                         </div>
-
-                        <div class="form-group form-group-no-margin">
-                            <label class="form-label">Description</label>
-                            <textarea class="form-textarea" placeholder="Add product description or notes..." name="description" style="flex: 1; resize: vertical;"></textarea>
-                        </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">Category *</label>
-                            <select class="form-select" name="category" required>
-                                <option value="">Select a category</option>
-                            </select>
-                        </div>
+                    <div>
+                        <label class="font-semibold mb-2 block">Description</label>
+                        <textarea class="input" rows="6" placeholder="Add product description or notes..." name="description" style="resize: vertical;"></textarea>
+                    </div>
+                </div>
 
-                        <div class="form-group">
-                            <label class="form-label">Volume *</label>
-                            <select class="form-select" name="volume" required>
-                                <option value="">Select volume</option>
-                            </select>
-                        </div>
+                <!-- Category and Volume -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class="font-semibold mb-2 block">Category *</label>
+                        <select class="input" name="category" required>
+                            <option value="">Select a category</option>
+                        </select>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">Barcode</label>
-                            <input type="text" class="form-input" placeholder="Enter barcode number" name="barcode">
-                        </div>
+                    <div>
+                        <label class="font-semibold mb-2 block">Volume *</label>
+                        <select class="input" name="volume" required>
+                            <option value="">Select volume</option>
+                        </select>
                     </div>
+                </div>
 
-                    <div class="flex flex-gap" style="justify-content: flex-end; margin-top: 2rem;">
-                        <a href="list.html" class="btn btn-outline">Cancel</a>
-                        <button type="submit" class="btn btn-success">Add Product</button>
-                    </div>
-                </form>
-            </div>
+                <!-- Barcode -->
+                <div class="mb-8">
+                    <label class="font-semibold mb-2 block">Barcode</label>
+                    <input type="text" class="input" placeholder="Enter barcode number" name="barcode">
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex gap-3 justify-end">
+                    <a href="/static/product/list.html" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary glow-cyan">Add Product</button>
+                </div>
+            </form>
         </div>
     </div>
 
     <!-- Product Add JavaScript -->
-    <script type="module" src="../js/product-add.js"></script>
+    <script type="module" src="/static/js/product-add.js"></script>
 </body>
 </html>

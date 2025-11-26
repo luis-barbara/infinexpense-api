@@ -67,14 +67,23 @@ function populateReceipt(receipt) {
     document.getElementById('receipt-total').textContent = 
         `${(receipt.total_price || 0).toFixed(2)} €`;
     
+    // Notes
+    if (receipt.notes) {
+        const notesSection = document.getElementById('notes-section');
+        const notesField = document.getElementById('receipt-notes');
+        notesField.textContent = receipt.notes;
+        notesSection.style.display = 'block';
+    }
+    
     // Products
     renderProducts(receipt.products || []);
     
     // Image
     if (receipt.receipt_photo) {
         const img = document.getElementById('receipt-image');
+        const container = document.getElementById('receipt-image-container');
         img.src = receipt.receipt_photo;
-        img.style.display = 'block';
+        container.style.display = 'block';
         document.getElementById('no-photo-placeholder').style.display = 'none';
     }
 }
@@ -93,23 +102,21 @@ function renderProducts(products) {
         container.innerHTML = '<div style="padding: 1rem; text-align: center;">No items</div>';
         return;
     }
-    
 
-    
     // Add product rows
-    products.forEach((product, index) => {
+    products.forEach((product) => {
         const item = document.createElement('div');
-        item.className = `list-item list-row ${index % 2 === 0 ? 'row-even' : 'row-odd'}`;
+        item.className = 'products-table-grid';
         
         const price = parseFloat(product.price) || 0;
         const quantity = parseFloat(product.quantity) || 0;
         
         item.innerHTML = `
-            <div class="list-item-value">${product.product_list?.name || '-'}</div>
-            <div class="list-item-value">${product.product_list?.category?.name || '-'}</div>
-            <div class="list-item-value">${quantity.toFixed(2)}</div>
-            <div class="list-item-value">${price.toFixed(2)} €</div>
-            <div class="list-item-value">${(quantity*price).toFixed(2)} €</div>
+            <div>${product.product_list?.name || '-'}</div>
+            <div>${product.product_list?.category?.name || '-'}</div>
+            <div style="text-align: right;">${quantity.toFixed(2)}</div>
+            <div style="text-align: right;">${price.toFixed(2)} €</div>
+            <div style="text-align: right;">${(quantity*price).toFixed(2)} €</div>
         `;
         
         container.appendChild(item);
@@ -164,6 +171,34 @@ async function deleteCurrentReceipt() {
 // Expose to global scope
 window.sortProducts = sortProducts;
 window.deleteCurrentReceipt = deleteCurrentReceipt;
+
+/**
+ * Open image modal to view zoomed photo
+ */
+function openImageModal() {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const receiptImg = document.getElementById('receipt-image');
+    modalImg.src = receiptImg.src;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+/**
+ * Close image modal
+ */
+function closeImageModal(event) {
+    // Close only if clicking on modal background or close button
+    if (event && event.target.id !== 'imageModal') return;
+    
+    const modal = document.getElementById('imageModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+// Expose functions to global scope
+window.openImageModal = openImageModal;
+window.closeImageModal = closeImageModal;
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {

@@ -1,450 +1,73 @@
-/* ==========================================================================
-   13. UTILITY CLASSES
-   ========================================================================== */
+/* Utilities */
 
-/* === Flexbox === */
+.glow-cyan {
+  box-shadow: var(--shadow-glow);
+}
+
+.glow-strong {
+  box-shadow: var(--shadow-strong);
+}
+
 .flex {
-    display: flex;
+  display: flex;
 }
 
 .flex-col {
-    flex-direction: column;
+  flex-direction: column;
 }
 
-.flex-center {
-    justify-content: center;
-    align-items: center;
+.items-center {
+  align-items: center;
 }
 
-.flex-between {
-    justify-content: space-between;
-    align-items: center;
+.justify-center {
+  justify-content: center;
 }
 
-.flex-1 {
-    flex: 1;
+.justify-between {
+  justify-content: space-between;
 }
 
-.flex-gap {
-    gap: var(--spacing-lg);
-}
-
-.flex-gap-sm {
-    gap: var(--spacing-sm);
-}
-
-/* === Text Alignment === */
-.text-left {
-    text-align: left;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.text-right {
-    text-align: right;
-}
-
-/* === Text Colors === */
-.text-primary-color {
-    color: var(--primary-color);
-}
-
-.text-success {
-    color: var(--success-color);
-}
-
-.text-danger {
-    color: var(--danger-color);
-}
-
-.text-secondary {
-    color: var(--text-secondary);
-}
-
-/* === Font Weights === */
-.font-medium {
-    font-weight: var(--font-weight-medium);
-}
-
-.font-semibold {
-    font-weight: var(--font-weight-semibold);
-}
-
-.font-bold {
-    font-weight: var(--font-weight-bold);
-}
-
-/* === Display === */
-.hidden {
-    display: none;
-}
-
-.block {
-    display: block;
-}
-
-.inline-block {
-    display: inline-block;
-}
-
-/* === Overflow === */
-.overflow-hidden {
-    overflow: hidden;
-}
-
-.overflow-auto {
-    overflow: auto;
-}
-
-/* === Cursor === */
-.cursor-pointer {
-    cursor: pointer;
-}
-
-/* === Spacing === */
-.m-0 {
-    margin: 0;
-}
-
-.mb-0 {
-    margin-bottom: 0;
-}
-
-.mb-sm {
-    margin-bottom: var(--spacing-sm);
-}
-
-.mb-md {
-    margin-bottom: var(--spacing-md);
-}
-
-.mb-lg {
-    margin-bottom: var(--spacing-lg);
-}
-
-.mb-xl {
-    margin-bottom: var(--spacing-xl);
-}
-
-.p-0 {
-    padding: 0;
-}
-
-/* === Width & Max-Width === */
-.max-width-800 {
-    max-width: 800px;
-}
-
-.max-width-600 {
-    max-width: 600px;
-}
-
-.width-300 {
-    width: 300px;
-}
-
-/* === Margin Auto (Centering) === */
-.mx-auto {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* === Margin Top === */
-.mt-2 {
-    margin-top: var(--spacing-2xl);
-}
-
-/* === Aspect Ratio === */
-.aspect-3-4 {
-    aspect-ratio: 3 / 4;
-}
-
-/* === Font Sizes === */
-.font-size-sm {
-    font-size: var(--font-size-sm);
-}
-
-.font-size-lg {
-    font-size: 1.1rem;
-}
-
-.font-size-2xl {
-    font-size: 2.5rem;
-}
-
-/* === Justify Content === */
-.justify-end {
-    justify-content: flex-end;
-}
-
-/* === Link Styles === */
-.link-no-underline {
-    text-decoration: none;
-}
-
-.link-primary {
-    color: var(--primary-color);
-    text-decoration: none;
-}
-
-.link-primary:hover {
-    text-decoration: underline;
-}
-
-.link-text {
-    color: var(--text-primary);
-    text-decoration: none;
-}
-
-.link-text:hover {
-    color: var(--primary-color);
-}
-
-
-
-/* Extended Utilities */
-/* === Additional Utility Classes === */
+.gap-2 { gap: 0.5rem; }
+.gap-3 { gap: 0.75rem; }
+.gap-4 { gap: 1rem; }
+.gap-6 { gap: 1.5rem; }
 
-/* Grid Templates */
-.grid-detail-2col {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 2rem;
-}
-
-.grid-2col-equal {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-}
-
-.grid-product-form {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 1.5rem;
-}
-
-.grid-4col-equal {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-
-/* Height & Max Width */
-.max-width-500 {
-    max-width: 500px;
-}
-
-.height-full {
-    height: 100%;
-}
-
-/* Display Flex Utilities */
-.flex-col-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Margin & Padding */
-.mt-1 {
-    margin-top: var(--spacing-md);
-}
-
-.mt-half {
-    margin-top: 0.5rem;
-}
-
-.mb-1-5 {
-    margin-bottom: 1.5rem;
-}
-
-.mb-2 {
-    margin-bottom: 2rem;
-}
-
-.p-1-5 {
-    padding: 1.5rem;
-}
-
-/* Font Sizes */
-.font-size-base {
-    font-size: 0.875rem;
-}
-
-.font-size-md {
-    font-size: 0.95rem;
-}
-
-.font-size-xl {
-    font-size: 1.5rem;
-}
-
-/* Box Shadow */
-.shadow-none {
-    box-shadow: none;
-}
-
-/* Min Height */
-.min-h-0 {
-    min-height: 0;
-}
-
-/* Overflow */
-.overflow-y-auto {
-    overflow-y: auto;
-}
-
-/* Text Decoration */
-.underline {
-    text-decoration: underline;
-}
-
-/* Resize */
-.resize-vertical {
-    resize: vertical;
-}
-
-/* Max Height */
-.max-h-250 {
-    max-height: 250px;
-}
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-4 { margin-bottom: 1rem; padding-top: 2rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.mb-8 { margin-bottom: 2rem; }
+.mb-16 { margin-bottom: 4rem; }
 
-/* Dashboard specific (complex calc height) */
-.dashboard-recent-card {
-    margin-bottom: 0;
-    height: calc(100vh - 64px - 2rem - 60px - 2rem - 170px - 1.5rem - 2rem);
-    display: flex;
-    flex-direction: column;
-}
-
-
-/* Extended Utilities */
-/* === Additional Utility Classes === */
-
-/* Grid Templates */
-.grid-detail-2col {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 2rem;
-}
-
-.grid-2col-equal {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-}
-
-.grid-product-form {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 1.5rem;
-}
-
-.grid-4col-equal {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-
-/* Height & Max Width */
-.max-width-500 {
-    max-width: 500px;
-}
-
-.height-full {
-    height: 100%;
-}
-
-/* Display Flex Utilities */
-.flex-col-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Margin & Padding */
-.mt-1 {
-    margin-top: var(--spacing-md);
-}
-
-.mt-half {
-    margin-top: 0.5rem;
-}
+.mt-2 { margin-top: 0.5rem; }
+.mt-4 { margin-top: 1rem; }
 
-.mb-1-5 {
-    margin-bottom: 1.5rem;
-}
-
-.mb-2 {
-    margin-bottom: 2rem;
-}
-
-.p-1-5 {
-    padding: 1.5rem;
-}
-
-/* Font Sizes */
-.font-size-base {
-    font-size: 0.875rem;
-}
-
-.font-size-md {
-    font-size: 0.95rem;
-}
-
-.font-size-xl {
-    font-size: 1.5rem;
-}
-
-/* Box Shadow */
-.shadow-none {
-    box-shadow: none;
-}
+.p-3 { padding: 0.75rem; }
+.p-6 { padding: 1.5rem; }
 
-/* Min Height */
-.min-h-0 {
-    min-height: 0;
-}
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.px-8 { padding-left: 2rem; padding-right: 2rem; }
+.py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+.py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+.py-16 { padding-top: 4rem; padding-bottom: 4rem; }
 
-/* Overflow */
-.overflow-y-auto {
-    overflow-y: auto;
-}
+.rounded-xl { border-radius: 0.75rem; }
+.rounded-2xl { border-radius: 1rem; }
 
-/* Text Decoration */
-.underline {
-    text-decoration: underline;
-}
+.font-bold { font-weight: 700; }
+.font-semibold { font-weight: 600; }
 
-/* Resize */
-.resize-vertical {
-    resize: vertical;
-}
+.text-sm { font-size: 0.875rem; }
+.text-lg { font-size: 1.125rem; }
+.text-xl { font-size: 1.25rem; }
+.text-3xl { font-size: 1.875rem; }
+.text-5xl { font-size: 3rem; }
 
-/* Max Height */
-.max-h-250 {
-    max-height: 250px;
-}
+.max-w-2xl { max-width: 42rem; margin-left: auto; margin-right: auto; }
+.max-w-5xl { max-width: 64rem; margin-left: auto; margin-right: auto; }
 
-/* Dashboard specific (complex calc height) */
-.dashboard-recent-card {
-    margin-bottom: 0;
-    height: calc(100vh - 64px - 2rem - 60px - 2rem - 170px - 1.5rem - 2rem);
-    display: flex;
-    flex-direction: column;
-}
+.mx-auto { margin-left: auto; margin-right: auto; }
 
-/* === Example Data Styling === */
-/* Applied to all example/demo data to distinguish from real data */
-.example-data {
-    color: #22c55e;
-    text-decoration: underline;
-    text-decoration-color: #22c55e;
-    text-underline-offset: 2px;
-}
+.hidden { display: none; }
 
-.example-data:hover {
-    color: #16a34a;
-    text-decoration-color: #16a34a;
-}
+.block { display: block; }

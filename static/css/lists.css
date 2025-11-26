@@ -1,35 +1,43 @@
-/* ==========================================================================
-   8. CATEGORY-SPECIFIC STYLES
-   ========================================================================== */
+/* List Items (for JS-rendered content) */
 
-.category-color-box {
-    width: 32px;
-    height: 32px;
-    border-radius: 6px;
+.list-item {
+  background: var(--gradient-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid hsl(var(--border) / 0.5);
+  border-radius: 0.75rem;
+  margin-bottom: 0.75rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-strong);
+  overflow: hidden;
 }
 
-.category-name {
-    font-weight: var(--font-weight-semibold);
-    font-size: 0.95rem;
-    text-align: center;
+.list-item:hover {
+  transform: translateY(-2px);
+  backdrop-filter: blur(20px);
+  background: linear-gradient(145deg, hsl(220 20% 10% / 0.9) 0%, hsl(220 25% 12% / 0.7) 100%);
+  border-color: hsl(var(--primary) / 0.4);
+  box-shadow: 0 0 40px hsl(210 100% 60% / 0.6), 0 10px 30px -10px hsl(var(--neon-cyan) / 0.5);
 }
 
-.category-meta {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    text-align: center;
+.list-item-main {
+  padding: 1rem;
 }
 
-.list-row {
-    display: grid;
-    grid-template-columns: 1.2fr 0.75fr 0.9fr 0.6fr 0.6fr;
-    border-bottom: 1px solid #e5e7eb;
-    align-items: center;
-    text-align: center;
+.receipts-list-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr 120px;
+  gap: 1rem;
+  align-items: center;
 }
 
 .list-item-value {
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.list-item-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
 }

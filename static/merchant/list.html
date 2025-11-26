@@ -4,76 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Merchants - InfinExpense</title>
-    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+    <link rel="stylesheet" href="/static/css/main.css">
 </head>
 <body data-active-page="merchants">
     <!-- Navigation Template -->
-
     <div data-template="header"></div>
 
-    <script src="../js/template-loader.js"></script>
+    <script src="/static/js/template-loader.js"></script>
 
     <!-- Main Content -->
-    <div class="container">
-        <div class="page-header">
-            <h1 class="page-title">Merchants</h1>
-            <a href="add.html" class="btn btn-primary">+ Add Merchant</a>
+    <div class="container py-8">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-8 animate-fade-in">
+            <div>
+                <h1 class="gradient-text mb-2">Merchants</h1>
+                <p class="text-muted">Manage and track all your merchants</p>
+            </div>
+            <a href="add.html" class="btn btn-primary glow-cyan">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14" />
+                    <path d="M12 5v14" />
+                </svg>
+                Add Merchant
+            </a>
         </div>
 
         <!-- Search Bar -->
-        <div class="search-bar">
-            <input type="text" id="searchInput" class="search-input" placeholder="Search merchants by name">
-            <button class="btn btn-primary" onclick="filterItems()">Search</button>
+        <div class="flex gap-3 mb-6 animate-slide-up" style="animation-delay: 0.1s;">
+            <div class="search-bar">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.3-4.3" />
+                </svg>
+                <input type="text" id="searchInput" class="input" placeholder="Search merchants by name or location...">
+            </div>
+            <button class="btn btn-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.3-4.3" />
+                </svg>
+            </button>
         </div>
 
-        <!-- Merchants List -->
-        <div class="content-wrapper">
-            <div class="card card-no-margin card-flex card-flex-1 overflow-hidden">
-                <!-- Table Headers -->
-                <div class="list-header merchants-list-grid">
-                    <div class="list-header-item">
-                        <span>Merchant Name</span>
-                        <span class="sort-buttons">
-                            <button class="sort-btn" onclick="sortMerchants('name', 'asc')">▲</button>
-                            <button class="sort-btn" onclick="sortMerchants('name', 'desc')">▼</button>
-                        </span>
-                    </div>
-                    <div class="list-header-item">
-                        <span>Location</span>
-                        <span class="sort-buttons">
-                            <button class="sort-btn" onclick="sortMerchants('location', 'asc')">▲</button>
-                            <button class="sort-btn" onclick="sortMerchants('location', 'desc')">▼</button>
-                        </span>
-                    </div>
-                    <div class="list-header-item">
-                        <span>Total Receipts</span>
-                        <span class="sort-buttons">
-                            <button class="sort-btn" onclick="sortMerchants('receipts', 'asc')">▲</button>
-                            <button class="sort-btn" onclick="sortMerchants('receipts', 'desc')">▼</button>
-                        </span>
-                    </div>
-                    <div class="list-header-item">
-                        <span>Total Spent</span>
-                        <span class="sort-buttons">
-                            <button class="sort-btn" onclick="sortMerchants('spent', 'asc')">▲</button>
-                            <button class="sort-btn" onclick="sortMerchants('spent', 'desc')">▼</button>
-                        </span>
-                    </div>
-                    <div class="list-header-item">
-                        <span>Actions</span>
-                    </div>
-                </div>
-                <div class="scrollable-list">
-                    <div class="list-container" id="merchantsList">
-                        <!-- Will be populated by JavaScript -->
-                    </div>
-                </div>
+        <!-- Merchants Table -->
+        <div class="table-container glow-strong animate-slide-up" style="animation-delay: 0.2s;">
+            <!-- Table Header -->
+            <div class="table-header merchants-list-grid">
+                <button class="flex items-center gap-2" onclick="sortReceipts('barcode')" style="background: none; border: none; color: inherit; cursor: pointer; text-align: left;">
+                    Merchant Name
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m7 15 5 5 5-5" />
+                        <path d="m7 9 5-5 5 5" />
+                    </svg>
+                </button>
+                <button class="flex items-center gap-2" onclick="sortReceipts('merchant')" style="background: none; border: none; color: inherit; cursor: pointer; text-align: left;">
+                    Location
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m7 15 5 5 5-5" />
+                        <path d="m7 9 5-5 5 5" />
+                    </svg>
+                </button>
+                <button class="flex items-center gap-2" onclick="sortReceipts('date')" style="background: none; border: none; color: inherit; cursor: pointer; text-align: left;">
+                    Total Receipts
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m7 15 5 5 5-5" />
+                        <path d="m7 9 5-5 5 5" />
+                    </svg>
+                </button>
+                <button class="flex items-center gap-2" onclick="sortReceipts('products')" style="background: none; border: none; color: inherit; cursor: pointer; text-align: left;">
+                    Total Spent
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m7 15 5 5 5-5" />
+                        <path d="m7 9 5-5 5 5" />
+                    </svg>
+                </button>
+                <div>Actions</div>
+            </div>
+
+            <!-- Table Body -->
+            <div id="merchantsList">
+                <!-- Will be populated by JavaScript -->
             </div>
         </div>
     </div>
 
     <!-- Merchants List JavaScript -->
-    <script type="module" src="../js/merchants-list.js"></script>
+    <script type="module" src="/static/js/merchants-list.js"></script>
 </body>
 </html>

@@ -33,17 +33,14 @@
      * Load a template file and inject it into the DOM
      * @param {HTMLElement} element - The element with data-template attribute
      * @param {string} templateName - Name of the template (header/footer)
-     * @param {string} basePath - Base path for URLs
      */
-    async function loadTemplate(element, templateName, basePath) {
+    async function loadTemplate(element, templateName) {
         try {
-            const response = await fetch(`${basePath}templates/${templateName}.html`);
+            // Always use /static/templates/ path since we're serving from root
+            const response = await fetch(`/static/templates/${templateName}.html`);
             if (!response.ok) throw new Error(`Template ${templateName} not found`);
             
             let html = await response.text();
-            
-            // Replace {BASE_PATH} placeholder with actual base path
-            html = html.replace(/{BASE_PATH}/g, basePath);
             
             // Inject the template
             element.innerHTML = html;
@@ -78,13 +75,22 @@
      * Initialize template loading on DOM ready
      */
     function init() {
-        const basePath = getBasePath();
-        const templateElements = document.querySelectorAll('[data-template]');
-        
-        templateElements.forEach(element => {
-            const templateName = element.getAttribute('data-template');
-            loadTemplate(element, templateName, basePath);
-        });
+        // Wait a tick to ensure DOM is fully parsed
+        setTimeout(() => {
+            const templateElements = document.querySelectorAll('[data-template]');
+            
+            if (templateElements.length > 0) {
+                templateElements.forEach(element => {
+                    const templateName = element.getAttribute('data-template');
+                    loadTemplate(element, templateName);
+                });
+            }
+            
+            // Load theme script
+            const themeScript = document.createElement('script');
+            themeScript.src = '/static/js/theme.js';
+            document.head.appendChild(themeScript);
+        }, 0);
     }
 
     // Run initialization when DOM is ready

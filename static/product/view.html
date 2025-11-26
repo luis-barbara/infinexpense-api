@@ -4,59 +4,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product - InfinExpense</title>
-    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+    <link rel="stylesheet" href="/static/css/main.css">
 </head>
 <body data-active-page="products">
     <!-- Navigation Template -->
     <div data-template="header"></div>
 
-    <script src="../js/template-loader.js"></script>
+    <script src="/static/js/template-loader.js"></script>
 
     <!-- Main Content -->
-    <div class="container">
-        <div class="page-header">
-            <h1 class="page-title">Product Name</h1>
-            <div class="flex flex-gap">
-                <a href="edit.html" class="btn btn-primary">Edit Product</a>
-                <button class="btn btn-danger" onclick="deleteProduct()">Delete Product</button>
+    <div class="container py-8">
+        <!-- Header -->
+        <div class="mb-8 animate-fade-in">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <a href="/static/product/list.html" class="btn btn-secondary btn-sm">← Back</a>
+                    <div>
+                        <h1 class="gradient-text mb-2">Product Name</h1>
+                        <p class="text-muted">Product details and information</p>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                    <a href="/static/product/edit.html" class="btn btn-primary glow-cyan">✏️ Edit</a>
+                    <button class="btn btn-danger" onclick="deleteProduct()">🗑️ Delete</button>
+                </div>
             </div>
         </div>
 
         <!-- Product Info Card -->
-        <div class="card product-detail-layout">
-            <!-- Product Photo -->
-            <div class="product-photo-container">
-                <img id="product-image" 
-                     src="" 
-                     alt="Product" 
-                     class="image-preview"
-                     style="display: none; cursor: pointer;">
-                <div id="no-photo-placeholder" class="no-photo-placeholder">
-                    <div class="no-photo-icon">🚫</div>
-                    <div class="no-photo-text">NO PHOTO</div>
+        <div class="card glow-strong animate-slide-up" style="animation-delay: 0.1s;">
+            <div style="display: grid; grid-template-columns: 300px 1fr; gap: 2rem; align-items: start;">
+                <!-- Product Photo -->
+                <div>
+                    <h3 class="font-semibold mb-4" style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="color: hsl(var(--neon-purple));">📷</span>
+                        Product Photo
+                    </h3>
+                    <div style="border-radius: 0.5rem; overflow: hidden; border: 1px solid hsl(var(--border) / 0.5); background: hsl(var(--secondary) / 0.3);">
+                        <img id="product-image" 
+                             src="" 
+                             alt="Product" 
+                             style="display: none; width: 100%; height: auto; cursor: pointer;">
+                        <div id="no-photo-placeholder" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem; text-align: center;">
+                            <span style="font-size: 3rem; margin-bottom: 0.5rem;">🚫</span>
+                            <p class="text-muted">No photo available</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Product Info -->
-            <div class="product-info-grid">
-                <div class="product-info-item">
-                    <span class="product-info-label">Category</span>
-                    <span class="product-info-value" data-field="category">-</span>
-                </div>
-                <div class="product-info-item">
-                    <span class="product-info-label">Volume</span>
-                    <span class="product-info-value" data-field="volume">-</span>
-                </div>
-                <div class="product-info-item">
-                    <span class="product-info-label">Barcode</span>
-                    <span class="product-info-value" data-field="barcode">-</span>
+                <!-- Product Info -->
+                <div>
+                    <h3 class="font-semibold mb-4" style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="color: hsl(var(--neon-cyan));">📦</span>
+                        Product Information
+                    </h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                        <div>
+                            <div style="font-size: 0.875rem; color: hsl(var(--muted-foreground)); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <span>🏷️</span>
+                                Category
+                            </div>
+                            <div class="font-semibold text-lg" data-field="category" style="color: hsl(var(--foreground));">-</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.875rem; color: hsl(var(--muted-foreground)); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <span>📏</span>
+                                Volume
+                            </div>
+                            <div class="font-semibold text-lg" data-field="volume" style="color: hsl(var(--foreground));">-</div>
+                        </div>
+                        <div style="grid-column: 1 / -1;">
+                            <div style="font-size: 0.875rem; color: hsl(var(--muted-foreground)); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <span>🔢</span>
+                                Barcode
+                            </div>
+                            <div class="font-semibold text-lg" data-field="barcode" style="color: hsl(var(--foreground));">-</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Product View JavaScript -->
-    <script type="module" src="../js/product-view.js"></script>
+    <script type="module" src="/static/js/product-view.js"></script>
 </body>
 </html>

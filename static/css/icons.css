@@ -1,0 +1,26 @@
+/* Icons/Logo Styling */
+
+.logo-icon {
+  display: inline-flex;
+  padding: 0.75rem;
+  background: var(--gradient-primary);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-glow);
+}
+
+.logo-icon svg {
+  width: 2rem;
+  height: 2rem;
+  color: hsl(var(--primary-foreground));
+}
+
+.icon {
+  display: inline-flex;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.icon-sm {
+  width: 1rem;
+  height: 1rem;
+}

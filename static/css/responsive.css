@@ -1,40 +1,72 @@
-/* ==========================================================================
-   14. RESPONSIVE DESIGN
-   ========================================================================== */
+/* Responsive */
 
 @media (max-width: 768px) {
-    .nav-menu {
-        flex-wrap: wrap;
-    }
+  h1 { font-size: 2rem; }
+  .text-5xl { font-size: 2rem; }
+  .grid-cols-1 { grid-template-columns: 1fr; }
+  
+  .receipts-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .table-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .header-content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .burger-menu {
+    display: flex;
+  }
+  
+  .nav-menu {
+    position: fixed;
+    top: 4.5rem;
+    right: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: calc(100vh - 4.5rem);
+    background: var(--gradient-card);
+    backdrop-filter: blur(20px);
+    border-left: 1px solid hsl(var(--border) / 0.5);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 2rem 0;
+    transition: right 0.3s ease;
+    box-shadow: -4px 0 20px hsl(var(--background) / 0.8);
+    z-index: 100;
+    pointer-events: none;
+  }
+  
+  .nav-menu.active {
+    right: 0;
+    pointer-events: auto;
+  }
+  
+  .nav-link {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border-radius: 0;
+    font-size: 1rem;
+  }
+  
+  .nav-link.active::after {
+    display: none;
+  }
+  
+  .logo-text {
+    font-size: 1.25rem;
+  }
 
-    .page-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .grid-2cols,
-    .grid-2cols-1-2,
-    .filter-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-
-    /* Stack list items on mobile */
-    .list-item-main {
-        grid-template-columns: 1fr !important;
-    }
-
-    .list-item-value {
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
-        padding: var(--spacing-sm) var(--spacing-md);
-    }
-
-    .list-item-value:last-child {
-        border-bottom: none;
-    }
+  /* Responsive grid layouts */
+  .md\\:grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
 }
-
