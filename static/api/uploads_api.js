@@ -1,11 +1,7 @@
-// frontend/api/uploads_api.js
-
 const API_BASE_URL = "http://localhost:8000";
 
 /**
- * Upload de foto para um produto
- * @param {number} productListId - ID do produto
- * @param {File} file - Ficheiro selecionado
+ * Upload a photo for a product.
  */
 export async function uploadProductPhoto(productListId, file) {
     const formData = new FormData();
@@ -13,11 +9,11 @@ export async function uploadProductPhoto(productListId, file) {
 
     const response = await fetch(`${API_BASE_URL}/uploads/product-list/${productListId}/photo`, {
         method: "POST",
-        body: formData, // multipart/form-data
+        body: formData,
     });
 
     if (!response.ok) {
-        let errorMessage = `Erro ${response.status}: ${response.statusText}`;
+        let errorMessage = `Error ${response.status}: ${response.statusText}`;
         try {
             const errorData = await response.json();
             if (errorData.detail) errorMessage = errorData.detail;
@@ -29,9 +25,7 @@ export async function uploadProductPhoto(productListId, file) {
 }
 
 /**
- * Upload de foto para um recibo
- * @param {number} receiptId - ID do recibo
- * @param {File} file - Ficheiro selecionado
+ * Upload a photo for a receipt.
  */
 export async function uploadReceiptPhoto(receiptId, file) {
     const formData = new FormData();
@@ -39,11 +33,11 @@ export async function uploadReceiptPhoto(receiptId, file) {
 
     const response = await fetch(`${API_BASE_URL}/uploads/receipt/${receiptId}/photo`, {
         method: "POST",
-        body: formData, // multipart/form-data
+        body: formData,
     });
 
     if (!response.ok) {
-        let errorMessage = `Erro ${response.status}: ${response.statusText}`;
+        let errorMessage = `Error ${response.status}: ${response.statusText}`;
         try {
             const errorData = await response.json();
             if (errorData.detail) errorMessage = errorData.detail;

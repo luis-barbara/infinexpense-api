@@ -35,10 +35,9 @@ async function loadMerchants() {
             select.appendChild(option);
         });
         
-        console.log('Merchants loaded:', allMerchants.length);
         return true;
     } catch (error) {
-        console.error('Erro ao carregar comerciantes:', error);
+        console.error('Error loading merchants:', error);
         return false;
     }
 }
@@ -51,9 +50,6 @@ async function loadProducts() {
         const response = await getProducts({ skip: 0, limit: 1000 });  // Use 1000 instead of 10000
         
         allProducts = Array.isArray(response) ? response : response.data || [];
-        
-        console.log('Products loaded:', allProducts.length);
-        console.log('Sample product:', allProducts[0]);
         
         return true;
     } catch (error) {
@@ -75,8 +71,6 @@ async function loadReceipt() {
             return;
         }
 
-        console.log('Loading receipt ID:', currentReceiptId);
-
         // Load merchants FIRST
         const merchantsLoaded = await loadMerchants();
         if (!merchantsLoaded) {
@@ -88,7 +82,6 @@ async function loadReceipt() {
         
         // Then load receipt
         currentReceipt = await getReceiptById(currentReceiptId);
-        console.log('Receipt loaded:', currentReceipt);
         
         // Update page title
         document.querySelector('.page-title').textContent =
@@ -98,8 +91,8 @@ async function loadReceipt() {
         populateForm(currentReceipt);
         
     } catch (error) {
-        console.error('Erro ao carregar recibo:', error);
-        alert('Erro ao carregar recibo: ' + error.message);
+        console.error('Error loading receipt:', error);
+        alert('Error loading receipt: ' + error.message);
         window.location.href = 'list.html';
     }
 }
@@ -108,34 +101,27 @@ async function loadReceipt() {
  * Populate form with receipt data (VALUES, not placeholders)
  */
 function populateForm(receipt) {
-    console.log('Populating form with:', receipt);
-    
     // Receipt code / barcode
     const codeField = document.getElementById('receiptCode');
     codeField.value = receipt.barcode || '';
-    console.log('Set receiptCode to:', codeField.value);
     
     // Merchant dropdown – select actual merchant
     const merchantSelect = document.getElementById('receiptMerchant');
     merchantSelect.value = receipt.merchant_id || '';
-    console.log('Set receiptMerchant to:', merchantSelect.value);
     
     // Date & time for datetime-local
     const dateField = document.getElementById('receiptDate');
     if (receipt.purchase_date) {
         const receiptDate = new Date(receipt.purchase_date);
-        const localDateTime = receiptDate.toISOString().slice(0, 16); // yyyy-MM-ddTHH:mm
+        const localDateTime = receiptDate.toISOString().slice(0, 16);
         dateField.value = localDateTime;
-        console.log('Set receiptDate to:', dateField.value);
     } else {
         dateField.value = '';
-        console.log('No purchase_date found, leaving receiptDate empty');
     }
     
     // Notes
     const notesField = document.getElementById('receiptNotes');
     notesField.value = receipt.notes || '';
-    console.log('Set receiptNotes to:', notesField.value);
     
     // Photo
     displayCurrentPhoto(receipt.receipt_photo);
@@ -225,8 +211,6 @@ function addProduct() {
     const item = document.createElement('div');
     item.className = 'list-item receipt-products-edit-grid';
     item.setAttribute('data-product-id', 'new');
-    
-    console.log('Adding product, total products available:', allProducts.length);
     
     // Create product select dropdown
     let productOptions = '<option value="">-- Select a product --</option>';
@@ -360,8 +344,8 @@ async function handleSubmit(e) {
                 const updatedReceipt = await uploadReceiptPhoto(currentReceiptId, pendingPhotoFile);
                 console.log('Photo uploaded successfully:', updatedReceipt.receipt_photo);
             } catch (photoError) {
-                console.error('Erro ao fazer upload da foto:', photoError);
-                alert('Erro ao fazer upload da foto: ' + photoError.message);
+                console.error('Error uploading photo:', photoError);
+                alert('Error uploading photo: ' + photoError.message);
                 // Continue with the rest of the save process
             }
         }
@@ -373,11 +357,11 @@ async function handleSubmit(e) {
         // Update products
         await updateReceiptProducts(currentReceiptId, products);
         
-        alert('Recibo atualizado com sucesso!');
+        alert('Receipt updated successfully!');
         window.location.href = `view.html?id=${currentReceiptId}`;
     } catch (error) {
-        console.error('Erro ao atualizar recibo:', error);
-        alert('Erro ao atualizar recibo: ' + error.message);
+        console.error('Error updating receipt:', error);
+        alert('Error updating receipt: ' + error.message);
     }
 }
 
@@ -385,15 +369,15 @@ async function handleSubmit(e) {
  * Delete current receipt
  */
 async function deleteCurrentReceipt() {
-    if (!confirm('Tem a certeza que deseja eliminar este recibo?')) return;
+    if (!confirm('Are you sure you want to delete this receipt?')) return;
 
     try {
         await deleteReceipt(currentReceiptId);
-        alert('Recibo eliminado com sucesso!');
+        alert('Receipt deleted successfully!');
         window.location.href = 'list.html';
     } catch (error) {
-        console.error('Erro ao eliminar recibo:', error);
-        alert('Erro ao eliminar recibo: ' + error.message);
+        console.error('Error deleting receipt:', error);
+        alert('Error deleting receipt: ' + error.message);
     }
 }
 

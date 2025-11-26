@@ -19,7 +19,6 @@ router = APIRouter(
 )
 
 
-# Create
 @router.post(
     "/",
     response_model=ProductListSchema,
@@ -30,9 +29,7 @@ def create_product(
     product: ProductListCreate,
     db: Session = Depends(get_db)
 ):
-    """
-    Create a new product with the provided details.
-    """
+    """Create a new product."""
     try:
         return ProductListService.create_product_list(db, product)
     except IntegrityError:
@@ -43,7 +40,6 @@ def create_product(
         )
 
 
-# Read All
 @router.get(
     "/",
     response_model=List[ProductListSchema],
@@ -57,13 +53,9 @@ def get_all_products(
     category_id: Optional[int] = Query(None, description="Filter by category ID"),
     db: Session = Depends(get_db)
 ):
-    """
-    Retrieve all products with optional filters and pagination.
-    """
     return ProductListService.get_product_lists(db, skip=skip, limit=limit)
 
 
-# Read By ID
 @router.get(
     "/{product_id}",
     response_model=ProductListSchema,
@@ -73,16 +65,13 @@ def get_product_by_id(
     product_id: int = Path(..., ge=1, description="ID of the product to retrieve"),
     db: Session = Depends(get_db)
 ):
-    """
-    Retrieve a specific product by its ID.
-    """
+    """Get a single product by ID."""
     product = ProductListService.get_product_list(db, product_id)
     if not product:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
     return product
 
 
-# Read By Barcode
 @router.get(
     "/barcode/{barcode}",
     response_model=ProductListSchema,
@@ -92,16 +81,13 @@ def get_product_by_barcode_endpoint(
     barcode: str = Path(..., max_length=50, description="Barcode of the product to retrieve"),
     db: Session = Depends(get_db)
 ):
-    """
-    Retrieve a product by its barcode.
-    """
+    """Get a product by barcode."""
     product = ProductListService.get_product_by_barcode(db, barcode)
     if not product:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
     return product
 
 
-# Read By Name
 @router.get(
     "/name/{name}",
     response_model=ProductListSchema,
@@ -111,16 +97,13 @@ def get_product_by_name_endpoint(
     name: str = Path(..., max_length=255, description="Name of the product to retrieve"),
     db: Session = Depends(get_db)
 ):
-    """
-    Retrieve a product by its name.
-    """
+    """Get a product by name."""
     product = ProductListService.get_product_by_name(db, name)
     if not product:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
     return product
 
 
-# Update
 @router.put(
     "/{product_id}",
     response_model=ProductListSchema,
@@ -131,16 +114,13 @@ def update_product(
     product_update: ProductListUpdate = None,
     db: Session = Depends(get_db)
 ):
-    """
-    Update a product's details.
-    """
+    """Update a product by ID."""
     product = ProductListService.update_product_list(db, product_id, product_update)
     if not product:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
     return product
 
 
-# Delete
 @router.delete(
     "/{product_id}",
     status_code=status.HTTP_204_NO_CONTENT,
@@ -150,9 +130,7 @@ def delete_product(
     product_id: int = Path(..., ge=1, description="ID of the product to delete"),
     db: Session = Depends(get_db)
 ):
-    """
-    Delete a product by its ID.
-    """
+    """Delete a product by ID."""
     try:
         success = ProductListService.delete_product_list(db, product_id)
         if not success:

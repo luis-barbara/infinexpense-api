@@ -23,14 +23,11 @@ async function loadProduct() {
             return;
         }
 
-        console.log('Loading product ID:', currentProductId);
         currentProduct = await getProductById(currentProductId);
-        console.log('Product loaded:', currentProduct);
-        
         populateProduct(currentProduct);
     } catch (error) {
-        console.error('Erro ao carregar produto:', error);
-        alert('Erro ao carregar produto: ' + error.message);
+        console.error('Error loading product:', error);
+        alert('Error loading product: ' + error.message);
         window.location.href = 'list.html';
     }
 }
@@ -39,7 +36,6 @@ async function loadProduct() {
  * Populate product details
  */
 function populateProduct(product) {
-    // Set title
     const title = document.querySelector('.page-title');
     if (title) {
         title.textContent = product.name;
@@ -51,7 +47,6 @@ function populateProduct(product) {
         editBtn.href = `edit.html?id=${product.id}`;
     }
     
-    // Set delete button
     const deleteBtn = document.querySelector('button.btn-danger');
     if (deleteBtn) {
         deleteBtn.onclick = function() {
@@ -59,7 +54,6 @@ function populateProduct(product) {
         };
     }
     
-    // Product Info
     const categoryEl = document.querySelector('[data-field="category"]');
     if (categoryEl) {
         categoryEl.textContent = product.category?.name || '-';
@@ -88,23 +82,20 @@ function populateProduct(product) {
  * Delete product with confirmation
  */
 async function deleteProduct() {
-    if (!confirm('Tem a certeza que deseja eliminar este produto?')) return;
+    if (!confirm('Delete this product?')) return;
 
     try {
         const { deleteProduct: deleteProductAPI } = await import('../api/products_api.js');
         await deleteProductAPI(currentProductId);
-        alert('Produto eliminado com sucesso!');
+        alert('Product deleted successfully!');
         window.location.href = 'list.html';
     } catch (error) {
-        console.error('Erro ao eliminar produto:', error);
-        alert('Não é possível eliminar este produto:\n\n' + error.message);
+        console.error('Error deleting product:', error);
+        alert('Cannot delete this product:\n\n' + error.message);
     }
 }
 
-// Expose to global scope
 window.deleteProduct = deleteProduct;
-
-// Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
     loadProduct();
 });

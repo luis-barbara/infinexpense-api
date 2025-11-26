@@ -11,8 +11,8 @@ async function loadReceipts() {
         allReceipts = await getReceipts();
         renderReceipts(allReceipts);
     } catch (error) {
-        console.error('Erro ao carregar recibos:', error);
-        alert('Erro ao carregar recibos: ' + error.message);
+        console.error('Error loading receipts:', error);
+        alert('Error loading receipts: ' + error.message);
     }
 }
 
@@ -24,7 +24,7 @@ function renderReceipts(receipts) {
     container.innerHTML = '';
 
     if (receipts.length === 0) {
-        container.innerHTML = '<div style="padding: 2rem; text-align: center;">Nenhum recibo encontrado.</div>';
+        container.innerHTML = '<div style="padding: 2rem; text-align: center;">No receipts found.</div>';
         return;
     }
 
@@ -107,17 +107,15 @@ function sortReceipts(field, direction) {
  * Delete receipt with confirmation
  */
 async function confirmDelete(receiptId) {
-    if (!confirm('Tem a certeza que deseja eliminar este recibo?')) return;
+    if (!confirm('Are you sure you want to delete this receipt?')) return;
 
     try {
-        console.log('Deleting receipt:', receiptId);
         await deleteReceipt(receiptId);
-        console.log('Receipt deleted successfully');
-        alert('Recibo eliminado com sucesso!');
+        alert('Receipt deleted successfully!');
         loadReceipts(); // Reload list
     } catch (error) {
-        console.error('Erro ao eliminar recibo:', error);
-        alert('Erro ao eliminar recibo: ' + error.message);
+        console.error('Error deleting receipt:', error);
+        alert('Error deleting receipt: ' + error.message);
     }
 }
 

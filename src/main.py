@@ -1,12 +1,8 @@
-# src/main.py 
-
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
-
-# Imports dos Routers 
 
 from src.routers import (
     receipts, 
@@ -17,8 +13,6 @@ from src.routers import (
     reports,  
     uploads   
 )
-
-# Definição dos Caminhos (Paths)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -43,23 +37,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# API Routers
-# Routers de CRUD
 app.include_router(receipts.router)
 app.include_router(products.router)
 app.include_router(categories.router)
 app.include_router(merchants.router)
 app.include_router(measurement_units.router)
-
-# Router de Reports
 app.include_router(reports.router)
-
-# Router de Uploads
 app.include_router(uploads.router)
 
-
-# Montagem de Ficheiros Estáticos (Static Files)
-# Serving static assets without /static prefix for cleaner URLs
 app.mount("/css", StaticFiles(directory=str(STATIC_DIR / "css")), name="css")
 app.mount("/js", StaticFiles(directory=str(STATIC_DIR / "js")), name="js")
 app.mount("/images", StaticFiles(directory=str(STATIC_DIR / "images")), name="images")
@@ -70,18 +55,12 @@ app.mount("/merchant", StaticFiles(directory=str(STATIC_DIR / "merchant")), name
 app.mount("/product", StaticFiles(directory=str(STATIC_DIR / "product")), name="product")
 app.mount("/receipt", StaticFiles(directory=str(STATIC_DIR / "receipt")), name="receipt")
 app.mount("/docs", StaticFiles(directory=str(STATIC_DIR / "docs")), name="docs")
-
-# Para as Fotos dos Produtos
 app.mount("/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
 
 
-# Servidor da Homepage (HTML)
 @app.get("/", include_in_schema=False)
 def read_root():
-    """
-    Serve a página principal (index.html) do teu frontend
-    que está na pasta /static.
-    """
+    """Serve the homepage from static directory."""
     index_path = STATIC_DIR / "index.html"
     if not index_path.is_file():
         return {"error": "index.html not found in static directory"}, 404
@@ -89,9 +68,7 @@ def read_root():
 
 @app.get("/index.html", include_in_schema=False)
 def read_index():
-    """
-    Alternative route to serve index.html directly at /index.html
-    """
+    """Serve index.html directly."""
     index_path = STATIC_DIR / "index.html"
     if not index_path.is_file():
         return {"error": "index.html not found in static directory"}, 404

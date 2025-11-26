@@ -32,19 +32,9 @@ class MeasurementUnit(Base):
         info={'description':'Abbreviation of the unit (e.g., kg")'}
     )
 
-    # The Relationship: "One unit (kg) can be in many product definitions (ProductList)"
-    # This mirrors the relationship in 'ProductList'
-    product_lists = relationship("ProductList", 
-        back_populates="measurement_unit")
+    product_lists = relationship("ProductList", back_populates="measurement_unit", passive_deletes=False)
 
-    # Indices to ensure name and abbreviation are unique
     __table_args__ = (
         Index('idx_measurement_unit_name_unique', 'name', unique=True),
         Index('idx_measurement_unit_abbreviation_unique', 'abbreviation', unique=True),
-    )
-
-    product_lists = relationship(
-    "ProductList", 
-    back_populates="measurement_unit",
-    passive_deletes=False  # Will raise error if trying to delete unit with products
     )

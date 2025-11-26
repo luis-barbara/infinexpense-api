@@ -1,5 +1,3 @@
-// src/static/js/merchants_api.js
-
 const API_BASE_URL = "http://localhost:8000";
 
 /**
@@ -32,7 +30,7 @@ async function _handleApiRequest(endpoint, options = {}) {
 }
 
 /**
- * Get all merchants
+ * Get all merchants with pagination.
  */
 export async function getMerchants(params = {}) {
     const validParams = {
@@ -46,7 +44,7 @@ export async function getMerchants(params = {}) {
 }
 
 /**
- * Get merchant by ID
+ * Get merchant by ID.
  */
 export async function getMerchantById(id) {
     return _handleApiRequest(`/merchants/${id}`);

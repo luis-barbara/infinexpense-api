@@ -1,5 +1,3 @@
-# src/services/crud_merchant.py
-
 from sqlalchemy.orm import Session
 from typing import List, Optional
 
@@ -9,31 +7,30 @@ from src.schemas import merchant as merchant_schema
 
 
 class MerchantService:
-    
-    # Read
     @staticmethod
     def get_merchant(db: Session, merchant_id: int) -> Optional[merchant_model.Merchant]:
+        """Get a merchant by ID."""
         return db.query(merchant_model.Merchant).filter(
             merchant_model.Merchant.id == merchant_id
         ).first()
 
     @staticmethod
     def get_merchants(db: Session, skip: int = 0, limit: int = 100) -> List[merchant_model.Merchant]:
-        """Get all merchants with pagination"""
+        """Get all merchants with pagination."""
         return db.query(merchant_model.Merchant).offset(skip).limit(limit).all()
 
-    # Create
     @staticmethod
     def create_merchant(db: Session, merchant: merchant_schema.MerchantCreate) -> merchant_model.Merchant:
+        """Create a new merchant."""
         db_merchant = merchant_model.Merchant(**merchant.model_dump())
         db.add(db_merchant)
         db.commit()
         db.refresh(db_merchant)
         return db_merchant
 
-    # Update
     @staticmethod
     def update_merchant(db: Session, merchant_id: int, merchant_update: merchant_schema.MerchantUpdate) -> Optional[merchant_model.Merchant]:
+        """Update a merchant."""
         db_merchant = db.query(merchant_model.Merchant).filter(
             merchant_model.Merchant.id == merchant_id
         ).first()
@@ -47,9 +44,9 @@ class MerchantService:
         
         return db_merchant
 
-    # Delete
     @staticmethod
     def delete_merchant(db: Session, merchant_id: int) -> bool:
+        """Delete a merchant by ID."""
         try:
             db_merchant = db.query(merchant_model.Merchant).filter(
                 merchant_model.Merchant.id == merchant_id

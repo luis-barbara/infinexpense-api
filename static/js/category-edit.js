@@ -96,5 +96,4 @@ document.getElementById('deleteBtn').addEventListener('click', async () => {
     }
 });
 
-// Load category on page load
 document.addEventListener('DOMContentLoaded', loadCategory);

@@ -24,9 +24,7 @@ async function loadMerchant() {
             return;
         }
 
-        console.log('Loading merchant ID:', currentMerchantId);
         currentMerchant = await getMerchantById(currentMerchantId);
-        console.log('Merchant loaded:', currentMerchant);
 
         // Update page title
         document.querySelector('.page-title').textContent = `Edit Merchant: ${currentMerchant.name}`;
@@ -34,8 +32,8 @@ async function loadMerchant() {
         // Populate form
         populateForm(currentMerchant);
     } catch (error) {
-        console.error('Erro ao carregar comerciante:', error);
-        alert('Erro ao carregar comerciante: ' + error.message);
+        console.error('Error loading merchant:', error);
+        alert('Error loading merchant: ' + error.message);
         window.location.href = 'list.html';
     }
 }
@@ -50,21 +48,18 @@ function populateForm(merchant) {
     const nameInput = form.querySelector('input[name="name"]');
     if (nameInput) {
         nameInput.value = merchant.name;
-        console.log('Set merchant name to:', merchant.name);
     }
     
     // Location
     const locationInput = form.querySelector('input[name="location"]');
     if (locationInput) {
         locationInput.value = merchant.location || '';
-        console.log('Set location to:', merchant.location);
     }
     
     // Notes
     const notesTextarea = form.querySelector('textarea[name="notes"]');
     if (notesTextarea) {
         notesTextarea.value = merchant.notes || '';
-        console.log('Set notes to:', merchant.notes);
     }
     
     // Set up cancel button
@@ -99,7 +94,6 @@ function handlePhotoSelect(e) {
     if (!file) return;
     
     selectedPhotoFile = file;
-    console.log('Photo selected:', file.name);
     
     // Show preview
     const reader = new FileReader();
@@ -141,7 +135,6 @@ async function handleSubmit(e) {
             notes: notesTextarea.value || null
         };
         
-        console.log('Updating merchant:', updateData);
         await updateMerchant(currentMerchantId, updateData);
         
         // Upload photo if selected
@@ -149,11 +142,11 @@ async function handleSubmit(e) {
             await uploadMerchantPhoto(currentMerchantId, selectedPhotoFile);
         }
         
-        alert('Comerciante atualizado com sucesso!');
+        alert('Merchant updated successfully!');
         window.location.href = `view.html?id=${currentMerchantId}`;
     } catch (error) {
-        console.error('Erro ao atualizar comerciante:', error);
-        alert('Erro ao atualizar comerciante: ' + error.message);
+        console.error('Error updating merchant:', error);
+        alert('Error updating merchant: ' + error.message);
     }
 }
 
@@ -161,15 +154,15 @@ async function handleSubmit(e) {
  * Delete merchant with confirmation
  */
 async function deleteMerchantConfirm() {
-    if (!confirm('Tem a certeza que deseja eliminar este comerciante?')) return;
+    if (!confirm('Are you sure you want to delete this merchant?')) return;
 
     try {
         await deleteMerchant(currentMerchantId);
-        alert('Comerciante eliminado com sucesso!');
+        alert('Merchant deleted successfully!');
         window.location.href = 'list.html';
     } catch (error) {
-        console.error('Erro ao eliminar comerciante:', error);
-        alert('Erro ao eliminar comerciante: ' + error.message);
+        console.error('Error deleting merchant:', error);
+        alert('Error deleting merchant: ' + error.message);
     }
 }
 

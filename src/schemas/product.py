@@ -1,13 +1,11 @@
-# src/schemas/product.py
-
 from pydantic import BaseModel, ConfigDict, Field
 from .category import Category
 from .measurement_unit import MeasurementUnit
 from typing import List, Optional
 from decimal import Decimal
 
-# schemas para Lista de Produtos (PRODUCT_LIST)
 class ProductListBase(BaseModel):
+    """Base schema for product"""
     name: str = Field(
         min_length=1, 
         max_length=255, 
@@ -30,6 +28,7 @@ class ProductListCreate(ProductListBase):
     pass
 
 class ProductListUpdate(BaseModel):
+    """Schema for updating an existing product"""
     name: Optional[str] = Field(
         default=None, 
         min_length=1, 
@@ -49,15 +48,15 @@ class ProductListUpdate(BaseModel):
     category_id: Optional[int] = None
 
 class ProductList(ProductListBase):
+    """Complete product schema with ID"""
     id: int
     category: Category
     product_list_photo: Optional[str] = None
     measurement_unit: MeasurementUnit 
     model_config = ConfigDict(from_attributes=True)
 
-
-# schemas para item do Recibo (PRODUCT)
 class ProductBase(BaseModel):
+    """Base schema for product item on a receipt"""
     price: Decimal = Field(
         max_digits=12, 
         decimal_places=4, 
@@ -75,16 +74,18 @@ class ProductBase(BaseModel):
     )
     product_list_id: int
 
-class ProductCreate(ProductBase):   
+class ProductCreate(ProductBase):
     pass
 
 class ProductUpdate(BaseModel):
+    """Schema for updating an existing product item"""
     price: Optional[Decimal] = Field(default=None, max_digits=12, decimal_places=4)
     quantity: Optional[Decimal] = Field(default=None, max_digits=12, decimal_places=4)
     description: Optional[str] = Field(default=None, max_length=100)
     product_list_id: Optional[int] = None
 
 class Product(ProductBase):
+    """Complete product item schema with ID"""
     id: int
     product_list: ProductList
     model_config = ConfigDict(from_attributes=True)
