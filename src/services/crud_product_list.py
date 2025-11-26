@@ -1,5 +1,3 @@
-# src/services/crud_product_list.py
-
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 from typing import List, Optional
@@ -17,9 +15,9 @@ from . import crud_category
 logger = logging.getLogger(__name__)
 
 class ProductListService:
-    # Read
     @staticmethod
     def get_product_list(db: Session, product_list_id: int) -> Optional[product_list_model.ProductList]:
+        """Get a product by ID."""
         return db.query(product_list_model.ProductList).filter(
             product_list_model.ProductList.id == product_list_id
         ).first()
@@ -39,17 +37,18 @@ class ProductListService:
 
     @staticmethod
     def get_product_by_barcode(db: Session, barcode: str) -> Optional[product_list_model.ProductList]:
+        """Get a product by barcode."""
         return db.query(product_list_model.ProductList).filter(
             product_list_model.ProductList.barcode == barcode
         ).first()
 
     @staticmethod
     def get_product_by_name(db: Session, name: str) -> Optional[product_list_model.ProductList]:
+        """Get a product by name."""
         return db.query(product_list_model.ProductList).filter(
             product_list_model.ProductList.name == name
         ).first()
 
-    # Create
     @staticmethod
     def create_product_list(db: Session, product: product_list_schema.ProductListCreate):  # CORRIGE AQUI
         logger.info(f"Creating product list: {product.name}")
@@ -70,7 +69,6 @@ class ProductListService:
                 detail=f"Product with name '{product.name}' already exists"
             )
 
-    # Update
     @staticmethod
     def update_product_list(db: Session, product_id: int, product_update: product_list_schema.ProductListUpdate) -> Optional[product_list_model.ProductList]:
         logger.info(f"Updating product list: id={product_id}")
@@ -99,7 +97,6 @@ class ProductListService:
             return None
 
 
-    # Delete
     @staticmethod
     def delete_product_list(db: Session, product_id: int) -> bool:
         logger.info(f"Deleting product list: id={product_id}")

@@ -21,7 +21,7 @@ router = APIRouter(
     tags=["Measurement Units"]
 )
 
-# Create
+
 @router.post("/", response_model=MeasurementUnitSchema, status_code=status.HTTP_201_CREATED)
 def create_measurement_unit(unit: MeasurementUnitCreate, db: Session = Depends(get_db)):
     try:
@@ -36,7 +36,7 @@ def create_measurement_unit(unit: MeasurementUnitCreate, db: Session = Depends(g
             detail="Error creating measurement unit"
         )
 
-# Read All
+
 @router.get("/", response_model=List[MeasurementUnitSchema])
 def get_all_measurement_units(skip: int = Query(0, ge=0), limit: int = Query(100, ge=1, le=1000), db: Session = Depends(get_db)):
     try:
@@ -48,7 +48,7 @@ def get_all_measurement_units(skip: int = Query(0, ge=0), limit: int = Query(100
             detail="Error fetching measurement units"
         )
 
-# Read by ID
+
 @router.get("/{unit_id}", response_model=MeasurementUnitSchema)
 def get_measurement_unit_by_id(unit_id: int = Path(..., gt=0), db: Session = Depends(get_db)):
     try:
@@ -69,7 +69,7 @@ def get_measurement_unit_by_id(unit_id: int = Path(..., gt=0), db: Session = Dep
             detail="Error fetching measurement unit"
         )
 
-# Update
+
 @router.put("/{unit_id}", response_model=MeasurementUnitSchema)
 def update_measurement_unit(unit_id: int, update_data: MeasurementUnitUpdate, db: Session = Depends(get_db)):
     try:
@@ -93,7 +93,7 @@ def update_measurement_unit(unit_id: int, update_data: MeasurementUnitUpdate, db
             detail="Error updating measurement unit"
         )
 
-# Delete
+
 @router.delete("/{unit_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_measurement_unit(unit_id: int, db: Session = Depends(get_db)):
     try:

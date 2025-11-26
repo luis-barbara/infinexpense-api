@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Mode Test - InfinExpense</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <style>
+        body { padding: 2rem; }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        .demo-elements {
+            display: grid;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Template -->
+    <div data-template="header"></div>
+
+    <div class="test-container">
+        <h1>Dark Mode Toggle Test</h1>
+        <p>Este é um teste do botão de alternância entre modo claro e escuro.</p>
+        
+        <div class="demo-elements">
+            <div class="card">
+                <h3>Card de Teste</h3>
+                <p>Este card deve mudar de cor conforme o tema.</p>
+                <button class="btn btn-primary">Botão Primário</button>
+                <button class="btn btn-outline">Botão Outline</button>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Campo de Teste</label>
+                <input type="text" class="form-input" placeholder="Digite algo..." value="Texto de exemplo">
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Exemplo de Estatística</div>
+                    <div class="stat-value">42</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Outro Exemplo</div>
+                    <div class="stat-value">99%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../static/js/template-loader.js"></script>
+</body>
+</html>

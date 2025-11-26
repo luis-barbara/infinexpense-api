@@ -23,3 +23,12 @@ migrationsdocker:
 loadscript:
 	python -m src.scripts.load_json_to_db --generate sample.json --products 200 --receipts 20
 	python -m src.scripts.load_json_to_db sample.json
+
+test: ## Run tests
+	poetry run pytest tests/
+
+coverage: ## Run tests with coverage report
+	poetry run pytest --cov=src tests/ --cov-report=term-missing
+
+coverage-html: ## Run tests with HTML coverage report
+	poetry run pytest --cov=src tests/ --cov-report=html

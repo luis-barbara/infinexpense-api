@@ -1,36 +1,7 @@
 /**
- * Merchant Detail - Spending Chart
- * Requires: Chart.js
- * 
- * INTEGRATION INSTRUCTIONS:
- * 1. Include Chart.js before this script:
- *    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
- * 2. Required HTML elements:
- *    - <canvas id="merchantSpendingChart"></canvas> (spending over time)
- * 3. Replace sample data with merchant data from database
- * 
- * @requires Chart.js v3+
+ * Merchant Detail Page - Display merchant spending chart.
  */
 
-/**
- * Spending Over Time Line Chart
- * Shows how much was spent at this merchant over time
- * 
- * REPLACE SAMPLE DATA with actual merchant spending history:
- * - Fetch merchant receipts grouped by date
- * - labels: Array of receipt dates
- * - data: Array of amounts spent on each date
- * 
- * @example
- * // Fetch from backend
- * fetch(`/api/merchants/${merchantId}/spending-history`)
- *   .then(res => res.json())
- *   .then(history => {
- *     merchantSpendingChart.data.labels = history.map(h => h.date);
- *     merchantSpendingChart.data.datasets[0].data = history.map(h => h.amount);
- *     merchantSpendingChart.update();
- *   });
- */
 const merchantSpendingCtx = document.getElementById('merchantSpendingChart');
 if (merchantSpendingCtx) {
     const merchantSpendingChart = new Chart(merchantSpendingCtx.getContext('2d'), {

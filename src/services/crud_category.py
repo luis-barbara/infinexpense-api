@@ -1,5 +1,3 @@
-# src/services/crud_category.py
-
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import func
@@ -23,12 +21,9 @@ AVAILABLE_COLORS = [
 
 
 class CategoryService:
-    # Read 
     @staticmethod
     def get_category(db: Session, category_id: int) -> Optional[Category]:
-        """
-        Obtem uma categoria através do ID
-        """
+        """Get a category by ID."""
         return db.query(Category).filter(Category.id == category_id).first()
 
     @staticmethod
@@ -119,7 +114,6 @@ class CategoryService:
             raise
 
 
-    # Create
     @staticmethod
     def create_category(db: Session, category_data: category_schema.CategoryCreate) -> Category:
         """
@@ -155,12 +149,8 @@ class CategoryService:
     # Update
     @staticmethod
     def update_category(db: Session, db_category: Category, update_data: category_schema.CategoryUpdate) -> Category:
-        """
-        Atualiza uma categoria existente.
-        """
+        """Update a category."""
         update_dict = update_data.model_dump(exclude_unset=True)
-
-        # Verificar se existe o nome duplicado
         if 'name' in update_dict:
             existing = db.query(Category).filter(
                 Category.name == update_dict['name'],
@@ -177,12 +167,9 @@ class CategoryService:
         db.refresh(db_category)
         return db_category
 
-    # Delete
     @staticmethod
     def delete_category(db: Session, db_category: Category) -> Category:
-        """
-        Deleta uma categoria.
-        """
+        """Delete a category."""
         db.delete(db_category)
         db.commit()
         return db_category

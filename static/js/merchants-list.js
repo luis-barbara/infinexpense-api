@@ -12,7 +12,6 @@ async function loadMerchants() {
         const merchants = await getMerchants();
         const receipts = await getReceipts({ limit: 1000 });
 
-        // Calculate receipts and total spent per merchant
         allMerchants = merchants.map(merchant => {
             const merchantReceipts = receipts.filter(r => r.merchant_id === merchant.id);
             const totalSpent = merchantReceipts.reduce((sum, r) => sum + parseFloat(r.total_price || 0), 0);
@@ -26,7 +25,7 @@ async function loadMerchants() {
 
         renderMerchants(allMerchants);
     } catch (error) {
-        console.error('Erro ao carregar comerciantes:', error);
+        console.error('Error loading merchants:', error);
     }
 }
 
@@ -38,7 +37,7 @@ function renderMerchants(merchants) {
     container.innerHTML = '';
 
     if (merchants.length === 0) {
-        container.innerHTML = '<div style="padding: 2rem; text-align: center;">Nenhum comerciante encontrado.</div>';
+        container.innerHTML = '<div style="padding: 2rem; text-align: center;">No merchants found.</div>';
         return;
     }
 
@@ -123,15 +122,15 @@ function sortMerchants(field, direction) {
  * Delete merchant with confirmation
  */
 async function confirmDelete(merchantId) {
-    if (!confirm('Tem a certeza que deseja eliminar este comerciante?')) return;
+    if (!confirm('Are you sure you want to delete this merchant?')) return;
 
     try {
         await deleteMerchant(merchantId);
-        alert('Comerciante eliminado com sucesso!');
+        alert('Merchant deleted successfully!');
         loadMerchants(); // Reload list
     } catch (error) {
-        console.error('Erro ao eliminar comerciante:', error);
-        alert('Erro ao eliminar comerciante: ' + error.message);
+        console.error('Error deleting merchant:', error);
+        alert('Error deleting merchant: ' + error.message);
     }
 }
 

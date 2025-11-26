@@ -16,7 +16,7 @@ async function loadCategories() {
         populateCategorySelect();
         return true;
     } catch (error) {
-        console.error('Erro ao carregar categorias:', error);
+        console.error('Error loading categories:', error);
         return false;
     }
 }
@@ -30,7 +30,7 @@ async function loadMeasurementUnits() {
         populateVolumeSelect();
         return true;
     } catch (error) {
-        console.error('Erro ao carregar unidades de medida:', error);
+        console.error('Error loading measurement units:', error);
         return false;
     }
 }
@@ -95,10 +95,9 @@ async function uploadPhoto(productId) {
     if (!selectedPhotoFile) return null;
     try {
         await uploadProductPhoto(productId, selectedPhotoFile);
-        console.log('Photo uploaded successfully');
         return true;
     } catch (error) {
-        console.error('Erro ao carregar foto:', error);
+        console.error('Error uploading photo:', error);
         return false;
     }
 }
@@ -139,20 +138,18 @@ async function handleSubmit(e) {
             barcode: barcodeInput.value || null
         };
         
-        console.log('Creating product:', newProduct);
         const createdProduct = await createProduct(newProduct);
-        console.log('Product created:', createdProduct);
         
         // Upload photo if selected
         if (selectedPhotoFile) {
             await uploadPhoto(createdProduct.id);
         }
         
-        alert('Produto criado com sucesso!');
+        alert('Product created successfully!');
         window.location.href = `view.html?id=${createdProduct.id}`;
     } catch (error) {
-        console.error('Erro ao criar produto:', error);
-        alert('Erro ao criar produto: ' + error.message);
+        console.error('Error creating product:', error);
+        alert('Error creating product: ' + error.message);
     }
 }
 

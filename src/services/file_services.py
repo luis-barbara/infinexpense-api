@@ -14,29 +14,16 @@ from src.models import receipt as model_receipt
 from .crud_product_list import ProductListService
 from .crud_receipt import ReceiptService
 
-# Configurações 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 PRODUCT_UPLOAD_DIRECTORY = BASE_DIR / "uploads" / "products"
 RECEIPT_UPLOAD_DIRECTORY = BASE_DIR / "uploads" / "receipts"
 
-
-
-#####
-# PRODUCT_UPLOAD_DIRECTORY = Path("/app/uploads/products")
-# RECEIPT_UPLOAD_DIRECTORY = Path("/app/uploads/receipts")
-
-# os.makedirs(PRODUCT_UPLOAD_DIRECTORY, exist_ok=True)
-# os.makedirs(RECEIPT_UPLOAD_DIRECTORY, exist_ok=True)
-
-# Logging
 logger = logging.getLogger(__name__)
 
-# Tipos e extensões permitidas
 ALLOWED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".webp"}
 ALLOWED_MIME_TYPES = {"image/jpeg", "image/png", "image/gif", "image/webp"}
 
-# Tamanho máximo do ficheiro (em bytes)
-MAX_FILE_SIZE = 5 * 1024 * 1024  # 5 MB
+MAX_FILE_SIZE = 5 * 1024 * 1024
 
 
 def save_product_photo(

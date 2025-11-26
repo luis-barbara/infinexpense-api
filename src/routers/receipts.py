@@ -25,7 +25,6 @@ router = APIRouter(
 )
 
 
-
 @router.post(
     "/", 
     response_model=ReceiptSchema, 
@@ -36,14 +35,7 @@ def create_receipt(
     receipt: ReceiptCreate,
     db: Session = Depends(get_db)
 ):
-    """
-    Create a new receipt with the provided details.
-    - **merchant_id**: ID of the merchant associated with the receipt
-    - **date**: Date of the receipt
-    - **barcode**: Optional barcode number for the receipt
-    - **products**: List of products associated with the receipt
-    Returns the created receipt.
-    """
+    """Create a new receipt."""
     try:
         return ReceiptService.create_receipt(db, receipt)
     except ValueError as e:
@@ -105,7 +97,6 @@ def get_receipt_by_filter(
             detail="Error fetching receipts"
         )
 
-
 @router.get(
     "/{receipt_id}",
     response_model=ReceiptSchema,
@@ -115,17 +106,7 @@ def get_receipt_by_id(
     receipt_id: int = Path(..., gt=0, description="The ID of the receipt to retrieve"),
     db: Session = Depends(get_db)
 ):
-    """
-    Retrive a receipt by its unique ID.
-
-    - **receipt_id**: The unique identifier of the receipt to retrieve
-    
-    Returns the receipt details including:
-    - Merchant information
-    - Date of the receipt
-    - Barcode (if available)
-    - List of products associated with the receipt
-    """
+    """Get a single receipt by ID."""
     try:
         return ReceiptService.get_receipt_by_id(db, receipt_id)
     except ValueError as e:
@@ -140,7 +121,6 @@ def get_receipt_by_id(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Error fetching receipt"
         )
-
 
 
 @router.get(

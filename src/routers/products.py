@@ -23,7 +23,6 @@ router = APIRouter(
 )
 
 
-# Create
 @router.post(
     "/",
     response_model=ProductListSchema,
@@ -34,9 +33,7 @@ def create_product(
     product: ProductListCreate,
     db: Session = Depends(get_db)
 ):
-    """
-    Create a new product with the provided details.
-    """
+    """Create a new product."""
     try:
         return ProductListService.create_product_list(db, product)
     except IntegrityError:
@@ -54,7 +51,6 @@ def create_product(
         )
 
 
-# Read All
 @router.get(
     "/",
     response_model=List[ProductListSchema],
@@ -81,7 +77,6 @@ def get_all_products(
         )
 
 
-# Read By ID
 @router.get(
     "/{product_id}",
     response_model=ProductListSchema,
@@ -110,7 +105,6 @@ def get_product_by_id(
         )
 
 
-# Read By Barcode
 @router.get(
     "/barcode/{barcode}",
     response_model=ProductListSchema,
@@ -139,7 +133,6 @@ def get_product_by_barcode_endpoint(
         )
 
 
-# Read By Name
 @router.get(
     "/name/{name}",
     response_model=ProductListSchema,
@@ -168,7 +161,6 @@ def get_product_by_name_endpoint(
         )
 
 
-# Update
 @router.put(
     "/{product_id}",
     response_model=ProductListSchema,
@@ -198,7 +190,6 @@ def update_product(
         )
 
 
-# Delete
 @router.delete(
     "/{product_id}",
     status_code=status.HTTP_204_NO_CONTENT,
@@ -208,9 +199,7 @@ def delete_product(
     product_id: int = Path(..., ge=1, description="ID of the product to delete"),
     db: Session = Depends(get_db)
 ):
-    """
-    Delete a product by its ID.
-    """
+    """Delete a product by ID."""
     try:
         success = ProductListService.delete_product_list(db, product_id)
         if not success:

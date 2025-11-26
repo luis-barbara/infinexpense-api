@@ -1,5 +1,3 @@
-# src/services/crud_measurement_unit.py
-
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 from typing import List, Optional
@@ -12,15 +10,13 @@ from src.schemas import measurement_unit as measurement_unit_schema
 logger = logging.getLogger(__name__)
 
 class MeasurementUnitService:
-    # Read 
+    @staticmethod
     def get_measurement_unit(db: Session, measurement_unit_id: int) -> Optional[measurement_unit_model.MeasurementUnit]:
-        """
-        Obtem uma unidade de medida através do ID
-        """
+        """Get a measurement unit by ID."""
         return db.query(measurement_unit_model.MeasurementUnit).filter(
             measurement_unit_model.MeasurementUnit.id == measurement_unit_id).first()
 
-
+    @staticmethod
     def get_measurement_units(db: Session, skip: int = 0, limit: int = 100) -> List[measurement_unit_model.MeasurementUnit]:
         """
         Obtem uma lista de unidades de medida com paginação.
@@ -40,8 +36,7 @@ class MeasurementUnitService:
             logger.error(f"Error fetching measurement units: {str(e)}", exc_info=True)
             raise
 
-
-    # Create
+    @staticmethod
     def create_measurement_unit(db: Session, measurement_unit_data: measurement_unit_schema.MeasurementUnitCreate) -> measurement_unit_model.MeasurementUnit:
         """
         Cria uma nova unidade de medida.
@@ -69,16 +64,13 @@ class MeasurementUnitService:
 
 
 
-    # Update
+    @staticmethod
     def update_measurement_unit(db: Session, db_measurement_unit: measurement_unit_model.MeasurementUnit, update_data: measurement_unit_schema.MeasurementUnitUpdate) -> measurement_unit_model.MeasurementUnit:
         """
         Atualiza uma unidade de medida existente.
         """
         logger.info(f"Updating measurement unit: id={db_measurement_unit.id}")
         update_dict = update_data.model_dump(exclude_unset=True)
-
-
-        # Verificar se existe o nome duplicado
         if 'name' in update_dict:
             existing = db.query(measurement_unit_model.MeasurementUnit).filter_by(name=update_dict['name']).first()
             if existing and existing.id != db_measurement_unit.id:
@@ -100,7 +92,7 @@ class MeasurementUnitService:
 
 
 
-    # Delete
+    @staticmethod
     def delete_measurement_unit(db: Session, db_measurement_unit: measurement_unit_model.MeasurementUnit) -> measurement_unit_model.MeasurementUnit:
         """
         Apaga uma unidade de medida.

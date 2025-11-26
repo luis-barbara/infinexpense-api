@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - InfinExpense</title>
-    <link rel="icon" type="image/x-icon" href="../static/images/favicon.ico">
-    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body data-active-page="dashboard">
     <!-- Navigation Template -->
 
     <div data-template="header"></div>
 
-    <script src="../static/js/template-loader.js"></script>
+    <script src="/js/template-loader.js"></script>
 
     <!-- Main Content -->
     <div class="container">
@@ -46,12 +46,12 @@
             <!-- Match bottom position with other pages: 64px navbar, 2rem container padding, 60px page-header, 2rem header margin, 170px stats-grid, 1.5rem stats margin, 2rem bottom margin -->
             <div class="flex-between mb-2">
                 <h2 class="detail-title" style="margin-bottom: 0;">Recent Receipts</h2>
-                <a href="../static/receipt/list.html" class="btn btn-outline btn-sm">View All</a>
+                <a href="/receipt/list.html" class="btn btn-outline btn-sm">View All</a>
             </div>
 
             <div class="receipt-list" id="recent-receipts-list" data-max-items="3" style="display: flex; flex-direction: column; justify-content: center; flex: 1; gap: 1rem;">
                 <!-- Receipt 1 -->
-                <a href="../static/receipt/view-example.html" class="receipt-card" data-receipt-id="1001" data-merchant-id="4001">
+                <a href="/receipt/view-example.html" class="receipt-card" data-receipt-id="1001" data-merchant-id="4001">
                     <div class="receipt-header">
                         <div>
                             <div class="receipt-merchant" data-field="merchant-name">Continente</div>
@@ -68,7 +68,7 @@
                 </a>
 
                 <!-- Receipt 2 -->
-                <a href="../static/receipt/receipt-1002.html" class="receipt-card" data-receipt-id="1002" data-merchant-id="4002">
+                <a href="/receipt/receipt-1002.html" class="receipt-card" data-receipt-id="1002" data-merchant-id="4002">
                     <div class="receipt-header">
                         <div>
                             <div class="receipt-merchant" data-field="merchant-name">Pingo Doce</div>
@@ -85,7 +85,7 @@
                 </a>
 
                 <!-- Receipt 3 -->
-                <a href="../static/receipt/receipt-1003.html" class="receipt-card" data-receipt-id="1003" data-merchant-id="4003">
+                <a href="/receipt/receipt-1003.html" class="receipt-card" data-receipt-id="1003" data-merchant-id="4003">
                     <div class="receipt-header">
                         <div>
                             <div class="receipt-merchant" data-field="merchant-name">Lidl</div>
@@ -105,6 +105,6 @@
     </div>
 
     <!-- Dashboard JavaScript -->
-    <script type="module" src="../static/js/dashboard.js"></script>
+    <script type="module" src="/js/dashboard.js"></script>
 </body>
 </html>

@@ -1,5 +1,3 @@
-# src/services/crud_receipt.py
-
 from sqlalchemy.orm import Session, joinedload
 from sqlalchemy.exc import IntegrityError
 from typing import List, Optional
@@ -24,9 +22,7 @@ class ReceiptBase(BaseModel):
 class ReceiptService:
     @staticmethod
     def _calculate_receipt_total(receipt: model_receipt.Receipt) -> Decimal:
-        """
-        Calculate total price of all products in receipt.
-        """
+        """Calculate receipt total by summing price * quantity for all products."""
         if not receipt.products:
             return Decimal("0.00")
         
@@ -36,7 +32,6 @@ class ReceiptService:
         )
         return total
 
-    # Read - Get all receipts
     @staticmethod
     def get_receipts(
         db: Session,
@@ -47,10 +42,7 @@ class ReceiptService:
         start_date: Optional[date] = None,
         end_date: Optional[date] = None,
     ) -> List[model_receipt.Receipt]:
-        """
-        Obtém recibos com paginação e filtros opcionais.
-        Calcula o total (price * quantity) de cada recibo.
-        """
+        """Get all receipts with optional filters and pagination."""
         query = (
             db.query(model_receipt.Receipt)
             .options(

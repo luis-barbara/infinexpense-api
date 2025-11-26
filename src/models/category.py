@@ -32,8 +32,6 @@ class Category(Base):
         info={'description':'Hex color code for the category (e.g., "#e6194b")'}
     )
 
-    # The Relationship: "One category can be in many product definitions (ProductList)"
-    # This mirrors the relationship in 'product.py'
     product_lists = relationship("ProductList", back_populates="category")
 
 

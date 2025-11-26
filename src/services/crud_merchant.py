@@ -1,5 +1,3 @@
-# src/services/crud_merchant.py
-
 from sqlalchemy.orm import Session
 from typing import List, Optional
 import logging
@@ -12,10 +10,9 @@ from src.schemas import merchant as merchant_schema
 logger = logging.getLogger(__name__)
 
 class MerchantService:
-    
-    # Read
     @staticmethod
     def get_merchant(db: Session, merchant_id: int) -> Optional[merchant_model.Merchant]:
+        """Get a merchant by ID."""
         return db.query(merchant_model.Merchant).filter(
             merchant_model.Merchant.id == merchant_id
         ).first()
@@ -33,7 +30,6 @@ class MerchantService:
             logger.error(f"Error fetching merchants: {str(e)}", exc_info=True)
             raise
 
-    # Create
     @staticmethod
     def create_merchant(db: Session, merchant: merchant_schema.MerchantCreate) -> merchant_model.Merchant:
         logger.info(f"Creating merchant: {merchant.name}")
@@ -51,7 +47,6 @@ class MerchantService:
             logger.error(f"Error creating merchant: {str(e)}", exc_info=True)
             raise
 
-    # Update
     @staticmethod
     def update_merchant(db: Session, merchant_id: int, merchant_update: merchant_schema.MerchantUpdate) -> Optional[merchant_model.Merchant]:
         logger.info(f"Updating merchant: id={merchant_id}")
@@ -77,7 +72,6 @@ class MerchantService:
             logger.warning(f"Merchant not found for update: id={merchant_id}")
             return None
 
-    # Delete
     @staticmethod
     def delete_merchant(db: Session, merchant_id: int) -> bool:
         logger.info(f"Deleting merchant: id={merchant_id}")

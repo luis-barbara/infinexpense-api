@@ -18,7 +18,7 @@ router = APIRouter(
     tags=["Merchants"]
 )
 
-# Create
+
 @router.post(
     "/",
     response_model=MerchantSchema,
@@ -29,9 +29,7 @@ def create_merchant(
     merchant: MerchantCreate,
     db: Session = Depends(get_db)
 ):
-    """
-    Create a new merchant.
-    """
+    """Create a new merchant."""
     try:
         return MerchantService.create_merchant(db, merchant)
     except Exception as e:
@@ -39,7 +37,6 @@ def create_merchant(
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 
 
-# Read All
 @router.get(
     "/",
     response_model=List[MerchantSchema],
@@ -60,7 +57,6 @@ def get_merchants(
         )
 
 
-# Read By ID
 @router.get(
     "/{merchant_id}",
     response_model=MerchantSchema,
@@ -86,7 +82,6 @@ def get_merchant_by_id(
         )
 
 
-# Update
 @router.put(
     "/{merchant_id}",
     response_model=MerchantSchema,
@@ -117,7 +112,6 @@ def update_merchant(
         )
 
 
-# Delete
 @router.delete(
     "/{merchant_id}",
     status_code=status.HTTP_204_NO_CONTENT,
@@ -127,9 +121,7 @@ def delete_merchant(
     merchant_id: int = Path(..., ge=1, description="ID of the merchant to delete"),
     db: Session = Depends(get_db)
 ):
-    """
-    Delete a merchant by its ID.
-    """
+    """Delete a merchant by ID."""
     try:
         success = MerchantService.delete_merchant(db, merchant_id)
         if not success:

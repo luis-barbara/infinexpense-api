@@ -18,7 +18,7 @@ router = APIRouter(
     tags=["Categories"]
 )
 
-# Create a new category
+
 @router.post(
     "/", 
     response_model=CategorySchema, 
@@ -26,6 +26,7 @@ router = APIRouter(
     summary="Create a new category"
 )
 def create_category(category: CategoryCreate, db: Session = Depends(get_db)):
+    """Create a new category."""
     try:
         return CategoryService.create_category(db, category)
     except ValueError as e:
@@ -38,7 +39,7 @@ def create_category(category: CategoryCreate, db: Session = Depends(get_db)):
             detail="Error creating category"
         )
 
-# Get all categories with optional pagination
+
 @router.get(
     "/", 
     response_model=List[CategorySchema], 
@@ -60,7 +61,7 @@ def get_categories(
             detail="Error fetching categories"
         )
 
-# Get category by ID
+
 @router.get(
     "/{category_id}", 
     response_model=CategorySchema,
@@ -82,7 +83,7 @@ def get_category_by_id(category_id: int = Path(..., gt=0), db: Session = Depends
             detail="Error fetching category"
         )
 
-# Update a category by ID
+
 @router.put(
     "/{category_id}", 
     response_model=CategorySchema,
@@ -112,7 +113,7 @@ def update_category(
             detail="Error updating category"
         )
 
-# Delete a category by ID
+
 @router.delete(
     "/{category_id}", 
     status_code=status.HTTP_204_NO_CONTENT,
