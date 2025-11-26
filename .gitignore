@@ -7,6 +7,6 @@ env/
 *.pyd
 ./uploads/
 /uploads/
-sample.json
+/sample.json
 .venv
 .pytest_cache/
