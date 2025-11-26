@@ -208,13 +208,30 @@ async function handleDeleteCategory(id) {
  * Setup event listeners
  */
 function setupEventListeners() {
-    // Search filter
+    // Search filter with debouncing for better performance
     const searchInput = document.getElementById('searchInput');
     if (searchInput) {
-        searchInput.addEventListener('input', handleSearch);
+        let searchTimeout;
+        searchInput.addEventListener('input', function(event) {
+            // Clear previous timeout
+            clearTimeout(searchTimeout);
+            
+            // Set new timeout for better performance (debounce)
+            searchTimeout = setTimeout(() => {
+                handleSearch(event);
+            }, 150); // 150ms delay
+        });
+        
+        // Also handle immediate search on Enter key
+        searchInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                clearTimeout(searchTimeout);
+                handleSearch(event);
+            }
+        });
     }
     
-    // Search button
+    // Search button (optional - since we have real-time search)
     const searchBtn = document.getElementById('searchBtn');
     if (searchBtn) {
         searchBtn.addEventListener('click', handleSearch);
@@ -234,22 +251,168 @@ function setupEventListeners() {
 }
 
 /**
- * Handle search filter
+ * Handle search filter - real-time search as user types
  */
 function handleSearch(event) {
-    const searchTerm = event.target.value.toLowerCase();
+    const searchTerm = event.target.value.toLowerCase().trim();
     
+    // Filter categories based on search term
+    let filteredCategories = allCategories;
+    
+    if (searchTerm) {
+        filteredCategories = allCategories.filter(category => 
+            category.name.toLowerCase().includes(searchTerm)
+        );
+    }
+    
+    // Re-render the list with filtered results
+    renderFilteredCategoriesList(filteredCategories);
+    
+    // Update chart with filtered data
+    renderFilteredChart(filteredCategories);
+}
+
+/**
+ * Render filtered categories list
+ */
+function renderFilteredCategoriesList(categories) {
     const container = document.getElementById('categoriesList');
-    const items = container.querySelectorAll('.list-item');
+    if (!container) return;
     
-    items.forEach(item => {
-        const categoryName = item.querySelector('.category-name').textContent.toLowerCase();
+    if (categories.length === 0) {
+        container.innerHTML = '<p style="text-align: center; padding: 2rem; color: hsl(var(--muted-foreground));">No categories found matching your search</p>';
+        return;
+    }
+    
+    container.innerHTML = categories.map(category => {
+        const itemPercentage = category.item_percentage || 0;
+        const color = category.color || '#999999';
         
-        if (categoryName.includes(searchTerm)) {
-            item.style.display = '';
-        } else {
-            item.style.display = 'none';
+        return `
+            <div style="display: grid; grid-template-columns: 30px 1fr 1fr 0.8fr 1fr 0.8fr; gap: 1rem; padding: 0.75rem; border-bottom: 1px solid hsl(var(--border) / 0.2); align-items: center;">
+                <div class="category-color-box" style="background-color: ${color}; width: 24px; height: 24px; border-radius: 4px;"></div>
+                <div class="category-name">${category.name}</div>
+                <div class="category-meta">${category.item_count || 0} Items</div>
+                <div class="category-meta">${itemPercentage}%</div>
+                <div style="color: hsl(var(--primary)); font-weight: 500; font-size: 0.9rem;">${(category.total_spent || 0).toFixed(2)} €</div>
+                <div style="display: flex; gap: 0.5rem;">
+                    <a href="/static/category/edit.html?id=${category.id}" class="btn btn-secondary btn-sm" style="font-size: 0.7rem; padding: 0.3rem 0.6rem;" title="Edit">✏️</a>
+                    <button class="btn btn-danger btn-sm" style="font-size: 0.7rem; padding: 0.3rem 0.6rem;" title="Delete" onclick="handleDeleteCategory(${category.id})">🗑️</button>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+/**
+ * Render filtered chart
+ */
+function renderFilteredChart(categories) {
+    const ctx = document.getElementById('categoryChart');
+    
+    if (!ctx || categories.length === 0) {
+        if (categoryChart) {
+            categoryChart.destroy();
+            categoryChart = null;
         }
+        return;
+    }
+    
+    if (categoryChart) {
+        categoryChart.destroy();
+    }
+    
+    const labels = categories.map(c => c.name);
+    const data = categories.map(c => c.total_spent || 0);
+    const backgroundColor = categories.map(c => c.color);
+    
+    categoryChart = new Chart(ctx.getContext('2d'), {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data,
+                backgroundColor: backgroundColor,
+                borderWidth: 1,
+                borderColor: '#000000ff',
+                hoverOffset: 15
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            layout: {
+                padding: {
+                    top: 30,
+                    bottom: 40,
+                    left: 20,
+                    right: 20
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: true,
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    titleFont: {
+                        size: 14,
+                        weight: 'bold'
+                    },
+                    bodyFont: {
+                        size: 12
+                    },
+                    padding: 16,
+                    displayColors: false,
+                    callbacks: {
+                        title: function(context) {
+                            return context[0].label;
+                        },
+                        label: function(context) {
+                            const value = context.parsed.toFixed(2);
+                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                            const percentage = ((context.parsed / total) * 100).toFixed(1);
+                            return [percentage + '%', value + ' €'];
+                        }
+                    }
+                },
+                datalabels: {
+                    color: document.documentElement.getAttribute('data-theme') === 'light' ? '#000000' : '#ffffff',
+                    font: {
+                        weight: 'bold',
+                        size: 12
+                    },
+                    formatter: function(value, context) {
+                        return context.chart.data.labels[context.dataIndex];
+                    },
+                    textAlign: 'center',
+                    anchor: 'end',
+                    align: 'end',
+                    offset: 10,
+                    distance: 45
+                },
+                datalabelsInside: {
+                    color: '#ffffff',
+                    font: {
+                        weight: 'bold',
+                        size: 11
+                    },
+                    formatter: function(value, context) {
+                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                        const percentage = ((value / total) * 100).toFixed(1);
+                        return percentage + '%';
+                    },
+                    anchor: 'center',
+                    align: 'center'
+                }
+            },
+            animation: {
+                animateRotate: true,
+                animateScale: true
+            }
+        },
+        plugins: [ChartDataLabels]
     });
 }
 
