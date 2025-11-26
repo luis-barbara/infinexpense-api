@@ -107,9 +107,6 @@ app.include_router(uploads.router)
 logger.info("All routers registered successfully")
 
 
-# Montagem de Ficheiros Estáticos (Static Files)
-# Para o Frontend (HTML/CSS/JS)
-app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
 # Para as Fotos dos Produtos
 app.mount("/css", StaticFiles(directory=str(STATIC_DIR / "css")), name="css")

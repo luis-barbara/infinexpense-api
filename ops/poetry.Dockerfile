@@ -1,10 +1,8 @@
 FROM python:3.12-slim
 
-WORKDIR /app
-
 RUN pip install poetry
 
-COPY pyproject.toml poetry.lock ./
+COPY . .
 
 RUN poetry self add poetry-plugin-export
 RUN poetry export -f requirements.txt --output requirements.txt
@@ -20,6 +18,7 @@ RUN mkdir -p /app/uploads/products /app/uploads/receipts && \
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
+WORKDIR /app/
 EXPOSE 8000
 
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
