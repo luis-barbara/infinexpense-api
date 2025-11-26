@@ -8,3 +8,451 @@
 2025-11-21 21:54:17,006 - src.main - INFO - Static directory: /app/static
 2025-11-21 21:54:17,006 - src.main - INFO - Upload directory: /app/uploads
 2025-11-21 21:55:09,426 - src.main - INFO - Infinexpense API shutting down...
+2025-11-26 17:38:28,806 - src.main - INFO - All routers registered successfully
+2025-11-26 17:38:28,822 - src.main - INFO - Infinexpense API starting up...
+2025-11-26 17:38:28,822 - src.main - INFO - Static directory: /app/static
+2025-11-26 17:38:28,823 - src.main - INFO - Upload directory: /app/uploads
+2025-11-26 17:39:40,724 - src.main - INFO - → GET /category/list.html
+2025-11-26 17:39:40,735 - src.main - INFO - ← GET /category/list.html - Status: 200 - Time: 0.011s
+2025-11-26 17:39:40,771 - src.main - INFO - → GET /static/css/main.css
+2025-11-26 17:39:40,772 - src.main - INFO - → GET /static/js/template-loader.js
+2025-11-26 17:39:40,774 - src.main - INFO - → GET /static/js/category-list.js
+2025-11-26 17:39:40,780 - src.main - INFO - ← GET /static/js/template-loader.js - Status: 200 - Time: 0.008s
+2025-11-26 17:39:40,781 - src.main - INFO - ← GET /static/js/category-list.js - Status: 200 - Time: 0.008s
+2025-11-26 17:39:40,782 - src.main - INFO - ← GET /static/css/main.css - Status: 200 - Time: 0.011s
+2025-11-26 17:39:40,838 - src.main - INFO - → GET /static/css/variables.css
+2025-11-26 17:39:40,839 - src.main - INFO - → GET /static/css/layout.css
+2025-11-26 17:39:40,840 - src.main - INFO - → GET /static/css/typography.css
+2025-11-26 17:39:40,842 - src.main - INFO - → GET /static/css/grids.css
+2025-11-26 17:39:40,845 - src.main - INFO - → GET /static/css/cards.css
+2025-11-26 17:39:40,847 - src.main - INFO - → GET /static/css/buttons.css
+2025-11-26 17:39:40,850 - src.main - INFO - ← GET /static/css/typography.css - Status: 200 - Time: 0.010s
+2025-11-26 17:39:40,852 - src.main - INFO - ← GET /static/css/layout.css - Status: 200 - Time: 0.012s
+2025-11-26 17:39:40,852 - src.main - INFO - ← GET /static/css/grids.css - Status: 200 - Time: 0.010s
+2025-11-26 17:39:40,853 - src.main - INFO - ← GET /static/css/variables.css - Status: 200 - Time: 0.015s
+2025-11-26 17:39:40,854 - src.main - INFO - ← GET /static/css/cards.css - Status: 200 - Time: 0.009s
+2025-11-26 17:39:40,855 - src.main - INFO - ← GET /static/css/buttons.css - Status: 200 - Time: 0.008s
+2025-11-26 17:39:40,858 - src.main - INFO - → GET /static/css/forms.css
+2025-11-26 17:39:40,862 - src.main - INFO - → GET /static/css/tables.css
+2025-11-26 17:39:40,864 - src.main - INFO - → GET /static/css/lists.css
+2025-11-26 17:39:40,864 - src.main - INFO - → GET /static/css/navigation.css
+2025-11-26 17:39:40,866 - src.main - INFO - → GET /static/css/icons.css
+2025-11-26 17:39:40,867 - src.main - INFO - → GET /static/css/utilities.css
+2025-11-26 17:39:40,868 - src.main - INFO - ← GET /static/css/forms.css - Status: 200 - Time: 0.009s
+2025-11-26 17:39:40,870 - src.main - INFO - ← GET /static/css/tables.css - Status: 200 - Time: 0.008s
+2025-11-26 17:39:40,871 - src.main - INFO - ← GET /static/css/navigation.css - Status: 200 - Time: 0.007s
+2025-11-26 17:39:40,873 - src.main - INFO - ← GET /static/css/lists.css - Status: 200 - Time: 0.009s
+2025-11-26 17:39:40,875 - src.main - INFO - ← GET /static/css/icons.css - Status: 200 - Time: 0.009s
+2025-11-26 17:39:40,876 - src.main - INFO - ← GET /static/css/utilities.css - Status: 200 - Time: 0.009s
+2025-11-26 17:39:40,879 - src.main - INFO - → GET /static/css/animations.css
+2025-11-26 17:39:40,881 - src.main - INFO - → GET /static/css/responsive.css
+2025-11-26 17:39:40,884 - src.main - INFO - ← GET /static/css/animations.css - Status: 200 - Time: 0.005s
+2025-11-26 17:39:40,886 - src.main - INFO - ← GET /static/css/responsive.css - Status: 200 - Time: 0.005s
+2025-11-26 17:39:40,969 - src.main - INFO - → GET /static/api/categories_api.js
+2025-11-26 17:39:40,976 - src.main - INFO - ← GET /static/api/categories_api.js - Status: 200 - Time: 0.007s
+2025-11-26 17:39:40,981 - src.main - INFO - → GET /categories/
+2025-11-26 17:39:40,983 - src.services.crud_category - INFO - Fetching categories (skip=0, limit=100, dates=None to None)
+2025-11-26 17:39:40,995 - src.main - INFO - → GET /static/templates/header.html
+2025-11-26 17:39:40,999 - src.main - INFO - → GET /static/js/theme.js
+2025-11-26 17:39:41,006 - src.main - INFO - ← GET /static/js/theme.js - Status: 200 - Time: 0.007s
+2025-11-26 17:39:41,007 - src.main - INFO - ← GET /static/templates/header.html - Status: 200 - Time: 0.012s
+2025-11-26 17:39:41,076 - src.main - INFO - ← GET /categories/ - Status: 200 - Time: 0.095s
+2025-11-26 17:39:41,094 - src.main - INFO - → GET /static/images/night.svg
+2025-11-26 17:39:41,095 - src.main - INFO - → GET /static/images/light.svg
+2025-11-26 17:39:41,103 - src.main - INFO - ← GET /static/images/light.svg - Status: 200 - Time: 0.008s
+2025-11-26 17:39:41,104 - src.main - INFO - ← GET /static/images/night.svg - Status: 200 - Time: 0.009s
+2025-11-26 17:39:41,128 - src.main - INFO - → GET /static/images/favicon.ico
+2025-11-26 17:39:41,137 - src.main - INFO - ← GET /static/images/favicon.ico - Status: 200 - Time: 0.009s
+2025-11-26 17:39:44,007 - src.main - INFO - → GET /category/list.html
+2025-11-26 17:39:44,015 - src.main - INFO - ← GET /category/list.html - Status: 200 - Time: 0.008s
+2025-11-26 17:39:44,153 - src.main - INFO - → GET /static/css/main.css
+2025-11-26 17:39:44,154 - src.main - INFO - → GET /static/js/template-loader.js
+2025-11-26 17:39:44,156 - src.main - INFO - → GET /static/js/category-list.js
+2025-11-26 17:39:44,161 - src.main - INFO - ← GET /static/js/template-loader.js - Status: 200 - Time: 0.007s
+2025-11-26 17:39:44,162 - src.main - INFO - ← GET /static/js/category-list.js - Status: 200 - Time: 0.007s
+2025-11-26 17:39:44,163 - src.main - INFO - ← GET /static/css/main.css - Status: 200 - Time: 0.010s
+2025-11-26 17:39:44,194 - src.main - INFO - → GET /static/css/variables.css
+2025-11-26 17:39:44,196 - src.main - INFO - → GET /static/css/layout.css
+2025-11-26 17:39:44,196 - src.main - INFO - → GET /static/css/typography.css
+2025-11-26 17:39:44,197 - src.main - INFO - → GET /static/css/grids.css
+2025-11-26 17:39:44,198 - src.main - INFO - → GET /static/css/cards.css
+2025-11-26 17:39:44,198 - src.main - INFO - → GET /static/css/buttons.css
+2025-11-26 17:39:44,207 - src.main - INFO - ← GET /static/css/cards.css - Status: 200 - Time: 0.009s
+2025-11-26 17:39:44,207 - src.main - INFO - ← GET /static/css/buttons.css - Status: 200 - Time: 0.009s
+2025-11-26 17:39:44,208 - src.main - INFO - ← GET /static/css/grids.css - Status: 200 - Time: 0.011s
+2025-11-26 17:39:44,209 - src.main - INFO - ← GET /static/css/variables.css - Status: 200 - Time: 0.015s
+2025-11-26 17:39:44,210 - src.main - INFO - ← GET /static/css/layout.css - Status: 200 - Time: 0.014s
+2025-11-26 17:39:44,211 - src.main - INFO - ← GET /static/css/typography.css - Status: 200 - Time: 0.015s
+2025-11-26 17:39:44,216 - src.main - INFO - → GET /static/css/forms.css
+2025-11-26 17:39:44,217 - src.main - INFO - → GET /static/css/tables.css
+2025-11-26 17:39:44,219 - src.main - INFO - → GET /static/css/lists.css
+2025-11-26 17:39:44,219 - src.main - INFO - → GET /static/css/navigation.css
+2025-11-26 17:39:44,220 - src.main - INFO - → GET /static/css/icons.css
+2025-11-26 17:39:44,226 - src.main - INFO - ← GET /static/css/icons.css - Status: 200 - Time: 0.007s
+2025-11-26 17:39:44,227 - src.main - INFO - ← GET /static/css/forms.css - Status: 200 - Time: 0.011s
+2025-11-26 17:39:44,228 - src.main - INFO - ← GET /static/css/tables.css - Status: 200 - Time: 0.010s
+2025-11-26 17:39:44,229 - src.main - INFO - ← GET /static/css/navigation.css - Status: 200 - Time: 0.009s
+2025-11-26 17:39:44,229 - src.main - INFO - ← GET /static/css/lists.css - Status: 200 - Time: 0.011s
+2025-11-26 17:39:44,235 - src.main - INFO - → GET /static/css/utilities.css
+2025-11-26 17:39:44,238 - src.main - INFO - → GET /static/css/animations.css
+2025-11-26 17:39:44,242 - src.main - INFO - ← GET /static/css/utilities.css - Status: 200 - Time: 0.006s
+2025-11-26 17:39:44,243 - src.main - INFO - ← GET /static/css/animations.css - Status: 200 - Time: 0.005s
+2025-11-26 17:39:44,247 - src.main - INFO - → GET /static/css/responsive.css
+2025-11-26 17:39:44,255 - src.main - INFO - ← GET /static/css/responsive.css - Status: 200 - Time: 0.008s
+2025-11-26 17:39:44,308 - src.main - INFO - → GET /static/api/categories_api.js
+2025-11-26 17:39:44,316 - src.main - INFO - ← GET /static/api/categories_api.js - Status: 200 - Time: 0.008s
+2025-11-26 17:39:44,322 - src.main - INFO - → GET /categories/
+2025-11-26 17:39:44,323 - src.main - INFO - → GET /static/templates/header.html
+2025-11-26 17:39:44,323 - src.main - INFO - → GET /static/js/theme.js
+2025-11-26 17:39:44,325 - src.services.crud_category - INFO - Fetching categories (skip=0, limit=100, dates=None to None)
+2025-11-26 17:39:44,331 - src.main - INFO - ← GET /static/templates/header.html - Status: 200 - Time: 0.009s
+2025-11-26 17:39:44,333 - src.main - INFO - ← GET /static/js/theme.js - Status: 200 - Time: 0.010s
+2025-11-26 17:39:44,357 - src.main - INFO - ← GET /categories/ - Status: 200 - Time: 0.035s
+2025-11-26 17:39:44,385 - src.main - INFO - → GET /static/images/night.svg
+2025-11-26 17:39:44,390 - src.main - INFO - → GET /static/images/light.svg
+2025-11-26 17:39:44,395 - src.main - INFO - ← GET /static/images/night.svg - Status: 200 - Time: 0.010s
+2025-11-26 17:39:44,397 - src.main - INFO - ← GET /static/images/light.svg - Status: 200 - Time: 0.007s
+2025-11-26 17:39:44,408 - src.main - INFO - → GET /static/images/favicon.ico
+2025-11-26 17:39:44,416 - src.main - INFO - ← GET /static/images/favicon.ico - Status: 200 - Time: 0.008s
+2025-11-26 17:41:20,507 - src.main - INFO - → GET /category/list.html
+2025-11-26 17:41:20,517 - src.main - INFO - ← GET /category/list.html - Status: 200 - Time: 0.010s
+2025-11-26 17:41:20,555 - src.main - INFO - → GET /static/css/main.css
+2025-11-26 17:41:20,556 - src.main - INFO - → GET /static/js/template-loader.js
+2025-11-26 17:41:20,559 - src.main - INFO - → GET /static/js/category-list.js
+2025-11-26 17:41:20,563 - src.main - INFO - ← GET /static/js/template-loader.js - Status: 200 - Time: 0.006s
+2025-11-26 17:41:20,564 - src.main - INFO - ← GET /static/css/main.css - Status: 200 - Time: 0.009s
+2025-11-26 17:41:20,565 - src.main - INFO - ← GET /static/js/category-list.js - Status: 200 - Time: 0.006s
+2025-11-26 17:41:20,632 - src.main - INFO - → GET /static/css/variables.css
+2025-11-26 17:41:20,633 - src.main - INFO - → GET /static/css/layout.css
+2025-11-26 17:41:20,634 - src.main - INFO - → GET /static/css/typography.css
+2025-11-26 17:41:20,636 - src.main - INFO - → GET /static/css/grids.css
+2025-11-26 17:41:20,639 - src.main - INFO - → GET /static/css/cards.css
+2025-11-26 17:41:20,640 - src.main - INFO - → GET /static/css/buttons.css
+2025-11-26 17:41:20,644 - src.main - INFO - ← GET /static/css/typography.css - Status: 200 - Time: 0.011s
+2025-11-26 17:41:20,645 - src.main - INFO - ← GET /static/css/layout.css - Status: 200 - Time: 0.012s
+2025-11-26 17:41:20,646 - src.main - INFO - ← GET /static/css/grids.css - Status: 200 - Time: 0.010s
+2025-11-26 17:41:20,647 - src.main - INFO - ← GET /static/css/variables.css - Status: 200 - Time: 0.015s
+2025-11-26 17:41:20,649 - src.main - INFO - ← GET /static/css/cards.css - Status: 200 - Time: 0.010s
+2025-11-26 17:41:20,650 - src.main - INFO - ← GET /static/css/buttons.css - Status: 200 - Time: 0.010s
+2025-11-26 17:41:20,654 - src.main - INFO - → GET /static/css/forms.css
+2025-11-26 17:41:20,655 - src.main - INFO - → GET /static/css/tables.css
+2025-11-26 17:41:20,657 - src.main - INFO - → GET /static/css/lists.css
+2025-11-26 17:41:20,657 - src.main - INFO - → GET /static/css/navigation.css
+2025-11-26 17:41:20,660 - src.main - INFO - → GET /static/css/icons.css
+2025-11-26 17:41:20,662 - src.main - INFO - → GET /static/css/utilities.css
+2025-11-26 17:41:20,664 - src.main - INFO - ← GET /static/css/forms.css - Status: 200 - Time: 0.010s
+2025-11-26 17:41:20,667 - src.main - INFO - ← GET /static/css/navigation.css - Status: 200 - Time: 0.010s
+2025-11-26 17:41:20,668 - src.main - INFO - ← GET /static/css/tables.css - Status: 200 - Time: 0.013s
+2025-11-26 17:41:20,669 - src.main - INFO - ← GET /static/css/lists.css - Status: 200 - Time: 0.012s
+2025-11-26 17:41:20,671 - src.main - INFO - ← GET /static/css/icons.css - Status: 200 - Time: 0.011s
+2025-11-26 17:41:20,672 - src.main - INFO - ← GET /static/css/utilities.css - Status: 200 - Time: 0.010s
+2025-11-26 17:41:20,677 - src.main - INFO - → GET /static/css/animations.css
+2025-11-26 17:41:20,678 - src.main - INFO - → GET /static/css/responsive.css
+2025-11-26 17:41:20,684 - src.main - INFO - ← GET /static/css/animations.css - Status: 200 - Time: 0.007s
+2025-11-26 17:41:20,685 - src.main - INFO - ← GET /static/css/responsive.css - Status: 200 - Time: 0.007s
+2025-11-26 17:41:20,739 - src.main - INFO - → GET /static/api/categories_api.js
+2025-11-26 17:41:20,748 - src.main - INFO - ← GET /static/api/categories_api.js - Status: 200 - Time: 0.010s
+2025-11-26 17:41:20,757 - src.main - INFO - → GET /categories/
+2025-11-26 17:41:20,758 - src.main - INFO - → GET /static/js/theme.js
+2025-11-26 17:41:20,759 - src.main - INFO - → GET /static/templates/header.html
+2025-11-26 17:41:20,761 - src.services.crud_category - INFO - Fetching categories (skip=0, limit=100, dates=None to None)
+2025-11-26 17:41:20,769 - src.main - INFO - ← GET /static/templates/header.html - Status: 200 - Time: 0.010s
+2025-11-26 17:41:20,771 - src.main - INFO - ← GET /static/js/theme.js - Status: 200 - Time: 0.013s
+2025-11-26 17:41:20,796 - src.main - INFO - ← GET /categories/ - Status: 200 - Time: 0.039s
+2025-11-26 17:41:20,830 - src.main - INFO - → GET /static/images/night.svg
+2025-11-26 17:41:20,832 - src.main - INFO - → GET /static/images/light.svg
+2025-11-26 17:41:20,839 - src.main - INFO - ← GET /static/images/light.svg - Status: 200 - Time: 0.007s
+2025-11-26 17:41:20,840 - src.main - INFO - ← GET /static/images/night.svg - Status: 200 - Time: 0.009s
+2025-11-26 17:41:20,865 - src.main - INFO - → GET /static/images/favicon.ico
+2025-11-26 17:41:20,874 - src.main - INFO - ← GET /static/images/favicon.ico - Status: 200 - Time: 0.009s
+2025-11-26 17:41:26,800 - src.main - INFO - → GET /category/list.html
+2025-11-26 17:41:26,809 - src.main - INFO - ← GET /category/list.html - Status: 200 - Time: 0.009s
+2025-11-26 17:41:26,842 - src.main - INFO - → GET /static/css/main.css
+2025-11-26 17:41:26,847 - src.main - INFO - → GET /static/js/template-loader.js
+2025-11-26 17:41:26,850 - src.main - INFO - → GET /static/js/category-list.js
+2025-11-26 17:41:26,852 - src.main - INFO - ← GET /static/css/main.css - Status: 200 - Time: 0.009s
+2025-11-26 17:41:26,855 - src.main - INFO - ← GET /static/js/template-loader.js - Status: 200 - Time: 0.008s
+2025-11-26 17:41:26,857 - src.main - INFO - ← GET /static/js/category-list.js - Status: 200 - Time: 0.007s
+2025-11-26 17:41:26,921 - src.main - INFO - → GET /static/css/variables.css
+2025-11-26 17:41:26,922 - src.main - INFO - → GET /static/css/layout.css
+2025-11-26 17:41:26,923 - src.main - INFO - → GET /static/css/typography.css
+2025-11-26 17:41:26,925 - src.main - INFO - → GET /static/css/grids.css
+2025-11-26 17:41:26,926 - src.main - INFO - → GET /static/css/cards.css
+2025-11-26 17:41:26,927 - src.main - INFO - → GET /static/css/buttons.css
+2025-11-26 17:41:26,931 - src.main - INFO - ← GET /static/css/typography.css - Status: 200 - Time: 0.008s
+2025-11-26 17:41:26,933 - src.main - INFO - ← GET /static/css/variables.css - Status: 200 - Time: 0.012s
+2025-11-26 17:41:26,934 - src.main - INFO - ← GET /static/css/layout.css - Status: 200 - Time: 0.011s
+2025-11-26 17:41:26,934 - src.main - INFO - ← GET /static/css/grids.css - Status: 200 - Time: 0.009s
+2025-11-26 17:41:26,935 - src.main - INFO - ← GET /static/css/cards.css - Status: 200 - Time: 0.009s
+2025-11-26 17:41:26,936 - src.main - INFO - ← GET /static/css/buttons.css - Status: 200 - Time: 0.009s
+2025-11-26 17:41:26,942 - src.main - INFO - → GET /static/css/forms.css
+2025-11-26 17:41:26,945 - src.main - INFO - → GET /static/css/tables.css
+2025-11-26 17:41:26,946 - src.main - INFO - → GET /static/css/lists.css
+2025-11-26 17:41:26,947 - src.main - INFO - → GET /static/css/navigation.css
+2025-11-26 17:41:26,947 - src.main - INFO - → GET /static/css/icons.css
+2025-11-26 17:41:26,948 - src.main - INFO - → GET /static/css/utilities.css
+2025-11-26 17:41:26,952 - src.main - INFO - ← GET /static/css/forms.css - Status: 200 - Time: 0.010s
+2025-11-26 17:41:26,956 - src.main - INFO - ← GET /static/css/icons.css - Status: 200 - Time: 0.008s
+2025-11-26 17:41:26,956 - src.main - INFO - ← GET /static/css/utilities.css - Status: 200 - Time: 0.009s
+2025-11-26 17:41:26,957 - src.main - INFO - ← GET /static/css/lists.css - Status: 200 - Time: 0.011s
+2025-11-26 17:41:26,958 - src.main - INFO - ← GET /static/css/tables.css - Status: 200 - Time: 0.013s
+2025-11-26 17:41:26,959 - src.main - INFO - ← GET /static/css/navigation.css - Status: 200 - Time: 0.012s
+2025-11-26 17:41:26,962 - src.main - INFO - → GET /static/css/animations.css
+2025-11-26 17:41:26,965 - src.main - INFO - → GET /static/css/responsive.css
+2025-11-26 17:41:26,969 - src.main - INFO - ← GET /static/css/animations.css - Status: 200 - Time: 0.007s
+2025-11-26 17:41:26,970 - src.main - INFO - ← GET /static/css/responsive.css - Status: 200 - Time: 0.005s
+2025-11-26 17:41:27,030 - src.main - INFO - → GET /static/api/categories_api.js
+2025-11-26 17:41:27,038 - src.main - INFO - ← GET /static/api/categories_api.js - Status: 200 - Time: 0.008s
+2025-11-26 17:41:27,049 - src.main - INFO - → GET /categories/
+2025-11-26 17:41:27,050 - src.main - INFO - → GET /static/templates/header.html
+2025-11-26 17:41:27,051 - src.main - INFO - → GET /static/js/theme.js
+2025-11-26 17:41:27,053 - src.services.crud_category - INFO - Fetching categories (skip=0, limit=100, dates=None to None)
+2025-11-26 17:41:27,062 - src.main - INFO - ← GET /static/templates/header.html - Status: 200 - Time: 0.012s
+2025-11-26 17:41:27,063 - src.main - INFO - ← GET /static/js/theme.js - Status: 200 - Time: 0.012s
+2025-11-26 17:41:27,088 - src.main - INFO - ← GET /categories/ - Status: 200 - Time: 0.039s
+2025-11-26 17:41:27,113 - src.main - INFO - → GET /static/images/night.svg
+2025-11-26 17:41:27,114 - src.main - INFO - → GET /static/images/light.svg
+2025-11-26 17:41:27,121 - src.main - INFO - ← GET /static/images/night.svg - Status: 200 - Time: 0.008s
+2025-11-26 17:41:27,122 - src.main - INFO - ← GET /static/images/light.svg - Status: 200 - Time: 0.008s
+2025-11-26 17:41:27,133 - src.main - INFO - → GET /static/images/favicon.ico
+2025-11-26 17:41:27,141 - src.main - INFO - ← GET /static/images/favicon.ico - Status: 200 - Time: 0.008s
+2025-11-26 17:42:22,192 - src.main - INFO - → GET /category/list.html
+2025-11-26 17:42:22,201 - src.main - INFO - ← GET /category/list.html - Status: 200 - Time: 0.009s
+2025-11-26 17:42:22,239 - src.main - INFO - → GET /static/css/main.css
+2025-11-26 17:42:22,240 - src.main - INFO - → GET /static/js/template-loader.js
+2025-11-26 17:42:22,244 - src.main - INFO - → GET /static/js/category-list.js
+2025-11-26 17:42:22,248 - src.main - INFO - ← GET /static/js/template-loader.js - Status: 200 - Time: 0.008s
+2025-11-26 17:42:22,249 - src.main - INFO - ← GET /static/css/main.css - Status: 200 - Time: 0.010s
+2025-11-26 17:42:22,250 - src.main - INFO - ← GET /static/js/category-list.js - Status: 200 - Time: 0.006s
+2025-11-26 17:42:22,256 - src.main - INFO - → GET /static/css/variables.css
+2025-11-26 17:42:22,257 - src.main - INFO - → GET /static/css/layout.css
+2025-11-26 17:42:22,258 - src.main - INFO - → GET /static/css/grids.css
+2025-11-26 17:42:22,260 - src.main - INFO - → GET /static/css/typography.css
+2025-11-26 17:42:22,262 - src.main - INFO - → GET /static/css/cards.css
+2025-11-26 17:42:22,263 - src.main - INFO - → GET /static/css/buttons.css
+2025-11-26 17:42:22,268 - src.main - INFO - ← GET /static/css/grids.css - Status: 200 - Time: 0.010s
+2025-11-26 17:42:22,269 - src.main - INFO - ← GET /static/css/layout.css - Status: 200 - Time: 0.012s
+2025-11-26 17:42:22,269 - src.main - INFO - ← GET /static/css/typography.css - Status: 200 - Time: 0.010s
+2025-11-26 17:42:22,270 - src.main - INFO - ← GET /static/css/variables.css - Status: 200 - Time: 0.014s
+2025-11-26 17:42:22,272 - src.main - INFO - ← GET /static/css/buttons.css - Status: 200 - Time: 0.009s
+2025-11-26 17:42:22,273 - src.main - INFO - ← GET /static/css/cards.css - Status: 200 - Time: 0.011s
+2025-11-26 17:42:22,278 - src.main - INFO - → GET /static/css/forms.css
+2025-11-26 17:42:22,279 - src.main - INFO - → GET /static/css/tables.css
+2025-11-26 17:42:22,280 - src.main - INFO - → GET /static/css/lists.css
+2025-11-26 17:42:22,281 - src.main - INFO - → GET /static/css/navigation.css
+2025-11-26 17:42:22,282 - src.main - INFO - → GET /static/css/icons.css
+2025-11-26 17:42:22,286 - src.main - INFO - ← GET /static/css/tables.css - Status: 200 - Time: 0.007s
+2025-11-26 17:42:22,287 - src.main - INFO - ← GET /static/css/lists.css - Status: 200 - Time: 0.008s
+2025-11-26 17:42:22,288 - src.main - INFO - ← GET /static/css/forms.css - Status: 200 - Time: 0.010s
+2025-11-26 17:42:22,289 - src.main - INFO - ← GET /static/css/navigation.css - Status: 200 - Time: 0.008s
+2025-11-26 17:42:22,290 - src.main - INFO - ← GET /static/css/icons.css - Status: 200 - Time: 0.008s
+2025-11-26 17:42:22,294 - src.main - INFO - → GET /static/css/utilities.css
+2025-11-26 17:42:22,296 - src.main - INFO - → GET /static/css/animations.css
+2025-11-26 17:42:22,300 - src.main - INFO - ← GET /static/css/utilities.css - Status: 200 - Time: 0.006s
+2025-11-26 17:42:22,301 - src.main - INFO - ← GET /static/css/animations.css - Status: 200 - Time: 0.005s
+2025-11-26 17:42:22,305 - src.main - INFO - → GET /static/css/responsive.css
+2025-11-26 17:42:22,312 - src.main - INFO - ← GET /static/css/responsive.css - Status: 200 - Time: 0.007s
+2025-11-26 17:42:22,370 - src.main - INFO - → GET /static/api/categories_api.js
+2025-11-26 17:42:22,378 - src.main - INFO - ← GET /static/api/categories_api.js - Status: 200 - Time: 0.008s
+2025-11-26 17:42:22,401 - src.main - INFO - → GET /categories/
+2025-11-26 17:42:22,402 - src.services.crud_category - INFO - Fetching categories (skip=0, limit=100, dates=None to None)
+2025-11-26 17:42:22,405 - src.main - INFO - → GET /static/templates/header.html
+2025-11-26 17:42:22,406 - src.main - INFO - → GET /static/js/theme.js
+2025-11-26 17:42:22,417 - src.main - INFO - ← GET /static/templates/header.html - Status: 200 - Time: 0.012s
+2025-11-26 17:42:22,419 - src.main - INFO - ← GET /static/js/theme.js - Status: 200 - Time: 0.013s
+2025-11-26 17:42:22,430 - src.main - INFO - → GET /static/images/night.svg
+2025-11-26 17:42:22,432 - src.main - INFO - → GET /static/images/light.svg
+2025-11-26 17:42:22,440 - src.main - INFO - ← GET /static/images/night.svg - Status: 200 - Time: 0.010s
+2025-11-26 17:42:22,443 - src.main - INFO - ← GET /static/images/light.svg - Status: 200 - Time: 0.011s
+2025-11-26 17:42:22,444 - src.main - INFO - ← GET /categories/ - Status: 200 - Time: 0.044s
+2025-11-26 17:42:22,455 - src.main - INFO - → GET /static/images/favicon.ico
+2025-11-26 17:42:22,461 - src.main - INFO - ← GET /static/images/favicon.ico - Status: 200 - Time: 0.006s
+2025-11-26 17:42:23,608 - src.main - INFO - → GET /category/list.html
+2025-11-26 17:42:23,616 - src.main - INFO - ← GET /category/list.html - Status: 200 - Time: 0.008s
+2025-11-26 17:42:23,647 - src.main - INFO - → GET /static/css/main.css
+2025-11-26 17:42:23,648 - src.main - INFO - → GET /static/js/template-loader.js
+2025-11-26 17:42:23,650 - src.main - INFO - → GET /static/js/category-list.js
+2025-11-26 17:42:23,654 - src.main - INFO - ← GET /static/js/template-loader.js - Status: 200 - Time: 0.006s
+2025-11-26 17:42:23,655 - src.main - INFO - ← GET /static/css/main.css - Status: 200 - Time: 0.008s
+2025-11-26 17:42:23,656 - src.main - INFO - ← GET /static/js/category-list.js - Status: 200 - Time: 0.006s
+2025-11-26 17:42:23,685 - src.main - INFO - → GET /static/css/variables.css
+2025-11-26 17:42:23,686 - src.main - INFO - → GET /static/css/layout.css
+2025-11-26 17:42:23,687 - src.main - INFO - → GET /static/css/typography.css
+2025-11-26 17:42:23,687 - src.main - INFO - → GET /static/css/grids.css
+2025-11-26 17:42:23,689 - src.main - INFO - → GET /static/css/cards.css
+2025-11-26 17:42:23,689 - src.main - INFO - → GET /static/css/buttons.css
+2025-11-26 17:42:23,695 - src.main - INFO - ← GET /static/css/variables.css - Status: 200 - Time: 0.010s
+2025-11-26 17:42:23,697 - src.main - INFO - ← GET /static/css/typography.css - Status: 200 - Time: 0.011s
+2025-11-26 17:42:23,698 - src.main - INFO - ← GET /static/css/layout.css - Status: 200 - Time: 0.012s
+2025-11-26 17:42:23,699 - src.main - INFO - ← GET /static/css/grids.css - Status: 200 - Time: 0.011s
+2025-11-26 17:42:23,700 - src.main - INFO - ← GET /static/css/cards.css - Status: 200 - Time: 0.011s
+2025-11-26 17:42:23,701 - src.main - INFO - ← GET /static/css/buttons.css - Status: 200 - Time: 0.012s
+2025-11-26 17:42:23,706 - src.main - INFO - → GET /static/css/forms.css
+2025-11-26 17:42:23,707 - src.main - INFO - → GET /static/css/tables.css
+2025-11-26 17:42:23,710 - src.main - INFO - → GET /static/css/lists.css
+2025-11-26 17:42:23,711 - src.main - INFO - → GET /static/css/navigation.css
+2025-11-26 17:42:23,712 - src.main - INFO - → GET /static/css/icons.css
+2025-11-26 17:42:23,714 - src.main - INFO - ← GET /static/css/forms.css - Status: 200 - Time: 0.008s
+2025-11-26 17:42:23,717 - src.main - INFO - ← GET /static/css/tables.css - Status: 200 - Time: 0.009s
+2025-11-26 17:42:23,719 - src.main - INFO - ← GET /static/css/icons.css - Status: 200 - Time: 0.007s
+2025-11-26 17:42:23,720 - src.main - INFO - ← GET /static/css/lists.css - Status: 200 - Time: 0.010s
+2025-11-26 17:42:23,721 - src.main - INFO - ← GET /static/css/navigation.css - Status: 200 - Time: 0.010s
+2025-11-26 17:42:23,723 - src.main - INFO - → GET /static/css/utilities.css
+2025-11-26 17:42:23,726 - src.main - INFO - → GET /static/css/animations.css
+2025-11-26 17:42:23,728 - src.main - INFO - → GET /static/css/responsive.css
+2025-11-26 17:42:23,729 - src.main - INFO - ← GET /static/css/utilities.css - Status: 200 - Time: 0.006s
+2025-11-26 17:42:23,731 - src.main - INFO - ← GET /static/css/animations.css - Status: 200 - Time: 0.006s
+2025-11-26 17:42:23,733 - src.main - INFO - ← GET /static/css/responsive.css - Status: 200 - Time: 0.005s
+2025-11-26 17:42:23,790 - src.main - INFO - → GET /static/api/categories_api.js
+2025-11-26 17:42:23,797 - src.main - INFO - ← GET /static/api/categories_api.js - Status: 200 - Time: 0.008s
+2025-11-26 17:42:23,803 - src.main - INFO - → GET /categories/
+2025-11-26 17:42:23,805 - src.main - INFO - → GET /static/templates/header.html
+2025-11-26 17:42:23,805 - src.services.crud_category - INFO - Fetching categories (skip=0, limit=100, dates=None to None)
+2025-11-26 17:42:23,806 - src.main - INFO - → GET /static/js/theme.js
+2025-11-26 17:42:23,816 - src.main - INFO - ← GET /static/templates/header.html - Status: 200 - Time: 0.011s
+2025-11-26 17:42:23,818 - src.main - INFO - ← GET /static/js/theme.js - Status: 200 - Time: 0.013s
+2025-11-26 17:42:23,842 - src.main - INFO - → GET /static/images/night.svg
+2025-11-26 17:42:23,844 - src.main - INFO - → GET /static/images/light.svg
+2025-11-26 17:42:23,845 - src.main - INFO - ← GET /categories/ - Status: 200 - Time: 0.043s
+2025-11-26 17:42:23,852 - src.main - INFO - ← GET /static/images/night.svg - Status: 200 - Time: 0.011s
+2025-11-26 17:42:23,854 - src.main - INFO - ← GET /static/images/light.svg - Status: 200 - Time: 0.010s
+2025-11-26 17:42:23,866 - src.main - INFO - → GET /static/images/favicon.ico
+2025-11-26 17:42:23,874 - src.main - INFO - ← GET /static/images/favicon.ico - Status: 200 - Time: 0.007s
+2025-11-26 17:43:26,374 - src.main - INFO - → GET /category/list.html
+2025-11-26 17:43:26,379 - src.main - INFO - ← GET /category/list.html - Status: 200 - Time: 0.005s
+2025-11-26 17:43:26,415 - src.main - INFO - → GET /static/css/main.css
+2025-11-26 17:43:26,418 - src.main - INFO - → GET /static/js/template-loader.js
+2025-11-26 17:43:26,421 - src.main - INFO - ← GET /static/css/main.css - Status: 200 - Time: 0.007s
+2025-11-26 17:43:26,424 - src.main - INFO - → GET /static/js/category-list.js
+2025-11-26 17:43:26,425 - src.main - INFO - ← GET /static/js/template-loader.js - Status: 200 - Time: 0.007s
+2025-11-26 17:43:26,430 - src.main - INFO - ← GET /static/js/category-list.js - Status: 200 - Time: 0.006s
+2025-11-26 17:43:26,476 - src.main - INFO - → GET /static/css/variables.css
+2025-11-26 17:43:26,477 - src.main - INFO - → GET /static/css/layout.css
+2025-11-26 17:43:26,478 - src.main - INFO - → GET /static/css/typography.css
+2025-11-26 17:43:26,480 - src.main - INFO - → GET /static/css/grids.css
+2025-11-26 17:43:26,481 - src.main - INFO - → GET /static/css/cards.css
+2025-11-26 17:43:26,483 - src.main - INFO - → GET /static/css/buttons.css
+2025-11-26 17:43:26,487 - src.main - INFO - ← GET /static/css/typography.css - Status: 200 - Time: 0.009s
+2025-11-26 17:43:26,488 - src.main - INFO - ← GET /static/css/layout.css - Status: 200 - Time: 0.012s
+2025-11-26 17:43:26,489 - src.main - INFO - ← GET /static/css/variables.css - Status: 200 - Time: 0.014s
+2025-11-26 17:43:26,490 - src.main - INFO - ← GET /static/css/grids.css - Status: 200 - Time: 0.010s
+2025-11-26 17:43:26,491 - src.main - INFO - ← GET /static/css/cards.css - Status: 200 - Time: 0.011s
+2025-11-26 17:43:26,493 - src.main - INFO - ← GET /static/css/buttons.css - Status: 200 - Time: 0.010s
+2025-11-26 17:43:26,498 - src.main - INFO - → GET /static/css/forms.css
+2025-11-26 17:43:26,499 - src.main - INFO - → GET /static/css/tables.css
+2025-11-26 17:43:26,500 - src.main - INFO - → GET /static/css/lists.css
+2025-11-26 17:43:26,501 - src.main - INFO - → GET /static/css/navigation.css
+2025-11-26 17:43:26,502 - src.main - INFO - → GET /static/css/icons.css
+2025-11-26 17:43:26,504 - src.main - INFO - → GET /static/css/utilities.css
+2025-11-26 17:43:26,505 - src.main - INFO - ← GET /static/css/forms.css - Status: 200 - Time: 0.008s
+2025-11-26 17:43:26,507 - src.main - INFO - ← GET /static/css/tables.css - Status: 200 - Time: 0.008s
+2025-11-26 17:43:26,509 - src.main - INFO - ← GET /static/css/navigation.css - Status: 200 - Time: 0.008s
+2025-11-26 17:43:26,511 - src.main - INFO - ← GET /static/css/lists.css - Status: 200 - Time: 0.011s
+2025-11-26 17:43:26,511 - src.main - INFO - ← GET /static/css/icons.css - Status: 200 - Time: 0.009s
+2025-11-26 17:43:26,513 - src.main - INFO - ← GET /static/css/utilities.css - Status: 200 - Time: 0.009s
+2025-11-26 17:43:26,516 - src.main - INFO - → GET /static/css/animations.css
+2025-11-26 17:43:26,519 - src.main - INFO - → GET /static/css/responsive.css
+2025-11-26 17:43:26,522 - src.main - INFO - ← GET /static/css/animations.css - Status: 200 - Time: 0.006s
+2025-11-26 17:43:26,525 - src.main - INFO - ← GET /static/css/responsive.css - Status: 200 - Time: 0.006s
+2025-11-26 17:43:26,579 - src.main - INFO - → GET /static/api/categories_api.js
+2025-11-26 17:43:26,587 - src.main - INFO - ← GET /static/api/categories_api.js - Status: 200 - Time: 0.008s
+2025-11-26 17:43:26,593 - src.main - INFO - → GET /categories/
+2025-11-26 17:43:26,594 - src.services.crud_category - INFO - Fetching categories (skip=0, limit=100, dates=None to None)
+2025-11-26 17:43:26,595 - src.main - INFO - → GET /static/templates/header.html
+2025-11-26 17:43:26,596 - src.main - INFO - → GET /static/js/theme.js
+2025-11-26 17:43:26,606 - src.main - INFO - ← GET /static/templates/header.html - Status: 200 - Time: 0.012s
+2025-11-26 17:43:26,609 - src.main - INFO - ← GET /static/js/theme.js - Status: 200 - Time: 0.013s
+2025-11-26 17:43:26,631 - src.main - INFO - ← GET /categories/ - Status: 200 - Time: 0.038s
+2025-11-26 17:43:26,684 - src.main - INFO - → GET /static/images/night.svg
+2025-11-26 17:43:26,685 - src.main - INFO - → GET /static/images/light.svg
+2025-11-26 17:43:26,691 - src.main - INFO - ← GET /static/images/light.svg - Status: 200 - Time: 0.006s
+2025-11-26 17:43:26,693 - src.main - INFO - ← GET /static/images/night.svg - Status: 200 - Time: 0.008s
+2025-11-26 17:43:26,725 - src.main - INFO - → GET /static/images/favicon.ico
+2025-11-26 17:43:26,738 - src.main - INFO - ← GET /static/images/favicon.ico - Status: 200 - Time: 0.013s
+2025-11-26 17:43:35,370 - src.main - INFO - Infinexpense API shutting down...
+2025-11-26 17:45:58,688 - src.main - INFO - All routers registered successfully
+2025-11-26 17:45:58,704 - src.main - INFO - Infinexpense API starting up...
+2025-11-26 17:45:58,704 - src.main - INFO - Static directory: /app/static
+2025-11-26 17:45:58,705 - src.main - INFO - Upload directory: /app/uploads
+2025-11-26 17:45:59,730 - src.main - INFO - → GET /category/list.html
+2025-11-26 17:45:59,742 - src.main - INFO - ← GET /category/list.html - Status: 200 - Time: 0.012s
+2025-11-26 17:45:59,774 - src.main - INFO - → GET /.well-known/appspecific/com.chrome.devtools.json
+2025-11-26 17:45:59,775 - src.main - INFO - ← GET /.well-known/appspecific/com.chrome.devtools.json - Status: 404 - Time: 0.001s
+2025-11-26 17:45:59,785 - src.main - INFO - → GET /static/css/main.css
+2025-11-26 17:45:59,787 - src.main - INFO - → GET /static/js/template-loader.js
+2025-11-26 17:45:59,789 - src.main - INFO - → GET /static/js/category-list.js
+2025-11-26 17:45:59,796 - src.main - INFO - ← GET /static/js/template-loader.js - Status: 304 - Time: 0.008s
+2025-11-26 17:45:59,797 - src.main - INFO - ← GET /static/js/category-list.js - Status: 200 - Time: 0.008s
+2025-11-26 17:45:59,798 - src.main - INFO - ← GET /static/css/main.css - Status: 304 - Time: 0.013s
+2025-11-26 17:45:59,818 - src.main - INFO - → GET /static/css/variables.css
+2025-11-26 17:45:59,819 - src.main - INFO - → GET /static/css/layout.css
+2025-11-26 17:45:59,823 - src.main - INFO - → GET /static/css/typography.css
+2025-11-26 17:45:59,825 - src.main - INFO - → GET /static/css/grids.css
+2025-11-26 17:45:59,827 - src.main - INFO - → GET /static/css/cards.css
+2025-11-26 17:45:59,829 - src.main - INFO - ← GET /static/css/variables.css - Status: 304 - Time: 0.011s
+2025-11-26 17:45:59,830 - src.main - INFO - ← GET /static/css/layout.css - Status: 304 - Time: 0.011s
+2025-11-26 17:45:59,831 - src.main - INFO - → GET /static/css/buttons.css
+2025-11-26 17:45:59,834 - src.main - INFO - → GET /static/css/forms.css
+2025-11-26 17:45:59,835 - src.main - INFO - ← GET /static/css/typography.css - Status: 304 - Time: 0.012s
+2025-11-26 17:45:59,837 - src.main - INFO - ← GET /static/css/grids.css - Status: 304 - Time: 0.012s
+2025-11-26 17:45:59,838 - src.main - INFO - ← GET /static/css/cards.css - Status: 304 - Time: 0.010s
+2025-11-26 17:45:59,839 - src.main - INFO - → GET /static/css/tables.css
+2025-11-26 17:45:59,840 - src.main - INFO - → GET /static/css/lists.css
+2025-11-26 17:45:59,841 - src.main - INFO - → GET /static/css/navigation.css
+2025-11-26 17:45:59,842 - src.main - INFO - → GET /static/css/icons.css
+2025-11-26 17:45:59,845 - src.main - INFO - ← GET /static/css/buttons.css - Status: 304 - Time: 0.013s
+2025-11-26 17:45:59,846 - src.main - INFO - ← GET /static/css/forms.css - Status: 200 - Time: 0.012s
+2025-11-26 17:45:59,848 - src.main - INFO - → GET /static/css/utilities.css
+2025-11-26 17:45:59,849 - src.main - INFO - ← GET /static/css/tables.css - Status: 304 - Time: 0.010s
+2025-11-26 17:45:59,850 - src.main - INFO - ← GET /static/css/lists.css - Status: 304 - Time: 0.010s
+2025-11-26 17:45:59,851 - src.main - INFO - → GET /static/css/animations.css
+2025-11-26 17:45:59,852 - src.main - INFO - ← GET /static/css/icons.css - Status: 304 - Time: 0.010s
+2025-11-26 17:45:59,853 - src.main - INFO - ← GET /static/css/navigation.css - Status: 304 - Time: 0.012s
+2025-11-26 17:45:59,854 - src.main - INFO - → GET /static/css/responsive.css
+2025-11-26 17:45:59,855 - src.main - INFO - ← GET /static/css/utilities.css - Status: 304 - Time: 0.007s
+2025-11-26 17:45:59,859 - src.main - INFO - ← GET /static/css/animations.css - Status: 304 - Time: 0.008s
+2025-11-26 17:45:59,860 - src.main - INFO - ← GET /static/css/responsive.css - Status: 304 - Time: 0.006s
+2025-11-26 17:45:59,907 - src.main - INFO - → GET /static/api/categories_api.js
+2025-11-26 17:45:59,915 - src.main - INFO - ← GET /static/api/categories_api.js - Status: 200 - Time: 0.007s
+2025-11-26 17:45:59,938 - src.main - INFO - → GET /categories/
+2025-11-26 17:45:59,940 - src.services.crud_category - INFO - Fetching categories (skip=0, limit=100, dates=None to None)
+2025-11-26 17:45:59,952 - src.main - INFO - → GET /static/templates/header.html
+2025-11-26 17:45:59,957 - src.main - INFO - → GET /static/js/theme.js
+2025-11-26 17:45:59,965 - src.main - INFO - ← GET /static/js/theme.js - Status: 304 - Time: 0.008s
+2025-11-26 17:45:59,966 - src.main - INFO - ← GET /static/templates/header.html - Status: 304 - Time: 0.014s
+2025-11-26 17:46:00,012 - src.main - INFO - ← GET /categories/ - Status: 200 - Time: 0.074s
+2025-11-26 17:46:00,080 - src.main - INFO - → GET /static/images/night.svg
+2025-11-26 17:46:00,081 - src.main - INFO - → GET /static/images/light.svg
+2025-11-26 17:46:00,087 - src.main - INFO - ← GET /static/images/night.svg - Status: 304 - Time: 0.007s
+2025-11-26 17:46:00,088 - src.main - INFO - ← GET /static/images/light.svg - Status: 304 - Time: 0.007s
+2025-11-26 17:46:00,191 - src.main - INFO - → GET /static/images/favicon.ico
+2025-11-26 17:46:00,203 - src.main - INFO - ← GET /static/images/favicon.ico - Status: 304 - Time: 0.012s
+2025-11-26 17:46:13,358 - src.main - INFO - → GET /categories/
+2025-11-26 17:46:13,360 - src.services.crud_category - INFO - Fetching categories (skip=0, limit=100, dates=2025-11-19 to 2025-11-30)
+2025-11-26 17:46:13,392 - src.main - INFO - ← GET /categories/ - Status: 200 - Time: 0.034s
+2025-11-26 17:46:19,891 - src.main - INFO - → GET /categories/
+2025-11-26 17:46:19,892 - src.services.crud_category - INFO - Fetching categories (skip=0, limit=100, dates=2025-11-14 to 2025-11-30)
+2025-11-26 17:46:19,923 - src.main - INFO - ← GET /categories/ - Status: 200 - Time: 0.033s
+2025-11-26 17:46:29,913 - src.main - INFO - → GET /categories/
+2025-11-26 17:46:29,915 - src.services.crud_category - INFO - Fetching categories (skip=0, limit=100, dates=2025-11-18 to 2025-11-30)
+2025-11-26 17:46:29,942 - src.main - INFO - ← GET /categories/ - Status: 200 - Time: 0.029s
+2025-11-26 17:46:38,507 - src.main - INFO - → GET /receipt/list.html
+2025-11-26 17:46:38,517 - src.main - INFO - ← GET /receipt/list.html - Status: 200 - Time: 0.010s
+2025-11-26 17:46:38,554 - src.main - INFO - → GET /.well-known/appspecific/com.chrome.devtools.json
+2025-11-26 17:46:38,555 - src.main - INFO - ← GET /.well-known/appspecific/com.chrome.devtools.json - Status: 404 - Time: 0.001s
+2025-11-26 17:46:38,567 - src.main - INFO - → GET /static/js/receipts-list.js
+2025-11-26 17:46:38,571 - src.main - INFO - → GET /static/css/forms.css
+2025-11-26 17:46:38,577 - src.main - INFO - ← GET /static/js/receipts-list.js - Status: 200 - Time: 0.010s
+2025-11-26 17:46:38,580 - src.main - INFO - ← GET /static/css/forms.css - Status: 304 - Time: 0.009s
+2025-11-26 17:46:38,627 - src.main - INFO - → GET /static/api/receipts_api.js
+2025-11-26 17:46:38,635 - src.main - INFO - ← GET /static/api/receipts_api.js - Status: 304 - Time: 0.008s
+2025-11-26 17:46:38,641 - src.main - INFO - → GET /receipts/
+2025-11-26 17:46:38,755 - src.main - INFO - ← GET /receipts/ - Status: 200 - Time: 0.114s
+2025-11-26 17:46:49,397 - src.main - INFO - → GET /
+2025-11-26 17:46:49,401 - src.main - INFO - ← GET / - Status: 200 - Time: 0.005s
+2025-11-26 17:46:49,441 - src.main - INFO - → GET /static/js/dashboard.js
+2025-11-26 17:46:49,448 - src.main - INFO - ← GET /static/js/dashboard.js - Status: 304 - Time: 0.008s
+2025-11-26 17:46:49,483 - src.main - INFO - → GET /receipts/
+2025-11-26 17:46:49,491 - src.main - INFO - → GET /receipts/
+2025-11-26 17:46:49,639 - src.main - INFO - ← GET /receipts/ - Status: 200 - Time: 0.156s
+2025-11-26 17:46:49,660 - src.main - INFO - ← GET /receipts/ - Status: 200 - Time: 0.169s
