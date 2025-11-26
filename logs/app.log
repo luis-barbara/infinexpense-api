@@ -5199,3 +5199,97 @@
 2025-11-26 19:44:56,650 - src.main - INFO - → GET /receipts/
 2025-11-26 19:44:56,708 - src.main - INFO - ← GET /receipts/ - Status: 200 - Time: 0.057s
 2025-11-26 19:44:56,709 - src.main - INFO - ← GET /receipts/ - Status: 200 - Time: 0.059s
+2025-11-26 19:45:50,758 - src.main - INFO - → GET /receipts/list.html
+2025-11-26 19:45:50,758 - src.main - INFO - ← GET /receipts/list.html - Status: 422 - Time: 0.001s
+2025-11-26 19:45:50,768 - src.main - INFO - → GET /favicon.ico
+2025-11-26 19:45:50,768 - src.main - INFO - ← GET /favicon.ico - Status: 404 - Time: 0.000s
+2025-11-26 19:46:34,085 - src.main - INFO - → GET /
+2025-11-26 19:46:34,086 - src.main - INFO - ← GET / - Status: 200 - Time: 0.001s
+2025-11-26 19:46:34,094 - src.main - INFO - → GET /static/css/main.css
+2025-11-26 19:46:34,095 - src.main - INFO - → GET /static/js/template-loader.js
+2025-11-26 19:46:34,095 - src.main - INFO - → GET /static/js/dashboard.js
+2025-11-26 19:46:34,096 - src.main - INFO - ← GET /static/js/template-loader.js - Status: 200 - Time: 0.001s
+2025-11-26 19:46:34,096 - src.main - INFO - ← GET /static/css/main.css - Status: 200 - Time: 0.002s
+2025-11-26 19:46:34,096 - src.main - INFO - ← GET /static/js/dashboard.js - Status: 200 - Time: 0.001s
+2025-11-26 19:46:34,099 - src.main - INFO - → GET /static/css/variables.css
+2025-11-26 19:46:34,099 - src.main - INFO - → GET /static/css/layout.css
+2025-11-26 19:46:34,099 - src.main - INFO - → GET /static/css/typography.css
+2025-11-26 19:46:34,099 - src.main - INFO - → GET /static/css/grids.css
+2025-11-26 19:46:34,100 - src.main - INFO - → GET /static/css/buttons.css
+2025-11-26 19:46:34,100 - src.main - INFO - → GET /static/css/cards.css
+2025-11-26 19:46:34,100 - src.main - INFO - ← GET /static/css/layout.css - Status: 200 - Time: 0.002s
+2025-11-26 19:46:34,101 - src.main - INFO - ← GET /static/css/variables.css - Status: 200 - Time: 0.002s
+2025-11-26 19:46:34,101 - src.main - INFO - ← GET /static/css/typography.css - Status: 200 - Time: 0.002s
+2025-11-26 19:46:34,101 - src.main - INFO - ← GET /static/css/cards.css - Status: 200 - Time: 0.001s
+2025-11-26 19:46:34,101 - src.main - INFO - ← GET /static/css/grids.css - Status: 200 - Time: 0.002s
+2025-11-26 19:46:34,102 - src.main - INFO - ← GET /static/css/buttons.css - Status: 200 - Time: 0.002s
+2025-11-26 19:46:34,103 - src.main - INFO - → GET /static/css/forms.css
+2025-11-26 19:46:34,104 - src.main - INFO - → GET /static/css/tables.css
+2025-11-26 19:46:34,104 - src.main - INFO - → GET /static/css/lists.css
+2025-11-26 19:46:34,104 - src.main - INFO - → GET /static/css/navigation.css
+2025-11-26 19:46:34,104 - src.main - INFO - → GET /static/css/icons.css
+2025-11-26 19:46:34,105 - src.main - INFO - ← GET /static/css/lists.css - Status: 200 - Time: 0.001s
+2025-11-26 19:46:34,105 - src.main - INFO - ← GET /static/css/forms.css - Status: 200 - Time: 0.001s
+2025-11-26 19:46:34,105 - src.main - INFO - ← GET /static/css/icons.css - Status: 200 - Time: 0.001s
+2025-11-26 19:46:34,105 - src.main - INFO - ← GET /static/css/navigation.css - Status: 200 - Time: 0.001s
+2025-11-26 19:46:34,105 - src.main - INFO - ← GET /static/css/tables.css - Status: 200 - Time: 0.002s
+2025-11-26 19:46:34,107 - src.main - INFO - → GET /static/css/utilities.css
+2025-11-26 19:46:34,107 - src.main - INFO - → GET /static/css/animations.css
+2025-11-26 19:46:34,107 - src.main - INFO - → GET /static/css/responsive.css
+2025-11-26 19:46:34,108 - src.main - INFO - ← GET /static/css/utilities.css - Status: 200 - Time: 0.001s
+2025-11-26 19:46:34,108 - src.main - INFO - ← GET /static/css/animations.css - Status: 200 - Time: 0.001s
+2025-11-26 19:46:34,108 - src.main - INFO - ← GET /static/css/responsive.css - Status: 200 - Time: 0.001s
+2025-11-26 19:46:34,174 - src.main - INFO - → GET /static/api/receipts_api.js
+2025-11-26 19:46:34,174 - src.main - INFO - ← GET /static/api/receipts_api.js - Status: 200 - Time: 0.000s
+2025-11-26 19:46:34,176 - src.main - INFO - → GET /receipts/
+2025-11-26 19:46:34,176 - src.main - INFO - → GET /receipts/
+2025-11-26 19:46:34,177 - src.main - INFO - → GET /static/templates/header.html
+2025-11-26 19:46:34,178 - src.main - INFO - → GET /static/js/theme.js
+2025-11-26 19:46:34,182 - src.main - INFO - ← GET /static/templates/header.html - Status: 200 - Time: 0.004s
+2025-11-26 19:46:34,183 - src.main - INFO - ← GET /static/js/theme.js - Status: 200 - Time: 0.005s
+2025-11-26 19:46:34,186 - src.main - INFO - → GET /static/images/logo2.png
+2025-11-26 19:46:34,186 - src.main - INFO - → GET /static/images/night.svg
+2025-11-26 19:46:34,187 - src.main - INFO - → GET /static/images/light.svg
+2025-11-26 19:46:34,189 - src.main - INFO - ← GET /static/images/light.svg - Status: 200 - Time: 0.003s
+2025-11-26 19:46:34,190 - src.main - INFO - ← GET /static/images/night.svg - Status: 200 - Time: 0.004s
+2025-11-26 19:46:34,191 - src.main - INFO - ← GET /static/images/logo2.png - Status: 200 - Time: 0.005s
+2025-11-26 19:46:34,199 - src.main - INFO - → GET /static/images/favicon.ico
+2025-11-26 19:46:34,202 - src.main - INFO - ← GET /static/images/favicon.ico - Status: 200 - Time: 0.002s
+2025-11-26 19:46:34,237 - src.main - INFO - ← GET /receipts/ - Status: 200 - Time: 0.061s
+2025-11-26 19:46:34,238 - src.main - INFO - ← GET /receipts/ - Status: 200 - Time: 0.062s
+2025-11-26 19:46:36,163 - src.main - INFO - → GET /receipts/
+2025-11-26 19:46:36,192 - src.main - INFO - ← GET /receipts/ - Status: 200 - Time: 0.029s
+2025-11-26 19:46:37,718 - src.main - INFO - → GET /
+2025-11-26 19:46:37,718 - src.main - INFO - ← GET / - Status: 200 - Time: 0.001s
+2025-11-26 19:46:37,729 - src.main - INFO - → GET /receipts/
+2025-11-26 19:46:37,730 - src.main - INFO - → GET /receipts/
+2025-11-26 19:46:37,780 - src.main - INFO - ← GET /receipts/ - Status: 200 - Time: 0.050s
+2025-11-26 19:46:37,780 - src.main - INFO - ← GET /receipts/ - Status: 200 - Time: 0.051s
+2025-11-26 19:46:39,715 - src.main - INFO - → GET /receipts/
+2025-11-26 19:46:39,745 - src.main - INFO - ← GET /receipts/ - Status: 200 - Time: 0.029s
+2025-11-26 19:46:40,782 - src.main - INFO - → GET /
+2025-11-26 19:46:40,783 - src.main - INFO - ← GET / - Status: 200 - Time: 0.001s
+2025-11-26 19:46:40,795 - src.main - INFO - → GET /receipts/
+2025-11-26 19:46:40,795 - src.main - INFO - → GET /receipts/
+2025-11-26 19:46:40,846 - src.main - INFO - ← GET /receipts/ - Status: 200 - Time: 0.051s
+2025-11-26 19:46:40,846 - src.main - INFO - ← GET /receipts/ - Status: 200 - Time: 0.052s
+2025-11-26 19:46:42,041 - src.main - INFO - → GET /static/receipt/view.html
+2025-11-26 19:46:42,041 - src.main - INFO - ← GET /static/receipt/view.html - Status: 200 - Time: 0.001s
+2025-11-26 19:46:42,055 - src.main - INFO - → GET /receipts/15
+2025-11-26 19:46:42,061 - src.main - INFO - ← GET /receipts/15 - Status: 200 - Time: 0.006s
+2025-11-26 19:46:43,261 - src.main - INFO - → GET /
+2025-11-26 19:46:43,262 - src.main - INFO - ← GET / - Status: 200 - Time: 0.001s
+2025-11-26 19:46:43,270 - src.main - INFO - → GET /receipts/
+2025-11-26 19:46:43,270 - src.main - INFO - → GET /receipts/
+2025-11-26 19:46:43,340 - src.main - INFO - ← GET /receipts/ - Status: 200 - Time: 0.071s
+2025-11-26 19:46:43,341 - src.main - INFO - ← GET /receipts/ - Status: 200 - Time: 0.071s
+2025-11-26 19:46:44,401 - src.main - INFO - → GET /static/receipt/view.html
+2025-11-26 19:46:44,402 - src.main - INFO - ← GET /static/receipt/view.html - Status: 200 - Time: 0.001s
+2025-11-26 19:46:44,414 - src.main - INFO - → GET /receipts/9
+2025-11-26 19:46:44,421 - src.main - INFO - ← GET /receipts/9 - Status: 200 - Time: 0.007s
+2025-11-26 19:46:45,159 - src.main - INFO - → GET /
+2025-11-26 19:46:45,160 - src.main - INFO - ← GET / - Status: 200 - Time: 0.001s
+2025-11-26 19:46:45,171 - src.main - INFO - → GET /receipts/
+2025-11-26 19:46:45,172 - src.main - INFO - → GET /receipts/
+2025-11-26 19:46:45,220 - src.main - INFO - ← GET /receipts/ - Status: 200 - Time: 0.049s
+2025-11-26 19:46:45,221 - src.main - INFO - ← GET /receipts/ - Status: 200 - Time: 0.049s
